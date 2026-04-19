@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>SHTSN 赛马日统计 | 2026年4月19日 沙田</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a2a1f;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            color: #eef4e6;
+            padding: 20px 16px;
+            line-height: 1.45;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: #232f1f;
+            border-radius: 28px;
+            padding: 1.2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3a4a2e;
+            margin-bottom: 24px;
+        }
+
+        .accent-gold {
+            color: #ffb347;
+        }
+
+        .accent-light-gold {
+            color: #ffd966;
+        }
+
+        .border-gold {
+            border-left: 4px solid #ffb347;
+            padding-left: 1rem;
+        }
+
+        /* 头部 */
+        .race-header {
+            background: linear-gradient(135deg, #1e2e1a, #0f1a0c);
+            border-radius: 32px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 24px;
+            border: 1px solid #ffb34740;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .race-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .race-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #b0c4a2;
+        }
+
+        /* 统计卡片网格 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: #2c3a24;
+            border-radius: 28px;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 3px solid #ffb347;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffb347;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            margin-top: 6px;
+            color: #b0c4a2;
+        }
+
+        /* 表格 */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .data-table th, .data-table td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid #3a4a2e;
+        }
+
+        .data-table th {
+            background: #1f2c1b;
+            color: #ffd966;
+            font-weight: 600;
+        }
+
+        .hit-yes {
+            color: #6fcf97;
+            font-weight: bold;
+        }
+
+        .hit-no {
+            color: #e74c3c;
+        }
+
+        /* 进度条 */
+        .progress-bar {
+            background: #3f5a35;
+            border-radius: 20px;
+            height: 10px;
+            width: 100%;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .progress-fill {
+            background: #ffb347;
+            height: 10px;
+            border-radius: 20px;
+            width: 0%;
+        }
+
+        /* 按钮 */
+        button {
+            background: #ffb347;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: #1a2a1f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.8rem;
+        }
+
+        button:hover {
+            background: #ff9f1a;
+            transform: scale(0.97);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.7rem;
+            color: #7a9a6e;
+        }
+
+        hr {
+            border-color: #3a4a2e;
+            margin: 16px 0;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 12px;
+            }
+            .stat-value {
+                font-size: 1.8rem;
+            }
+            .data-table th, .data-table td {
+                padding: 6px 4px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="race-header">
+        <div class="race-title">🕸️ SHTSN 系统 · 赛后统计报告</div>
+        <div class="race-meta">
+            <span>📅 2026年4月19日 (星期日)</span>
+            <span>🏟️ 沙田赛马日 · 草地/全天候</span>
+            <span>📊 共8场赛事分析</span>
+            <span>🧠 版本 V7.144I | 动态权重校准中</span>
+        </div>
+    </div>
+
+    <!-- 核心指标卡片 -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">57.3%</div>
+            <div class="stat-label">精选池平均入围率</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:57.3%"></div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">12.5%</div>
+            <div class="stat-label">连赢命中率</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:12.5%"></div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">62.5%</div>
+            <div class="stat-label">位置Q命中率</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:62.5%"></div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0%</div>
+            <div class="stat-label">三重彩/单T/四连环命中</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+    </div>
+
+    <!-- 详细场次表格 -->
+    <div class="card">
+        <h3 style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">📋 各场次详细命中统计</h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>场次</th>
+                        <th>时间</th>
+                        <th>班次/场地</th>
+                        <th>精选池入围率</th>
+                        <th>连赢命中</th>
+                        <th>位置Q命中</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>HK_24</td><td>12:45</td><td>五班1800米全天候</td><td>33.3% (1/3)</td><td class="hit-no">❌</td><td class="hit-no">❌</td></tr>
+                    <tr><td>HK_25</td><td>13:15</td><td>五班1200米全天候</td><td>100% (3/3)</td><td class="hit-no">❌</td><td class="hit-yes">✅</td></tr>
+                    <tr><td>HK_33</td><td>13:45</td><td>四班1000米草地</td><td>0% (0/3)</td><td class="hit-no">❌</td><td class="hit-no">❌</td></tr>
+                    <tr><td>HK_26</td><td>14:15</td><td>四班1400米草地</td><td>25% (1/4)</td><td class="hit-no">❌</td><td class="hit-no">❌</td></tr>
+                    <tr><td>HK_27</td><td>15:05</td><td>四班1600米草地</td><td>100% (4/4)</td><td class="hit-no">❌</td><td class="hit-yes">✅</td></tr>
+                    <tr><td>HK_28</td><td>15:40</td><td>四班1650米全天候</td><td>75% (3/4)</td><td class="hit-no">❌</td><td class="hit-yes">✅</td></tr>
+                    <tr><td>HK_29</td><td>16:10</td><td>四班1200米全天候</td><td>75% (3/4)</td><td class="hit-yes">✅</td><td class="hit-yes">✅</td></tr>
+                    <tr><td>HK_30</td><td>16:40</td><td>三班1200米全天候</td><td>50% (2/4)</td><td class="hit-no">❌</td><td class="hit-yes">✅</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 分析总结卡片 -->
+    <div class="card">
+        <h3>🔍 系统表现总结</h3>
+        <div class="border-gold" style="margin: 12px 0;">
+            <p>✅ 精选池平均入围率 <strong class="accent-gold">57.3%</strong> — 系统能有效圈定前四名马匹，但稳定性有待提升。</p>
+            <p>✅ 位置Q命中率 <strong class="accent-gold">62.5%</strong> — 位置Q组合有较高参考价值，可作为主要投注策略。</p>
+            <p>⚠️ 连赢命中率 <strong class="accent-light-gold">12.5%</strong> — 顺序预测能力较弱，需优化排序算法。</p>
+            <p>❌ 三重彩、单T、四连环命中率均为0% — 顺序彩池预测完全失效，建议引入真实赔率权重及步速分析。</p>
+        </div>
+        <div class="border-gold" style="margin-top: 12px;">
+            <p>📌 <strong>权重调整方向：</strong>奇门派权重微降（0.50 → 0.47），数据派下调，赔率派上调至0.16，后续将引入更多赛道因子。</p>
+        </div>
+    </div>
+
+    <!-- 补充资料提示 + 外部数据接口 -->
+    <div class="card" style="background: #1b2817; border: 1px dashed #ffb347;">
+        <h3>🌐 补充资料 / 外部数据框架</h3>
+        <p style="margin-bottom: 12px;">点击下方按钮可模拟获取外部实时赔率、晨操数据或查看官方赛果。实际应用时可串接香港马会API。</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <button id="fetchOddsBtn">🎲 模拟更新赔率数据</button>
+            <button id="externalLinkBtn" onclick="window.open('https://bet.hkjc.com/racing/index.aspx?lang=zh','_blank')">🔗 香港马会官方赛马页面</button>
+        </div>
+        <div id="externalMsg" style="margin-top: 16px; font-size: 0.8rem; color: #b0c4a2;"></div>
+    </div>
+
+    <footer>
+        🕸️ SHTSN System — 团队分工，决策融合，集体智慧，持续进化。<br>
+        本报告基于2026-04-19沙田日赛事后数据生成，动态权重版本 V7.144I。
+    </footer>
+</div>
+
+<script>
+    // 模拟外部补充数据（仅演示）
+    const fetchBtn = document.getElementById('fetchOddsBtn');
+    const msgDiv = document.getElementById('externalMsg');
+
+    fetchBtn.addEventListener('click', function() {
+        // 模拟获取实时赔率或晨操数据
+        const mockData = {
+            message: "🌐 模拟外部数据更新：已获取最新独赢赔率及晨操时间（演示数据）。实际应用可接入香港马会API或澳洲TAB接口。",
+            timestamp: new Date().toLocaleString()
+        };
+        msgDiv.innerHTML = `${mockData.message}<br>⏱️ 更新时间: ${mockData.timestamp}`;
+        // 也可简单展示一个提示
+        setTimeout(() => {
+            msgDiv.style.opacity = '1';
+        }, 10);
+    });
+</script>
+</body>
+</html>
