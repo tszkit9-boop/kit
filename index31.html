@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>SHTSN 新增投注專區 | 三重彩 · 四重彩 · 六環彩</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a2a1f;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            color: #eef4e6;
+            padding: 20px 16px;
+            line-height: 1.45;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #232f1f;
+            border-radius: 28px;
+            padding: 1.2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3a4a2e;
+            margin-bottom: 24px;
+        }
+
+        .accent-gold {
+            color: #ffb347;
+        }
+        .accent-light-gold {
+            color: #ffd966;
+        }
+        .border-gold {
+            border-left: 4px solid #ffb347;
+            padding-left: 1rem;
+        }
+
+        .race-header {
+            background: linear-gradient(135deg, #1e2e1a, #0f1a0c);
+            border-radius: 32px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 24px;
+            border: 1px solid #ffb34740;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .race-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .race-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #b0c4a2;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #ffb347;
+            padding-bottom: 6px;
+        }
+
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 16px 0;
+        }
+
+        .combo-card {
+            background: #2c3a24;
+            border-radius: 24px;
+            padding: 1rem;
+            border-top: 4px solid #ffb347;
+            transition: transform 0.2s;
+        }
+        .combo-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .combo-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffd966;
+        }
+        .horse-list {
+            font-size: 1rem;
+            margin: 8px 0;
+        }
+        .horse-number {
+            display: inline-block;
+            background: #1e2a18;
+            border-radius: 30px;
+            padding: 2px 10px;
+            margin: 2px 4px;
+            font-weight: bold;
+        }
+        .confidence {
+            font-size: 0.75rem;
+            color: #b0c4a2;
+            margin-top: 8px;
+        }
+        .risk-note {
+            background: #1b2817;
+            border-radius: 20px;
+            padding: 10px;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            border-left: 3px solid #ffb347;
+        }
+
+        .sixup-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        .sixup-table th, .sixup-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #3a4a2e;
+            text-align: center;
+        }
+        .sixup-table th {
+            background: #1f2c1b;
+            color: #ffd966;
+        }
+
+        button {
+            background: #ffb347;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: #1a2a1f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.8rem;
+        }
+        button:hover {
+            background: #ff9f1a;
+            transform: scale(0.97);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.7rem;
+            color: #7a9a6e;
+        }
+
+        @media (max-width: 640px) {
+            .combo-grid {
+                grid-template-columns: 1fr;
+            }
+            .sixup-table th, .sixup-table td {
+                font-size: 0.7rem;
+                padding: 6px 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="race-header">
+        <div class="race-title">🕸️ SHTSN 新增投注專區</div>
+        <div class="race-meta">
+            <span>📅 2026年4月20日 更新</span>
+            <span>🎯 三重彩 · 四重彩 · 六環彩</span>
+            <span>🧠 系統版本 V7.145I | 非膽拖組合</span>
+        </div>
+    </div>
+
+    <!-- ==================== 三重彩專區 ==================== -->
+    <div class="card">
+        <div class="section-title">
+            <span>🥇 三重彩專區</span>
+            <span style="font-size: 0.7rem; background:#2b4b3a; padding:2px 10px; border-radius: 20px;">一組三匹馬 · 順序預測</span>
+        </div>
+        <p>根據決策老大綜合評分，選取每場綜合分最高的三匹馬作為三重彩推薦（順序為 1st > 2nd > 3rd）。以下為今日重點場次示範：</p>
+        <div class="combo-grid" id="tripleTrioGrid">
+            <!-- 動態生成三重彩卡片 -->
+        </div>
+        <div class="risk-note">
+            💡 注碼建議：每注 $10 · 最大損失 $100（可調整）
+        </div>
+    </div>
+
+    <!-- ==================== 四重彩專區 ==================== -->
+    <div class="card">
+        <div class="section-title">
+            <span>🔗 四重彩專區</span>
+            <span style="font-size: 0.7rem; background:#2b4b3a; padding:2px 10px; border-radius: 20px;">一組四匹馬 · 順序預測</span>
+        </div>
+        <p>選取每場綜合分最高的四匹馬作為四重彩推薦（順序 1st > 2nd > 3rd > 4th）。以下為今日重點場次示範：</p>
+        <div class="combo-grid" id="quartetGrid">
+            <!-- 動態生成四重彩卡片 -->
+        </div>
+        <div class="risk-note">
+            💡 注碼建議：每注 $5 · 最大損失 $100（可調整）
+        </div>
+    </div>
+
+    <!-- ==================== 六環彩專區 ==================== -->
+    <div class="card">
+        <div class="section-title">
+            <span>🎲 六環彩專區</span>
+            <span style="font-size: 0.7rem; background:#2b4b3a; padding:2px 10px; border-radius: 20px;">每場兩匹馬 · 複式串關</span>
+        </div>
+        <p>選取連續六場賽事，每場提供兩匹精選馬（綜合分前兩名）。以下示範基於 2026-04-19 沙田日賽事順序：</p>
+        <div class="table-wrapper">
+            <table class="sixup-table" id="sixUpTable">
+                <thead>
+                    <tr>
+                        <th>場次</th>
+                        <th>時間</th>
+                        <th>班次/場地</th>
+                        <th>首選馬</th>
+                        <th>次選馬</th>
+                    </tr>
+                </thead>
+                <tbody id="sixUpBody">
+                    <!-- 動態生成六環彩內容 -->
+                </tbody>
+            </table>
+        </div>
+        <div class="risk-note">
+            💡 六環彩投注方式：可選「每場兩匹馬」複式串關（共 2^6 = 64 注），每注 $2 最低投注額，總投注 $128。建議保守可剔除冷門場次。
+        </div>
+    </div>
+
+    <footer>
+        🕸️ SHTSN System — 團隊分工，決策融合，集體智慧，持續進化。<br>
+        以上推薦基於系統綜合評分排序，非膽拖組合。真實投注請以馬會公佈為準。
+    </footer>
+</div>
+
+<script>
+    // ----- 模擬賽事數據（基於2026-04-19沙田日實際預測結果）-----
+    // 場次順序：HK_24, HK_25, HK_33, HK_26, HK_27, HK_28, HK_29, HK_30 （取前6場作為六環彩示範）
+    const races = [
+        { id: "HK_24", time: "12:45", class: "五班1800米全天候", top1: { no:6, name:"十力" }, top2: { no:4, name:"風起雲湧" }, top3: { no:8, name:"香港精神" }, top4: { no:5, name:"怪獸叉燒" } },
+        { id: "HK_25", time: "13:15", class: "五班1200米全天候", top1: { no:9, name:"爆熱" }, top2: { no:11, name:"謙謙君子" }, top3: { no:7, name:"魅力星" }, top4: { no:4, name:"多彩多姿" } },
+        { id: "HK_33", time: "13:45", class: "四班1000米草地", top1: { no:6, name:"馬運高" }, top2: { no:13, name:"英雄豪邁" }, top3: { no:9, name:"步步合拍" }, top4: { no:4, name:"勝萬金" } },
+        { id: "HK_26", time: "14:15", class: "四班1400米草地", top1: { no:7, name:"馬上盈" }, top2: { no:1, name:"輕功猛男" }, top3: { no:4, name:"共創歡欣" }, top4: { no:13, name:"文武全能" } },
+        { id: "HK_27", time: "15:05", class: "四班1600米草地", top1: { no:11, name:"超開心" }, top2: { no:10, name:"萬事勝利" }, top3: { no:6, name:"瑞祺威楓" }, top4: { no:14, name:"江南勇士" } },
+        { id: "HK_28", time: "15:40", class: "四班1650米全天候", top1: { no:5, name:"有派頭" }, top2: { no:8, name:"盛勢威楓" }, top3: { no:9, name:"花開" }, top4: { no:11, name:"林寶精神" } },
+        { id: "HK_29", time: "16:10", class: "四班1200米全天候", top1: { no:5, name:"觀眾之力" }, top2: { no:1, name:"穿甲戰鷹" }, top3: { no:4, name:"快搏" }, top4: { no:3, name:"日馳千里" } },
+        { id: "HK_30", time: "16:40", class: "三班1200米全天候", top1: { no:11, name:"天福" }, top2: { no:9, name:"德心知遇" }, top3: { no:6, name:"偵探傳奇" }, top4: { no:5, name:"熾烈神駒" } }
+    ];
+
+    // 取前6場作為六環彩（連續6場）
+    const sixUpRaces = races.slice(0, 6);
+
+    // 生成三重彩卡片（每場前三名，順序）
+    function renderTripleTrio() {
+        const container = document.getElementById('tripleTrioGrid');
+        container.innerHTML = '';
+        // 取前4場作為示範，避免頁面過長
+        const demoRaces = races.slice(0, 4);
+        demoRaces.forEach(race => {
+            const card = document.createElement('div');
+            card.className = 'combo-card';
+            card.innerHTML = `
+                <div class="combo-title">${race.id} · ${race.time}</div>
+                <div class="horse-list">
+                    🥇 冠軍：<span class="horse-number">${race.top1.no}</span> ${race.top1.name}<br>
+                    🥈 亞軍：<span class="horse-number">${race.top2.no}</span> ${race.top2.name}<br>
+                    🥉 季軍：<span class="horse-number">${race.top3.no}</span> ${race.top3.name}
+                </div>
+                <div class="confidence">⭐ 信心：綜合分最高三匹，順序預測</div>
+                <div style="margin-top: 6px; font-size:0.7rem;">班次：${race.class}</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // 生成四重彩卡片（每場前四名，順序）
+    function renderQuartet() {
+        const container = document.getElementById('quartetGrid');
+        container.innerHTML = '';
+        const demoRaces = races.slice(0, 4);
+        demoRaces.forEach(race => {
+            const card = document.createElement('div');
+            card.className = 'combo-card';
+            card.innerHTML = `
+                <div class="combo-title">${race.id} · ${race.time}</div>
+                <div class="horse-list">
+                    1st：<span class="horse-number">${race.top1.no}</span> ${race.top1.name}<br>
+                    2nd：<span class="horse-number">${race.top2.no}</span> ${race.top2.name}<br>
+                    3rd：<span class="horse-number">${race.top3.no}</span> ${race.top3.name}<br>
+                    4th：<span class="horse-number">${race.top4.no}</span> ${race.top4.name}
+                </div>
+                <div class="confidence">⭐ 信心：綜合分前四名，順序預測</div>
+                <div style="margin-top: 6px; font-size:0.7rem;">班次：${race.class}</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // 生成六環彩表格（每場兩匹馬）
+    function renderSixUp() {
+        const tbody = document.getElementById('sixUpBody');
+        tbody.innerHTML = '';
+        sixUpRaces.forEach((race, idx) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${race.id}</td>
+                <td>${race.time}</td>
+                <td>${race.class}</td>
+                <td><span class="horse-number">${race.top1.no}</span> ${race.top1.name}</td>
+                <td><span class="horse-number">${race.top2.no}</span> ${race.top2.name}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // 頁面載入後渲染
+    renderTripleTrio();
+    renderQuartet();
+    renderSixUp();
+
+    // 可選：增加一個按鈕更新數據的提示（示範）
+    const style = document.createElement('style');
+    style.textContent = `button.helper { margin-top: 12px; }`;
+    document.head.appendChild(style);
+</script>
+</body>
+</html>
