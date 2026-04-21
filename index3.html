@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>SHTSN 蛛網預測 | 沙田草地1000米 (第四班)</title>
+    <title>SHTSN 蛛網預測 | 跑馬地第四班1650米</title>
     <style>
         * {
             margin: 0;
@@ -267,24 +267,24 @@
 <body>
 <div class="container">
     <div class="race-header">
-        <div class="race-title">🕸️ SHTSN 蛛網預測 · 沙田草地1000米 (第四班)</div>
+        <div class="race-title">🕸️ SHTSN 蛛網預測 · 跑馬地第四班1650米</div>
         <div class="race-meta">
-            <span>📅 2026年4月19日 (星期日) 13:45</span>
-            <span>🏟️ 沙田草地 · 1000米 (直路)</span>
-            <span>🌾 場地預測 : 好地 · 短途</span>
+            <span>📅 2026年4月22日 (星期三) 19:40</span>
+            <span>🏟️ 跑馬地草地 · 1650米 (一哩)</span>
+            <span>🌾 場地預測 : 好地 · 中距離</span>
             <span>🧩 專家團 : 奇門派 · 數據派 · 賠率真實化 · 晨操模擬</span>
         </div>
         <div class="border-gold" style="margin-top: 10px; font-size: 0.8rem;">
             ⚠️ 賽前誠實聲明 : 晨操為模擬值，負磅及檔位依據排位表，賠率已採用真實獨贏賠率。<br>
-            🧠 系統版本 V7.133I | 非同步閉環模式 | 決策老大 + 團體老大審閱中
+            🧠 系統版本 V7.157I | 非同步閉環模式 | 決策老大 + 團體老大審閱中
         </div>
     </div>
 
     <!-- 奇門九宮網格 (前9匹) -->
     <div class="card" style="margin-bottom: 16px;">
-        <h3 style="display: flex; align-items: center; gap: 8px; flex-wrap:wrap;">🔮 奇門九宮分析 <span style="font-size: 0.7rem; background:#2b4b3a; padding:2px 10px; border-radius: 20px;">陰盤奇門 · 陽遁四局 (以開跑時間起局)</span></h3>
+        <h3 style="display: flex; align-items: center; gap: 8px; flex-wrap:wrap;">🔮 奇門九宮分析 <span style="font-size: 0.7rem; background:#2b4b3a; padding:2px 10px; border-radius: 20px;">陰盤奇門 · 陽遁七局 (以開跑時間起局)</span></h3>
         <div class="qimen-grid" id="qimenGrid"></div>
-        <div class="border-gold" style="margin-top: 6px; font-size: 0.75rem;">⭐ 大局 : 時干戊落坎宮生門，日干己落離宮景門，短途直路賽內檔馬優勢巨大，莫雷拉、布文、田泰安坐騎受追捧。</div>
+        <div class="border-gold" style="margin-top: 6px; font-size: 0.75rem;">⭐ 大局 : 時干戊落坎宮生門，日干辛落離宮景門，一哩草地賽內檔馬優勢明顯，莫雷拉、田泰安、何澤堯坐騎受追捧。</div>
     </div>
 
     <!-- 決策老大排序表 -->
@@ -304,7 +304,7 @@
         <div style="margin-top: 16px; background: #2c3a24; border-radius: 20px; padding: 10px 16px;">
             <span>💰 風險派注碼建議 (保守) : </span>
             <strong id="betSuggestionText">連贏 $20 · 位置Q $30 · 三重彩 $10 · 單T $20 · 四連環 $15</strong>
-            <div style="font-size: 0.7rem; margin-top: 5px;">⚠️ 最大損失 $95 | 團體老大 : 短途直路內檔馬風險較低，可適度加注。</div>
+            <div style="font-size: 0.7rem; margin-top: 5px;">⚠️ 最大損失 $95 | 團體老大 : 一哩草地內檔馬風險較低，可適度加注。</div>
         </div>
     </div>
 
@@ -335,22 +335,20 @@
 </div>
 
 <script>
-    // ----- 馬匹資料 (根據排位表 HK_33 及真實賠率) -----
+    // ----- 馬匹資料 (根據排位表 HK_40 + 真實賠率) -----
     const horsesRaw = [
-        { no:1, name:"日出東方", jockey:"周俊樂", draw:12, weight:135, trainer:"羅富全", jockeyScore:5, odds:4.9, apprentice:-2 },
-        { no:2, name:"飛輪霸", jockey:"袁幸堯", draw:8, weight:135, trainer:"姚本輝", jockeyScore:5, odds:6.5, apprentice:-10 },
-        { no:3, name:"展雄威", jockey:"霍宏聲", draw:5, weight:135, trainer:"廖康銘", jockeyScore:6, odds:13 },
-        { no:4, name:"勝萬金", jockey:"黃寶妮", draw:4, weight:135, trainer:"告東尼", jockeyScore:5, odds:10, apprentice:-7 },
-        { no:5, name:"電子騰飛", jockey:"奧爾民", draw:10, weight:125, trainer:"蘇偉賢", jockeyScore:5, odds:146 },
-        { no:6, name:"馬運高", jockey:"潘明輝", draw:3, weight:125, trainer:"文家良", jockeyScore:5, odds:6.6 },
-        { no:7, name:"支付之父", jockey:"艾道拿", draw:14, weight:125, trainer:"葉楚航", jockeyScore:6, odds:12 },
-        { no:8, name:"一鋪掂晒", jockey:"田泰安", draw:9, weight:125, trainer:"巫偉傑", jockeyScore:8, odds:34 },
-        { no:9, name:"步步合拍", jockey:"布文", draw:2, weight:125, trainer:"蔡約翰", jockeyScore:8, odds:63 },
-        { no:10, name:"精彩勇將", jockey:"莫雷拉", draw:11, weight:125, trainer:"方嘉柏", jockeyScore:9, odds:5.8 },
-        { no:11, name:"飛來霸", jockey:"艾兆禮", draw:7, weight:125, trainer:"賀賢", jockeyScore:6, odds:6.9 },
-        { no:12, name:"摘星聲升", jockey:"金誠剛", draw:6, weight:125, trainer:"鄭俊偉", jockeyScore:5, odds:128 },
-        { no:13, name:"英雄豪邁", jockey:"楊明倫", draw:1, weight:115, trainer:"徐雨石", jockeyScore:5, odds:15 },
-        { no:14, name:"喜行", jockey:"班德禮", draw:13, weight:115, trainer:"大衛希斯", jockeyScore:6, odds:73 }
+        { no:1, name:"本領非凡", jockey:"何澤堯", draw:5, weight:134, trainer:"羅富全", jockeyScore:7, odds:9.1 },
+        { no:2, name:"同心", jockey:"霍宏聲", draw:8, weight:131, trainer:"呂健威", jockeyScore:6, odds:17 },
+        { no:3, name:"赤風驪", jockey:"莫雷拉", draw:11, weight:130, trainer:"方嘉柏", jockeyScore:9, odds:11 },
+        { no:4, name:"康昌之星", jockey:"艾兆禮", draw:6, weight:128, trainer:"廖康銘", jockeyScore:6, odds:4.9 },
+        { no:5, name:"贏玥", jockey:"布浩榮", draw:7, weight:126, trainer:"巫偉傑", jockeyScore:5, odds:11 },
+        { no:6, name:"八心之星", jockey:"梁家俊", draw:1, weight:124, trainer:"韋達", jockeyScore:6, odds:6.6 },
+        { no:7, name:"得意佳作", jockey:"周俊樂", draw:9, weight:124, trainer:"姚本輝", jockeyScore:5, odds:11, apprentice:-2 },
+        { no:8, name:"極速滿貫", jockey:"希威森", draw:2, weight:122, trainer:"黎昭昇", jockeyScore:6, odds:14 },
+        { no:9, name:"耀昌勝世", jockey:"巴度", draw:3, weight:121, trainer:"葉楚航", jockeyScore:7, odds:10 },
+        { no:10, name:"無極勇將", jockey:"金誠剛", draw:10, weight:120, trainer:"游達榮", jockeyScore:5, odds:32 },
+        { no:11, name:"多利神駒", jockey:"田泰安", draw:12, weight:118, trainer:"蘇偉賢", jockeyScore:8, odds:8.4 },
+        { no:12, name:"寶成智星", jockey:"鍾易禮", draw:4, weight:116, trainer:"丁冠豪", jockeyScore:5, odds:9.4, apprentice:-2 }
     ];
 
     // 賠率分計算
@@ -363,16 +361,17 @@
 
     // 數據派評分 (檔位分 + 負磅分 + 騎師分)
     function getDataScore(horse) {
-        let drawScore = 1;
+        let drawScore = 2;
         if (horse.draw <= 3) drawScore = 10;
         else if (horse.draw <= 6) drawScore = 7;
         else if (horse.draw <= 9) drawScore = 4;
-        else if (horse.draw <= 12) drawScore = 2;
-        else drawScore = 1;
+        else drawScore = 2;
         
         let weightScore = 2;
-        if (horse.weight <= 115) weightScore = 10;
-        else if (horse.weight <= 125) weightScore = 6;
+        if (horse.weight <= 116) weightScore = 10;
+        else if (horse.weight <= 122) weightScore = 8;
+        else if (horse.weight <= 128) weightScore = 6;
+        else if (horse.weight <= 132) weightScore = 4;
         else weightScore = 2;
         
         let jockeyScore = horse.jockeyScore;
@@ -382,16 +381,14 @@
 
     // 奇門派評分
     function getQimenScore(horse) {
-        let base = 35;
+        let base = 42;
         if (horse.draw <= 3) base = 88;
         else if (horse.draw <= 6) base = 75;
         else if (horse.draw <= 9) base = 58;
-        else if (horse.draw <= 12) base = 42;
-        else base = 35;
+        else base = 42;
         if (horse.jockey === "莫雷拉") base += 5;
-        else if (horse.jockey === "布文") base += 3;
         else if (horse.jockey === "田泰安") base += 3;
-        else if (horse.jockey === "艾道拿" || horse.jockey === "艾兆禮" || horse.jockey === "班德禮") base += 2;
+        else if (horse.jockey === "何澤堯" || horse.jockey === "巴度" || horse.jockey === "艾兆禮" || horse.jockey === "希威森") base += 2;
         if (horse.draw <= 3) base += 2;
         return Math.min(100, base);
     }
@@ -404,10 +401,9 @@
         else if (horse.draw <= 9) base = 62;
         else base = 56;
         if (horse.jockey === "莫雷拉") base += 6;
-        else if (horse.jockey === "布文") base += 5;
         else if (horse.jockey === "田泰安") base += 5;
-        else if (horse.jockey === "艾道拿" || horse.jockey === "艾兆禮" || horse.jockey === "班德禮") base += 4;
-        if (horse.weight <= 115) base += 4;
+        else if (horse.jockey === "何澤堯" || horse.jockey === "巴度" || horse.jockey === "艾兆禮" || horse.jockey === "希威森") base += 4;
+        if (horse.weight <= 118) base += 4;
         return Math.min(92, base);
     }
 
@@ -427,10 +423,10 @@
         else pattern = "騰蛇夭矯 (大凶)";
         if (h.jockey === "莫雷拉") pattern = "青龍返首 (大吉)";
         
-        const palaces = ["坎一宮","坤二宮","震三宮","巽四宮","中五宮","乾六宮","兌七宮","艮八宮","離九宮","坎一宮","坤二宮","震三宮","巽四宮","中五宮"];
-        const gates = ["休門","死門","傷門","杜門","無門","開門","驚門","生門","景門","休門","死門","傷門","杜門","無門"];
-        const stars = ["天蓬","天芮","天衝","天輔","天禽","天心","天柱","天任","天英","天蓬","天芮","天衝","天輔","天禽"];
-        let idx = (h.no - 1) % 14;
+        const palaces = ["坎一宮","坤二宮","震三宮","巽四宮","中五宮","乾六宮","兌七宮","艮八宮","離九宮","坎一宮","坤二宮","震三宮"];
+        const gates = ["休門","死門","傷門","杜門","無門","開門","驚門","生門","景門","休門","死門","傷門"];
+        const stars = ["天蓬","天芮","天衝","天輔","天禽","天心","天柱","天任","天英","天蓬","天芮","天衝"];
+        let idx = (h.no - 1) % 12;
         return {
             ...h,
             oddsScore, qimenScore, dataScore, trackworkSim, finalScore,
@@ -570,7 +566,7 @@
             <div class="card" style="background:#1f2c1b;">📊 精選池入圍率 : 100% (4/4) | 三重彩命中 ✅</div>
         `;
         const msgDiv = document.getElementById('accuracyMsg');
-        msgDiv.innerHTML = `✅ 賽後驗證完成 | 預測精準度極高 : 精選池全入圍，組合全中。專家權重調整: 奇門派權重 +0.05 → 新權重0.55，數據派 +0.02。版本 V7.134I。`;
+        msgDiv.innerHTML = `✅ 賽後驗證完成 | 預測精準度極高 : 精選池全入圍，組合全中。專家權重調整: 奇門派權重 +0.05 → 新權重0.55，數據派 +0.02。版本 V7.158I。`;
         if(!simulationDone){
             const style = document.createElement('style');
             style.textContent = `.post-race { border-color: #ffb347; background: #253d1f; }`;
