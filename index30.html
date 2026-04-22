@@ -63,7 +63,7 @@ const horses = [
     {no:6, name:"快樂寶寶", gate:7, weight:130, jockey:"梁家俊", jockeyCode:"other", odds:6.6},
     {no:7, name:"戰騎飛", gate:3, weight:125, jockey:"楊明綸", jockeyCode:"other", odds:27},
     {no:8, name:"添喜運", gate:4, weight:122, jockey:"潘頓", jockeyCode:"panton", odds:5.0},
-    {no:9, name:"天火同德", gate:6, weight:119, jockey:"金誠剛", jockeyCode:"other", odds:99},   // 賠率缺失，設為99使賠率分=0
+    {no:9, name:"天火同德", gate:6, weight:119, jockey:"金誠剛", jockeyCode:"other", odds:99},   // 賠率缺失
     {no:10, name:"太行美景", gate:11, weight:119, jockey:"黃智弘(-3)", jockeyCode:"other", odds:99},
     {no:11, name:"富貴駒", gate:2, weight:118, jockey:"田泰安", jockeyCode:"tian", odds:99},
     {no:12, name:"東方福寶", gate:8, weight:115, jockey:"潘明輝", jockeyCode:"other", odds:99}
@@ -112,7 +112,7 @@ function getTrackwork(gate, weight, jockeyCode) {
     return Math.min(base + starBonus + lightBonus, 92);
 }
 function getOddsScore(odds) {
-    if (odds >= 99) return 0;  // 缺失賠率視為0
+    if (odds >= 99) return 0;
     let raw = 100 - (odds - 2) * 6;
     if (raw < 0) return 0;
     if (raw > 100) return 100;
@@ -161,12 +161,18 @@ document.getElementById('spiderPicks').innerHTML = top5.map(h => `
 `).join('');
 
 const top3 = top5.slice(0,3).map(h => h.no);
+const top4 = top5.slice(0,4).map(h => h.no);
+const winPick = top3[0];  // 首選獨贏馬
+
+// 投注建議：包含獨贏、四重彩（複式24注）及其他彩池
 document.getElementById('betBody').innerHTML = `
-    <tr><td>連贏</div>.${top3.join(',')} 互串</div>.均注</div>--
-    <tr><td>位置Q</div>.${top3.join(',')} 互串</div>.主力</div>--
-    <tr><td>單T</div>.${top3.join(',')}</div>.小注</div>--
-    <tr><td>三重彩</div>.${top3[0]} > ${top3[1]},${top3[2]} > 全</div>.複式</div>--
-    <tr><td>四連環</div>.${top3.concat(top5[3].no).join(',')}</div>.防守</div>--
+    <tr><td>獨贏</div>.${winPick}號 ${sorted.find(h=>h.no==winPick).name}</div>.主力</div>--
+    <tr>.html(位置Q).${top3.join(',')} 互串</div>.主力</div>--
+    <tr>.html(連贏).${top3.join(',')} 互串</div>.均注</div>--
+    <tr>.html(單T).${top3.join(',')}</div>.小注</div>--
+    <tr>.html(三重彩).${top3[0]} > ${top3[1]},${top3[2]} > 全</div>.複式</div>--
+    <tr>.html(四連環).${top4.join(',')}</div>.防守</div>--
+    <tr>.html(四重彩).${top4.join(',')} 複式四重彩（24注）</div>.小注</div>--
 `;
 
 const jiugong = [
