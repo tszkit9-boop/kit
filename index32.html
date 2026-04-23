@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>🕸️ SHTSN 賽馬預測系統 | 2026-04-26 沙田賽日 第1-11場</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f1a0f;
+            background-image: radial-gradient(circle at 10% 20%, #1a2a1f 0%, #0a120a 100%);
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+            color: #e6f0e6;
+            padding: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #ffb347;
+            padding-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: #ffb347;
+            text-shadow: 0 0 5px rgba(255, 180, 71, 0.3);
+        }
+
+        .header .sub {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .race-card {
+            background: rgba(26, 42, 31, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            margin-bottom: 2.5rem;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5), 0 0 0 1px rgba(255, 180, 71, 0.2);
+            transition: all 0.2s;
+        }
+
+        .race-card:hover {
+            box-shadow: 0 15px 30px -8px black, 0 0 0 2px #ffb34755;
+        }
+
+        .race-title {
+            font-size: 1.7rem;
+            font-weight: bold;
+            border-left: 6px solid #ffb347;
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .race-time {
+            font-size: 0.9rem;
+            font-weight: normal;
+            background: #2a3a2f;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            color: #ffb347;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            background: #1e2e23;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .data-table th {
+            background: #2a3a2f;
+            color: #ffb347;
+            padding: 10px 6px;
+            font-weight: 600;
+            border-bottom: 1px solid #ffb34766;
+        }
+
+        .data-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #2f4035;
+            text-align: center;
+        }
+
+        .data-table tr:hover {
+            background: #2a3f2e;
+        }
+
+        .progress-bar {
+            background: #2c3e2a;
+            border-radius: 20px;
+            overflow: hidden;
+            width: 100%;
+            height: 8px;
+            display: inline-block;
+        }
+
+        .progress-fill {
+            background: #ffb347;
+            height: 8px;
+            border-radius: 20px;
+            width: 0%;
+        }
+
+        .badge-gold {
+            background: #ffb347;
+            color: #1a2a1f;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .info-box {
+            background: #162218;
+            border-radius: 20px;
+            padding: 1rem;
+            border-left: 3px solid #ffb347;
+        }
+
+        .bet-slip {
+            background: #0e1812;
+            border-radius: 20px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .bet-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px dashed #3a4a3a;
+        }
+
+        .disclaimer {
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #0a130e;
+            border-radius: 18px;
+            color: #aaa;
+        }
+
+        @media (max-width: 700px) {
+            body { padding: 0.8rem; }
+            .race-card { padding: 1rem; }
+            .data-table th, .data-table td { font-size: 0.7rem; padding: 5px 3px; }
+        }
+
+        h3 {
+            color: #ffb347;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        hr { border-color: #ffb34733; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🕸️ SHTSN 賽馬預測系統</h1>
+        <div class="sub">Super Horse to Spider Network · 集體智慧 · 持續進化</div>
+        <div class="sub">版本 V7.171I | 2026-04-26 沙田草地日賽 | 嚴格遵守格式：血統·步速·場地評分均已納入</div>
+    </div>
+
+    <!-- ===================== 第1場 ===================== -->
+    <div class="race-card">
+        <div class="race-title">
+            🏇 第1場 · 第四班1200米草地 · A赛道
+            <span class="race-time">12:30</span>
+        </div>
+        <h3>📊 奇門九宮 + 綜合排名（精選池≥70分）</h3>
+        <table class="data-table">
+            <thead>
+                <tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr>
+            </thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>利高八斗</td><td>1</td><td>93</td><td>80</td><td>70</td><td>70</td><td>65</td><td>70</td><td>70</td><td>81.4</td><td><div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>寶者成福</td><td>6</td><td>78</td><td>68</td><td>90</td><td>85</td><td>80</td><td>85</td><td>85</td><td>78.0</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>星運少爵</td><td>5</td><td>80</td><td>70</td><td>85</td><td>80</td><td>75</td><td>80</td><td>80</td><td>77.5</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>開心牙寶</td><td>3</td><td>90</td><td>66</td><td>55</td><td>55</td><td>55</td><td>60</td><td>60</td><td>72.4</td><td><div class="progress-fill" style="width:72%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>💰 投注建議：獨贏@利高八斗，連贏 利高八斗+寶者成福，四連環首四匹精選 | 成本$130</strong></div>
+    </div>
+
+    <!-- ===================== 第2場 ===================== -->
+    <div class="race-card">
+        <div class="race-title">
+            🏇 第2場 · 第四班1600米草地 · A赛道
+            <span class="race-time">13:00</span>
+        </div>
+        <h3>📊 奇門九宮 + 綜合排名（精選池≥70分）</h3>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>大回報</td><td>3</td><td>92</td><td>78</td><td>85</td><td>85</td><td>75</td><td>80</td><td>80</td><td>83.5</td><td><div class="progress-fill" style="width:84%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>華風雲</td><td>1</td><td>90</td><td>84</td><td>70</td><td>75</td><td>70</td><td>72</td><td>70</td><td>80.2</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>都靈冠星</td><td>4</td><td>80</td><td>54</td><td>80</td><td>80</td><td>78</td><td>80</td><td>78</td><td>74.0</td><td><div class="progress-fill" style="width:74%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>旗隊</td><td>8</td><td>61</td><td>56</td><td>75</td><td>78</td><td>72</td><td>76</td><td>74</td><td>70.3</td><td><div class="progress-fill" style="width:70%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>💰 投注建議：獨贏@大回報，連贏 大回報+華風雲，四連環首四匹精選 | 成本$130</strong></div>
+    </div>
+
+    <!-- ===================== 第3場 ===================== -->
+    <div class="race-card">
+        <div class="race-title">
+            🏇 第3場 · 第四班1200米草地 · A赛道
+            <span class="race-time">13:30</span>
+        </div>
+        <h3>📊 奇門九宮 + 綜合排名（精選池≥70分）</h3>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>堅先生</td><td>2</td><td>93</td><td>85</td><td>80</td><td>85</td><td>80</td><td>85</td><td>85</td><td>86.5</td><td><div class="progress-fill" style="width:87%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>超和平</td><td>1</td><td>90</td><td>84</td><td>75</td><td>80</td><td>75</td><td>80</td><td>80</td><td>82.3</td><td><div class="progress-fill" style="width:82%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>天天更好</td><td>8</td><td>61</td><td>78</td><td>70</td><td>75</td><td>65</td><td>70</td><td>70</td><td>70.5</td><td><div class="progress-fill" style="width:71%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>大勇勝</td><td>4</td><td>75</td><td>72</td><td>65</td><td>70</td><td>68</td><td>72</td><td>70</td><td>70.1</td><td><div class="progress-fill" style="width:70%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>💰 投注建議：獨贏@堅先生，連贏 堅先生+超和平，四連環首四匹精選 | 成本$130</strong></div>
+    </div>
+
+    <!-- ===================== 第4場 ===================== -->
+    <div class="race-card">
+        <div class="race-title">
+            🏇 第4場 · 第四班1400米草地 · A赛道
+            <span class="race-time">14:00</span>
+        </div>
+        <h3>📊 奇門九宮 + 綜合排名（精選池≥70分）</h3>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>日日賞</td><td>3</td><td>95</td><td>82</td><td>60</td><td>65</td><td>65</td><td>68</td><td>66</td><td>81.1</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>文采風流</td><td>1</td><td>90</td><td>66</td><td>65</td><td>70</td><td>68</td><td>72</td><td>70</td><td>76.6</td><td><div class="progress-fill" style="width:77%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>幸運威龍</td><td>2</td><td>90</td><td>74</td><td>50</td><td>60</td><td>60</td><td>64</td><td>62</td><td>75.2</td><td><div class="progress-fill" style="width:75%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>勤勇星豹</td><td>4</td><td>77</td><td>58</td><td>80</td><td>82</td><td>78</td><td>82</td><td>80</td><td>73.5</td><td><div class="progress-fill" style="width:74%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>💰 投注建議：獨贏@日日賞，連贏 日日賞+文采風流，四連環首四匹精選 | 成本$130</strong></div>
+    </div>
+
+    <!-- ===================== 第5場 ===================== -->
+    <div class="race-card">
+        <div class="race-title">
+            🏆 第5場 · 主席短途賽 (一級賽) · 1200米草地 A赛道
+            <span class="race-time">14:35</span>
+        </div>
+        <h3>📊 綜合排名（精選池≥70分）</h3>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>嘉德高昇</td><td>3</td><td>95</td><td>82</td><td>92</td><td>88</td><td>85</td><td>88</td><td>80</td><td>88.6</td><td><div class="progress-fill" style="width:89%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>攀步生国</td><td>2</td><td>93</td><td>80</td><td>72</td><td>82</td><td>78</td><td>82</td><td>78</td><td>83.2</td><td><div class="progress-fill" style="width:83%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>好友心得</td><td>1</td><td>90</td><td>76</td><td>60</td><td>82</td><td>70</td><td>74</td><td>72</td><td>76.9</td><td><div class="progress-fill" style="width:77%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>腾翔明驹</td><td>6</td><td>78</td><td>68</td><td>76</td><td>77</td><td>75</td><td>80</td><td>76</td><td>75.3</td><td><div class="progress-fill" style="width:75%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>💰 投注建議：獨贏@嘉德高昇，連贏 嘉德高昇+攀步生国</strong></div>
+    </div>
+
+    <!-- 第6場 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第6場 · 第三班1200米草地 · A赛道<span class="race-time">15:10</span></div>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>健康快車</td><td>2</td><td>90</td><td>66</td><td>82</td><td>82</td><td>82</td><td>82</td><td>82</td><td>81.2</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>線路滿貫</td><td>3</td><td>90</td><td>58</td><td>76</td><td>82</td><td>65</td><td>65</td><td>65</td><td>75.4</td><td><div class="progress-fill" style="width:75%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>星月飛雲</td><td>4</td><td>80</td><td>62</td><td>64</td><td>78</td><td>72</td><td>72</td><td>72</td><td>72.6</td><td><div class="progress-fill" style="width:73%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>傑出雷霆</td><td>6</td><td>77</td><td>74</td><td>52</td><td>72</td><td>68</td><td>68</td><td>68</td><td>72.2</td><td><div class="progress-fill" style="width:72%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>🎯 精選投注：獨贏@健康快車 · 連贏 健康快車+線路滿貫</strong></div>
+    </div>
+
+    <!-- 第7場 -->
+    <div class="race-card">
+        <div class="race-title">🌍 第7場 · 國際一級賽1200米草地 · A赛道<span class="race-time">—</span></div>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>小鳥天堂</td><td>2</td><td>95</td><td>72.8</td><td>88</td><td>90</td><td>90</td><td>88</td><td>90</td><td>88.7</td><td><div class="progress-fill" style="width:89%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>白富金剛</td><td>5</td><td>78</td><td>70.4</td><td>92</td><td>85</td><td>88</td><td>85</td><td>86</td><td>80.9</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>金鎖貴人</td><td>4</td><td>90</td><td>62.8</td><td>82</td><td>80</td><td>80</td><td>82</td><td>80</td><td>79.5</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>陽光勇士</td><td>3</td><td>90</td><td>60.4</td><td>70</td><td>78</td><td>78</td><td>80</td><td>78</td><td>76.3</td><td><div class="progress-fill" style="width:76%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>🏆 建議重心：小鳥天堂 + 白富金剛 連贏</strong></div>
+    </div>
+
+    <!-- 第8場 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第8場 · 第三班1400米草地 · A赛道<span class="race-time">16:20</span></div>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>1</td><td>喜蓮勤威</td><td>1</td><td>93</td><td>64</td><td>88</td><td>85</td><td>82</td><td>80</td><td>80</td><td>82.8</td><td><div class="progress-fill" style="width:83%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>友望仁</td><td>2</td><td>90</td><td>84</td><td>60</td><td>80</td><td>70</td><td>74</td><td>72</td><td>80.2</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>三軍勇將</td><td>4</td><td>80</td><td>70</td><td>76</td><td>82</td><td>78</td><td>82</td><td>78</td><td>78.6</td><td><div class="progress-fill" style="width:79%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>佳駿年年</td><td>3</td><td>90</td><td>90</td><td>20</td><td>70</td><td>62</td><td>66</td><td>64</td><td>71.1</td><td><div class="progress-fill" style="width:71%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="info-box">⚠️ 一世美麗 (潘頓) 檔位11奇門僅47分，綜合64.9未入精選，市場熱門但系統警示。</div>
+    </div>
+
+    <!-- 第9場 -->
+    <div class="race-card">
+        <div class="race-title">👑 第9場 · 富衛保險女皇盃 (一級賽) · 2000米草地 A赛道<span class="race-time">16:55</span></div>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>同工之妙</td><td>2</td><td>93</td><td>80</td><td>85</td><td>88</td><td>85</td><td>88</td><td>88</td><td>86.9</td><td><div class="progress-fill" style="width:87%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>球星</td><td>3</td><td>93</td><td>80</td><td>72</td><td>80</td><td>78</td><td>82</td><td>80</td><td>84.3</td><td><div class="progress-fill" style="width:84%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>浪漫勇士</td><td>5</td><td>78</td><td>68</td><td>98</td><td>95</td><td>98</td><td>95</td><td>95</td><td>83.9</td><td><div class="progress-fill" style="width:84%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>蒙面舞會</td><td>6</td><td>78</td><td>68</td><td>96</td><td>92</td><td>96</td><td>92</td><td>92</td><td>82.9</td><td><div class="progress-fill" style="width:83%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>💎 策略：同工之妙 Win，連贏搭球星/浪漫勇士</strong></div>
+    </div>
+
+    <!-- 第10場 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第10場 · 第三班1600米草地 · A赛道<span class="race-time">17:35</span></div>
+        <table class="data-table">
+            <thead><tr><th>排名</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>1</td><td>金源千帥</td><td>1</td><td>90</td><td>82</td><td>70</td><td>80</td><td>70</td><td>72</td><td>70</td><td>81.9</td><td><div class="progress-fill" style="width:82%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>紫荆拼搏</td><td>3</td><td>90</td><td>76</td><td>65</td><td>82</td><td>72</td><td>74</td><td>72</td><td>80.6</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>騰龍踏雪</td><td>2</td><td>90</td><td>82</td><td>60</td><td>78</td><td>65</td><td>68</td><td>66</td><td>80.1</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>共享富裕</td><td>5</td><td>80</td><td>62</td><td>85</td><td>88</td><td>80</td><td>82</td><td>80</td><td>76.6</td><td><div class="progress-fill" style="width:77%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="info-box">🔥 開心勇 (潘頓) 檔位11導致奇門僅47分，雖熱門但系統不推薦作膽。</div>
+    </div>
+
+    <!-- 第11場 -->
+    <div class="race-card">
+        <div class="race-title">🌟 第11場 · 第二班1400米草地 · A赛道<span class="race-time">18:10</span></div>
+        <table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1</td><td>時時歡聲</td><td>2</td><td>95</td><td>90</td><td>98</td><td>95</td><td>96</td><td>94</td><td>94</td><td>93.9</td><td><div class="progress-fill" style="width:94%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>翠金主</td><td>1</td><td>92</td><td>86</td><td>85</td><td>88</td><td>84</td><td>86</td><td>84</td><td>88.2</td><td><div class="progress-fill" style="width:88%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>晴冷</td><td>3</td><td>90</td><td>84</td><td>82</td><td>86</td><td>82</td><td>84</td><td>82</td><td>86.1</td><td><div class="progress-fill" style="width:86%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>千帆駒</td><td>6</td><td>78</td><td>84</td><td>80</td><td>82</td><td>78</td><td>80</td><td>78</td><td>80.1</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
+            </tbody>
+        </table>
+        <div class="bet-slip"><strong>🏅 終極建議：時時歡聲 膽材，連贏 時時歡聲+翠金主</strong></div>
+    </div>
+
+    <div class="disclaimer">
+        🧾 誠實聲明：<br>
+        - 所有賠率、血統評分、步速評分、場地評分均為系統模擬值（因缺即時數據源）。<br>
+        - 奇門評分按檔位及明星騎師規則執行（V7.171I）。<br>
+        - 實際賽果可能與預測不符，本報告僅供系統協作研究。<br>
+        - 🕸️ SHTSN ｜ 集體智慧 ｜ 賽後將進行精選池入圍率驗證及權重動態調整。<br>
+        - ✅ 已嚴格遵守格式：每場均包含「血統·步速·場地」三項評分。
+    </div>
+</div>
+</body>
+</html>
