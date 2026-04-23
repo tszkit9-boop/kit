@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN 沙田賽日完整預測｜第1-11場（傳統格式）</title>
+    <title>SHTSN 沙田賽日完整預測｜第1-11場（修正版）</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
         body{background:#f4f2ef;font-family:system-ui,'Segoe UI',sans-serif;padding:20px 14px 40px;}
@@ -40,7 +40,7 @@
             <span style="font-weight:800;font-size:1.8rem;">🕸️ SHTSN</span>
             <span style="background:#00000030;padding:4px 12px;border-radius:30px;">V1.1I</span>
         </div>
-        <div>沙田草地 · 26/04 賽日 · 第1-11場（傳統單場格式）</div>
+        <div>沙田草地 · 26/04 賽日 · 第1-11場（傳統格式・修正版）</div>
     </div>
     <div class="honest">📢 誠實聲明：賠率、晨操、路程分均為模擬值(60)。血統分基於搜尋及估算。步速分析綜合檔位及騎師風格。</div>
 
@@ -50,8 +50,7 @@
 </div>
 
 <script>
-// ==================== 各場數據定義（與最終版一致）====================
-// 共用評分函數
+// ==================== 共用評分函數 ====================
 function getDrawScore(gate) { if (gate <= 3) return 10; if (gate <= 6) return 7; if (gate <= 9) return 4; return 2; }
 function getWeightScore(weight) { if (weight <= 115) return 10; if (weight <= 122) return 8; if (weight <= 129) return 5; if (weight <= 133) return 3; return 2; }
 function getJockeyScore(code) { if (code === "panton" || code === "bowen" || code === "moreira" || code === "star") return 9; if (code === "badu" || code === "tian" || code === "cai" || code === "heze") return 7; if (code === "bender" || code === "xiwei" || code === "aizhao") return 6; return 5; }
@@ -61,7 +60,7 @@ function getTrackwork(gate, weight, code) { let base = gate <= 3 ? 82 : (gate <=
 function getOddsScore() { return 60; }
 function getFinal(qimen, data, odds, track, distance, blood) { let combined = (odds + track) / 2; return (qimen * 0.45) + (data * 0.30) + (combined * 0.20) + (distance * 0.03) + (blood * 0.02); }
 
-// 場次數據 (只定義差異，第3,4複製第1)
+// ==================== 各場數據定義（完整版）====================
 const race1data = {
     title:"第1場・第四班1200米", distance:1200,
     pace:"內檔馬(1,2,9,12)具前速，外檔多，預期步速正常偏快，利後上馬如5號、13號。",
@@ -248,31 +247,38 @@ function renderRace(raceData, index) {
     let top4 = top5.slice(0,4).map(h => h.no);
     let winPick = top3[0];
 
-    // 表格
+    // 綜合評分表
     let tableHtml = `<div class="table-wrapper"><table class="ranking-table"><thead><tr><th>排名</th><th>馬號</th><th>馬名</th><th>檔位</th><th>綜合分</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>進度</th></tr></thead><tbody>`;
     sorted.forEach((h, idx) => {
-        tableHtml += `<tr${idx%2===0?'':' style="background:#faf8f5;"'}><td>${idx+1}</td>.yes${h.no}</td>.yes${h.name}</td>.yes${h.gate}</td>.yes<strong>${h.final.toFixed(1)}</strong></td>.yes${h.qimen}</td>.yes${h.dataScore}</td>.yes${h.oddsScore.toFixed(1)}</td>.yes${h.trackwork}<tr>.yes${h.blood}</td>.yes<div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, h.final)}%"></div></div></td></tr>`;
+        tableHtml += `<tr${idx%2===0?'':' style="background:#faf8f5;"'}><td>${idx+1}</td>.yes${h.no}</td>.yes${h.name}</td>.yes${h.gate}</td>.yes<strong>${h.final.toFixed(1)}</strong></td>.yes${h.qimen}</td>.yes${h.dataScore}</td>.yes${h.oddsScore.toFixed(1)}</td>.yes${h.trackwork}</td>.yes${h.blood}</td>.yes<div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, h.final)}%"></div></div></td></tr>`;
     });
-    tableHtml += `</tbody></table></div>`;
+    tableHtml += `</tbody><tr></div>`;
 
+    // 精選池
     let picksHtml = `<div class="flex-grid">${top5.map(h => `<div class="pick-card"><div class="pick-number">${h.no}</div><div>${h.name}</div><div>${h.final.toFixed(1)}分</div></div>`).join('')}</div>`;
+
+    // 投注建議（修正版）
     let betHtml = `<table class="bet-table"><tbody>
-        <tr>.html(獨贏).${winPick}號 ${sorted.find(h=>h.no==winPick).name}</div>.主力</div>--
-        <tr>.html(位置Q).${top3.join(',')} 互串</div>.主力</div>--
-        <tr>.html(連贏).${top3.join(',')} 互串</div>.均注</div>--
-        <tr>.html(單T).${top3.join(',')}</div>.小注</div>--
-        <tr>.html(三重彩).${top3[0]} > ${top3[1]},${top3[2]} > 全</div>.複式</div>--
-        <tr>.html(四連環).${top4.join(',')}</div>.防守</div>--
-        <tr>.html(四重彩).${top4.join(',')} 複式四重彩（24注）</div>.小注</div>--
+        <tr><td>獨贏</td><td>${winPick}號 ${sorted.find(h=>h.no==winPick).name}</td><td>主力</td></tr>
+        <tr><td>位置Q</td><td>${top3.join(',')} 互串</td><td>主力</td></tr>
+        <tr><td>連贏</td><td>${top3.join(',')} 互串</td><td>均注</td></tr>
+        <tr><td>單T</td><td>${top3.join(',')}</td><td>小注</td></tr>
+        <tr><td>三重彩</td><td>${top3[0]} > ${top3[1]},${top3[2]} > 全</td><td>複式</td></tr>
+        <tr><td>四連環</td><td>${top4.join(',')}</td><td>防守</td></tr>
+        <tr><td>四重彩</td><td>${top4.join(',')} 複式四重彩（24注）</td><td>小注</td></tr>
     </tbody></table>`;
 
+    // 奇門九宮
     const jiugong = [
         ["巽宮·東南","天輔星",false],["離宮·南","值符·天英",false],["坤宮·西南","天芮星",false],
         ["震宮·東","天沖星",false],["中宮","太極",false],["兌宮·西","天柱星",true],
         ["艮宮·東北","天任星",false],["坎宮·北","天蓬星",false],["乾宮·西北","天心星",false]
     ];
     let jiugongHtml = `<div class="jiugong-grid">${jiugong.map(c => `<div class="grid-cell ${c[2]?'highlight':''}"><strong>${c[0]}</strong><span>${c[1]}</span></div>`).join('')}</div>`;
+    let qimenSub = raceData.distance===1200?"午時陰遁四局，短途內檔優勢顯著":(raceData.distance===2000?"申時陰遁四局，長途內檔優勢略減，馬星影響增大":"酉時陰遁四局，中距離內檔優勢明顯");
     let paceHtml = `<div class="pace-card">🏁 <strong>步速分析</strong><br>${raceData.pace}</div>`;
+
+    // 馬匹深度分析
     let detailsHtml = `<div>${horsesWithScores.map(h => `
         <div class="horse-detail-card">
             <div><strong>${h.no}. ${h.name}</strong> (${h.gate}檔 · ${h.weight}磅) 騎師: ${h.jockey}</div>
@@ -295,7 +301,7 @@ function renderRace(raceData, index) {
         ${paceHtml}
         <div class="card"><div class="card-header"><h2>🕸️ 蛛網精選</h2></div>${picksHtml}</div>
         <div class="card"><div class="card-header"><h2>🎲 投注組合建議</h2></div>${betHtml}</div>
-        <div class="card"><div class="card-header"><h2>☯ 奇門九宮·時空格局</h2></div>${jiugongHtml}<div class="sub">${raceData.distance===1200?"午時陰遁四局，短途內檔優勢顯著":(raceData.distance===2000?"申時陰遁四局，長途內檔優勢略減，馬星影響增大":"酉時陰遁四局，中距離內檔優勢明顯")}</div></div>
+        <div class="card"><div class="card-header"><h2>☯ 奇門九宮·時空格局</h2></div>${jiugongHtml}<div class="sub">${qimenSub}</div></div>
         <div class="card"><div class="card-header"><h2>🐎 馬匹深度分析</h2></div>${detailsHtml}</div>
     `;
 }
