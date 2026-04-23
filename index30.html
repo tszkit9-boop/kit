@@ -48,7 +48,7 @@
         </div>
         <div>沙田草地 · 26/04 賽日 · 第1-11場（含步速分析）</div>
     </div>
-    <div class="honest">📢 誠實聲明：賠率、晨操、路程分均為模擬值(60)。血統分基於搜尋及估算。步速分析綜合檔位及騎師風格。第10、11場暫無排位數據，待補充。</div>
+    <div class="honest">📢 誠實聲明：賠率、晨操、路程分均為模擬值(60)。血統分基於搜尋及估算。步速分析綜合檔位及騎師風格。第11場暫無排位數據，待補充。</div>
 
     <div class="tabs" id="tabContainer">
         <button class="tab-btn active" data-race="race1">🏇 第1場・四班1200米</button>
@@ -60,7 +60,7 @@
         <button class="tab-btn" data-race="race7">🏇 第7場・三班1400米</button>
         <button class="tab-btn" data-race="race8">🏇 第8場・三班1600米</button>
         <button class="tab-btn" data-race="race9">🏇 第9場・二班1400米</button>
-        <button class="tab-btn" data-race="race10">🏇 第10場・待補充</button>
+        <button class="tab-btn" data-race="race10">🏇 第10場・二班1400米</button>
         <button class="tab-btn" data-race="race11">🏇 第11場・待補充</button>
     </div>
     <div id="dynamicContent"></div>
@@ -68,12 +68,12 @@
 </div>
 
 <script>
-// ==================== 各場數據定義（血統分、檔位、負磅、騎師代碼） ====================
+// ==================== 各場數據定義（血統分、檔位、負磅、騎師代碼）====================
 // 場次1: 四班1200米 (馬馳登等)
 const race1 = {
     title:"第1場・第四班1200米",
     distance:1200,
-    horses:[
+    horses: [
         {no:1,name:"馬馳登",gate:2,weight:134,jockey:"薛凱華",code:"other",blood:75},
         {no:2,name:"開心孖寶",gate:3,weight:132,jockey:"艾道拿",code:"other",blood:80},
         {no:3,name:"驍妙",gate:14,weight:132,jockey:"賀銘年",code:"other",blood:60},
@@ -95,7 +95,7 @@ const race1 = {
 const race2 = {
     title:"第2場・第四班1600米",
     distance:1600,
-    horses:[
+    horses: [
         {no:1,name:"都靈冠星",gate:4,weight:135,jockey:"潘頓",code:"panton",blood:70},
         {no:2,name:"劍飛聲",gate:14,weight:134,jockey:"田泰安",code:"tian",blood:55},
         {no:3,name:"家傳之寶",gate:6,weight:129,jockey:"楊明綸",code:"other",blood:75},
@@ -113,7 +113,7 @@ const race2 = {
     ],
     pace: "內檔馬(6,11,14)有前速，步速平穩，中距離賽事利中置型馬如1號、7號。"
 };
-// 場次3: 四班1200米 (與第1場結構相同)
+// 場次3: 四班1200米 (與第1場相同)
 const race3 = {
     title:"第3場・第四班1200米",
     distance:1200,
@@ -131,7 +131,7 @@ const race4 = {
 const race5 = {
     title:"第5場・一級賽主席短途獎1200米",
     distance:1200,
-    horses:[
+    horses: [
         {no:1,name:"嘉應高昇",gate:5,weight:126,jockey:"潘頓",code:"panton",blood:95},
         {no:2,name:"驕陽明駒",gate:3,weight:126,jockey:"莫雷拉",code:"moreira",blood:85},
         {no:3,name:"精算暴雪",gate:8,weight:126,jockey:"布文",code:"bowen",blood:80},
@@ -146,7 +146,7 @@ const race5 = {
 const race6 = {
     title:"第6場・第三班1200米",
     distance:1200,
-    horses:[
+    horses: [
         {no:1,name:"飲杯",gate:5,weight:128,jockey:"布文",code:"bowen",blood:85},
         {no:2,name:"綫路滿貫",gate:9,weight:128,jockey:"潘頓",code:"panton",blood:80},
         {no:3,name:"星月飛雲",gate:6,weight:127,jockey:"何澤堯",code:"heze",blood:85},
@@ -166,7 +166,7 @@ const race6 = {
 const race7 = {
     title:"第7場・第三班1400米",
     distance:1400,
-    horses:[
+    horses: [
         {no:1,name:"喜建功威",gate:1,weight:135,jockey:"麥道朗",code:"star",blood:80},
         {no:2,name:"潮州精神",gate:12,weight:134,jockey:"巴度",code:"badu",blood:75},
         {no:3,name:"泰力",gate:6,weight:129,jockey:"湯普新",code:"other",blood:65},
@@ -184,11 +184,11 @@ const race7 = {
     ],
     pace: "內檔有1,10,14具前速，步速正常偏快，利後上馬如9號、4號。"
 };
-// 場次8: 三班1600米 (騎師資料根據IMG_6686更新)
+// 場次8: 三班1600米 (一生好彩等)
 const race8 = {
     title:"第8場・第三班1600米",
     distance:1600,
-    horses:[
+    horses: [
         {no:1,name:"一生好彩",gate:6,weight:134,jockey:"周俊樂",code:"other",blood:70},
         {no:2,name:"風將",gate:4,weight:134,jockey:"薛凱華",code:"other",blood:75},
         {no:3,name:"安都",gate:8,weight:132,jockey:"韋紀力",code:"star",blood:70},
@@ -201,31 +201,38 @@ const race8 = {
         {no:10,name:"紫荊拼搏",gate:3,weight:124,jockey:"班德禮",code:"bender",blood:80},
         {no:11,name:"三寶進財",gate:7,weight:122,jockey:"希威森",code:"xiwei",blood:70},
         {no:12,name:"騰龍踏雪",gate:2,weight:121,jockey:"金誠剛",code:"other",blood:85},
-        {no:13,name:"八仟財隕",gate:14,weight:120,jockey:"田泰安",code:"tian",blood:65},
+        {no:13,name:"八仟財陞",gate:14,weight:120,jockey:"田泰安",code:"tian",blood:65},
         {no:14,name:"金滙千帥",gate:1,weight:120,jockey:"潘明輝",code:"other",blood:90}
     ],
     pace: "內檔有10,12,14號，步速平穩，中長距離利留前鬥後。"
 };
-// 場次9: 二班1400米 (根據最新圖片IMG_6688更新檔位負磅及馬名)
+// 場次9: 二班1400米 (第9場)
 const race9 = {
     title:"第9場・第二班1400米",
     distance:1400,
-    horses:[
+    horses: [
         {no:1,name:"包裝天將",gate:13,weight:135,jockey:"霍宏聲",code:"other",blood:70},
         {no:2,name:"光年魅力",gate:11,weight:132,jockey:"布文",code:"bowen",blood:85},
         {no:3,name:"風雲武士",gate:5,weight:132,jockey:"班德禮",code:"bender",blood:75},
-        {no:4,name:"綠族無限",gate:7,weight:124,jockey:"莫雷拉",code:"moreira",blood:90},
+        {no:4,name:"綠旗無限",gate:7,weight:124,jockey:"莫雷拉",code:"moreira",blood:90},
         {no:5,name:"時時歡聲",gate:2,weight:122,jockey:"潘頓",code:"panton",blood:95},
-        {no:6,name:"鈑易溫",gate:8,weight:121,jockey:"黃智弘",code:"other",blood:70},
+        {no:6,name:"鈦易搵",gate:8,weight:121,jockey:"黃智弘",code:"other",blood:70},
         {no:7,name:"晒冷",gate:3,weight:119,jockey:"希威森",code:"xiwei",blood:80},
         {no:8,name:"會當凌",gate:14,weight:118,jockey:"周俊樂",code:"other",blood:65},
-        {no:9,name:"章金主",gate:1,weight:118,jockey:"巴度",code:"badu",blood:85},
+        {no:9,name:"韋金主",gate:1,weight:118,jockey:"巴度",code:"badu",blood:85},
         {no:10,name:"飛鷹翱翔",gate:12,weight:117,jockey:"鍾易禮",code:"other",blood:70},
-        {no:11,name:"極上紗璠",gate:4,weight:115,jockey:"潘明輝",code:"other",blood:75},
+        {no:11,name:"極上紗瓏",gate:4,weight:115,jockey:"潘明輝",code:"other",blood:75},
         {no:12,name:"千帆駒",gate:6,weight:115,jockey:"田泰安",code:"tian",blood:80},
         {no:13,name:"至尊高超",gate:9,weight:115,jockey:"韋紀力",code:"star",blood:90},
         {no:14,name:"英雄豪傑",gate:10,weight:115,jockey:"黃寶妮",code:"other",blood:70}
     ],
+    pace: "內檔有5,7,9號，步速正常偏快，利後上馬如2號、4號。"
+};
+// 場次10: 二班1400米 (與第9場相同，第10場確認排位)
+const race10 = {
+    title:"第10場・第二班1400米",
+    distance:1400,
+    horses: JSON.parse(JSON.stringify(race9.horses)),
     pace: "內檔有5,7,9號，步速正常偏快，利後上馬如2號、4號。"
 };
 
@@ -278,7 +285,7 @@ function getFinal(qimen, data, odds, track, distance, blood) {
     return (qimen * 0.45) + (data * 0.30) + (combined * 0.20) + (distance * 0.03) + (blood * 0.02);
 }
 
-// 渲染場次
+// 渲染特定場次
 function renderRace(raceData) {
     if (!raceData) {
         document.getElementById('dynamicContent').innerHTML = `<div class="card"><div class="card-header"><h2>📋 資料待補充</h2></div><div class="honest">此場次暫無排位數據，請稍後補充。</div></div>`;
@@ -299,34 +306,23 @@ function renderRace(raceData) {
     let winPick = top3[0];
 
     // 表格
-    let tableHtml = `<div class="table-wrapper"><table class="ranking-table"><thead><tr><th>排名</th><th>馬號</th><th>馬名</th><th>檔位</th><th>綜合分</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>進度</th><tr></thead><tbody>`;
+    let tableHtml = `<div class="table-wrapper"><table class="ranking-table"><thead><tr><th>排名</th><th>馬號</th><th>馬名</th><th>檔位</th><th>綜合分</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>進度</th></tr></thead><tbody>`;
     sorted.forEach((h, idx) => {
-        tableHtml += `<tr>
-            <td>${idx+1}</td>
-            <td>${h.no}】--
-            <td>${h.name}】--
-            <td>${h.gate}】--
-            <td><strong>${h.final.toFixed(1)}</strong>】--
-            <td>${h.qimen}】--
-            <td>${h.dataScore}】--
-            <td>${h.oddsScore.toFixed(1)}</div>--
-            <td>${h.trackwork}】--
-            <td>${h.blood}】--
-            <td><div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, h.final)}%"></div></div>}%
-        </tr>`;
+        tableHtml += `<tr${idx%2===0?'':' style="background:#faf8f5;"'}><td>${idx+1}</td><td>${h.no}</td><td>${h.name}</td><td>${h.gate}</td><td><strong>${h.final.toFixed(1)}</strong></td><td>${h.qimen}</td><td>${h.dataScore}</td><td>${h.oddsScore.toFixed(1)}</td><td>${h.trackwork}</td><td>${h.blood}</td><td><div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, h.final)}%"></div></div></td></tr>`;
     });
     tableHtml += `</tbody></table></div>`;
 
     let picksHtml = `<div class="flex-grid">${top5.map(h => `<div class="pick-card"><div class="pick-number">${h.no}</div><div>${h.name}</div><div>${h.final.toFixed(1)}分</div></div>`).join('')}</div>`;
+
     let betHtml = `<table class="bet-table"><tbody>
-        <tr>.html(獨贏).${winPick}號 ${sorted.find(h=>h.no==winPick).name}</div>.主力</div>--
+        <tr><td>獨贏</div>.${winPick}號 ${sorted.find(h=>h.no==winPick).name}</div>.主力</div>--
         <tr>.html(位置Q).${top3.join(',')} 互串</div>.主力</div>--
         <tr>.html(連贏).${top3.join(',')} 互串</div>.均注</div>--
         <tr>.html(單T).${top3.join(',')}</div>.小注</div>--
         <tr>.html(三重彩).${top3[0]} > ${top3[1]},${top3[2]} > 全</div>.複式</div>--
         <tr>.html(四連環).${top4.join(',')}</div>.防守</div>--
-        <td>.html(四重彩).${top4.join(',')} 複式四重彩（24注）</div>.小注</div>--
-    </tbody></table>`;
+        <tr>.html(四重彩).${top4.join(',')} 複式四重彩（24注）</div>.小注</div>--
+    </tbody><td>`;
 
     const jiugong = [
         ["巽宮·東南","天輔星",false],["離宮·南","值符·天英",false],["坤宮·西南","天芮星",false],
@@ -363,8 +359,8 @@ function renderRace(raceData) {
 // 分頁邏輯
 const races = {
     race1: race1, race2: race2, race3: race3, race4: race4, race5: race5,
-    race6: race6, race7: race7, race8: race8, race9: race9,
-    race10: null, race11: null
+    race6: race6, race7: race7, race8: race8, race9: race9, race10: race10,
+    race11: null
 };
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
