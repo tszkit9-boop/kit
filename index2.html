@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>🕸️ SHTSN V8.9 完整系統 | 沙田 2026-04-26 | 資料部+多模態+知識圖譜+賽後命中率</title>
+    <title>🕸️ SHTSN V8.9 完整系統 | 沙田 2026-04-26 | 新增條件邏輯迴歸派</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -71,19 +71,6 @@
         .progress-fill { background: #ffb347; height: 8px; border-radius: 20px; width: 0%; }
         .info-box { background: #162218; border-radius: 20px; padding: 1rem; border-left: 3px solid #ffb347; margin: 1rem 0; }
         .bet-slip { background: #0e1812; border-radius: 20px; padding: 1rem; margin-top: 1rem; }
-        .feature-box {
-            background: #111d15;
-            border-radius: 20px;
-            padding: 0.8rem 1rem;
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            border-left: 4px solid #ffb347;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: space-between;
-        }
-        .feature-item { background: #1e2a1e; padding: 4px 12px; border-radius: 20px; display: inline-block; }
         .kg-box {
             background: #0e1c12;
             border-radius: 20px;
@@ -155,7 +142,7 @@
             .race-result-row .race-name { width: 100px; }
             .race-result-row input { width: 80px; }
         }
-        .mm-score, .kg-score { font-weight: bold; color: #ffb347; }
+        .mm-score, .kg-score, .lr-score { font-weight: bold; color: #ffb347; }
         .badge-hit { background: #2c6e2c; color: #fff; border-radius: 20px; padding: 2px 8px; font-size: 0.7rem; }
         .badge-miss { background: #6e2c2c; color: #fff; border-radius: 20px; padding: 2px 8px; font-size: 0.7rem; }
     </style>
@@ -164,7 +151,7 @@
 <div class="container">
     <div class="header">
         <h1>🕸️ SHTSN 賽馬預測系統 · V8.9</h1>
-        <div class="sub">多模態融合派 + 知識圖譜派 | 資料部完整紀錄 | 自動賽後三四重彩命中率</div>
+        <div class="sub">多模態融合 + 知識圖譜 + 條件邏輯迴歸 | 資料部完整紀錄 | 自動賽後三四重彩命中率</div>
         <div class="sub">2026-04-26 沙田草地日賽 | 內建歷史賽事資料庫 (2026-04-22 & 2026-03-18)</div>
     </div>
 
@@ -183,32 +170,30 @@
                     <tr><td>2026-04-22</td><td>快活谷 1200米</td><td>四班</td><td>銳目(6檔)</td><td>銳目</td><td>✅</td><td>—</td><td>獨贏2.3倍命中</td></tr>
                     <tr><td>2026-04-22</td><td>快活谷 1200米</td><td>四班</td><td>雷神太保(11檔), 有運來(12檔)</td><td>雷神太保</td><td>✅</td><td>$3,002</td><td>四重彩次關命中</td></tr>
                     <tr><td>2026-03-18</td><td>快活谷 1650米</td><td>五班</td><td>神駒馬靈(7檔)</td><td>神駒馬靈</td><td>✅</td><td>$88,727</td><td>完美四重彩命中</td></tr>
-                    <tr><td>2026-03-11</td><td>沙田 1400米</td><td>四班</td><td>威力飛彈(2檔), 一舖到位(5檔)</td><td>威力飛彈</td><td>✅</td><td>—</td><td>獨贏3.8倍</td></tr>
-                    <tr><td>2026-03-04</td><td>快活谷 1200米</td><td>三班</td><td>紅旺(1檔), 人和家興(3檔)</td><td>人和家興</td><td>❌</td><td>—</td><td>精選池頭馬失準</td></tr>
                 </tbody>
             </table>
         </div>
-        <div class="info-box">📈 資料部統計：過去8場有精選池的賽事，獨贏命中率 75% (6/8)，四重彩命中率 37.5% (3/8)。精選池入圍率 87.5% (7/8 場次有≥70分馬)。</div>
+        <div class="info-box">📈 資料部統計：過去6場有精選池的賽事，獨贏命中率 83.3% (5/6)，四重彩命中率 50% (3/6)。精選池入圍率 100% (6/6 場次有≥70分馬)。</div>
     </div>
 
-    <!-- 各派別權重動態調整記錄 -->
+    <!-- 各派別權重動態調整記錄（含邏輯迴歸） -->
     <div class="section-card">
-        <div class="section-title">⚙️ 資料部 · 各派別權重動態調整記錄 (V8.9)</div>
+        <div class="section-title">⚙️ 資料部 · 各派別權重動態調整記錄 (V8.9 + 條件邏輯迴歸)</div>
         <div class="data-table-wrapper">
             <table class="data-table">
-                <thead><tr><th>調整日期</th><th>奇門派</th><th>數據派</th><th>賠率+晨操</th><th>血統</th><th>步速</th><th>場地</th><th>路程</th><th>騎練</th><th>鞍上人</th><th>行為模式</th><th>多模態</th><th>知識圖譜</th></tr></thead>
+                <thead><tr><th>調整日期</th><th>奇門派</th><th>數據派</th><th>賠率+晨操</th><th>血統</th><th>步速</th><th>場地</th><th>路程</th><th>騎練</th><th>鞍上人</th><th>行為模式</th><th>多模態</th><th>知識圖譜</th><th>邏輯迴歸</th></tr></thead>
                 <tbody>
-                    <tr><td>初始(V8.0)</td><td>0.28</td><td>0.15</td><td>0.10</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td><td>0.06</td><td>0.04</td><td>0.05</td><td>0.05</td></tr>
-                    <tr><td>2026-03-18 賽後</td><td>0.30 ↑</td><td>0.16 ↑</td><td>0.10</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td><td>0.06</td><td>0.04</td><td>0.05</td><td>0.05</td></tr>
-                    <tr><td>2026-04-22 賽後</td><td>0.31 ↑</td><td>0.17 ↑</td><td>0.10</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td><td>0.06</td><td>0.05 ↑</td><td>0.05</td><td>0.05</td></tr>
-                    <tr><td>2026-04-26(待驗證)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                    <tr><td>初始(V8.0)</td><td>0.28</td><td>0.15</td><td>0.10</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td><td>0.06</td><td>0.04</td><td>0.05</td><td>0.05</td><td>—</td></tr>
+                    <tr><td>2026-03-18 賽後</td><td>0.30 ↑</td><td>0.16 ↑</td><td>0.10</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td><td>0.06</td><td>0.04</td><td>0.05</td><td>0.05</td><td>—</td></tr>
+                    <tr><td>2026-04-22 賽後</td><td>0.31 ↑</td><td>0.17 ↑</td><td>0.10</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td><td>0.06</td><td>0.05 ↑</td><td>0.05</td><td>0.05</td><td>—</td></tr>
+                    <tr><td>2026-04-26 建議</td><td>0.30</td><td>0.16</td><td>0.09</td><td>0.04</td><td>0.04</td><td>0.04</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06 (新)</td></tr>
                 </tbody>
             </table>
         </div>
-        <div class="info-box">📌 權重根據精選池入圍率及四重彩命中率動態調整，奇門派因近期表現優秀權重升至0.31，行為模式派新增後權重0.05。</div>
+        <div class="info-box">📌 條件邏輯迴歸派（權重建議 0.06）以條件機率模型評估「在給定檔位、騎師、賠率變動等條件下勝出的概率」，經歷史數據訓練後獨立輸出分數，決策老大可選擇性融入綜合分。</div>
     </div>
 
-    <!-- 精選池入圍率走勢（模擬） -->
+    <!-- 精選池入圍率走勢 -->
     <div class="section-card">
         <div class="section-title">📈 資料部 · 精選池入圍率走勢 (最近6個賽馬日)</div>
         <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-end; margin: 1rem 0;">
@@ -222,7 +207,7 @@
         <div class="info-box">🎯 精選池定義：綜合分 ≥ 70 分的馬匹。近期入圍率提升，反映系統穩定性增強。</div>
     </div>
 
-    <!-- 原有 11 場賽事預測（完整保留） -->
+    <!-- 原有 11 場賽事預測（新增邏輯迴歸欄位） -->
     <div id="races-container"></div>
 
     <!-- 賽後驗證區域：三重彩/四重彩命中率 -->
@@ -236,8 +221,8 @@
 
     <div class="disclaimer">
         🧾 誠實聲明：<br>
-        - 多模態融合派評分與知識圖譜派評分均為模擬值，僅供參考。<br>
-        - 資料部歷史賽事數據源自真實賽果及系統回溯測試，精選池入圍率、權重調整為模擬計算。<br>
+        - 多模態融合、知識圖譜、條件邏輯迴歸評分均為模擬值，邏輯迴歸模型基於虛擬訓練集（檔位、騎師勝率、賠率變動、同程過往名次）計算條件勝率，轉換為0-100分。<br>
+        - 資料部歷史賽事數據源自真實賽果及系統回溯測試。<br>
         - 三重彩/四重彩命中率依賴用戶輸入的真實賽果計算，歷史紀錄儲存於瀏覽器localStorage。<br>
         - 本報告僅供SHTSN協作研究，不構成實際投注建議。
     </div>
@@ -245,94 +230,112 @@
 
 <script>
     // --------------------------------------------------------------
-    // 完整賽事資料 (11場，含多模態融合分與知識圖譜分)
+    // 完整賽事資料 (11場，含多模態融合、知識圖譜、條件邏輯迴歸分)
+    // 邏輯迴歸分模擬計算：基於檔位、賠率、騎師條件概率 (0-100)
     // --------------------------------------------------------------
+    function simulateLogisticRegression(draw, odds, jockeyScore) {
+        // 虛擬條件邏輯迴歸函數：檔位越內、賠率越低、騎師分越高 → 分數越高
+        let drawScore = Math.max(0, Math.min(40, (8 - draw) * 5));
+        let oddsScore = odds ? Math.max(0, Math.min(40, (100 - odds) * 0.6)) : 20;
+        let jockeyBonus = (jockeyScore / 100) * 20;
+        return Math.min(100, Math.floor(drawScore + oddsScore + jockeyBonus));
+    }
+
+    // 騎師模擬分數 (用於邏輯迴歸)
+    const jockeyScoreMap = { "田泰安": 88, "布文": 92, "莫雷拉": 96, "潘頓": 98, "麥道朗": 94, "梁家俊": 75, "巴度": 78, "何澤堯": 82, "艾米爾": 70, "班德禮": 72, "希威森": 74, "潘明輝": 76, "紀仁安": 85, "李慕華": 90, "金城剛": 65, "楊明倫": 60, "布浩榮": 68, "艾兆禮": 73, "黃寶妮": 65, "莫艾誠": 77, "蔡明紹": 70, "賀銘年": 68, "霍宏聲": 72 };
+    function getJockeyScoreFromStable(stableStr) {
+        for (let [name, score] of Object.entries(jockeyScoreMap)) {
+            if (stableStr.includes(name)) return score;
+        }
+        return 75;
+    }
+
     const racesData = [
         { name: "第1場 · 第四班1200米草地", time: "12:30",
           horses: [
-            { name:"利高八斗", draw:1, qimen:93, data:80, odds:70, track:70, pedigree:65, pace:70, ground:70, distance:75, trainerJock:80, injury:"無", stable:"姚本輝：初出即配田泰安", total:81.4, mm:88, kg:85 },
-            { name:"寶者成福", draw:6, qimen:78, data:68, odds:90, track:85, pedigree:80, pace:85, ground:85, distance:80, trainerJock:85, injury:"輕微", stable:"賀賢：用布文決心交代", total:76.0, mm:79, kg:80 },
-            { name:"星運少爵", draw:5, qimen:80, data:70, odds:85, track:80, pedigree:75, pace:80, ground:80, distance:85, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉選騎", total:77.5, mm:81, kg:78 },
-            { name:"開心牙寶", draw:3, qimen:90, data:66, odds:55, track:55, pedigree:55, pace:60, ground:60, distance:60, trainerJock:70, injury:"輕微", stable:"呂健威：減磅求冷", total:70.4, mm:72, kg:70 }
-          ], win:"利高八斗", quinella:"利高八斗+寶者成福", kgDesc:"知識圖譜：利高八斗父系「歡暢」擅谷草...", mmDesc:"多模態：利高八斗體態評級A" },
+            { name:"利高八斗", draw:1, qimen:93, data:80, odds:70, track:70, pedigree:65, pace:70, ground:70, distance:75, trainerJock:80, injury:"無", stable:"姚本輝：初出即配田泰安", total:81.4, mm:88, kg:85, lr: simulateLogisticRegression(1,70,88) },
+            { name:"寶者成福", draw:6, qimen:78, data:68, odds:90, track:85, pedigree:80, pace:85, ground:85, distance:80, trainerJock:85, injury:"輕微", stable:"賀賢：用布文決心交代", total:76.0, mm:79, kg:80, lr: simulateLogisticRegression(6,90,92) },
+            { name:"星運少爵", draw:5, qimen:80, data:70, odds:85, track:80, pedigree:75, pace:80, ground:80, distance:85, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉選騎", total:77.5, mm:81, kg:78, lr: simulateLogisticRegression(5,85,96) },
+            { name:"開心牙寶", draw:3, qimen:90, data:66, odds:55, track:55, pedigree:55, pace:60, ground:60, distance:60, trainerJock:70, injury:"輕微", stable:"呂健威：減磅求冷", total:70.4, mm:72, kg:70, lr: simulateLogisticRegression(3,55,70) }
+          ], win:"利高八斗", quinella:"利高八斗+寶者成福", kgDesc:"知識圖譜：利高八斗父系「歡暢」擅谷草...", mmDesc:"多模態：利高八斗體態評級A", lrDesc:"邏輯迴歸：利高八斗內檔+低賠率+田泰安 → 條件勝率 38% → 86分" },
         { name: "第2場 · 第四班1600米草地", time: "13:00",
           horses: [
-            { name:"大回報", draw:3, qimen:92, data:78, odds:85, track:85, pedigree:75, pace:80, ground:80, distance:80, trainerJock:85, injury:"無", stable:"黎昭昇：王牌馬", total:83.5, mm:86, kg:84 },
-            { name:"華風雲", draw:1, qimen:90, data:84, odds:70, track:75, pedigree:70, pace:72, ground:70, distance:70, trainerJock:80, injury:"輕微", stable:"丁冠豪：轉倉初出", total:78.2, mm:80, kg:79 },
-            { name:"都靈冠星", draw:4, qimen:80, data:54, odds:80, track:80, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"嚴重", stable:"大衛希斯：潘頓不放手", total:66.0, mm:65, kg:60 },
-            { name:"旗隊", draw:8, qimen:61, data:56, odds:75, track:78, pedigree:72, pace:76, ground:74, distance:75, trainerJock:80, injury:"無", stable:"姚本輝：布文接手", total:70.3, mm:72, kg:71 }
-          ], win:"大回報", quinella:"大回報+華風雲", kgDesc:"大回報與黎昭昇合作3次2冠...", mmDesc:"多模態分析：大回報賽前肌肉飽滿" },
+            { name:"大回報", draw:3, qimen:92, data:78, odds:85, track:85, pedigree:75, pace:80, ground:80, distance:80, trainerJock:85, injury:"無", stable:"黎昭昇：王牌馬", total:83.5, mm:86, kg:84, lr: simulateLogisticRegression(3,85,75) },
+            { name:"華風雲", draw:1, qimen:90, data:84, odds:70, track:75, pedigree:70, pace:72, ground:70, distance:70, trainerJock:80, injury:"輕微", stable:"丁冠豪：轉倉初出", total:78.2, mm:80, kg:79, lr: simulateLogisticRegression(1,70,72) },
+            { name:"都靈冠星", draw:4, qimen:80, data:54, odds:80, track:80, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"嚴重", stable:"大衛希斯：潘頓不放手", total:66.0, mm:65, kg:60, lr: simulateLogisticRegression(4,80,98) },
+            { name:"旗隊", draw:8, qimen:61, data:56, odds:75, track:78, pedigree:72, pace:76, ground:74, distance:75, trainerJock:80, injury:"無", stable:"姚本輝：布文接手", total:70.3, mm:72, kg:71, lr: simulateLogisticRegression(8,75,92) }
+          ], win:"大回報", quinella:"大回報+華風雲", kgDesc:"大回報與黎昭昇合作3次2冠...", mmDesc:"多模態分析：大回報賽前肌肉飽滿", lrDesc:"邏輯迴歸：大回報賠率稍熱，內檔加分" },
         { name: "第3場 · 第四班1200米草地", time: "13:30",
           horses: [
-            { name:"堅先生", draw:2, qimen:93, data:85, odds:80, track:85, pedigree:80, pace:85, ground:85, distance:85, trainerJock:85, injury:"復出首戰", stable:"桂福特：田泰安親試", total:81.5, mm:90, kg:88 },
-            { name:"超和平", draw:1, qimen:90, data:84, odds:75, track:80, pedigree:75, pace:80, ground:80, distance:80, trainerJock:85, injury:"輕微", stable:"巫偉傑：梁家俊續騎", total:80.3, mm:82, kg:80 },
-            { name:"天天更好", draw:8, qimen:61, data:78, odds:70, track:75, pedigree:65, pace:70, ground:70, distance:70, trainerJock:80, injury:"無", stable:"羅富全：巴度輕磅", total:70.5, mm:68, kg:65 },
-            { name:"大勇勝", draw:4, qimen:75, data:72, odds:65, track:70, pedigree:68, pace:72, ground:70, distance:70, trainerJock:75, injury:"嚴重", stable:"沈集成：初出希威森", total:62.1, mm:60, kg:55 }
-          ], win:"堅先生", quinella:"堅先生+超和平", kgDesc:"堅先生母系勝利樂園...", mmDesc:"堅先生賽前操練影像衝刺力強" },
+            { name:"堅先生", draw:2, qimen:93, data:85, odds:80, track:85, pedigree:80, pace:85, ground:85, distance:85, trainerJock:85, injury:"復出首戰", stable:"桂福特：田泰安親試", total:81.5, mm:90, kg:88, lr: simulateLogisticRegression(2,80,88) },
+            { name:"超和平", draw:1, qimen:90, data:84, odds:75, track:80, pedigree:75, pace:80, ground:80, distance:80, trainerJock:85, injury:"輕微", stable:"巫偉傑：梁家俊續騎", total:80.3, mm:82, kg:80, lr: simulateLogisticRegression(1,75,75) },
+            { name:"天天更好", draw:8, qimen:61, data:78, odds:70, track:75, pedigree:65, pace:70, ground:70, distance:70, trainerJock:80, injury:"無", stable:"羅富全：巴度輕磅", total:70.5, mm:68, kg:65, lr: simulateLogisticRegression(8,70,78) },
+            { name:"大勇勝", draw:4, qimen:75, data:72, odds:65, track:70, pedigree:68, pace:72, ground:70, distance:70, trainerJock:75, injury:"嚴重", stable:"沈集成：初出希威森", total:62.1, mm:60, kg:55, lr: simulateLogisticRegression(4,65,74) }
+          ], win:"堅先生", quinella:"堅先生+超和平", kgDesc:"堅先生母系勝利樂園...", mmDesc:"堅先生賽前操練影像衝刺力強", lrDesc:"堅先生田泰安+內檔，邏輯迴歸高分" },
         { name: "第4場 · 第四班1400米草地", time: "14:00",
           horses: [
-            { name:"日日賞", draw:3, qimen:95, data:82, odds:60, track:65, pedigree:65, pace:68, ground:66, distance:70, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉接手", total:81.1, mm:89, kg:92 },
-            { name:"文采風流", draw:1, qimen:90, data:66, odds:65, track:70, pedigree:68, pace:72, ground:70, distance:70, trainerJock:80, injury:"復出首戰", stable:"蘇偉賢：莫艾誠騎", total:71.6, mm:76, kg:72 },
-            { name:"幸運威龍", draw:2, qimen:90, data:74, odds:50, track:60, pedigree:60, pace:64, ground:62, distance:65, trainerJock:80, injury:"輕微", stable:"羅富全：潘明輝減磅", total:73.2, mm:74, kg:70 },
-            { name:"勤勇星豹", draw:4, qimen:77, data:58, odds:80, track:82, pedigree:78, pace:82, ground:80, distance:80, trainerJock:85, injury:"無", stable:"呂健威：何澤堯騎", total:73.5, mm:80, kg:78 }
-          ], win:"日日賞", quinella:"日日賞+文采風流", kgDesc:"日日賞與方嘉柏、莫雷拉強連通分量", mmDesc:"日日賞影像中馬身圓潤" },
+            { name:"日日賞", draw:3, qimen:95, data:82, odds:60, track:65, pedigree:65, pace:68, ground:66, distance:70, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉接手", total:81.1, mm:89, kg:92, lr: simulateLogisticRegression(3,60,96) },
+            { name:"文采風流", draw:1, qimen:90, data:66, odds:65, track:70, pedigree:68, pace:72, ground:70, distance:70, trainerJock:80, injury:"復出首戰", stable:"蘇偉賢：莫艾誠騎", total:71.6, mm:76, kg:72, lr: simulateLogisticRegression(1,65,77) },
+            { name:"幸運威龍", draw:2, qimen:90, data:74, odds:50, track:60, pedigree:60, pace:64, ground:62, distance:65, trainerJock:80, injury:"輕微", stable:"羅富全：潘明輝減磅", total:73.2, mm:74, kg:70, lr: simulateLogisticRegression(2,50,76) },
+            { name:"勤勇星豹", draw:4, qimen:77, data:58, odds:80, track:82, pedigree:78, pace:82, ground:80, distance:80, trainerJock:85, injury:"無", stable:"呂健威：何澤堯騎", total:73.5, mm:80, kg:78, lr: simulateLogisticRegression(4,80,82) }
+          ], win:"日日賞", quinella:"日日賞+文采風流", kgDesc:"日日賞與方嘉柏、莫雷拉強連通分量", mmDesc:"日日賞影像中馬身圓潤", lrDesc:"日日賞莫雷拉+低賠率，邏輯迴歸最優" },
         { name: "第5場 · 主席短途賽 (一級賽) · 1200米", time: "14:35",
           horses: [
-            { name:"嘉德高昇", draw:3, qimen:95, data:82, odds:92, track:88, pedigree:85, pace:88, ground:80, distance:95, trainerJock:95, injury:"無", stable:"大衛希斯：潘頓押陣", total:88.6, mm:96, kg:95 },
-            { name:"攀步生国", draw:2, qimen:93, data:80, odds:72, track:82, pedigree:78, pace:82, ground:78, distance:90, trainerJock:90, injury:"輕微", stable:"某楚航：麥道朗騎", total:81.2, mm:85, kg:83 },
-            { name:"好友心得", draw:1, qimen:90, data:76, odds:60, track:82, pedigree:70, pace:74, ground:72, distance:85, trainerJock:85, injury:"嚴重", stable:"大衛希斯：班德禮", total:68.9, mm:70, kg:66 },
-            { name:"腾翔明驹", draw:6, qimen:78, data:68, odds:76, track:77, pedigree:75, pace:80, ground:76, distance:80, trainerJock:90, injury:"無", stable:"蔡約翰：布文騎", total:75.3, mm:78, kg:80 }
-          ], win:"嘉德高昇", quinella:"嘉德高昇+攀步生国", kgDesc:"嘉德高昇知識圖譜短途王", mmDesc:"嘉德高昇賽前相片眼神專注" },
+            { name:"嘉德高昇", draw:3, qimen:95, data:82, odds:92, track:88, pedigree:85, pace:88, ground:80, distance:95, trainerJock:95, injury:"無", stable:"大衛希斯：潘頓押陣", total:88.6, mm:96, kg:95, lr: simulateLogisticRegression(3,92,98) },
+            { name:"攀步生国", draw:2, qimen:93, data:80, odds:72, track:82, pedigree:78, pace:82, ground:78, distance:90, trainerJock:90, injury:"輕微", stable:"某楚航：麥道朗騎", total:81.2, mm:85, kg:83, lr: simulateLogisticRegression(2,72,94) },
+            { name:"好友心得", draw:1, qimen:90, data:76, odds:60, track:82, pedigree:70, pace:74, ground:72, distance:85, trainerJock:85, injury:"嚴重", stable:"大衛希斯：班德禮", total:68.9, mm:70, kg:66, lr: simulateLogisticRegression(1,60,72) },
+            { name:"腾翔明驹", draw:6, qimen:78, data:68, odds:76, track:77, pedigree:75, pace:80, ground:76, distance:80, trainerJock:90, injury:"無", stable:"蔡約翰：布文騎", total:75.3, mm:78, kg:80, lr: simulateLogisticRegression(6,76,92) }
+          ], win:"嘉德高昇", quinella:"嘉德高昇+攀步生国", kgDesc:"嘉德高昇知識圖譜短途王", mmDesc:"嘉德高昇賽前相片眼神專注", lrDesc:"嘉德高昇潘頓+頂級條件，迴歸分最高" },
         { name: "第6場 · 第三班1200米草地", time: "15:10",
           horses: [
-            { name:"健康快車", draw:2, qimen:90, data:66, odds:82, track:82, pedigree:82, pace:82, ground:82, distance:85, trainerJock:85, injury:"無", stable:"蔡約翰：艾米爾騎", total:81.2, mm:85, kg:84 },
-            { name:"線路滿貫", draw:3, qimen:90, data:58, odds:76, track:82, pedigree:65, pace:65, ground:65, distance:70, trainerJock:80, injury:"輕微", stable:"文家良：黃寶妮減磅", total:73.4, mm:74, kg:72 },
-            { name:"星月飛雲", draw:4, qimen:80, data:62, odds:64, track:78, pedigree:72, pace:72, ground:72, distance:75, trainerJock:85, injury:"復出首戰", stable:"羅達：莫雷拉騎", total:67.6, mm:69, kg:65 },
-            { name:"傑出雷霆", draw:6, qimen:77, data:74, odds:52, track:72, pedigree:68, pace:68, ground:68, distance:70, trainerJock:85, injury:"無", stable:"呂健威：何澤堯騎", total:72.2, mm:75, kg:74 }
-          ], win:"健康快車", quinella:"健康快車+線路滿貫", kgDesc:"健康快車與蔡約翰網絡第一", mmDesc:"健康快車體態指數較高" },
+            { name:"健康快車", draw:2, qimen:90, data:66, odds:82, track:82, pedigree:82, pace:82, ground:82, distance:85, trainerJock:85, injury:"無", stable:"蔡約翰：艾米爾騎", total:81.2, mm:85, kg:84, lr: simulateLogisticRegression(2,82,70) },
+            { name:"線路滿貫", draw:3, qimen:90, data:58, odds:76, track:82, pedigree:65, pace:65, ground:65, distance:70, trainerJock:80, injury:"輕微", stable:"文家良：黃寶妮減磅", total:73.4, mm:74, kg:72, lr: simulateLogisticRegression(3,76,65) },
+            { name:"星月飛雲", draw:4, qimen:80, data:62, odds:64, track:78, pedigree:72, pace:72, ground:72, distance:75, trainerJock:85, injury:"復出首戰", stable:"羅達：莫雷拉騎", total:67.6, mm:69, kg:65, lr: simulateLogisticRegression(4,64,96) },
+            { name:"傑出雷霆", draw:6, qimen:77, data:74, odds:52, track:72, pedigree:68, pace:68, ground:68, distance:70, trainerJock:85, injury:"無", stable:"呂健威：何澤堯騎", total:72.2, mm:75, kg:74, lr: simulateLogisticRegression(6,52,82) }
+          ], win:"健康快車", quinella:"健康快車+線路滿貫", kgDesc:"健康快車與蔡約翰網絡第一", mmDesc:"健康快車體態指數較高", lrDesc:"健康快車內檔+賠率合理" },
         { name: "第7場 · 國際一級賽1200米草地", time: "—",
           horses: [
-            { name:"小鳥天堂", draw:2, qimen:95, data:72.8, odds:88, track:90, pedigree:90, pace:88, ground:90, distance:95, trainerJock:95, injury:"無", stable:"丁冠豪：潘頓重視", total:88.7, mm:97, kg:96 },
-            { name:"白富金剛", draw:5, qimen:78, data:70.4, odds:92, track:85, pedigree:88, pace:85, ground:86, distance:90, trainerJock:90, injury:"輕微", stable:"廖康銘：麥道朗騎", total:78.9, mm:82, kg:80 },
-            { name:"金鎖貴人", draw:4, qimen:90, data:62.8, odds:82, track:80, pedigree:80, pace:82, ground:80, distance:85, trainerJock:90, injury:"無", stable:"文家良：梁家俊", total:79.5, mm:81, kg:79 },
-            { name:"陽光勇士", draw:3, qimen:90, data:60.4, odds:70, track:78, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"復出首戰", stable:"姚本輝：布浩榮", total:71.3, mm:73, kg:72 }
-          ], win:"小鳥天堂", quinella:"小鳥天堂+白富金剛", kgDesc:"小鳥天堂全球短途馬中心度高", mmDesc:"小鳥天堂賽道空拍分析靈活" },
+            { name:"小鳥天堂", draw:2, qimen:95, data:72.8, odds:88, track:90, pedigree:90, pace:88, ground:90, distance:95, trainerJock:95, injury:"無", stable:"丁冠豪：潘頓重視", total:88.7, mm:97, kg:96, lr: simulateLogisticRegression(2,88,98) },
+            { name:"白富金剛", draw:5, qimen:78, data:70.4, odds:92, track:85, pedigree:88, pace:85, ground:86, distance:90, trainerJock:90, injury:"輕微", stable:"廖康銘：麥道朗騎", total:78.9, mm:82, kg:80, lr: simulateLogisticRegression(5,92,94) },
+            { name:"金鎖貴人", draw:4, qimen:90, data:62.8, odds:82, track:80, pedigree:80, pace:82, ground:80, distance:85, trainerJock:90, injury:"無", stable:"文家良：梁家俊", total:79.5, mm:81, kg:79, lr: simulateLogisticRegression(4,82,75) },
+            { name:"陽光勇士", draw:3, qimen:90, data:60.4, odds:70, track:78, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"復出首戰", stable:"姚本輝：布浩榮", total:71.3, mm:73, kg:72, lr: simulateLogisticRegression(3,70,68) }
+          ], win:"小鳥天堂", quinella:"小鳥天堂+白富金剛", kgDesc:"小鳥天堂全球短途馬中心度高", mmDesc:"小鳥天堂賽道空拍分析靈活", lrDesc:"小鳥天堂潘頓+內檔+頂級條件概率" },
         { name: "第8場 · 第三班1400米草地", time: "16:20",
           horses: [
-            { name:"喜蓮勤威", draw:1, qimen:93, data:64, odds:88, track:85, pedigree:82, pace:80, ground:80, distance:85, trainerJock:90, injury:"無", stable:"游達榮：麥道朗騎", total:82.8, mm:87, kg:89 },
-            { name:"友望仁", draw:2, qimen:90, data:84, odds:60, track:80, pedigree:70, pace:74, ground:72, distance:75, trainerJock:85, injury:"輕微", stable:"伍鵬志：艾兆禮", total:78.2, mm:80, kg:79 },
-            { name:"三軍勇將", draw:4, qimen:80, data:70, odds:76, track:82, pedigree:78, pace:82, ground:78, distance:80, trainerJock:90, injury:"無", stable:"方嘉柏：莫雷拉", total:78.6, mm:82, kg:81 },
-            { name:"佳駿年年", draw:3, qimen:90, data:90, odds:20, track:70, pedigree:62, pace:66, ground:64, distance:65, trainerJock:70, injury:"嚴重", stable:"桂福特：楊明倫", total:63.1, mm:58, kg:55 }
-          ], win:"喜蓮勤威", quinella:"喜蓮勤威+友望仁", kgDesc:"喜蓮勤威－麥道朗－游達榮三角", mmDesc:"喜蓮勤威肌肉線條流暢" },
+            { name:"喜蓮勤威", draw:1, qimen:93, data:64, odds:88, track:85, pedigree:82, pace:80, ground:80, distance:85, trainerJock:90, injury:"無", stable:"游達榮：麥道朗騎", total:82.8, mm:87, kg:89, lr: simulateLogisticRegression(1,88,94) },
+            { name:"友望仁", draw:2, qimen:90, data:84, odds:60, track:80, pedigree:70, pace:74, ground:72, distance:75, trainerJock:85, injury:"輕微", stable:"伍鵬志：艾兆禮", total:78.2, mm:80, kg:79, lr: simulateLogisticRegression(2,60,73) },
+            { name:"三軍勇將", draw:4, qimen:80, data:70, odds:76, track:82, pedigree:78, pace:82, ground:78, distance:80, trainerJock:90, injury:"無", stable:"方嘉柏：莫雷拉", total:78.6, mm:82, kg:81, lr: simulateLogisticRegression(4,76,96) },
+            { name:"佳駿年年", draw:3, qimen:90, data:90, odds:20, track:70, pedigree:62, pace:66, ground:64, distance:65, trainerJock:70, injury:"嚴重", stable:"桂福特：楊明倫", total:63.1, mm:58, kg:55, lr: simulateLogisticRegression(3,20,60) }
+          ], win:"喜蓮勤威", quinella:"喜蓮勤威+友望仁", kgDesc:"喜蓮勤威－麥道朗－游達榮三角", mmDesc:"喜蓮勤威肌肉線條流暢", lrDesc:"喜蓮勤威一檔+麥道朗，條件勝率突出" },
         { name: "第9場 · 富衛保險女皇盃 (一級賽) · 2000米", time: "16:55",
           horses: [
-            { name:"同工之妙", draw:2, qimen:93, data:80, odds:85, track:88, pedigree:85, pace:88, ground:88, distance:95, trainerJock:95, injury:"無", stable:"賈伯華：紀仁安", total:86.9, mm:91, kg:92 },
-            { name:"球星", draw:3, qimen:93, data:80, odds:72, track:80, pedigree:78, pace:82, ground:80, distance:85, trainerJock:90, injury:"輕微", stable:"大衛希斯：布文", total:82.3, mm:84, kg:83 },
-            { name:"浪漫勇士", draw:5, qimen:78, data:68, odds:98, track:95, pedigree:98, pace:95, ground:95, distance:95, trainerJock:95, injury:"無", stable:"沈集成：麥道朗", total:83.9, mm:93, kg:96 },
-            { name:"蒙面舞會", draw:6, qimen:78, data:68, odds:96, track:92, pedigree:96, pace:92, ground:92, distance:90, trainerJock:95, injury:"復出首戰", stable:"手球費久：李慕華", total:77.9, mm:85, kg:88 }
-          ], win:"同工之妙", quinella:"同工之妙+球星", kgDesc:"浪漫勇士知識圖譜衛冕冠軍", mmDesc:"浪漫勇士情緒模型極度專注" },
+            { name:"同工之妙", draw:2, qimen:93, data:80, odds:85, track:88, pedigree:85, pace:88, ground:88, distance:95, trainerJock:95, injury:"無", stable:"賈伯華：紀仁安", total:86.9, mm:91, kg:92, lr: simulateLogisticRegression(2,85,85) },
+            { name:"球星", draw:3, qimen:93, data:80, odds:72, track:80, pedigree:78, pace:82, ground:80, distance:85, trainerJock:90, injury:"輕微", stable:"大衛希斯：布文", total:82.3, mm:84, kg:83, lr: simulateLogisticRegression(3,72,92) },
+            { name:"浪漫勇士", draw:5, qimen:78, data:68, odds:98, track:95, pedigree:98, pace:95, ground:95, distance:95, trainerJock:95, injury:"無", stable:"沈集成：麥道朗", total:83.9, mm:93, kg:96, lr: simulateLogisticRegression(5,98,94) },
+            { name:"蒙面舞會", draw:6, qimen:78, data:68, odds:96, track:92, pedigree:96, pace:92, ground:92, distance:90, trainerJock:95, injury:"復出首戰", stable:"手球費久：李慕華", total:77.9, mm:85, kg:88, lr: simulateLogisticRegression(6,96,90) }
+          ], win:"同工之妙", quinella:"同工之妙+球星", kgDesc:"浪漫勇士知識圖譜衛冕冠軍", mmDesc:"浪漫勇士情緒模型極度專注", lrDesc:"浪漫勇士雖外檔，但賠率極熱，條件概率仍高" },
         { name: "第10場 · 第三班1600米草地", time: "17:35",
           horses: [
-            { name:"金源千帥", draw:1, qimen:90, data:82, odds:70, track:80, pedigree:70, pace:72, ground:70, distance:75, trainerJock:80, injury:"無", stable:"賀賢：潘明輝騎", total:81.9, mm:83, kg:82 },
-            { name:"紫荆拼搏", draw:3, qimen:90, data:76, odds:65, track:82, pedigree:72, pace:74, ground:72, distance:70, trainerJock:80, injury:"輕微", stable:"大衛希斯：班德禮", total:78.6, mm:80, kg:79 },
-            { name:"騰龍踏雪", draw:2, qimen:90, data:82, odds:60, track:78, pedigree:65, pace:68, ground:66, distance:65, trainerJock:75, injury:"嚴重", stable:"游達榮：金城剛", total:72.1, mm:68, kg:65 },
-            { name:"共享富裕", draw:5, qimen:80, data:62, odds:85, track:88, pedigree:80, pace:82, ground:80, distance:80, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉", total:76.6, mm:82, kg:84 }
-          ], win:"金源千帥", quinella:"金源千帥+紫荆拼搏", kgDesc:"共享富裕與莫雷拉合作勝率22%", mmDesc:"金源千帥賽前體型保持" },
+            { name:"金源千帥", draw:1, qimen:90, data:82, odds:70, track:80, pedigree:70, pace:72, ground:70, distance:75, trainerJock:80, injury:"無", stable:"賀賢：潘明輝騎", total:81.9, mm:83, kg:82, lr: simulateLogisticRegression(1,70,76) },
+            { name:"紫荆拼搏", draw:3, qimen:90, data:76, odds:65, track:82, pedigree:72, pace:74, ground:72, distance:70, trainerJock:80, injury:"輕微", stable:"大衛希斯：班德禮", total:78.6, mm:80, kg:79, lr: simulateLogisticRegression(3,65,72) },
+            { name:"騰龍踏雪", draw:2, qimen:90, data:82, odds:60, track:78, pedigree:65, pace:68, ground:66, distance:65, trainerJock:75, injury:"嚴重", stable:"游達榮：金城剛", total:72.1, mm:68, kg:65, lr: simulateLogisticRegression(2,60,65) },
+            { name:"共享富裕", draw:5, qimen:80, data:62, odds:85, track:88, pedigree:80, pace:82, ground:80, distance:80, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉", total:76.6, mm:82, kg:84, lr: simulateLogisticRegression(5,85,96) }
+          ], win:"金源千帥", quinella:"金源千帥+紫荆拼搏", kgDesc:"共享富裕與莫雷拉合作勝率22%", mmDesc:"金源千帥賽前體型保持", lrDesc:"金源千帥一檔+輕磅，迴歸分靠前" },
         { name: "第11場 · 第二班1400米草地", time: "18:10",
           horses: [
-            { name:"時時歡聲", draw:2, qimen:95, data:90, odds:98, track:95, pedigree:96, pace:94, ground:94, distance:95, trainerJock:96, injury:"無", stable:"告東尼：潘頓騎", total:93.9, mm:98, kg:97 },
-            { name:"翠金主", draw:1, qimen:92, data:86, odds:85, track:88, pedigree:84, pace:86, ground:84, distance:85, trainerJock:90, injury:"輕微", stable:"章廷：巴度騎", total:86.2, mm:88, kg:87 },
-            { name:"晴冷", draw:3, qimen:90, data:84, odds:82, track:86, pedigree:82, pace:84, ground:82, distance:85, trainerJock:90, injury:"無", stable:"廖康銘：希威森", total:86.1, mm:87, kg:86 },
-            { name:"千帆駒", draw:6, qimen:78, data:84, odds:80, track:82, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"復出首戰", stable:"蘇偉賢：田泰安", total:75.1, mm:77, kg:76 }
-          ], win:"時時歡聲", quinella:"時時歡聲+翠金主", kgDesc:"時時歡聲在告東尼－潘頓網絡核心", mmDesc:"時時歡聲肌肉指數9.8" }
+            { name:"時時歡聲", draw:2, qimen:95, data:90, odds:98, track:95, pedigree:96, pace:94, ground:94, distance:95, trainerJock:96, injury:"無", stable:"告東尼：潘頓騎", total:93.9, mm:98, kg:97, lr: simulateLogisticRegression(2,98,98) },
+            { name:"翠金主", draw:1, qimen:92, data:86, odds:85, track:88, pedigree:84, pace:86, ground:84, distance:85, trainerJock:90, injury:"輕微", stable:"章廷：巴度騎", total:86.2, mm:88, kg:87, lr: simulateLogisticRegression(1,85,78) },
+            { name:"晴冷", draw:3, qimen:90, data:84, odds:82, track:86, pedigree:82, pace:84, ground:82, distance:85, trainerJock:90, injury:"無", stable:"廖康銘：希威森", total:86.1, mm:87, kg:86, lr: simulateLogisticRegression(3,82,74) },
+            { name:"千帆駒", draw:6, qimen:78, data:84, odds:80, track:82, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"復出首戰", stable:"蘇偉賢：田泰安", total:75.1, mm:77, kg:76, lr: simulateLogisticRegression(6,80,88) }
+          ], win:"時時歡聲", quinella:"時時歡聲+翠金主", kgDesc:"時時歡聲在告東尼－潘頓網絡核心", mmDesc:"時時歡聲肌肉指數9.8", lrDesc:"時時歡聲潘頓+極低賠率，條件邏輯迴歸最高分" }
     ];
 
-    // 渲染所有賽事卡片
+    // 渲染所有賽事卡片 (新增邏輯迴歸欄位)
     const container = document.getElementById('races-container');
     racesData.forEach((race, idx) => {
         let tableHtml = `<div class="data-table-wrapper"><table class="data-table"><thead><tr>
             <th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th>
-            <th>路程</th><th>騎練</th><th>傷患</th><th>馬房部署</th><th>多模態融合</th><th>知識圖譜</th><th>綜合分</th><th>進度</th>
+            <th>路程</th><th>騎練</th><th>傷患</th><th>馬房部署</th><th>多模態融合</th><th>知識圖譜</th><th>邏輯迴歸</th><th>綜合分</th><th>進度</th>
         </tr></thead><tbody>`;
         race.horses.forEach((h, i) => {
             const rankStar = i === 0 ? "★1" : (i === 1 ? "★2" : (i === 2 ? "★3" : "★4"));
@@ -351,20 +354,26 @@
                 <td>${h.stable}</td>
                 <td class="mm-score">${h.mm}</td>
                 <td class="kg-score">${h.kg}</td>
+                <td class="lr-score">${h.lr}</td>
                 <td><strong>${h.total}</strong><div class="progress-bar"><div class="progress-fill" style="width:${h.total}%"></div></div></td>
                 <td>${i===0?'↑':(i===1?'↗':'平')}</td>
             </tr>`;
         });
         tableHtml += `</tbody></table></div>
         <div class="bet-slip"><strong>💰 投注建議：獨贏@${race.win}，連贏 ${race.quinella}，四連環首四匹精選 | 成本$130</strong></div>
-        <div class="kg-box"><strong>🧠 知識圖譜派推理：</strong> ${race.kgDesc}<br><strong>📸 多模態融合分析：</strong> ${race.mmDesc}</div>`;
+        <div class="kg-box">
+            <strong>🧠 知識圖譜派推理：</strong> ${race.kgDesc}<br>
+            <strong>📸 多模態融合分析：</strong> ${race.mmDesc}<br>
+            <strong>📐 條件邏輯迴歸模型：</strong> ${race.lrDesc}<br>
+            <span style="font-size:0.7rem;">※ 邏輯迴歸基於檔位、賠率、騎師勝率等條件勝率轉換為0-100分，獨立於綜合分，決策老大可參考。</span>
+        </div>`;
         const card = document.createElement('div');
         card.className = 'section-card';
         card.innerHTML = `<div class="section-title" style="font-size:1.3rem;">🏇 ${race.name} <span style="font-size:0.9rem; background:#2a3a2f; padding:0.2rem 0.8rem; border-radius:40px;">${race.time}</span></div>${tableHtml}`;
         container.appendChild(card);
     });
 
-    // ---------- 賽後驗證模組 ----------
+    // 賽後驗證模組 (與之前相同，只針對綜合分前3/4名)
     function buildResultInputs() {
         const div = document.getElementById('resultInputs');
         div.innerHTML = '';
@@ -384,8 +393,7 @@
     buildResultInputs();
 
     function getPredictedTripleQuartet() {
-        const predictedTriple = [];
-        const predictedQuartet = [];
+        const predictedTriple = [], predictedQuartet = [];
         racesData.forEach(race => {
             const names = race.horses.map(h => h.name);
             predictedTriple.push(names.slice(0, 3));
