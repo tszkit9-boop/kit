@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>🕸️ SHTSN 賽馬預測系統 | 沙田 2026-04-26 第1-11場 (V8.5 含濕度)</title>
+    <title>🕸️ SHTSN 賽馬預測系統 | 沙田 2026-04-26 第1-11場 (V8.6 含鞍上人姿態)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -80,15 +80,6 @@
             display: inline-block;
         }
         .progress-fill { background: #ffb347; height: 8px; border-radius: 20px; width: 0%; }
-        .badge-gold {
-            background: #ffb347;
-            color: #1a2a1f;
-            font-weight: bold;
-            padding: 2px 8px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            display: inline-block;
-        }
         .bet-slip { background: #0e1812; border-radius: 20px; padding: 1rem; margin-top: 1rem; }
         .optimization-box {
             background: #1a2a1f;
@@ -120,7 +111,7 @@
     <div class="header">
         <h1>🕸️ SHTSN 賽馬預測系統</h1>
         <div class="sub">Super Horse to Spider Network · 集體智慧 · 持續進化</div>
-        <div class="sub">版本 V8.5 | 2026-04-26 沙田草地日賽 | 新增「濕度」欄位 (模擬值)</div>
+        <div class="sub">版本 V8.6 | 2026-04-26 沙田草地日賽 | 新增「鞍上人姿態」欄位 (模擬值)</div>
     </div>
 
     <!-- 資料部回顧區 -->
@@ -128,7 +119,7 @@
         <div class="race-title">📚 資料部回顧 | 過往比賽戰績</div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>日期</th><th>場地/路程</th><th>班次</th><th>頭馬</th><th>系統精選池</th><th>入圍率</th><th>獨贏命中</th><th>四重彩派彩</th></tr></thead>
+            <thead><td><th>日期</th><th>場地/路程</th><th>班次</th><th>頭馬</th><th>系統精選池</th><th>入圍率</th><th>獨贏命中</th><th>四重彩派彩</th></tr></thead>
             <tbody>
                 <tr><td>2026-04-22</td><td>快活谷 1200米</td><td>五班</td><td>獵寶勤</td><td>4,8</td><td>100%</td><td>✅</td><td>$28,250</td></tr>
                 <tr><td>2026-04-22</td><td>快活谷 1650米</td><td>五班</td><td>焦點</td><td>7,8</td><td>100%</td><td>✅</td><td>—</td></tr>
@@ -147,12 +138,12 @@
         <div class="race-title">🏇 第1場 · 第四班1200米草地 · A赛道<span class="race-time">12:30</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead>,<th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th> </thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>利高八斗</td><td>1</td><td>93</td><td>80</td><td>70</td><td>70</td><td>65</td><td>70</td><td>70</td><td>68%</td><td>75</td><td>80</td><td>無</td><td>TT</td><td>初出即配田泰安</td><td>81.4</td><td><div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>寶者成福</td><td>6</td><td>78</td><td>68</td><td>90</td><td>85</td><td>80</td><td>85</td><td>85</td><td>68%</td><td>80</td><td>85</td><td>輕微</td><td>—</td><td>用布文決心交代</td><td>76.0</td><td><div class="progress-fill" style="width:76%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>星運少爵</td><td>5</td><td>80</td><td>70</td><td>85</td><td>80</td><td>75</td><td>80</td><td>80</td><td>68%</td><td>85</td><td>85</td><td>無</td><td>—</td><td>莫雷拉選騎</td><td>77.5</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>開心牙寶</td><td>3</td><td>90</td><td>66</td><td>55</td><td>55</td><td>55</td><td>60</td><td>60</td><td>68%</td><td>60</td><td>70</td><td>輕微</td><td>B/TT</td><td>減磅求冷</td><td>70.4</td><td><div class="progress-fill" style="width:70%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>利高八斗</td><td>1</td><td>93</td><td>80</td><td>70</td><td>70</td><td>65</td><td>70</td><td>70</td><td>68%</td><td>75</td><td>80</td><td>無</td><td>TT</td><td>領放</td><td>初出即配田泰安</td><td>81.4</td><td><div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>寶者成福</td><td>6</td><td>78</td><td>68</td><td>90</td><td>85</td><td>80</td><td>85</td><td>85</td><td>68%</td><td>80</td><td>85</td><td>輕微</td><td>—</td><td>後上</td><td>用布文決心交代</td><td>76.0</td><td><div class="progress-fill" style="width:76%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>星運少爵</td><td>5</td><td>80</td><td>70</td><td>85</td><td>80</td><td>75</td><td>80</td><td>80</td><td>68%</td><td>85</td><td>85</td><td>無</td><td>—</td><td>居中</td><td>莫雷拉選騎</td><td>77.5</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>開心牙寶</td><td>3</td><td>90</td><td>66</td><td>55</td><td>55</td><td>55</td><td>60</td><td>60</td><td>68%</td><td>60</td><td>70</td><td>輕微</td><td>B/TT</td><td>留前鬥後</td><td>減磅求冷</td><td>70.4</td><td><div class="progress-fill" style="width:70%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -165,12 +156,12 @@
         <div class="race-title">🏇 第2場 · 第四班1600米草地 · A赛道<span class="race-time">13:00</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>大回報</td><td>3</td><td>92</td><td>78</td><td>85</td><td>85</td><td>75</td><td>80</td><td>80</td><td>65%</td><td>80</td><td>85</td><td>無</td><td>H/TT</td><td>爭連捷</td><td>83.5</td><td><div class="progress-fill" style="width:84%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>華風雲</td><td>1</td><td>90</td><td>84</td><td>70</td><td>75</td><td>70</td><td>72</td><td>70</td><td>65%</td><td>70</td><td>80</td><td>輕微</td><td>B</td><td>轉倉初出</td><td>78.2</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>都靈冠星</td><td>4</td><td>80</td><td>54</td><td>80</td><td>80</td><td>78</td><td>80</td><td>78</td><td>65%</td><td>80</td><td>85</td><td>嚴重</td><td>SR</td><td>健康存疑</td><td>66.0</td><td><div class="progress-fill" style="width:66%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>旗隊</td><td>8</td><td>61</td><td>56</td><td>75</td><td>78</td><td>72</td><td>76</td><td>74</td><td>65%</td><td>75</td><td>80</td><td>無</td><td>B</td><td>布文接手</td><td>70.3</td><td><div class="progress-fill" style="width:70%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>大回報</td><td>3</td><td>92</td><td>78</td><td>85</td><td>85</td><td>75</td><td>80</td><td>80</td><td>65%</td><td>80</td><td>85</td><td>無</td><td>H/TT</td><td>領放</td><td>爭連捷</td><td>83.5</td><td><div class="progress-fill" style="width:84%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>華風雲</td><td>1</td><td>90</td><td>84</td><td>70</td><td>75</td><td>70</td><td>72</td><td>70</td><td>65%</td><td>70</td><td>80</td><td>輕微</td><td>B</td><td>領放</td><td>轉倉初出</td><td>78.2</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>都靈冠星</td><td>4</td><td>80</td><td>54</td><td>80</td><td>80</td><td>78</td><td>80</td><td>78</td><td>65%</td><td>80</td><td>85</td><td>嚴重</td><td>SR</td><td>居中</td><td>健康存疑</td><td>66.0</td><td><div class="progress-fill" style="width:66%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>旗隊</td><td>8</td><td>61</td><td>56</td><td>75</td><td>78</td><td>72</td><td>76</td><td>74</td><td>65%</td><td>75</td><td>80</td><td>無</td><td>B</td><td>後上</td><td>布文接手</td><td>70.3</td><td><div class="progress-fill" style="width:70%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -183,12 +174,12 @@
         <div class="race-title">🏇 第3場 · 第四班1200米草地 · A赛道<span class="race-time">13:30</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>堅先生</td><td>2</td><td>93</td><td>85</td><td>80</td><td>85</td><td>80</td><td>85</td><td>85</td><td>70%</td><td>85</td><td>85</td><td>復出首戰</td><td>—</td><td>田泰安親試</td><td>81.5</td><td><div class="progress-fill" style="width:82%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>超和平</td><td>1</td><td>90</td><td>84</td><td>75</td><td>80</td><td>75</td><td>80</td><td>80</td><td>70%</td><td>80</td><td>85</td><td>輕微</td><td>TT</td><td>力求回穩</td><td>80.3</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>天天更好</td><td>8</td><td>61</td><td>78</td><td>70</td><td>75</td><td>65</td><td>70</td><td>70</td><td>70%</td><td>70</td><td>80</td><td>無</td><td>H/P/TT</td><td>巴度輕磅</td><td>70.5</td><td><div class="progress-fill" style="width:71%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>大勇勝</td><td>4</td><td>75</td><td>72</td><td>65</td><td>70</td><td>68</td><td>72</td><td>70</td><td>70%</td><td>70</td><td>75</td><td>嚴重</td><td>TT1</td><td>初出希威森</td><td>62.1</td><td><div class="progress-fill" style="width:62%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>堅先生</td><td>2</td><td>93</td><td>85</td><td>80</td><td>85</td><td>80</td><td>85</td><td>85</td><td>70%</td><td>85</td><td>85</td><td>復出首戰</td><td>—</td><td>居中</td><td>田泰安親試</td><td>81.5</td><td><div class="progress-fill" style="width:82%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>超和平</td><td>1</td><td>90</td><td>84</td><td>75</td><td>80</td><td>75</td><td>80</td><td>80</td><td>70%</td><td>80</td><td>85</td><td>輕微</td><td>TT</td><td>領放</td><td>力求回穩</td><td>80.3</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>天天更好</td><td>8</td><td>61</td><td>78</td><td>70</td><td>75</td><td>65</td><td>70</td><td>70</td><td>70%</td><td>70</td><td>80</td><td>無</td><td>H/P/TT</td><td>後上</td><td>巴度輕磅</td><td>70.5</td><td><div class="progress-fill" style="width:71%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>大勇勝</td><td>4</td><td>75</td><td>72</td><td>65</td><td>70</td><td>68</td><td>72</td><td>70</td><td>70%</td><td>70</td><td>75</td><td>嚴重</td><td>TT1</td><td>留前鬥後</td><td>初出希威森</td><td>62.1</td><td><div class="progress-fill" style="width:62%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -201,12 +192,12 @@
         <div class="race-title">🏇 第4場 · 第四班1400米草地 · A赛道<span class="race-time">14:00</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>日日賞</td><td>3</td><td>95</td><td>82</td><td>60</td><td>65</td><td>65</td><td>68</td><td>66</td><td>68%</td><td>70</td><td>85</td><td>無</td><td>—</td><td>莫雷拉接手</td><td>81.1</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>文采風流</td><td>1</td><td>90</td><td>66</td><td>65</td><td>70</td><td>68</td><td>72</td><td>70</td><td>68%</td><td>70</td><td>80</td><td>復出首戰</td><td>TT</td><td>久休復出</td><td>71.6</td><td><div class="progress-fill" style="width:72%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>幸運威龍</td><td>2</td><td>90</td><td>74</td><td>50</td><td>60</td><td>60</td><td>64</td><td>62</td><td>68%</td><td>65</td><td>80</td><td>輕微</td><td>CP/TT</td><td>潘明輝減磅</td><td>73.2</td><td><div class="progress-fill" style="width:73%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>勤勇星豹</td><td>4</td><td>77</td><td>58</td><td>80</td><td>82</td><td>78</td><td>82</td><td>80</td><td>68%</td><td>80</td><td>85</td><td>無</td><td>B/XB</td><td>何澤堯騎</td><td>73.5</td><td><div class="progress-fill" style="width:74%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>日日賞</td><td>3</td><td>95</td><td>82</td><td>60</td><td>65</td><td>65</td><td>68</td><td>66</td><td>68%</td><td>70</td><td>85</td><td>無</td><td>—</td><td>居中</td><td>莫雷拉接手</td><td>81.1</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>文采風流</td><td>1</td><td>90</td><td>66</td><td>65</td><td>70</td><td>68</td><td>72</td><td>70</td><td>68%</td><td>70</td><td>80</td><td>復出首戰</td><td>TT</td><td>領放</td><td>久休復出</td><td>71.6</td><td><div class="progress-fill" style="width:72%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>幸運威龍</td><td>2</td><td>90</td><td>74</td><td>50</td><td>60</td><td>60</td><td>64</td><td>62</td><td>68%</td><td>65</td><td>80</td><td>輕微</td><td>CP/TT</td><td>留前鬥後</td><td>潘明輝減磅</td><td>73.2</td><td><div class="progress-fill" style="width:73%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>勤勇星豹</td><td>4</td><td>77</td><td>58</td><td>80</td><td>82</td><td>78</td><td>82</td><td>80</td><td>68%</td><td>80</td><td>85</td><td>無</td><td>B/XB</td><td>後上</td><td>何澤堯騎</td><td>73.5</td><td><div class="progress-fill" style="width:74%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -219,12 +210,12 @@
         <div class="race-title">🏆 第5場 · 主席短途賽 (一級賽) · 1200米草地 A赛道<span class="race-time">14:35</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>嘉德高昇</td><td>3</td><td>95</td><td>82</td><td>92</td><td>88</td><td>85</td><td>88</td><td>80</td><td>65%</td><td>95</td><td>95</td><td>無</td><td>—</td><td>潘頓押陣</td><td>88.6</td><td><div class="progress-fill" style="width:89%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>攀步生国</td><td>2</td><td>93</td><td>80</td><td>72</td><td>82</td><td>78</td><td>82</td><td>78</td><td>65%</td><td>90</td><td>90</td><td>輕微</td><td>B2/TT</td><td>麥道朗騎</td><td>81.2</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>好友心得</td><td>1</td><td>90</td><td>76</td><td>60</td><td>82</td><td>70</td><td>74</td><td>72</td><td>65%</td><td>85</td><td>85</td><td>嚴重</td><td>BO-/B...</td><td>健康成疑</td><td>68.9</td><td><div class="progress-fill" style="width:69%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>腾翔明驹</td><td>6</td><td>78</td><td>68</td><td>76</td><td>77</td><td>75</td><td>80</td><td>76</td><td>65%</td><td>80</td><td>90</td><td>無</td><td>—</td><td>布文騎</td><td>75.3</td><td><div class="progress-fill" style="width:75%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>嘉德高昇</td><td>3</td><td>95</td><td>82</td><td>92</td><td>88</td><td>85</td><td>88</td><td>80</td><td>65%</td><td>95</td><td>95</td><td>無</td><td>—</td><td>領放</td><td>潘頓押陣</td><td>88.6</td><td><div class="progress-fill" style="width:89%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>攀步生国</td><td>2</td><td>93</td><td>80</td><td>72</td><td>82</td><td>78</td><td>82</td><td>78</td><td>65%</td><td>90</td><td>90</td><td>輕微</td><td>B2/TT</td><td>居中</td><td>麥道朗騎</td><td>81.2</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>好友心得</td><td>1</td><td>90</td><td>76</td><td>60</td><td>82</td><td>70</td><td>74</td><td>72</td><td>65%</td><td>85</td><td>85</td><td>嚴重</td><td>BO-/B...</td><td>留前鬥後</td><td>健康成疑</td><td>68.9</td><td><div class="progress-fill" style="width:69%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>腾翔明驹</td><td>6</td><td>78</td><td>68</td><td>76</td><td>77</td><td>75</td><td>80</td><td>76</td><td>65%</td><td>80</td><td>90</td><td>無</td><td>—</td><td>後上</td><td>布文騎</td><td>75.3</td><td><div class="progress-fill" style="width:75%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -237,12 +228,12 @@
         <div class="race-title">🏇 第6場 · 第三班1200米草地 · A赛道<span class="race-time">15:10</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>健康快車</td><td>2</td><td>90</td><td>66</td><td>82</td><td>82</td><td>82</td><td>82</td><td>82</td><td>68%</td><td>85</td><td>85</td><td>無</td><td>E</td><td>艾米爾騎</td><td>81.2</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>線路滿貫</td><td>3</td><td>90</td><td>58</td><td>76</td><td>82</td><td>65</td><td>65</td><td>65</td><td>68%</td><td>70</td><td>80</td><td>輕微</td><td>TT</td><td>黃寶妮減磅</td><td>73.4</td><td><div class="progress-fill" style="width:73%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>星月飛雲</td><td>4</td><td>80</td><td>62</td><td>64</td><td>78</td><td>72</td><td>72</td><td>72</td><td>68%</td><td>75</td><td>85</td><td>復出首戰</td><td>B-/CP2</td><td>莫雷拉騎</td><td>67.6</td><td><div class="progress-fill" style="width:68%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>傑出雷霆</td><td>6</td><td>77</td><td>74</td><td>52</td><td>72</td><td>68</td><td>68</td><td>68</td><td>68%</td><td>70</td><td>85</td><td>無</td><td>H1</td><td>何澤堯騎</td><td>72.2</td><td><div class="progress-fill" style="width:72%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>健康快車</td><td>2</td><td>90</td><td>66</td><td>82</td><td>82</td><td>82</td><td>82</td><td>82</td><td>68%</td><td>85</td><td>85</td><td>無</td><td>E</td><td>領放</td><td>艾米爾騎</td><td>81.2</td><td><div class="progress-fill" style="width:81%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>線路滿貫</td><td>3</td><td>90</td><td>58</td><td>76</td><td>82</td><td>65</td><td>65</td><td>65</td><td>68%</td><td>70</td><td>80</td><td>輕微</td><td>TT</td><td>居中</td><td>黃寶妮減磅</td><td>73.4</td><td><div class="progress-fill" style="width:73%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>星月飛雲</td><td>4</td><td>80</td><td>62</td><td>64</td><td>78</td><td>72</td><td>72</td><td>72</td><td>68%</td><td>75</td><td>85</td><td>復出首戰</td><td>B-/CP2</td><td>留前鬥後</td><td>莫雷拉騎</td><td>67.6</td><td><div class="progress-fill" style="width:68%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>傑出雷霆</td><td>6</td><td>77</td><td>74</td><td>52</td><td>72</td><td>68</td><td>68</td><td>68</td><td>68%</td><td>70</td><td>85</td><td>無</td><td>H1</td><td>後上</td><td>何澤堯騎</td><td>72.2</td><td><div class="progress-fill" style="width:72%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -255,12 +246,12 @@
         <div class="race-title">🌍 第7場 · 國際一級賽1200米草地 · A赛道<span class="race-time">—</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>小鳥天堂</td><td>2</td><td>95</td><td>72.8</td><td>88</td><td>90</td><td>90</td><td>88</td><td>90</td><td>65%</td><td>95</td><td>95</td><td>無</td><td>TT</td><td>潘頓重視</td><td>88.7</td><td><div class="progress-fill" style="width:89%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>白富金剛</td><td>5</td><td>78</td><td>70.4</td><td>92</td><td>85</td><td>88</td><td>85</td><td>86</td><td>65%</td><td>90</td><td>90</td><td>輕微</td><td>—</td><td>麥道朗騎</td><td>78.9</td><td><div class="progress-fill" style="width:79%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>金鎖貴人</td><td>4</td><td>90</td><td>62.8</td><td>82</td><td>80</td><td>80</td><td>82</td><td>80</td><td>65%</td><td>85</td><td>90</td><td>無</td><td>—</td><td>梁家俊騎</td><td>79.5</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>陽光勇士</td><td>3</td><td>90</td><td>60.4</td><td>70</td><td>78</td><td>78</td><td>80</td><td>78</td><td>65%</td><td>80</td><td>85</td><td>復出首戰</td><td>—</td><td>布浩榮騎</td><td>71.3</td><td><div class="progress-fill" style="width:71%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>小鳥天堂</td><td>2</td><td>95</td><td>72.8</td><td>88</td><td>90</td><td>90</td><td>88</td><td>90</td><td>65%</td><td>95</td><td>95</td><td>無</td><td>TT</td><td>領放</td><td>潘頓重視</td><td>88.7</td><td><div class="progress-fill" style="width:89%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>白富金剛</td><td>5</td><td>78</td><td>70.4</td><td>92</td><td>85</td><td>88</td><td>85</td><td>86</td><td>65%</td><td>90</td><td>90</td><td>輕微</td><td>—</td><td>後上</td><td>麥道朗騎</td><td>78.9</td><td><div class="progress-fill" style="width:79%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>金鎖貴人</td><td>4</td><td>90</td><td>62.8</td><td>82</td><td>80</td><td>80</td><td>82</td><td>80</td><td>65%</td><td>85</td><td>90</td><td>無</td><td>—</td><td>居中</td><td>梁家俊騎</td><td>79.5</td><td><div class="progress-fill" style="width:80%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>陽光勇士</td><td>3</td><td>90</td><td>60.4</td><td>70</td><td>78</td><td>78</td><td>80</td><td>78</td><td>65%</td><td>80</td><td>85</td><td>復出首戰</td><td>—</td><td>留前鬥後</td><td>布浩榮騎</td><td>71.3</td><td><div class="progress-fill" style="width:71%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -273,12 +264,12 @@
         <div class="race-title">🏇 第8場 · 第三班1400米草地 · A赛道<span class="race-time">16:20</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>1</td><td>喜蓮勤威</td><td>1</td><td>93</td><td>64</td><td>88</td><td>85</td><td>82</td><td>80</td><td>80</td><td>70%</td><td>85</td><td>90</td><td>無</td><td>XB/TT</td><td>麥道朗騎</td><td>82.8</td><td><div class="progress-fill" style="width:83%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>2</td><td>友望仁</td><td>2</td><td>90</td><td>84</td><td>60</td><td>80</td><td>70</td><td>74</td><td>72</td><td>70%</td><td>75</td><td>85</td><td>輕微</td><td>H/TT</td><td>艾兆禮騎</td><td>78.2</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>3</td><td>三軍勇將</td><td>4</td><td>80</td><td>70</td><td>76</td><td>82</td><td>78</td><td>82</td><td>78</td><td>70%</td><td>80</td><td>90</td><td>無</td><td>TT</td><td>莫雷拉騎</td><td>78.6</td><td><div class="progress-fill" style="width:79%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>4</td><td>佳駿年年</td><td>3</td><td>90</td><td>90</td><td>20</td><td>70</td><td>62</td><td>66</td><td>64</td><td>70%</td><td>65</td><td>70</td><td>嚴重</td><td>XB</td><td>楊明倫騎</td><td>63.1</td><td><div class="progress-fill" style="width:63%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>1</td><td>喜蓮勤威</td><td>1</td><td>93</td><td>64</td><td>88</td><td>85</td><td>82</td><td>80</td><td>80</td><td>70%</td><td>85</td><td>90</td><td>無</td><td>XB/TT</td><td>領放</td><td>麥道朗騎</td><td>82.8</td><td><div class="progress-fill" style="width:83%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>友望仁</td><td>2</td><td>90</td><td>84</td><td>60</td><td>80</td><td>70</td><td>74</td><td>72</td><td>70%</td><td>75</td><td>85</td><td>輕微</td><td>H/TT</td><td>居中</td><td>艾兆禮騎</td><td>78.2</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>三軍勇將</td><td>4</td><td>80</td><td>70</td><td>76</td><td>82</td><td>78</td><td>82</td><td>78</td><td>70%</td><td>80</td><td>90</td><td>無</td><td>TT</td><td>後上</td><td>莫雷拉騎</td><td>78.6</td><td><div class="progress-fill" style="width:79%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>佳駿年年</td><td>3</td><td>90</td><td>90</td><td>20</td><td>70</td><td>62</td><td>66</td><td>64</td><td>70%</td><td>65</td><td>70</td><td>嚴重</td><td>XB</td><td>留前鬥後</td><td>楊明倫騎</td><td>63.1</td><td><div class="progress-fill" style="width:63%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -292,12 +283,12 @@
         <div class="race-title">👑 第9場 · 富衛保險女皇盃 (一級賽) · 2000米草地 A赛道<span class="race-time">16:55</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>同工之妙</td><td>2</td><td>93</td><td>80</td><td>85</td><td>88</td><td>85</td><td>88</td><td>88</td><td>68%</td><td>90</td><td>95</td><td>無</td><td>—</td><td>紀仁安騎</td><td>86.9</td><td><div class="progress-fill" style="width:87%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>球星</td><td>3</td><td>93</td><td>80</td><td>72</td><td>80</td><td>78</td><td>82</td><td>80</td><td>68%</td><td>85</td><td>90</td><td>輕微</td><td>B-/CP2...</td><td>布文騎</td><td>82.3</td><td><div class="progress-fill" style="width:82%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>浪漫勇士</td><td>5</td><td>78</td><td>68</td><td>98</td><td>95</td><td>98</td><td>95</td><td>95</td><td>68%</td><td>95</td><td>95</td><td>無</td><td>TT</td><td>麥道朗騎</td><td>83.9</td><td><div class="progress-fill" style="width:84%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>蒙面舞會</td><td>6</td><td>78</td><td>68</td><td>96</td><td>92</td><td>96</td><td>92</td><td>92</td><td>68%</td><td>90</td><td>95</td><td>復出首戰</td><td>—</td><td>李慕華騎</td><td>77.9</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>同工之妙</td><td>2</td><td>93</td><td>80</td><td>85</td><td>88</td><td>85</td><td>88</td><td>88</td><td>68%</td><td>90</td><td>95</td><td>無</td><td>—</td><td>居中</td><td>紀仁安騎</td><td>86.9</td><td><div class="progress-fill" style="width:87%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>球星</td><td>3</td><td>93</td><td>80</td><td>72</td><td>80</td><td>78</td><td>82</td><td>80</td><td>68%</td><td>85</td><td>90</td><td>輕微</td><td>B-/CP2...</td><td>領放</td><td>布文騎</td><td>82.3</td><td><div class="progress-fill" style="width:82%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>浪漫勇士</td><td>5</td><td>78</td><td>68</td><td>98</td><td>95</td><td>98</td><td>95</td><td>95</td><td>68%</td><td>95</td><td>95</td><td>無</td><td>TT</td><td>留前鬥後</td><td>麥道朗騎</td><td>83.9</td><td><div class="progress-fill" style="width:84%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>蒙面舞會</td><td>6</td><td>78</td><td>68</td><td>96</td><td>92</td><td>96</td><td>92</td><td>92</td><td>68%</td><td>90</td><td>95</td><td>復出首戰</td><td>—</td><td>後上</td><td>李慕華騎</td><td>77.9</td><td><div class="progress-fill" style="width:78%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -310,12 +301,12 @@
         <div class="race-title">🏇 第10場 · 第三班1600米草地 · A赛道<span class="race-time">17:35</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>1</td><td>金源千帥</td><td>1</td><td>90</td><td>82</td><td>70</td><td>80</td><td>70</td><td>72</td><td>70</td><td>68%</td><td>75</td><td>80</td><td>無</td><td>B</td><td>潘明輝騎</td><td>81.9</td><td><div class="progress-fill" style="width:82%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>2</td><td>紫荆拼搏</td><td>3</td><td>90</td><td>76</td><td>65</td><td>82</td><td>72</td><td>74</td><td>72</td><td>68%</td><td>70</td><td>80</td><td>輕微</td><td>—</td><td>班德禮騎</td><td>78.6</td><td><div class="progress-fill" style="width:79%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>3</td><td>騰龍踏雪</td><td>2</td><td>90</td><td>82</td><td>60</td><td>78</td><td>65</td><td>68</td><td>66</td><td>68%</td><td>65</td><td>75</td><td>嚴重</td><td>XB</td><td>金城剛騎</td><td>72.1</td><td><div class="progress-fill" style="width:72%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>4</td><td>共享富裕</td><td>5</td><td>80</td><td>62</td><td>85</td><td>88</td><td>80</td><td>82</td><td>80</td><td>68%</td><td>80</td><td>85</td><td>無</td><td>B1</td><td>莫雷拉騎</td><td>76.6</td><td><div class="progress-fill" style="width:77%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>1</td><td>金源千帥</td><td>1</td><td>90</td><td>82</td><td>70</td><td>80</td><td>70</td><td>72</td><td>70</td><td>68%</td><td>75</td><td>80</td><td>無</td><td>B</td><td>領放</td><td>潘明輝騎</td><td>81.9</td><td><div class="progress-fill" style="width:82%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>2</td><td>紫荆拼搏</td><td>3</td><td>90</td><td>76</td><td>65</td><td>82</td><td>72</td><td>74</td><td>72</td><td>68%</td><td>70</td><td>80</td><td>輕微</td><td>—</td><td>居中</td><td>班德禮騎</td><td>78.6</td><td><div class="progress-fill" style="width:79%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>3</td><td>騰龍踏雪</td><td>2</td><td>90</td><td>82</td><td>60</td><td>78</td><td>65</td><td>68</td><td>66</td><td>68%</td><td>65</td><td>75</td><td>嚴重</td><td>XB</td><td>後上</td><td>金城剛騎</td><td>72.1</td><td><div class="progress-fill" style="width:72%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>4</td><td>共享富裕</td><td>5</td><td>80</td><td>62</td><td>85</td><td>88</td><td>80</td><td>82</td><td>80</td><td>68%</td><td>80</td><td>85</td><td>無</td><td>B1</td><td>留前鬥後</td><td>莫雷拉騎</td><td>76.6</td><td><div class="progress-fill" style="width:77%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -329,12 +320,12 @@
         <div class="race-title">🌟 第11場 · 第二班1400米草地 · A赛道<span class="race-time">18:10</span></div>
         <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1</td><td>時時歡聲</td><td>2</td><td>95</td><td>90</td><td>98</td><td>95</td><td>96</td><td>94</td><td>94</td><td>65%</td><td>95</td><td>95</td><td>無</td><td>TT</td><td>潘頓騎</td><td>93.9</td><td><div class="progress-fill" style="width:94%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★2</td><td>翠金主</td><td>1</td><td>92</td><td>86</td><td>85</td><td>88</td><td>84</td><td>86</td><td>84</td><td>65%</td><td>85</td><td>90</td><td>輕微</td><td>B</td><td>巴度騎</td><td>86.2</td><td><div class="progress-fill" style="width:86%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★3</td><td>晴冷</td><td>3</td><td>90</td><td>84</td><td>82</td><td>86</td><td>82</td><td>84</td><td>82</td><td>65%</td><td>85</td><td>90</td><td>無</td><td>—</td><td>希威森騎</td><td>86.1</td><td><div class="progress-fill" style="width:86%"></div></td></tr>
-                <tr style="background:#2c412a;"><td>★4</td><td>千帆駒</td><td>6</td><td>78</td><td>84</td><td>80</td><td>82</td><td>78</td><td>80</td><td>78</td><td>65%</td><td>80</td><td>85</td><td>復出首戰</td><td>XB/TT</td><td>田泰安騎</td><td>75.1</td><td><div class="progress-fill" style="width:75%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★1</td><td>時時歡聲</td><td>2</td><td>95</td><td>90</td><td>98</td><td>95</td><td>96</td><td>94</td><td>94</td><td>65%</td><td>95</td><td>95</td><td>無</td><td>TT</td><td>領放</td><td>潘頓騎</td><td>93.9</td><td><div class="progress-fill" style="width:94%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★2</td><td>翠金主</td><td>1</td><td>92</td><td>86</td><td>85</td><td>88</td><td>84</td><td>86</td><td>84</td><td>65%</td><td>85</td><td>90</td><td>輕微</td><td>B</td><td>領放</td><td>巴度騎</td><td>86.2</td><td><div class="progress-fill" style="width:86%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★3</td><td>晴冷</td><td>3</td><td>90</td><td>84</td><td>82</td><td>86</td><td>82</td><td>84</td><td>82</td><td>65%</td><td>85</td><td>90</td><td>無</td><td>—</td><td>居中</td><td>希威森騎</td><td>86.1</td><td><div class="progress-fill" style="width:86%"></div></td></tr>
+                <tr style="background:#2c412a;"><td>★4</td><td>千帆駒</td><td>6</td><td>78</td><td>84</td><td>80</td><td>82</td><td>78</td><td>80</td><td>78</td><td>65%</td><td>80</td><td>85</td><td>復出首戰</td><td>XB/TT</td><td>後上</td><td>田泰安騎</td><td>75.1</td><td><div class="progress-fill" style="width:75%"></div></td></tr>
             </tbody>
         </table>
         </div>
@@ -344,11 +335,12 @@
 
     <div class="disclaimer">
         🧾 誠實聲明：<br>
-        - 所有賠率、血統、步速、場地、濕度、路程、騎練、傷患、裝備、馬房部署均為系統模擬值（因缺即時數據源）。<br>
-        - 表格欄位順序固定為：名次｜馬匹｜檔位｜奇門｜數據｜賠率｜晨操｜血統｜步速｜場地｜濕度｜路程｜騎練｜傷患｜裝備｜馬房部署｜綜合分｜進度。<br>
-        - 濕度模擬值為當日天氣預測，實際比賽可根據天氣報告手動輸入，系統將自動調整場地評分。<br>
+        - 所有賠率、血統、步速、場地、濕度、路程、騎練、傷患、裝備、鞍上人姿態、馬房部署均為系統模擬值（因缺即時數據源）。<br>
+        - 表格欄位順序固定為：名次｜馬匹｜檔位｜奇門｜數據｜賠率｜晨操｜血統｜步速｜場地｜濕度｜路程｜騎練｜傷患｜裝備｜鞍上人姿態｜馬房部署｜綜合分｜進度。<br>
+        - 「鞍上人姿態」根據檔位、騎師風格及馬匹慣常跑法推測，目前不影響綜合分，僅供參考。<br>
+        - 濕度模擬值為當日天氣預測，實際比賽可根據天氣報告手動輸入。<br>
         - 本報告僅供系統協作研究，不構成實際投注建議。<br>
-        - 🕸️ SHTSN V8.5 ｜ 資料部已錄入全部11場數據，待賽後驗證。
+        - 🕸️ SHTSN V8.6 ｜ 資料部已錄入全部11場數據，待賽後驗證。
     </div>
 </div>
 </body>
