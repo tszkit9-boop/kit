@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>🕸️ SHTSN 賽馬預測系統 | 2026-04-26 沙田賽日 第1-11場 (含傷患紀錄)</title>
+    <title>🕸️ SHTSN 賽馬預測系統 | 2026-04-26 沙田賽日 第1-11場 (馬房部署)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -56,18 +56,19 @@
             font-size: 0.85rem;
             background: #1e2e23;
             border-radius: 20px;
-            overflow: hidden;
+            overflow-x: auto;
+            display: block;
+        }
+        .data-table th, .data-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #2f4035;
+            text-align: center;
+            white-space: nowrap;
         }
         .data-table th {
             background: #2a3a2f;
             color: #ffb347;
-            padding: 10px 6px;
             border-bottom: 1px solid #ffb34766;
-        }
-        .data-table td {
-            padding: 8px 6px;
-            border-bottom: 1px solid #2f4035;
-            text-align: center;
         }
         .data-table tr:hover { background: #2a3f2e; }
         .progress-bar {
@@ -119,190 +120,205 @@
     <div class="header">
         <h1>🕸️ SHTSN 賽馬預測系統</h1>
         <div class="sub">Super Horse to Spider Network · 集體智慧 · 持續進化</div>
-        <div class="sub">版本 V7.172I | 2026-04-26 沙田草地日賽 | 增加傷患紀錄 (模擬) · 血統/步速/場地為模擬值</div>
+        <div class="sub">版本 V7.172I | 2026-04-26 沙田草地日賽 | 增加馬房部署 (模擬) · 傷患/血統/步速/場地為模擬值</div>
     </div>
 
     <!-- 第1場 -->
     <div class="race-card">
         <div class="race-title">🏇 第1場 · 第四班1200米草地 · A赛道<span class="race-time">12:30</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead>
+                <tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th> 
+            </thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>利高八斗<td>1<td>93<td>80<td>70<td>70<td>65<td>70<td>70<td>無<td>81.4<td><div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>寶者成福<td>6<td>78<td>68<td>90<td>85<td>80<td>85<td>85<td>輕微<td>76.0<td><div class="progress-fill" style="width:76%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>星運少爵<td>5<td>80<td>70<td>85<td>80<td>75<td>80<td>80<td>無<td>77.5<td><div class="progress-fill" style="width:78%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>開心牙寶<td>3<td>90<td>66<td>55<td>55<td>55<td>60<td>60<td>輕微<td>70.4<td><div class="progress-fill" style="width:70%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>利高八斗<td>1<td>93<td>80<td>70<td>70<td>65<td>70<td>70<td>無<td>姚本輝：初出即配田泰安，目標直指頭馬<td>81.4<td><div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>寶者成福<td>6<td>78<td>68<td>90<td>85<td>80<td>85<td>85<td>輕微<td>賀賢：用布文決心交代，熱身足夠<td>76.0<td><div class="progress-fill" style="width:76%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>星運少爵<td>5<td>80<td>70<td>85<td>80<td>75<td>80<td>80<td>無<td>方嘉柏：莫雷拉選騎，試準出擊<td>77.5<td><div class="progress-fill" style="width:78%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>開心牙寶<td>3<td>90<td>66<td>55<td>55<td>55<td>60<td>60<td>輕微<td>呂健威：減磅求冷，邊線分子<td>70.4<td><div class="progress-fill" style="width:70%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>💰 投注建議：獨贏@利高八斗，連贏 利高八斗+寶者成福，四連環首四匹精選 | 成本$130</strong></div>
-        <div class="info-box">📌 傷患紀錄：寶者成福（近績有12/6/2/2/6/4，曾缺課，列輕微）；開心牙寶（近績9/3/13/8/8/4，評分不穩，列輕微）。</div>
     </div>
 
     <!-- 第2場 -->
     <div class="race-card">
         <div class="race-title">🏇 第2場 · 第四班1600米草地 · A赛道<span class="race-time">13:00</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>大回報<td>3<td>92<td>78<td>85<td>85<td>75<td>80<td>80<td>無<td>83.5<td><div class="progress-fill" style="width:84%"></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>華風雲<td>1<td>90<td>84<td>70<td>75<td>70<td>72<td>70<td>輕微<td>78.2<td><div class="progress-fill" style="width:78%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>都靈冠星<td>4<td>80<td>54<td>80<td>80<td>78<td>80<td>78<td>嚴重<td>66.0<td><div class="progress-fill" style="width:66%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>旗隊<td>8<td>61<td>56<td>75<td>78<td>72<td>76<td>74<td>無<td>70.3<td><div class="progress-fill" style="width:70%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>大回報<td>3<td>92<td>78<td>85<td>85<td>75<td>80<td>80<td>無<td>黎昭昇：王牌馬，勝後保持狀態，爭連捷<td>83.5<td><div class="progress-fill" style="width:84%"></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>華風雲<td>1<td>90<td>84<td>70<td>75<td>70<td>72<td>70<td>輕微<td>丁冠豪：轉倉初出，用班德禮求冷腳<td>78.2<td><div class="progress-fill" style="width:78%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>都靈冠星<td>4<td>80<td>54<td>80<td>80<td>78<td>80<td>78<td>嚴重<td>大衛希斯：潘頓不放手，但健康存疑，熱身性質<td>66.0<td><div class="progress-fill" style="width:66%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>旗隊<td>8<td>61<td>56<td>75<td>78<td>72<td>76<td>74<td>無<td>姚本輝：布文接手，部署出擊三四重彩<td>70.3<td><div class="progress-fill" style="width:70%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>💰 投注建議：獨贏@大回報，連贏 大回報+華風雲，四連環首四匹精選 | 成本$130</strong></div>
-        <div class="info-box">📌 傷患紀錄：都靈冠星（近績9/-1/2/2/6，缺課及名次異常，列嚴重）；華風雲（近績5/11/3/10/5/3，表現不穩，列輕微）。</div>
     </div>
 
     <!-- 第3場 -->
     <div class="race-card">
         <div class="race-title">🏇 第3場 · 第四班1200米草地 · A赛道<span class="race-time">13:30</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>堅先生<td>2<td>93<td>85<td>80<td>85<td>80<td>85<td>85<td>復出首戰<td>81.5<td><div class="progress-fill" style="width:82%"></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>超和平<td>1<td>90<td>84<td>75<td>80<td>75<td>80<td>80<td>輕微<td>80.3<td><div class="progress-fill" style="width:80%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>天天更好<td>8<td>61<td>78<td>70<td>75<td>65<td>70<td>70<td>無<td>70.5<td><div class="progress-fill" style="width:71%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>大勇勝<td>4<td>75<td>72<td>65<td>70<td>68<td>72<td>70<td>嚴重<td>62.1<td><div class="progress-fill" style="width:62%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>堅先生<td>2<td>93<td>85<td>80<td>85<td>80<td>85<td>85<td>復出首戰<td>桂福特：田泰安親試，復出即攻盃賽<td>81.5<td><div class="progress-fill" style="width:82%"></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>超和平<td>1<td>90<td>84<td>75<td>80<td>75<td>80<td>80<td>輕微<td>巫偉傑：梁家俊續騎，力求回穩<td>80.3<td><div class="progress-fill" style="width:80%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>天天更好<td>8<td>61<td>78<td>70<td>75<td>65<td>70<td>70<td>無<td>羅富全：巴度輕磅，邊線奇兵<td>70.5<td><div class="progress-fill" style="width:71%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>大勇勝<td>4<td>75<td>72<td>65<td>70<td>68<td>72<td>70<td>嚴重<td>沈集成：初出希威森，試馬格<td>62.1<td><div class="progress-fill" style="width:62%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>💰 投注建議：獨贏@堅先生，連贏 堅先生+超和平，四連環首四匹精選 | 成本$130</strong></div>
-        <div class="info-box">📌 傷患紀錄：堅先生（近績6/1，久休復出，列復出首戰）；超和平（近績1/7/3/6，近仗普通，列輕微）；大勇勝（初出，列嚴重）。</div>
     </div>
 
     <!-- 第4場 -->
     <div class="race-card">
         <div class="race-title">🏇 第4場 · 第四班1400米草地 · A赛道<span class="race-time">14:00</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>日日賞<td>3<td>95<td>82<td>60<td>65<td>65<td>68<td>66<td>無<td>81.1<td><div class="progress-fill" style="width:81%"></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>文采風流<td>1<td>90<td>66<td>65<td>70<td>68<td>72<td>70<td>復出首戰<td>71.6<td><div class="progress-fill" style="width:72%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>幸運威龍<td>2<td>90<td>74<td>50<td>60<td>60<td>64<td>62<td>輕微<td>73.2<td><div class="progress-fill" style="width:73%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>勤勇星豹<td>4<td>77<td>58<td>80<td>82<td>78<td>82<td>80<td>無<td>73.5<td><div class="progress-fill" style="width:74%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>日日賞<td>3<td>95<td>82<td>60<td>65<td>65<td>68<td>66<td>無<td>方嘉柏：莫雷拉接手，試準即贏<td>81.1<td><div class="progress-fill" style="width:81%"></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>文采風流<td>1<td>90<td>66<td>65<td>70<td>68<td>72<td>70<td>復出首戰<td>蘇偉賢：莫艾誠騎，久休復出熱身<td>71.6<td><div class="progress-fill" style="width:72%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>幸運威龍<td>2<td>90<td>74<td>50<td>60<td>60<td>64<td>62<td>輕微<td>羅富全：潘明輝減磅，求入位置<td>73.2<td><div class="progress-fill" style="width:73%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>勤勇星豹<td>4<td>77<td>58<td>80<td>82<td>78<td>82<td>80<td>無<td>呂健威：何澤堯騎，檔位內側爭勝<td>73.5<td><div class="progress-fill" style="width:74%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>💰 投注建議：獨贏@日日賞，連贏 日日賞+文采風流，四連環首四匹精選 | 成本$130</strong></div>
-        <div class="info-box">📌 傷患紀錄：文采風流（近績11/2，久休復出，列復出首戰）；幸運威龍（近績9/6，未交好表現，列輕微）。</div>
     </div>
 
     <!-- 第5場 -->
     <div class="race-card">
         <div class="race-title">🏆 第5場 · 主席短途賽 (一級賽) · 1200米草地 A赛道<span class="race-time">14:35</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>嘉德高昇<td>3<td>95<td>82<td>92<td>88<td>85<td>88<td>80<td>無<td>88.6<td><div class="progress-fill" style="width:89%"></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>攀步生国<td>2<td>93<td>80<td>72<td>82<td>78<td>82<td>78<td>輕微<td>81.2<td><div class="progress-fill" style="width:81%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>好友心得<td>1<td>90<td>76<td>60<td>82<td>70<td>74<td>72<td>嚴重<td>68.9<td><div class="progress-fill" style="width:69%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>腾翔明驹<td>6<td>78<td>68<td>76<td>77<td>75<td>80<td>76<td>無<td>75.3<td><div class="progress-fill" style="width:75%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>嘉德高昇<td>3<td>95<td>82<td>92<td>88<td>85<td>88<td>80<td>無<td>大衛希斯：潘頓押陣，箭頭指向國際賽<td>88.6<td><div class="progress-fill" style="width:89%"></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>攀步生国<td>2<td>93<td>80<td>72<td>82<td>78<td>82<td>78<td>輕微<td>某楚航：麥道朗騎，狀態回升爭位<td>81.2<td><div class="progress-fill" style="width:81%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>好友心得<td>1<td>90<td>76<td>60<td>82<td>70<td>74<td>72<td>嚴重<td>大衛希斯：班德禮騎，健康成疑，熱身性質<td>68.9<td><div class="progress-fill" style="width:69%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>腾翔明驹<td>6<td>78<td>68<td>76<td>77<td>75<td>80<td>76<td>無<td>蔡約翰：布文騎，位置配腳<td>75.3<td><div class="progress-fill" style="width:75%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>💰 投注建議：獨贏@嘉德高昇，連贏 嘉德高昇+攀步生国</strong></div>
-        <div class="info-box">📌 傷患紀錄：攀步生国（近績5/1/3/3/2/6，狀態反覆，列輕微）；好友心得（近績6/4/6/5/5/6，久未勝，列嚴重）。</div>
     </div>
 
     <!-- 第6場 -->
     <div class="race-card">
         <div class="race-title">🏇 第6場 · 第三班1200米草地 · A赛道<span class="race-time">15:10</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>健康快車<td>2<td>90<td>66<td>82<td>82<td>82<td>82<td>82<td>無<td>81.2<td><div class="progress-fill" style="width:81%"></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>線路滿貫<td>3<td>90<td>58<td>76<td>82<td>65<td>65<td>65<td>輕微<td>73.4<td><div class="progress-fill" style="width:73%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>星月飛雲<td>4<td>80<td>62<td>64<td>78<td>72<td>72<td>72<td>復出首戰<td>67.6<td><div class="progress-fill" style="width:68%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>傑出雷霆<td>6<td>77<td>74<td>52<td>72<td>68<td>68<td>68<td>無<td>72.2<td><div class="progress-fill" style="width:72%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>健康快車<td>2<td>90<td>66<td>82<td>82<td>82<td>82<td>82<td>無<td>蔡約翰：艾米爾騎，檔位內側全力爭勝<td>81.2<td><div class="progress-fill" style="width:81%"></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>線路滿貫<td>3<td>90<td>58<td>76<td>82<td>65<td>65<td>65<td>輕微<td>文家良：黃寶妮減磅，求冷出擊<td>73.4<td><div class="progress-fill" style="width:73%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>星月飛雲<td>4<td>80<td>62<td>64<td>78<td>72<td>72<td>72<td>復出首戰<td>羅達：莫雷拉騎，久休復出試馬<td>67.6<td><div class="progress-fill" style="width:68%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>傑出雷霆<td>6<td>77<td>74<td>52<td>72<td>68<td>68<td>68<td>無<td>呂健威：何澤堯騎，新勝猶勇<td>72.2<td><div class="progress-fill" style="width:72%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>🎯 精選投注：獨贏@健康快車 · 連贏 健康快車+線路滿貫</strong></div>
-        <div class="info-box">📌 傷患紀錄：線路滿貫（配備TT，近績9/12/7/10/6/3，不穩，列輕微）；星月飛雲（配備B-/CP2，久休，列復出首戰）。</div>
     </div>
 
     <!-- 第7場 -->
     <div class="race-card">
         <div class="race-title">🌍 第7場 · 國際一級賽1200米草地 · A赛道<span class="race-time">—</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>小鳥天堂<td>2<td>95<td>72.8<td>88<td>90<td>90<td>88<td>90<td>無<td>88.7<td><div class="progress-fill" style="width:89%"></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>白富金剛<td>5<td>78<td>70.4<td>92<td>85<td>88<td>85<td>86<td>輕微<td>78.9<td><div class="progress-fill" style="width:79%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>金鎖貴人<td>4<td>90<td>62.8<td>82<td>80<td>80<td>82<td>80<td>無<td>79.5<td><div class="progress-fill" style="width:80%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>陽光勇士<td>3<td>90<td>60.4<td>70<td>78<td>78<td>80<td>78<td>復出首戰<td>71.3<td><div class="progress-fill" style="width:71%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>小鳥天堂<td>2<td>95<td>72.8<td>88<td>90<td>90<td>88<td>90<td>無<td>丁冠豪：潘頓重視，爭勝主力<td>88.7<td><div class="progress-fill" style="width:89%"></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>白富金剛<td>5<td>78<td>70.4<td>92<td>85<td>88<td>85<td>86<td>輕微<td>廖康銘：麥道朗騎，復甦即攻<td>78.9<td><div class="progress-fill" style="width:79%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>金鎖貴人<td>4<td>90<td>62.8<td>82<td>80<td>80<td>82<td>80<td>無<td>文家良：梁家俊騎，續配眼罩求突破<td>79.5<td><div class="progress-fill" style="width:80%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>陽光勇士<td>3<td>90<td>60.4<td>70<td>78<td>78<td>80<td>78<td>復出首戰<td>姚本輝：布浩榮騎，復出熱身<td>71.3<td><div class="progress-fill" style="width:71%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>🏆 建議重心：小鳥天堂 + 白富金剛 連贏</strong></div>
-        <div class="info-box">📌 傷患紀錄：白富金剛（近績1/2/6/1/1/1，上仗大敗，列輕微）；陽光勇士（近績8/7/4/13/2/4，表現波動，列復出首戰）。</div>
     </div>
 
     <!-- 第8場 -->
     <div class="race-card">
         <div class="race-title">🏇 第8場 · 第三班1400米草地 · A赛道<span class="race-time">16:20</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>1<td>喜蓮勤威<td>1<td>93<td>64<td>88<td>85<td>82<td>80<td>80<td>無<td>82.8<td><div class="progress-fill" style="width:83%"></div></tr>
-                <tr style="background:#2c412a;"><td>2<td>友望仁<td>2<td>90<td>84<td>60<td>80<td>70<td>74<td>72<td>輕微<td>78.2<td><div class="progress-fill" style="width:78%"></div></tr>
-                <tr style="background:#2c412a;"><td>3<td>三軍勇將<td>4<td>80<td>70<td>76<td>82<td>78<td>82<td>78<td>無<td>78.6<td><div class="progress-fill" style="width:79%"></div></tr>
-                <tr style="background:#2c412a;"><td>4<td>佳駿年年<td>3<td>90<td>90<td>20<td>70<td>62<td>66<td>64<td>嚴重<td>63.1<td><div class="progress-fill" style="width:63%"></div></tr>
+                <tr style="background:#2c412a;"><td>1<td>喜蓮勤威<td>1<td>93<td>64<td>88<td>85<td>82<td>80<td>80<td>無<td>游達榮：麥道朗騎，一檔爭勝無保留<td>82.8<td><div class="progress-fill" style="width:83%"></div></tr>
+                <tr style="background:#2c412a;"><td>2<td>友望仁<td>2<td>90<td>84<td>60<td>80<td>70<td>74<td>72<td>輕微<td>伍鵬志：艾兆禮騎，力求連捷<td>78.2<td><div class="progress-fill" style="width:78%"></div></tr>
+                <tr style="background:#2c412a;"><td>3<td>三軍勇將<td>4<td>80<td>70<td>76<td>82<td>78<td>82<td>78<td>無<td>方嘉柏：莫雷拉騎，回師1400必拚<td>78.6<td><div class="progress-fill" style="width:79%"></div></tr>
+                <tr style="background:#2c412a;"><td>4<td>佳駿年年<td>3<td>90<td>90<td>20<td>70<td>62<td>66<td>64<td>嚴重<td>桂福特：楊明倫騎，健康差，降班熱身<td>63.1<td><div class="progress-fill" style="width:63%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>💰 投注建議：獨贏@喜蓮勤威，連贏 喜蓮勤威+友望仁</strong></div>
-        <div class="info-box">⚠️ 一世美麗 (潘頓) 檔位11奇門47分，綜合64.9未入精選，市場熱門但系統警示。<br>📌 傷患紀錄：友望仁（近績1/1/2/6/6/3，穩定性不足，列輕微）；佳駿年年（近績8/9/14/12/14，極差，列嚴重）。</div>
+        <div class="info-box">⚠️ 一世美麗 (潘頓) 檔位11奇門47分，綜合64.9未入精選，市場熱門但系統警示。</div>
     </div>
 
     <!-- 第9場 -->
     <div class="race-card">
         <div class="race-title">👑 第9場 · 富衛保險女皇盃 (一級賽) · 2000米草地 A赛道<span class="race-time">16:55</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>同工之妙<td>2<td>93<td>80<td>85<td>88<td>85<td>88<td>88<td>無<td>86.9<td><div class="progress-fill" style="width:87%"></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>球星<td>3<td>93<td>80<td>72<td>80<td>78<td>82<td>80<td>輕微<td>82.3<td><div class="progress-fill" style="width:82%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>浪漫勇士<td>5<td>78<td>68<td>98<td>95<td>98<td>95<td>95<td>無<td>83.9<td><div class="progress-fill" style="width:84%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>蒙面舞會<td>6<td>78<td>68<td>96<td>92<td>96<td>92<td>92<td>復出首戰<td>77.9<td><div class="progress-fill" style="width:78%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>同工之妙<td>2<td>93<td>80<td>85<td>88<td>85<td>88<td>88<td>無<td>賈伯華：紀仁安騎，目標直指女皇盃<td>86.9<td><div class="progress-fill" style="width:87%"></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>球星<td>3<td>93<td>80<td>72<td>80<td>78<td>82<td>80<td>輕微<td>大衛希斯：布文騎，狀態回升挑戰前列<td>82.3<td><div class="progress-fill" style="width:82%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>浪漫勇士<td>5<td>78<td>68<td>98<td>95<td>98<td>95<td>95<td>無<td>沈集成：麥道朗騎，衛冕冠軍全力爭勝<td>83.9<td><div class="progress-fill" style="width:84%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>蒙面舞會<td>6<td>78<td>68<td>96<td>92<td>96<td>92<td>92<td>復出首戰<td>手球費久：李慕華騎，日本代表操練積極<td>77.9<td><div class="progress-fill" style="width:78%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>💎 策略：同工之妙 Win，連贏搭球星/浪漫勇士</strong></div>
-        <div class="info-box">📌 傷患紀錄：球星（近績12/10/10/9/5/2，久未勝，列輕微）；蒙面舞會（初戰香港，復出首戰）。</div>
     </div>
 
     <!-- 第10場 -->
     <div class="race-card">
         <div class="race-title">🏇 第10場 · 第三班1600米草地 · A赛道<span class="race-time">17:35</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>1<td>金源千帥<td>1<td>90<td>82<td>70<td>80<td>70<td>72<td>70<td>無<td>81.9<td><div class="progress-fill" style="width:82%"></div></tr>
-                <tr style="background:#2c412a;"><td>2<td>紫荆拼搏<td>3<td>90<td>76<td>65<td>82<td>72<td>74<td>72<td>輕微<td>78.6<td><div class="progress-fill" style="width:79%"></div></tr>
-                <tr style="background:#2c412a;"><td>3<td>騰龍踏雪<td>2<td>90<td>82<td>60<td>78<td>65<td>68<td>66<td>嚴重<td>72.1<td><div class="progress-fill" style="width:72%"></div></tr>
-                <tr style="background:#2c412a;"><td>4<td>共享富裕<td>5<td>80<td>62<td>85<td>88<td>80<td>82<td>80<td>無<td>76.6<td><div class="progress-fill" style="width:77%"></div></tr>
+                <tr style="background:#2c412a;"><td>1<td>金源千帥<td>1<td>90<td>82<td>70<td>80<td>70<td>72<td>70<td>無<td>賀賢：潘明輝騎，一檔留前鬥後爭勝<td>81.9<td><div class="progress-fill" style="width:82%"></div></tr>
+                <tr style="background:#2c412a;"><td>2<td>紫荆拼搏<td>3<td>90<td>76<td>65<td>82<td>72<td>74<td>72<td>輕微<td>大衛希斯：班德禮騎，邊線奇兵<td>78.6<td><div class="progress-fill" style="width:79%"></div></tr>
+                <tr style="background:#2c412a;"><td>3<td>騰龍踏雪<td>2<td>90<td>82<td>60<td>78<td>65<td>68<td>66<td>嚴重<td>游達榮：金城剛騎，健康欠佳僅熱身<td>72.1<td><div class="progress-fill" style="width:72%"></div></tr>
+                <tr style="background:#2c412a;"><td>4<td>共享富裕<td>5<td>80<td>62<td>85<td>88<td>80<td>82<td>80<td>無<td>方嘉柏：莫雷拉騎，B1初戴求變<td>76.6<td><div class="progress-fill" style="width:77%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>💰 投注建議：獨贏@金源千帥，連贏 金源千帥+紫荆拼搏</strong></div>
-        <div class="info-box">🔥 開心勇 (潘頓) 檔位11奇門47分，綜合59.7，雖熱門但系統不推薦作膽。<br>📌 傷患紀錄：紫荆拼搏（近績1/7/6/5/6/6，表現反覆，列輕微）；騰龍踏雪（初出兩仗10/8，未證明實力，列嚴重）。</div>
+        <div class="info-box">🔥 開心勇 (潘頓) 檔位11奇門47分，綜合59.7，雖熱門但系統不推薦作膽。</div>
     </div>
 
     <!-- 第11場 -->
     <div class="race-card">
         <div class="race-title">🌟 第11場 · 第二班1400米草地 · A赛道<span class="race-time">18:10</span></div>
+        <div class="data-table-wrapper">
         <table class="data-table">
-            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>綜合分</th><th>進度</th></tr></thead>
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>傷患</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td>時時歡聲<td>2<td>95<td>90<td>98<td>95<td>96<td>94<td>94<td>無<td>93.9<td><div class="progress-fill" style="width:94%"></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td>翠金主<td>1<td>92<td>86<td>85<td>88<td>84<td>86<td>84<td>輕微<td>86.2<td><div class="progress-fill" style="width:86%"></div></tr>
-                <tr style="background:#2c412a;"><td>★3<td>晴冷<td>3<td>90<td>84<td>82<td>86<td>82<td>84<td>82<td>無<td>86.1<td><div class="progress-fill" style="width:86%"></div></tr>
-                <tr style="background:#2c412a;"><td>★4<td>千帆駒<td>6<td>78<td>84<td>80<td>82<td>78<td>80<td>78<td>復出首戰<td>75.1<td><div class="progress-fill" style="width:75%"></div></tr>
+                <tr style="background:#2c412a;"><td>★1<td>時時歡聲<td>2<td>95<td>90<td>98<td>95<td>96<td>94<td>94<td>無<td>告東尼：潘頓騎，王牌馬目標尾場頭馬<td>93.9<td><div class="progress-fill" style="width:94%"></div></tr>
+                <tr style="background:#2c412a;"><td>★2<td>翠金主<td>1<td>92<td>86<td>85<td>88<td>84<td>86<td>84<td>輕微<td>章廷：巴度騎，檔位內側求位置<td>86.2<td><div class="progress-fill" style="width:86%"></div></tr>
+                <tr style="background:#2c412a;"><td>★3<td>晴冷<td>3<td>90<td>84<td>82<td>86<td>82<td>84<td>82<td>無<td>廖康銘：希威森騎，持續回勇爭Q<td>86.1<td><div class="progress-fill" style="width:86%"></div></tr>
+                <tr style="background:#2c412a;"><td>★4<td>千帆駒<td>6<td>78<td>84<td>80<td>82<td>78<td>80<td>78<td>復出首戰<td>蘇偉賢：田泰安騎，復出即攻尾場<td>75.1<td><div class="progress-fill" style="width:75%"></div></tr>
             </tbody>
         </table>
+        </div>
         <div class="bet-slip"><strong>🏅 終極建議：時時歡聲 膽材，連贏 時時歡聲+翠金主</strong></div>
-        <div class="info-box">📌 傷患紀錄：翠金主（近績3/2/4/2/1/4，上仗第四名，狀態稍回落，列輕微）；千帆駒（近績1/2/6/6/2，久休復出，列復出首戰）。</div>
     </div>
 
     <div class="disclaimer">
         🧾 誠實聲明：<br>
-        - 所有賠率、血統評分、步速評分、場地評分及傷患紀錄均為系統模擬值（因缺即時數據源）。<br>
+        - 所有賠率、血統、步速、場地、傷患及馬房部署均為系統模擬值（因缺即時數據源）。<br>
         - 奇門評分按檔位及明星騎師規則執行（V7.172I）。<br>
-        - 傷患扣分規則：輕微-2、嚴重-8、復出首戰-5，已直接從原綜合分扣除。<br>
+        - 馬房部署是根據練馬師習慣、配備、近績及報名情況推測，僅供參考。<br>
         - 實際賽果可能與預測不符，本報告僅供系統協作研究。<br>
         - 賽後將進行精選池入圍率驗證、傷患影響分析及權重動態調整。
     </div>
