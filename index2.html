@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>🕸️ SHTSN V8.9 完整系統 | 沙田 2026-04-26 | 凱利公式風險控制</title>
+    <title>🕸️ SHTSN V8.9 | 沙田日賽 2026-04-26 | 11場完整預測</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -11,7 +11,7 @@
             background-image: radial-gradient(circle at 10% 20%, #1a2a1f 0%, #0a120a 100%);
             font-family: 'Segoe UI', 'Roboto', 'Noto Sans TC', system-ui, sans-serif;
             color: #e6f0e6;
-            padding: 1.5rem;
+            padding: 1rem;
             line-height: 1.5;
         }
         .container { max-width: 1400px; margin: 0 auto; }
@@ -21,35 +21,47 @@
             border-bottom: 2px solid #ffb347;
             padding-bottom: 1rem;
         }
-        .header h1 { font-size: 2rem; letter-spacing: 2px; color: #ffb347; text-shadow: 0 0 5px rgba(255,180,71,0.3); }
-        .header .sub { font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem; }
-        .section-card {
+        .header h1 { font-size: 1.8rem; letter-spacing: 2px; color: #ffb347; }
+        .header .sub { font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem; }
+        .race-card {
             background: rgba(26,42,31,0.85);
-            backdrop-filter: blur(2px);
             border-radius: 28px;
-            margin-bottom: 2.5rem;
-            padding: 1.2rem 1.5rem;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,180,71,0.2);
+            margin-bottom: 2rem;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,180,71,0.2);
         }
-        .section-title {
-            font-size: 1.7rem;
+        .race-title {
+            font-size: 1.4rem;
             font-weight: bold;
-            border-left: 6px solid #ffb347;
-            padding-left: 1rem;
-            margin-bottom: 1.2rem;
+            border-left: 5px solid #ffb347;
+            padding-left: 0.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .race-time {
+            font-size: 0.8rem;
+            background: #2a3a2f;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            color: #ffb347;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 0.8rem 0;
+            border-radius: 20px;
         }
         .data-table {
             width: 100%;
+            min-width: 1100px;
             border-collapse: collapse;
-            margin: 1rem 0;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             background: #1e2e23;
-            border-radius: 20px;
-            overflow-x: auto;
-            display: block;
         }
         .data-table th, .data-table td {
-            padding: 8px 6px;
+            padding: 8px 5px;
             border-bottom: 1px solid #2f4035;
             text-align: center;
             white-space: nowrap;
@@ -57,56 +69,37 @@
         .data-table th {
             background: #2a3a2f;
             color: #ffb347;
-            border-bottom: 1px solid #ffb34766;
+            font-weight: 600;
         }
         .data-table tr:hover { background: #2a3f2e; }
         .progress-bar {
             background: #2c3e2a;
             border-radius: 20px;
             overflow: hidden;
-            width: 100%;
-            height: 8px;
+            width: 70px;
             display: inline-block;
+            height: 6px;
         }
-        .progress-fill { background: #ffb347; height: 8px; border-radius: 20px; width: 0%; }
-        .info-box { background: #162218; border-radius: 20px; padding: 1rem; border-left: 3px solid #ffb347; margin: 1rem 0; }
-        .bet-slip { background: #0e1812; border-radius: 20px; padding: 1rem; margin-top: 1rem; }
-        .risk-box {
-            background: #1c2418;
+        .progress-fill { background: #ffb347; height: 6px; width: 0%; }
+        .bet-slip {
+            background: #0e1812;
             border-radius: 20px;
-            padding: 1rem;
-            margin-top: 1rem;
-            border: 1px solid #ffb347;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: space-between;
-            align-items: center;
+            padding: 0.7rem 1rem;
+            margin: 0.8rem 0;
+            font-size: 0.85rem;
         }
-        .kelly-value {
-            background: #2c2a1a;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-family: monospace;
-            font-weight: bold;
-            color: #ffb347;
-        }
-        .risk-low { color: #6fcf97; }
-        .risk-medium { color: #ffb347; }
-        .risk-high { color: #e67e22; }
-        .risk-extreme { color: #e74c3c; }
         .kg-box {
             background: #0e1c12;
-            border-radius: 20px;
-            padding: 0.8rem 1rem;
-            margin-top: 0.8rem;
-            font-size: 0.8rem;
-            border-top: 1px solid #ffb34760;
+            border-radius: 18px;
+            padding: 0.7rem;
+            font-size: 0.75rem;
+            border-left: 3px solid #ffb347;
+            margin-top: 0.5rem;
         }
         .verification-panel {
             background: #132015;
             border-radius: 28px;
-            padding: 1.5rem;
+            padding: 1.2rem;
             margin-top: 2rem;
             border: 1px solid #ffb34760;
         }
@@ -114,406 +107,298 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 10px;
             background: #1e2e23;
-            padding: 8px 12px;
+            padding: 6px 12px;
             border-radius: 40px;
         }
         .race-result-row .race-name {
-            width: 140px;
+            width: 130px;
             font-weight: bold;
+            font-size: 0.8rem;
         }
         .race-result-row input {
             background: #2a3a2f;
             border: 1px solid #ffb347;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 24px;
             color: #fff;
-            width: 110px;
+            width: 90px;
+            font-size: 0.75rem;
         }
         .calc-btn {
             background: #ffb347;
             color: #1a2a1f;
             font-weight: bold;
             border: none;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 40px;
             cursor: pointer;
-            margin: 20px 0 10px;
+            margin: 15px 0 10px;
         }
         .stats-box {
             background: #0a130e;
-            border-radius: 20px;
-            padding: 1rem;
+            border-radius: 18px;
+            padding: 0.8rem;
             margin-top: 1rem;
-            font-size: 1rem;
+            font-size: 0.85rem;
         }
-        .hit-rate { color: #ffb347; font-weight: bold; font-size: 1.2rem; }
+        .hit-rate { color: #ffb347; font-weight: bold; }
         .disclaimer {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-align: center;
             margin-top: 2rem;
-            padding: 1rem;
+            padding: 0.8rem;
             background: #0a130e;
             border-radius: 18px;
             color: #aaa;
         }
         @media (max-width: 700px) {
-            body { padding: 0.8rem; }
-            .section-card { padding: 1rem; }
-            .data-table th, .data-table td { font-size: 0.7rem; padding: 5px 3px; }
+            body { padding: 0.6rem; }
+            .race-card { padding: 0.8rem; }
+            .data-table th, .data-table td { font-size: 0.65rem; padding: 5px 3px; }
             .race-result-row .race-name { width: 100px; }
-            .race-result-row input { width: 80px; }
-            .risk-box { flex-direction: column; align-items: flex-start; }
+            .race-result-row input { width: 75px; }
         }
-        .mm-score, .kg-score, .lr-score, .ma-score { font-weight: bold; color: #ffb347; }
+        .sim-mark { font-size: 0.6rem; color: #a0b89a; margin-left: 2px; }
+        .mm-score, .kg-score, .lr-score { font-weight: bold; color: #ffb347; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <h1>🕸️ SHTSN 賽馬預測系統 · V8.9</h1>
-        <div class="sub">多模態融合 + 知識圖譜 + 條件邏輯迴歸 + 多智能體協作 + 凱利公式風險控制</div>
-        <div class="sub">2026-04-26 沙田草地日賽 | 內建歷史賽事資料庫 (2026-04-22 & 2026-03-18)</div>
+        <div class="sub">多模態融合 + 知識圖譜 + 條件邏輯迴歸 | 賽後可驗證三四重彩</div>
+        <div class="sub">2026-04-26 沙田草地日賽 (A赛道) | 所有評分除特別註明外均為模擬值</div>
     </div>
 
-    <!-- ===================== 資料部（完整歷史資料庫） ===================== -->
-    <div class="section-card">
-        <div class="section-title">📊 資料部 · 歷史賽事明細</div>
-        <div class="data-table-wrapper">
-            <table class="data-table">
-                <thead>
-                    <tr><th>日期</th><th>場地/路程</th><th>班次</th><th>系統精選池</th><th>實際頭馬</th><th>獨贏命中</th><th>四重彩派彩</th><th>備註</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>2026-04-22</td><td>快活谷 1200米</td><td>五班</td><td>獵寶勤(4檔), 妙算歡騰(8檔)</td><td>獵寶勤</td><td>✅</td><td>$28,250</td><td>精選池頭馬命中，四重彩中正</td></tr>
-                    <tr><td>2026-04-22</td><td>快活谷 1650米</td><td>五班</td><td>焦點(7檔), 日日光彩(8檔)</td><td>焦點</td><td>✅</td><td>—</td><td>獨贏命中，連贏斷腳</td></tr>
-                    <tr><td>2026-04-22</td><td>快活谷 1650米</td><td>四班</td><td>無（綜合分＜70）</td><td>贏玥</td><td>—</td><td>$112,641(未中)</td><td>精選池無馬，未參與預測</td></tr>
-                    <tr><td>2026-04-22</td><td>快活谷 1200米</td><td>四班</td><td>銳目(6檔)</td><td>銳目</td><td>✅</td><td>—</td><td>獨贏2.3倍命中</td></tr>
-                    <tr><td>2026-04-22</td><td>快活谷 1200米</td><td>四班</td><td>雷神太保(11檔), 有運來(12檔)</td><td>雷神太保</td><td>✅</td><td>$3,002</td><td>四重彩次關命中</td></tr>
-                    <tr><td>2026-03-18</td><td>快活谷 1650米</td><td>五班</td><td>神駒馬靈(7檔)</td><td>神駒馬靈</td><td>✅</td><td>$88,727</td><td>完美四重彩命中</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="info-box">📈 資料部統計：過去6場有精選池的賽事，獨贏命中率 83.3% (5/6)，四重彩命中率 50% (3/6)。精選池入圍率 100% (6/6 場次有≥70分馬)。</div>
-    </div>
-
-    <!-- 各派別權重動態調整記錄 -->
-    <div class="section-card">
-        <div class="section-title">⚙️ 資料部 · 各派別權重動態調整記錄 (V8.9 + 風險控制)</div>
-        <div class="data-table-wrapper">
-            <table class="data-table">
-                <thead><tr><th>調整日期</th><th>奇門派</th><th>數據派</th><th>賠率+晨操</th><th>血統</th><th>步速</th><th>場地</th><th>路程</th><th>騎練</th><th>鞍上人</th><th>行為模式</th><th>多模態</th><th>知識圖譜</th><th>邏輯迴歸</th><th>多智能體</th></tr></thead>
-                <tbody>
-                    <tr><td>初始(V8.0)</td><td>0.28</td><td>0.15</td><td>0.10</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td><td>0.06</td><td>0.04</td><td>0.05</td><td>0.05</td><td>—</td><td>—</td></tr>
-                    <tr><td>2026-04-22 賽後</td><td>0.31 ↑</td><td>0.17 ↑</td><td>0.10</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td><td>0.06</td><td>0.05 ↑</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td></tr>
-                    <tr><td>2026-04-26 建議</td><td>0.30</td><td>0.16</td><td>0.09</td><td>0.04</td><td>0.04</td><td>0.04</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.05</td><td>0.06</td><td>0.06</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="info-box">📌 凱利公式風險控制模型獨立運作，不參與綜合分計算，僅提供注碼建議與風險評估。</div>
-    </div>
-
-    <!-- 全局風險控制面板 -->
-    <div class="section-card" id="globalRiskPanel">
-        <div class="section-title">💰 凱利公式風險控制 · 全局摘要</div>
-        <div class="info-box" id="globalRiskInfo">正在計算本日風險總覽...</div>
-    </div>
-
-    <!-- 原有 11 場賽事預測（新增多智能體協作分 + 凱利風險控制塊） -->
     <div id="races-container"></div>
 
-    <!-- 賽後驗證區域：三重彩/四重彩命中率 -->
-    <div class="verification-panel" id="verificationPanel">
-        <div class="section-title" style="font-size:1.3rem;">📊 賽後自動驗證：三重彩 & 四重彩命中率</div>
+    <!-- 賽後驗證：三重彩/四重彩命中率 -->
+    <div class="verification-panel">
+        <div style="font-size:1.3rem; font-weight:bold; margin-bottom:1rem;">📊 賽後自動驗證（三重彩 & 四重彩）</div>
         <div id="resultInputs"></div>
         <button class="calc-btn" id="calcHitRateBtn">✅ 計算本日命中率（儲存至紀錄）</button>
         <div id="hitRateDisplay" class="stats-box"></div>
-        <div class="info-box" style="margin-top:1rem;">💡 說明：系統預測三重彩 = 每場綜合分排名 ★1,★2,★3 順序；四重彩 = ★1,★2,★3,★4 順序。<br>請輸入真實頭馬、二馬、三馬、四馬名稱（必須與上方馬匹名稱完全一致），比對順序相同即命中。</div>
+        <div class="info-box" style="margin-top:0.8rem; font-size:0.7rem;">💡 系統預測三重彩 = 每場綜合分排名 ★1,★2,★3 順序；四重彩 = ★1,★2,★3,★4 順序。請輸入真實名次（馬名需與上表完全一致）→ 比對順序相同即命中。</div>
     </div>
 
     <div class="disclaimer">
-        🧾 誠實聲明：<br>
-        - 凱利公式計算中使用之「系統勝率」由綜合分/100 模擬，賠率為模擬獨贏賠率，實際投注請以真實賠率與個人風險承受能力為準。<br>
-        - 多模態融合、知識圖譜、邏輯迴歸、多智能體協作評分均為模擬值。<br>
-        - 本報告僅供SHTSN協作研究，不構成實際投注建議。
+        🧾 誠實聲明：所有賠率、血統、步速、場地、騎練、傷患、馬房部署、多模態融合、知識圖譜及邏輯迴歸評分均為系統模擬值。賽後三四重彩命中率依賴用戶輸入的真實賽果計算，歷史紀錄儲存於瀏覽器 localStorage。本報告僅供研究，不構成實際投注建議。
     </div>
 </div>
 
 <script>
-    // --------------------------------------------------------------
-    // 凱利公式計算函數
-    // f = (p * b - q) / b ，其中 p = 系統勝率 (綜合分/100)，b = 淨賠率 (賠率 - 1)，q = 1-p
-    // 返回建議投注比例 (0-1)，並限制最大比例 0.25 (避免過度激進)
-    // --------------------------------------------------------------
-    function kellyFraction(winProb, odds) {
-        if (odds <= 1) return 0;
-        let p = Math.min(0.95, Math.max(0.05, winProb)); // 限制機率範圍
-        let b = odds - 1;
-        let q = 1 - p;
-        let f = (p * b - q) / b;
-        if (isNaN(f) || f <= 0) return 0;
-        return Math.min(0.25, f); // 單場最大注碼 25% 資金 (保守)
+    // ===================== 賽事數據 (11場完整) =====================
+    // 輔助：邏輯迴歸模擬 (檔位、賠率、騎師分)
+    function simLR(draw, odds, jockeyScore) {
+        let drawScore = Math.max(0, Math.min(40, (8 - draw) * 5));
+        let oddsScore = odds ? Math.max(0, Math.min(40, (100 - odds) * 0.6)) : 20;
+        let jockeyBonus = (jockeyScore / 100) * 20;
+        return Math.min(100, Math.floor(drawScore + oddsScore + jockeyBonus));
     }
-
-    // 多智能體協作分模擬 (5個智能體投票)
-    function simulateMultiAgent(draw, oddsScore, qiMenScore, jockeyScore) {
-        let agentScores = [
-            Math.min(100, (8 - draw) * 10 + 20),        // 檔位智能體
-            Math.min(100, oddsScore * 0.8 + 20),        // 賠率智能體
-            qiMenScore,                                 // 奇門智能體
-            jockeyScore,                                // 騎師智能體
-            Math.min(100, (draw <= 4 ? 80 : 50) + (oddsScore > 70 ? 15 : 0)) // 綜合感知智能體
-        ];
-        let avg = agentScores.reduce((a,b)=>a+b,0)/agentScores.length;
-        return Math.floor(avg);
-    }
-
-    // 獲取騎師模擬分數
-    const jockeyScoreMap = { "田泰安": 88, "布文": 92, "莫雷拉": 96, "潘頓": 98, "麥道朗": 94, "梁家俊": 75, "巴度": 78, "何澤堯": 82, "艾米爾": 70, "班德禮": 72, "希威森": 74, "潘明輝": 76, "紀仁安": 85, "李慕華": 90, "金城剛": 65, "楊明倫": 60, "布浩榮": 68, "艾兆禮": 73, "黃寶妮": 65, "莫艾誠": 77 };
-    function getJockeyScoreFromStable(stableStr) {
-        for (let [name, score] of Object.entries(jockeyScoreMap)) {
+    // 騎師模擬分數
+    const jockeyMap = { "田泰安":88, "布文":92, "莫雷拉":96, "潘頓":98, "麥道朗":94, "梁家俊":75, "巴度":78, "何澤堯":82, "艾米爾":70, "班德禮":72, "希威森":74, "潘明輝":76, "紀仁安":85, "李慕華":90, "金城剛":65, "楊明倫":60, "布浩榮":68, "艾兆禮":73, "黃寶妮":65, "莫艾誠":77, "蔡明紹":70 };
+    function getJockeyScore(stableStr) {
+        for (let [name, score] of Object.entries(jockeyMap)) {
             if (stableStr.includes(name)) return score;
         }
         return 70;
     }
+    // 多模態融合分 (模擬)
+    function simMM(draw, odds, qiMen) { return Math.min(100, Math.floor(qiMen * 0.6 + (8-draw)*3 + (odds>80?10:0))); }
+    // 知識圖譜分 (模擬)
+    function simKG(name, trainerJock) { return Math.floor(70 + (name.length%30)); }
 
-    // 賽事資料 (擴充多智能體協作分 ma)
-    const racesData = [
-        { name: "第1場 · 第四班1200米草地", time: "12:30",
-          horses: [
-            { name:"利高八斗", draw:1, qimen:93, data:80, odds:70, track:70, pedigree:65, pace:70, ground:70, distance:75, trainerJock:80, injury:"無", stable:"姚本輝：初出即配田泰安", total:81.4, mm:88, kg:85, lr:86, ma: simulateMultiAgent(1,70,93,88) },
-            { name:"寶者成福", draw:6, qimen:78, data:68, odds:90, track:85, pedigree:80, pace:85, ground:85, distance:80, trainerJock:85, injury:"輕微", stable:"賀賢：用布文決心交代", total:76.0, mm:79, kg:80, lr:80, ma: simulateMultiAgent(6,90,78,92) },
-            { name:"星運少爵", draw:5, qimen:80, data:70, odds:85, track:80, pedigree:75, pace:80, ground:80, distance:85, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉選騎", total:77.5, mm:81, kg:78, lr:82, ma: simulateMultiAgent(5,85,80,96) },
-            { name:"開心牙寶", draw:3, qimen:90, data:66, odds:55, track:55, pedigree:55, pace:60, ground:60, distance:60, trainerJock:70, injury:"輕微", stable:"呂健威：減磅求冷", total:70.4, mm:72, kg:70, lr:72, ma: simulateMultiAgent(3,55,90,70) }
-          ], win:"利高八斗", quinella:"利高八斗+寶者成福", kgDesc:"知識圖譜：利高八斗父系「歡暢」擅谷草", mmDesc:"多模態：利高八斗體態評級A", lrDesc:"邏輯迴歸：內檔+低賠率", maDesc:"多智能體：檔位+奇門+賠率一致看好" },
-        { name: "第2場 · 第四班1600米草地", time: "13:00",
-          horses: [
-            { name:"大回報", draw:3, qimen:92, data:78, odds:85, track:85, pedigree:75, pace:80, ground:80, distance:80, trainerJock:85, injury:"無", stable:"黎昭昇：王牌馬", total:83.5, mm:86, kg:84, lr:84, ma: simulateMultiAgent(3,85,92,75) },
-            { name:"華風雲", draw:1, qimen:90, data:84, odds:70, track:75, pedigree:70, pace:72, ground:70, distance:70, trainerJock:80, injury:"輕微", stable:"丁冠豪：轉倉初出", total:78.2, mm:80, kg:79, lr:79, ma: simulateMultiAgent(1,70,90,72) },
-            { name:"都靈冠星", draw:4, qimen:80, data:54, odds:80, track:80, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"嚴重", stable:"大衛希斯：潘頓不放手", total:66.0, mm:65, kg:60, lr:65, ma: simulateMultiAgent(4,80,80,98) },
-            { name:"旗隊", draw:8, qimen:61, data:56, odds:75, track:78, pedigree:72, pace:76, ground:74, distance:75, trainerJock:80, injury:"無", stable:"姚本輝：布文接手", total:70.3, mm:72, kg:71, lr:73, ma: simulateMultiAgent(8,75,61,92) }
-          ], win:"大回報", quinella:"大回報+華風雲", kgDesc:"大回報與黎昭昇合作3次2冠", mmDesc:"多模態：大回報肌肉飽滿", lrDesc:"邏輯迴歸：內檔+賠率合理", maDesc:"多智能體：分歧較大，但仍看好大回報" },
-        { name: "第3場 · 第四班1200米草地", time: "13:30",
-          horses: [
-            { name:"堅先生", draw:2, qimen:93, data:85, odds:80, track:85, pedigree:80, pace:85, ground:85, distance:85, trainerJock:85, injury:"復出首戰", stable:"桂福特：田泰安親試", total:81.5, mm:90, kg:88, lr:90, ma: simulateMultiAgent(2,80,93,88) },
-            { name:"超和平", draw:1, qimen:90, data:84, odds:75, track:80, pedigree:75, pace:80, ground:80, distance:80, trainerJock:85, injury:"輕微", stable:"巫偉傑：梁家俊續騎", total:80.3, mm:82, kg:80, lr:82, ma: simulateMultiAgent(1,75,90,75) },
-            { name:"天天更好", draw:8, qimen:61, data:78, odds:70, track:75, pedigree:65, pace:70, ground:70, distance:70, trainerJock:80, injury:"無", stable:"羅富全：巴度輕磅", total:70.5, mm:68, kg:65, lr:70, ma: simulateMultiAgent(8,70,61,78) },
-            { name:"大勇勝", draw:4, qimen:75, data:72, odds:65, track:70, pedigree:68, pace:72, ground:70, distance:70, trainerJock:75, injury:"嚴重", stable:"沈集成：初出希威森", total:62.1, mm:60, kg:55, lr:62, ma: simulateMultiAgent(4,65,75,74) }
-          ], win:"堅先生", quinella:"堅先生+超和平", kgDesc:"堅先生母系勝利樂園", mmDesc:"堅先生操練影像衝刺力強", lrDesc:"邏輯迴歸：田泰安+內檔", maDesc:"多智能體：全體一致推薦堅先生" },
-        { name: "第4場 · 第四班1400米草地", time: "14:00",
-          horses: [
-            { name:"日日賞", draw:3, qimen:95, data:82, odds:60, track:65, pedigree:65, pace:68, ground:66, distance:70, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉接手", total:81.1, mm:89, kg:92, lr:92, ma: simulateMultiAgent(3,60,95,96) },
-            { name:"文采風流", draw:1, qimen:90, data:66, odds:65, track:70, pedigree:68, pace:72, ground:70, distance:70, trainerJock:80, injury:"復出首戰", stable:"蘇偉賢：莫艾誠騎", total:71.6, mm:76, kg:72, lr:74, ma: simulateMultiAgent(1,65,90,77) },
-            { name:"幸運威龍", draw:2, qimen:90, data:74, odds:50, track:60, pedigree:60, pace:64, ground:62, distance:65, trainerJock:80, injury:"輕微", stable:"羅富全：潘明輝減磅", total:73.2, mm:74, kg:70, lr:72, ma: simulateMultiAgent(2,50,90,76) },
-            { name:"勤勇星豹", draw:4, qimen:77, data:58, odds:80, track:82, pedigree:78, pace:82, ground:80, distance:80, trainerJock:85, injury:"無", stable:"呂健威：何澤堯騎", total:73.5, mm:80, kg:78, lr:80, ma: simulateMultiAgent(4,80,77,82) }
-          ], win:"日日賞", quinella:"日日賞+文采風流", kgDesc:"日日賞與方嘉柏、莫雷拉強連通分量", mmDesc:"日日賞影像中馬身圓潤", lrDesc:"邏輯迴歸：莫雷拉+低賠率", maDesc:"多智能體：日日賞獲得4/5智能體支持" },
-        { name: "第5場 · 主席短途賽 (一級賽) · 1200米", time: "14:35",
-          horses: [
-            { name:"嘉德高昇", draw:3, qimen:95, data:82, odds:92, track:88, pedigree:85, pace:88, ground:80, distance:95, trainerJock:95, injury:"無", stable:"大衛希斯：潘頓押陣", total:88.6, mm:96, kg:95, lr:94, ma: simulateMultiAgent(3,92,95,98) },
-            { name:"攀步生国", draw:2, qimen:93, data:80, odds:72, track:82, pedigree:78, pace:82, ground:78, distance:90, trainerJock:90, injury:"輕微", stable:"某楚航：麥道朗騎", total:81.2, mm:85, kg:83, lr:85, ma: simulateMultiAgent(2,72,93,94) },
-            { name:"好友心得", draw:1, qimen:90, data:76, odds:60, track:82, pedigree:70, pace:74, ground:72, distance:85, trainerJock:85, injury:"嚴重", stable:"大衛希斯：班德禮", total:68.9, mm:70, kg:66, lr:68, ma: simulateMultiAgent(1,60,90,72) },
-            { name:"腾翔明驹", draw:6, qimen:78, data:68, odds:76, track:77, pedigree:75, pace:80, ground:76, distance:80, trainerJock:90, injury:"無", stable:"蔡約翰：布文騎", total:75.3, mm:78, kg:80, lr:78, ma: simulateMultiAgent(6,76,78,92) }
-          ], win:"嘉德高昇", quinella:"嘉德高昇+攀步生国", kgDesc:"嘉德高昇知識圖譜短途王", mmDesc:"嘉德高昇賽前相片眼神專注", lrDesc:"邏輯迴歸：潘頓+頂級條件", maDesc:"多智能體：嘉德高昇獲全票通過" },
-        // 為節省篇幅，第6-11場結構相同，但為了完整呈現，繼續用程式生成，此處僅列出關鍵資料，實際會全數渲染。
+    const races = [
+        { name:"第1場 · 第四班1200米草地", time:"12:30", 
+          horses:[
+            { name:"利高八斗", draw:1, qimen:93, data:80, odds:70, track:70, pedigree:65, pace:70, ground:70, distance:75, trainerJock:80, injury:"無", stable:"姚本輝：初出即配田泰安", total:81.4, mm:simMM(1,70,93), kg:simKG("利高八斗",80), lr:simLR(1,70,88) },
+            { name:"寶者成福", draw:6, qimen:78, data:68, odds:90, track:85, pedigree:80, pace:85, ground:85, distance:80, trainerJock:85, injury:"輕微", stable:"賀賢：用布文決心交代", total:76.0, mm:simMM(6,90,78), kg:simKG("寶者成福",85), lr:simLR(6,90,92) },
+            { name:"星運少爵", draw:5, qimen:80, data:70, odds:85, track:80, pedigree:75, pace:80, ground:80, distance:85, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉選騎", total:77.5, mm:simMM(5,85,80), kg:simKG("星運少爵",85), lr:simLR(5,85,96) },
+            { name:"開心牙寶", draw:3, qimen:90, data:66, odds:55, track:55, pedigree:55, pace:60, ground:60, distance:60, trainerJock:70, injury:"輕微", stable:"呂健威：減磅求冷", total:70.4, mm:simMM(3,55,90), kg:simKG("開心牙寶",70), lr:simLR(3,55,70) }
+          ], win:"利高八斗", quinella:"利高八斗+寶者成福", desc:"利高八斗內檔明星騎師，奇門生門；寶者成福步速靈活。行為模式：前速穩定。" },
+        { name:"第2場 · 第四班1600米草地", time:"13:00",
+          horses:[
+            { name:"大回報", draw:3, qimen:92, data:78, odds:85, track:85, pedigree:75, pace:80, ground:80, distance:80, trainerJock:85, injury:"無", stable:"黎昭昇：王牌馬", total:83.5, mm:simMM(3,85,92), kg:simKG("大回報",85), lr:simLR(3,85,75) },
+            { name:"華風雲", draw:1, qimen:90, data:84, odds:70, track:75, pedigree:70, pace:72, ground:70, distance:70, trainerJock:80, injury:"輕微", stable:"丁冠豪：轉倉初出", total:78.2, mm:simMM(1,70,90), kg:simKG("華風雲",80), lr:simLR(1,70,72) },
+            { name:"都靈冠星", draw:4, qimen:80, data:54, odds:80, track:80, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"嚴重", stable:"大衛希斯：潘頓不放手", total:66.0, mm:simMM(4,80,80), kg:simKG("都靈冠星",85), lr:simLR(4,80,98) },
+            { name:"旗隊", draw:8, qimen:61, data:56, odds:75, track:78, pedigree:72, pace:76, ground:74, distance:75, trainerJock:80, injury:"無", stable:"姚本輝：布文接手", total:70.3, mm:simMM(8,75,61), kg:simKG("旗隊",80), lr:simLR(8,75,92) }
+          ], win:"大回報", quinella:"大回報+華風雲", desc:"大回報同程兩捷，騎練指數高；華風雲一檔奇門開門吉格。" },
+        { name:"第3場 · 第四班1200米草地", time:"13:30",
+          horses:[
+            { name:"堅先生", draw:2, qimen:93, data:85, odds:80, track:85, pedigree:80, pace:85, ground:85, distance:85, trainerJock:85, injury:"復出首戰", stable:"桂福特：田泰安親試", total:81.5, mm:simMM(2,80,93), kg:simKG("堅先生",85), lr:simLR(2,80,88) },
+            { name:"超和平", draw:1, qimen:90, data:84, odds:75, track:80, pedigree:75, pace:80, ground:80, distance:80, trainerJock:85, injury:"輕微", stable:"巫偉傑：梁家俊續騎", total:80.3, mm:simMM(1,75,90), kg:simKG("超和平",85), lr:simLR(1,75,75) },
+            { name:"天天更好", draw:8, qimen:61, data:78, odds:70, track:75, pedigree:65, pace:70, ground:70, distance:70, trainerJock:80, injury:"無", stable:"羅富全：巴度輕磅", total:70.5, mm:simMM(8,70,61), kg:simKG("天天更好",80), lr:simLR(8,70,78) },
+            { name:"大勇勝", draw:4, qimen:75, data:72, odds:65, track:70, pedigree:68, pace:72, ground:70, distance:70, trainerJock:75, injury:"嚴重", stable:"沈集成：初出希威森", total:62.1, mm:simMM(4,65,75), kg:simKG("大勇勝",75), lr:simLR(4,65,74) }
+          ], win:"堅先生", quinella:"堅先生+超和平", desc:"堅先生試閘走勢凌厲，直路衝刺評分高；超和平檔利。" },
+        { name:"第4場 · 第四班1400米草地", time:"14:00",
+          horses:[
+            { name:"日日賞", draw:3, qimen:95, data:82, odds:60, track:65, pedigree:65, pace:68, ground:66, distance:70, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉接手", total:81.1, mm:simMM(3,60,95), kg:simKG("日日賞",85), lr:simLR(3,60,96) },
+            { name:"文采風流", draw:1, qimen:90, data:66, odds:65, track:70, pedigree:68, pace:72, ground:70, distance:70, trainerJock:80, injury:"復出首戰", stable:"蘇偉賢：莫艾誠騎", total:71.6, mm:simMM(1,65,90), kg:simKG("文采風流",80), lr:simLR(1,65,77) },
+            { name:"幸運威龍", draw:2, qimen:90, data:74, odds:50, track:60, pedigree:60, pace:64, ground:62, distance:65, trainerJock:80, injury:"輕微", stable:"羅富全：潘明輝減磅", total:73.2, mm:simMM(2,50,90), kg:simKG("幸運威龍",80), lr:simLR(2,50,76) },
+            { name:"勤勇星豹", draw:4, qimen:77, data:58, odds:80, track:82, pedigree:78, pace:82, ground:80, distance:80, trainerJock:85, injury:"無", stable:"呂健威：何澤堯騎", total:73.5, mm:simMM(4,80,77), kg:simKG("勤勇星豹",85), lr:simLR(4,80,82) }
+          ], win:"日日賞", quinella:"日日賞+文采風流", desc:"日日賞生門+天輔星，莫雷拉加持；文采風流內檔。" },
+        { name:"第5場 · 主席短途賽(一級賽)1200米", time:"14:35",
+          horses:[
+            { name:"嘉德高昇", draw:3, qimen:95, data:82, odds:92, track:88, pedigree:85, pace:88, ground:80, distance:95, trainerJock:95, injury:"無", stable:"大衛希斯：潘頓押陣", total:88.6, mm:simMM(3,92,95), kg:simKG("嘉德高昇",95), lr:simLR(3,92,98) },
+            { name:"攀步生国", draw:2, qimen:93, data:80, odds:72, track:82, pedigree:78, pace:82, ground:78, distance:90, trainerJock:90, injury:"輕微", stable:"某楚航：麥道朗騎", total:81.2, mm:simMM(2,72,93), kg:simKG("攀步生国",90), lr:simLR(2,72,94) },
+            { name:"好友心得", draw:1, qimen:90, data:76, odds:60, track:82, pedigree:70, pace:74, ground:72, distance:85, trainerJock:85, injury:"嚴重", stable:"大衛希斯：班德禮", total:68.9, mm:simMM(1,60,90), kg:simKG("好友心得",85), lr:simLR(1,60,72) },
+            { name:"腾翔明驹", draw:6, qimen:78, data:68, odds:76, track:77, pedigree:75, pace:80, ground:76, distance:80, trainerJock:90, injury:"無", stable:"蔡約翰：布文騎", total:75.3, mm:simMM(6,76,78), kg:simKG("腾翔明驹",90), lr:simLR(6,76,92) }
+          ], win:"嘉德高昇", quinella:"嘉德高昇+攀步生国", desc:"嘉德高昇一級賽經驗豐富，奇門值極高。" },
+        { name:"第6場 · 第三班1200米草地", time:"15:10",
+          horses:[
+            { name:"健康快車", draw:2, qimen:90, data:66, odds:82, track:82, pedigree:82, pace:82, ground:82, distance:85, trainerJock:85, injury:"無", stable:"蔡約翰：艾米爾騎", total:81.2, mm:simMM(2,82,90), kg:simKG("健康快車",85), lr:simLR(2,82,70) },
+            { name:"線路滿貫", draw:3, qimen:90, data:58, odds:76, track:82, pedigree:65, pace:65, ground:65, distance:70, trainerJock:80, injury:"輕微", stable:"文家良：黃寶妮減磅", total:73.4, mm:simMM(3,76,90), kg:simKG("線路滿貫",80), lr:simLR(3,76,65) },
+            { name:"星月飛雲", draw:4, qimen:80, data:62, odds:64, track:78, pedigree:72, pace:72, ground:72, distance:75, trainerJock:85, injury:"復出首戰", stable:"羅達：莫雷拉騎", total:67.6, mm:simMM(4,64,80), kg:simKG("星月飛雲",85), lr:simLR(4,64,96) },
+            { name:"傑出雷霆", draw:6, qimen:77, data:74, odds:52, track:72, pedigree:68, pace:68, ground:68, distance:70, trainerJock:85, injury:"無", stable:"呂健威：何澤堯騎", total:72.2, mm:simMM(6,52,77), kg:simKG("傑出雷霆",85), lr:simLR(6,52,82) }
+          ], win:"健康快車", quinella:"健康快車+線路滿貫", desc:"健康快車內檔優勢，晨操見好。" },
+        { name:"第7場 · 國際一級賽1200米草地", time:"15:45",
+          horses:[
+            { name:"小鳥天堂", draw:2, qimen:95, data:72.8, odds:88, track:90, pedigree:90, pace:88, ground:90, distance:95, trainerJock:95, injury:"無", stable:"丁冠豪：潘頓重視", total:88.7, mm:simMM(2,88,95), kg:simKG("小鳥天堂",95), lr:simLR(2,88,98) },
+            { name:"白富金剛", draw:5, qimen:78, data:70.4, odds:92, track:85, pedigree:88, pace:85, ground:86, distance:90, trainerJock:90, injury:"輕微", stable:"廖康銘：麥道朗騎", total:78.9, mm:simMM(5,92,78), kg:simKG("白富金剛",90), lr:simLR(5,92,94) },
+            { name:"金鎖貴人", draw:4, qimen:90, data:62.8, odds:82, track:80, pedigree:80, pace:82, ground:80, distance:85, trainerJock:90, injury:"無", stable:"文家良：梁家俊", total:79.5, mm:simMM(4,82,90), kg:simKG("金鎖貴人",90), lr:simLR(4,82,75) },
+            { name:"陽光勇士", draw:3, qimen:90, data:60.4, odds:70, track:78, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"復出首戰", stable:"姚本輝：布浩榮", total:71.3, mm:simMM(3,70,90), kg:simKG("陽光勇士",85), lr:simLR(3,70,68) }
+          ], win:"小鳥天堂", quinella:"小鳥天堂+白富金剛", desc:"小鳥天堂短途王者，奇門值高。" },
+        { name:"第8場 · 第三班1400米草地", time:"16:20",
+          horses:[
+            { name:"喜蓮勤威", draw:1, qimen:93, data:64, odds:88, track:85, pedigree:82, pace:80, ground:80, distance:85, trainerJock:90, injury:"無", stable:"游達榮：麥道朗騎", total:82.8, mm:simMM(1,88,93), kg:simKG("喜蓮勤威",90), lr:simLR(1,88,94) },
+            { name:"友望仁", draw:2, qimen:90, data:84, odds:60, track:80, pedigree:70, pace:74, ground:72, distance:75, trainerJock:85, injury:"輕微", stable:"伍鵬志：艾兆禮", total:78.2, mm:simMM(2,60,90), kg:simKG("友望仁",85), lr:simLR(2,60,73) },
+            { name:"三軍勇將", draw:4, qimen:80, data:70, odds:76, track:82, pedigree:78, pace:82, ground:78, distance:80, trainerJock:90, injury:"無", stable:"方嘉柏：莫雷拉", total:78.6, mm:simMM(4,76,80), kg:simKG("三軍勇將",90), lr:simLR(4,76,96) },
+            { name:"佳駿年年", draw:3, qimen:90, data:90, odds:20, track:70, pedigree:62, pace:66, ground:64, distance:65, trainerJock:70, injury:"嚴重", stable:"桂福特：楊明倫", total:63.1, mm:simMM(3,20,90), kg:simKG("佳駿年年",70), lr:simLR(3,20,60) }
+          ], win:"喜蓮勤威", quinella:"喜蓮勤威+友望仁", desc:"喜蓮勤威一檔奇門生宮，友望仁近況穩定。" },
+        { name:"第9場 · 富衛保險女皇盃(一級賽)2000米", time:"16:55",
+          horses:[
+            { name:"同工之妙", draw:2, qimen:93, data:80, odds:85, track:88, pedigree:85, pace:88, ground:88, distance:95, trainerJock:95, injury:"無", stable:"賈伯華：紀仁安", total:86.9, mm:simMM(2,85,93), kg:simKG("同工之妙",95), lr:simLR(2,85,85) },
+            { name:"球星", draw:3, qimen:93, data:80, odds:72, track:80, pedigree:78, pace:82, ground:80, distance:85, trainerJock:90, injury:"輕微", stable:"大衛希斯：布文", total:82.3, mm:simMM(3,72,93), kg:simKG("球星",90), lr:simLR(3,72,92) },
+            { name:"浪漫勇士", draw:5, qimen:78, data:68, odds:98, track:95, pedigree:98, pace:95, ground:95, distance:95, trainerJock:95, injury:"無", stable:"沈集成：麥道朗", total:83.9, mm:simMM(5,98,78), kg:simKG("浪漫勇士",95), lr:simLR(5,98,94) },
+            { name:"蒙面舞會", draw:6, qimen:78, data:68, odds:96, track:92, pedigree:96, pace:92, ground:92, distance:90, trainerJock:95, injury:"復出首戰", stable:"手球費久：李慕華", total:77.9, mm:simMM(6,96,78), kg:simKG("蒙面舞會",95), lr:simLR(6,96,90) }
+          ], win:"同工之妙", quinella:"同工之妙+球星", desc:"同工之妙同程三戰全入Q，奇門值配合長途格局。" },
+        { name:"第10場 · 第三班1600米草地", time:"17:35",
+          horses:[
+            { name:"金源千帥", draw:1, qimen:90, data:82, odds:70, track:80, pedigree:70, pace:72, ground:70, distance:75, trainerJock:80, injury:"無", stable:"賀賢：潘明輝騎", total:81.9, mm:simMM(1,70,90), kg:simKG("金源千帥",80), lr:simLR(1,70,76) },
+            { name:"紫荆拼搏", draw:3, qimen:90, data:76, odds:65, track:82, pedigree:72, pace:74, ground:72, distance:70, trainerJock:80, injury:"輕微", stable:"大衛希斯：班德禮", total:78.6, mm:simMM(3,65,90), kg:simKG("紫荆拼搏",80), lr:simLR(3,65,72) },
+            { name:"騰龍踏雪", draw:2, qimen:90, data:82, odds:60, track:78, pedigree:65, pace:68, ground:66, distance:65, trainerJock:75, injury:"嚴重", stable:"游達榮：金城剛", total:72.1, mm:simMM(2,60,90), kg:simKG("騰龍踏雪",75), lr:simLR(2,60,65) },
+            { name:"共享富裕", draw:5, qimen:80, data:62, odds:85, track:88, pedigree:80, pace:82, ground:80, distance:80, trainerJock:85, injury:"無", stable:"方嘉柏：莫雷拉", total:76.6, mm:simMM(5,85,80), kg:simKG("共享富裕",85), lr:simLR(5,85,96) }
+          ], win:"金源千帥", quinella:"金源千帥+紫荆拼搏", desc:"金源千帥一檔賺形勢，步速合適。" },
+        { name:"第11場 · 第二班1400米草地", time:"18:10",
+          horses:[
+            { name:"時時歡聲", draw:2, qimen:95, data:90, odds:98, track:95, pedigree:96, pace:94, ground:94, distance:95, trainerJock:96, injury:"無", stable:"告東尼：潘頓騎", total:93.9, mm:simMM(2,98,95), kg:simKG("時時歡聲",96), lr:simLR(2,98,98) },
+            { name:"翠金主", draw:1, qimen:92, data:86, odds:85, track:88, pedigree:84, pace:86, ground:84, distance:85, trainerJock:90, injury:"輕微", stable:"章廷：巴度騎", total:86.2, mm:simMM(1,85,92), kg:simKG("翠金主",90), lr:simLR(1,85,78) },
+            { name:"晴冷", draw:3, qimen:90, data:84, odds:82, track:86, pedigree:82, pace:84, ground:82, distance:85, trainerJock:90, injury:"無", stable:"廖康銘：希威森", total:86.1, mm:simMM(3,82,90), kg:simKG("晴冷",90), lr:simLR(3,82,74) },
+            { name:"千帆駒", draw:6, qimen:78, data:84, odds:80, track:82, pedigree:78, pace:80, ground:78, distance:80, trainerJock:85, injury:"復出首戰", stable:"蘇偉賢：田泰安", total:75.1, mm:simMM(6,80,78), kg:simKG("千帆駒",85), lr:simLR(6,80,88) }
+          ], win:"時時歡聲", quinella:"時時歡聲+翠金主", desc:"時時歡聲全場最高綜合分，奇門太陰＋天輔。" }
     ];
-    // 補全第6-11場 (避免遺漏，使用完整生成)
-    const extraRaces = [
-        { name: "第6場 · 第三班1200米草地", time: "15:10", horses: [
-            { name:"健康快車", draw:2, qimen:90, data:66, odds:82, track:82, pedigree:82, pace:82, ground:82, distance:85, trainerJock:85, injury:"無", stable:"蔡約翰：艾米爾騎", total:81.2, mm:85, kg:84, lr:82, ma: simulateMultiAgent(2,82,90,70) },
-            { name:"線路滿貫", draw:3, qimen:90, data:58, odds:76, track:82, pedigree:65, pace:65, ground:65, distance:70, trainerJock:80, injury:"輕微", stable:"文家良：黃寶妮減磅", total:73.4, mm:74, kg:72, lr:74, ma: simulateMultiAgent(3,76,90,65) }
-        ], win:"健康快車", quinella:"健康快車+線路滿貫", kgDesc:"健康快車與蔡約翰網絡第一", mmDesc:"健康快車體態指數高", lrDesc:"邏輯迴歸：內檔+賠率合理", maDesc:"多智能體：健康快車檔位優勢明顯" },
-        { name: "第7場 · 國際一級賽1200米草地", time: "—", horses: [
-            { name:"小鳥天堂", draw:2, qimen:95, data:72.8, odds:88, track:90, pedigree:90, pace:88, ground:90, distance:95, trainerJock:95, injury:"無", stable:"丁冠豪：潘頓重視", total:88.7, mm:97, kg:96, lr:96, ma: simulateMultiAgent(2,88,95,98) }
-        ], win:"小鳥天堂", quinella:"小鳥天堂+白富金剛", kgDesc:"小鳥天堂全球短途馬中心度高", mmDesc:"小鳥天堂賽道空拍靈活", lrDesc:"邏輯迴歸：頂尖條件", maDesc:"多智能體：全體共識" },
-        { name: "第8場 · 第三班1400米草地", time: "16:20", horses: [
-            { name:"喜蓮勤威", draw:1, qimen:93, data:64, odds:88, track:85, pedigree:82, pace:80, ground:80, distance:85, trainerJock:90, injury:"無", stable:"游達榮：麥道朗騎", total:82.8, mm:87, kg:89, lr:89, ma: simulateMultiAgent(1,88,93,94) }
-        ], win:"喜蓮勤威", quinella:"喜蓮勤威+友望仁", kgDesc:"喜蓮勤威－麥道朗－游達榮三角", mmDesc:"喜蓮勤威肌肉線條流暢", lrDesc:"邏輯迴歸：一檔+麥道朗", maDesc:"多智能體：檔位智能體滿分" },
-        { name: "第9場 · 富衛保險女皇盃 (一級賽) · 2000米", time: "16:55", horses: [
-            { name:"同工之妙", draw:2, qimen:93, data:80, odds:85, track:88, pedigree:85, pace:88, ground:88, distance:95, trainerJock:95, injury:"無", stable:"賈伯華：紀仁安", total:86.9, mm:91, kg:92, lr:90, ma: simulateMultiAgent(2,85,93,85) },
-            { name:"浪漫勇士", draw:5, qimen:78, data:68, odds:98, track:95, pedigree:98, pace:95, ground:95, distance:95, trainerJock:95, injury:"無", stable:"沈集成：麥道朗", total:83.9, mm:93, kg:96, lr:94, ma: simulateMultiAgent(5,98,78,94) }
-        ], win:"同工之妙", quinella:"同工之妙+球星", kgDesc:"浪漫勇士知識圖譜衛冕冠軍", mmDesc:"浪漫勇士情緒模型極度專注", lrDesc:"邏輯迴歸：賠率極熱", maDesc:"多智能體：浪漫勇士獲賠率智能體高分" },
-        { name: "第10場 · 第三班1600米草地", time: "17:35", horses: [
-            { name:"金源千帥", draw:1, qimen:90, data:82, odds:70, track:80, pedigree:70, pace:72, ground:70, distance:75, trainerJock:80, injury:"無", stable:"賀賢：潘明輝騎", total:81.9, mm:83, kg:82, lr:82, ma: simulateMultiAgent(1,70,90,76) }
-        ], win:"金源千帥", quinella:"金源千帥+紫荆拼搏", kgDesc:"金源千帥一檔優勢", mmDesc:"金源千帥體型保持", lrDesc:"邏輯迴歸：內檔+輕磅", maDesc:"多智能體：檔位智能體給出高分" },
-        { name: "第11場 · 第二班1400米草地", time: "18:10", horses: [
-            { name:"時時歡聲", draw:2, qimen:95, data:90, odds:98, track:95, pedigree:96, pace:94, ground:94, distance:95, trainerJock:96, injury:"無", stable:"告東尼：潘頓騎", total:93.9, mm:98, kg:97, lr:98, ma: simulateMultiAgent(2,98,95,98) }
-        ], win:"時時歡聲", quinella:"時時歡聲+翠金主", kgDesc:"時時歡聲在告東尼－潘頓網絡核心", mmDesc:"時時歡聲肌肉指數9.8", lrDesc:"邏輯迴歸：最高分", maDesc:"多智能體：全票通過，完美協作" }
-    ];
-    // 合併完整資料
-    const fullRaces = [...racesData.slice(0,5), ...extraRaces];
 
-    // 渲染賽事卡片並計算凱利值
+    // 動態生成賽事卡片
     const container = document.getElementById('races-container');
-    let globalKellySum = 0;
-    let globalRiskLevel = "低";
-
-    fullRaces.forEach((race, idx) => {
-        // 取得頭馬 (綜合分最高) 用於凱利計算
-        const topHorse = race.horses.reduce((a,b) => (a.total > b.total ? a : b), race.horses[0]);
-        const winProb = topHorse.total / 100;  // 綜合分作為勝率估計
-        const oddsVal = topHorse.odds;
-        const kellyF = kellyFraction(winProb, oddsVal);
-        const suggestedBet = (kellyF * 1000).toFixed(0); // 假設總資金1000單位
-        let riskClass = "";
-        let riskText = "";
-        if (kellyF <= 0.05) { riskClass = "risk-low"; riskText = "低風險"; }
-        else if (kellyF <= 0.12) { riskClass = "risk-medium"; riskText = "中風險"; }
-        else if (kellyF <= 0.20) { riskClass = "risk-high"; riskText = "高風險"; }
-        else { riskClass = "risk-extreme"; riskText = "極高風險"; }
-        
-        // 累加全局風險
-        globalKellySum += kellyF;
-        
-        let tableHtml = `<div class="data-table-wrapper"><table class="data-table"><thead><tr>
+    races.forEach((race, idx) => {
+        let tableHtml = `<div class="table-wrapper"><table class="data-table"><thead><tr>
             <th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th>
-            <th>路程</th><th>騎練</th><th>傷患</th><th>馬房部署</th><th>多模態</th><th>知識圖譜</th><th>邏輯迴歸</th><th>多智能體</th><th>綜合分</th><th>進度</th>
+            <th>路程</th><th>騎練</th><th>傷患</th><th>馬房部署</th><th>多模態</th><th>知識圖譜</th><th>邏輯迴歸</th><th>綜合分</th><th>進度</th>
         </tr></thead><tbody>`;
         race.horses.forEach((h, i) => {
-            const rankStar = i === 0 ? "★1" : (i === 1 ? "★2" : (i === 2 ? "★3" : "★4"));
+            const star = i===0 ? "★1" : (i===1 ? "★2" : (i===2 ? "★3" : "★4"));
             tableHtml += `<tr style="${i===0?'background:#2c412a;':''}">
-                <td>${rankStar}</td>
+                <td>${star}</td>
                 <td style="font-weight:bold;color:#ffdd99;">${h.name}</td>
                 <td>${h.draw}</td><td>${h.qimen}</td><td>${h.data}</td>
-                <td>${h.odds}<span style="font-size:0.65rem;">模</span></td>
-                <td>${h.track}<span style="font-size:0.65rem;">模</span></td>
-                <td>${h.pedigree}<span style="font-size:0.65rem;">模</span></td>
-                <td>${h.pace}<span style="font-size:0.65rem;">模</span></td>
-                <td>${h.ground}<span style="font-size:0.65rem;">模</span></td>
-                <td>${h.distance}<span style="font-size:0.65rem;">模</span></td>
-                <td>${h.trainerJock}<span style="font-size:0.65rem;">模</span></td>
+                <td>${h.odds}<span class="sim-mark">模</span></td>
+                <td>${h.track}<span class="sim-mark">模</span></td>
+                <td>${h.pedigree}<span class="sim-mark">模</span></td>
+                <td>${h.pace}<span class="sim-mark">模</span></td>
+                <td>${h.ground}<span class="sim-mark">模</span></td>
+                <td>${h.distance}<span class="sim-mark">模</span></td>
+                <td>${h.trainerJock}<span class="sim-mark">模</span></td>
                 <td>${h.injury}</td>
                 <td>${h.stable}</td>
                 <td class="mm-score">${h.mm}</td>
                 <td class="kg-score">${h.kg}</td>
                 <td class="lr-score">${h.lr}</td>
-                <td class="ma-score">${h.ma}</td>
                 <td><strong>${h.total}</strong><div class="progress-bar"><div class="progress-fill" style="width:${h.total}%"></div></div></td>
                 <td>${i===0?'↑':(i===1?'↗':'平')}</td>
             </tr>`;
         });
         tableHtml += `</tbody></table></div>
-        <div class="bet-slip"><strong>💰 投注建議：獨贏@${race.win}，連贏 ${race.quinella}，四連環首四匹精選 | 成本$130</strong></div>
-        <div class="risk-box">
-            <div>📐 <strong>凱利公式風險控制</strong> (頭馬: ${topHorse.name})</div>
-            <div>勝率估算: ${(winProb*100).toFixed(1)}% | 賠率: ${oddsVal}倍</div>
-            <div>凱利建議比例: <span class="kelly-value">${(kellyF*100).toFixed(1)}%</span></div>
-            <div>建議投注額 (資金1000): $${suggestedBet}</div>
-            <div>風險等級: <span class="${riskClass}">${riskText}</span></div>
-            <div style="font-size:0.7rem;">*凱利公式 f = (p*b - q)/b，限制最大25%資金</div>
-        </div>
+        <div class="bet-slip"><strong>💰 投注建議：獨贏 @ ${race.win}，連贏 ${race.quinella}，四連環首四匹精選 | 成本 $130</strong></div>
         <div class="kg-box">
-            <strong>🧠 知識圖譜派：</strong> ${race.kgDesc}<br>
-            <strong>📸 多模態融合：</strong> ${race.mmDesc}<br>
-            <strong>📐 條件邏輯迴歸：</strong> ${race.lrDesc}<br>
-            <strong>🤝 多智能體協作：</strong> ${race.maDesc}
+            <strong>🧠 多模態融合：</strong> 分析馬匹體態、賽道影像、情緒 → 分數越高越佳。<br>
+            <strong>📚 知識圖譜：</strong> 基於騎練血統關係網絡 PageRank 評分。<br>
+            <strong>📐 條件邏輯迴歸：</strong> 檔位+賠率+騎師條件勝率轉換分數。<br>
+            <strong>🐎 行為模式摘要：</strong> ${race.desc}
         </div>`;
         const card = document.createElement('div');
-        card.className = 'section-card';
-        card.innerHTML = `<div class="section-title" style="font-size:1.3rem;">🏇 ${race.name} <span style="font-size:0.9rem; background:#2a3a2f; padding:0.2rem 0.8rem; border-radius:40px;">${race.time}</span></div>${tableHtml}`;
+        card.className = 'race-card';
+        card.innerHTML = `<div class="race-title">🏇 ${race.name} <span class="race-time">${race.time}</span></div>${tableHtml}`;
         container.appendChild(card);
     });
 
-    // 全局風險面板更新
-    const avgKelly = globalKellySum / fullRaces.length;
-    let globalRiskClass = "";
-    if (avgKelly <= 0.05) globalRiskClass = "risk-low";
-    else if (avgKelly <= 0.10) globalRiskClass = "risk-medium";
-    else if (avgKelly <= 0.18) globalRiskClass = "risk-high";
-    else globalRiskClass = "risk-extreme";
-    document.getElementById('globalRiskInfo').innerHTML = `
-        <div style="display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:space-between;">
-            <div>📊 全日平均凱利比例: <strong class="${globalRiskClass}">${(avgKelly*100).toFixed(1)}%</strong></div>
-            <div>🎲 全體風險水平: <strong class="${globalRiskClass}">${globalRiskClass === "risk-low" ? "低風險 — 可適度加注" : (globalRiskClass === "risk-medium" ? "中風險 — 跟隨凱利建議" : (globalRiskClass === "risk-high" ? "高風險 — 縮減注碼" : "極高風險 — 建議觀望"))}</strong></div>
-            <div>💡 策略提示: 建議單場投注不超過總資金5%，凱利比例超過15%時應謹慎。</div>
-        </div>
-    `;
-
-    // 賽後驗證模組 (保持原有功能)
+    // 賽後驗證工具 (三四重彩)
     function buildResultInputs() {
         const div = document.getElementById('resultInputs');
         div.innerHTML = '';
-        fullRaces.forEach((race, idx) => {
+        races.forEach((race, i) => {
             const row = document.createElement('div');
             row.className = 'race-result-row';
-            row.innerHTML = `
-                <span class="race-name">${race.name}</span>
-                <input type="text" placeholder="頭馬" id="r${idx}_1">
-                <input type="text" placeholder="二馬" id="r${idx}_2">
-                <input type="text" placeholder="三馬" id="r${idx}_3">
-                <input type="text" placeholder="四馬" id="r${idx}_4">
-            `;
+            row.innerHTML = `<span class="race-name">${race.name}</span>
+                <input type="text" placeholder="頭馬" id="r${i}_1">
+                <input type="text" placeholder="二馬" id="r${i}_2">
+                <input type="text" placeholder="三馬" id="r${i}_3">
+                <input type="text" placeholder="四馬" id="r${i}_4">`;
             div.appendChild(row);
         });
     }
     buildResultInputs();
 
-    function getPredictedTripleQuartet() {
-        const predictedTriple = [], predictedQuartet = [];
-        fullRaces.forEach(race => {
+    function getPredicted() {
+        const triple = [], quartet = [];
+        races.forEach(race => {
             const names = race.horses.map(h => h.name);
-            predictedTriple.push(names.slice(0, 3));
-            predictedQuartet.push(names.slice(0, 4));
+            triple.push(names.slice(0,3));
+            quartet.push(names.slice(0,4));
         });
-        return { predictedTriple, predictedQuartet };
+        return { triple, quartet };
     }
 
-    function computeAndSave() {
-        const { predictedTriple, predictedQuartet } = getPredictedTripleQuartet();
-        let tripleHitCount = 0, quartetHitCount = 0, validRaces = 0;
-        for (let i = 0; i < fullRaces.length; i++) {
+    function computeHitRate() {
+        const { triple: predTriple, quartet: predQuartet } = getPredicted();
+        let tripleHit=0, quartetHit=0, valid=0;
+        for(let i=0; i<races.length; i++) {
             const first = document.getElementById(`r${i}_1`)?.value.trim();
             const second = document.getElementById(`r${i}_2`)?.value.trim();
             const third = document.getElementById(`r${i}_3`)?.value.trim();
             const fourth = document.getElementById(`r${i}_4`)?.value.trim();
-            if (!first || !second || !third) continue;
-            validRaces++;
-            const actualTriple = [first, second, third];
-            const actualQuartet = [first, second, third, fourth];
-            const predTriple = predictedTriple[i];
-            const predQuartet = predictedQuartet[i];
-            if (actualTriple[0] === predTriple[0] && actualTriple[1] === predTriple[1] && actualTriple[2] === predTriple[2]) tripleHitCount++;
-            if (fourth && actualQuartet[0] === predQuartet[0] && actualQuartet[1] === predQuartet[1] && actualQuartet[2] === predQuartet[2] && actualQuartet[3] === predQuartet[3]) quartetHitCount++;
+            if(!first || !second || !third) continue;
+            valid++;
+            if(first===predTriple[i][0] && second===predTriple[i][1] && third===predTriple[i][2]) tripleHit++;
+            if(fourth && first===predQuartet[i][0] && second===predQuartet[i][1] && third===predQuartet[i][2] && fourth===predQuartet[i][3]) quartetHit++;
         }
-        const tripleRate = validRaces === 0 ? 0 : (tripleHitCount / validRaces * 100);
-        const quartetRate = validRaces === 0 ? 0 : (quartetHitCount / validRaces * 100);
-        const todayData = {
-            date: new Date().toISOString().slice(0,10),
-            tripleHit: tripleHitCount, tripleTotal: validRaces,
-            quartetHit: quartetHitCount, quartetTotal: validRaces,
-            tripleRate: tripleRate.toFixed(2), quartetRate: quartetRate.toFixed(2)
-        };
-        let history = localStorage.getItem('SHTSN_hitrate_history');
-        let historyArr = history ? JSON.parse(history) : [];
-        historyArr.push(todayData);
-        localStorage.setItem('SHTSN_hitrate_history', JSON.stringify(historyArr));
-        displayStats(historyArr);
-    }
-
-    function displayStats(historyArr) {
-        let last = historyArr[historyArr.length-1];
-        let totalTripleHit=0, totalTripleTotal=0, totalQuartetHit=0, totalQuartetTotal=0;
-        historyArr.forEach(day => {
-            totalTripleHit += day.tripleHit;
-            totalTripleTotal += day.tripleTotal;
-            totalQuartetHit += day.quartetHit;
-            totalQuartetTotal += day.quartetTotal;
-        });
-        const overallTripleRate = totalTripleTotal===0 ? 0 : (totalTripleHit/totalTripleTotal*100);
-        const overallQuartetRate = totalQuartetTotal===0 ? 0 : (totalQuartetHit/totalQuartetTotal*100);
+        const tripleRate = valid? (tripleHit/valid*100).toFixed(1) : 0;
+        const quartetRate = valid? (quartetHit/valid*100).toFixed(1) : 0;
+        const today = { date: new Date().toISOString().slice(0,10), tripleHit, tripleTotal:valid, quartetHit, quartetTotal:valid, tripleRate, quartetRate };
+        let history = localStorage.getItem('SHTSN_hitrate');
+        let arr = history ? JSON.parse(history) : [];
+        arr.push(today);
+        localStorage.setItem('SHTSN_hitrate', JSON.stringify(arr));
+        let totalTriple=0, totalTripleCnt=0, totalQuartet=0, totalQuartetCnt=0;
+        arr.forEach(d=>{ totalTriple+=d.tripleHit; totalTripleCnt+=d.tripleTotal; totalQuartet+=d.quartetHit; totalQuartetCnt+=d.quartetTotal; });
+        const overallTriple = totalTripleCnt ? (totalTriple/totalTripleCnt*100).toFixed(1) : 0;
+        const overallQuartet = totalQuartetCnt ? (totalQuartet/totalQuartetCnt*100).toFixed(1) : 0;
         document.getElementById('hitRateDisplay').innerHTML = `
-            <div style="display:flex; gap:2rem; flex-wrap:wrap;">
-                <div>📅 本日 (${last?.date || '今天'})：<br>三重彩命中 ${last?.tripleHit||0}/${last?.tripleTotal||0} (${last?.tripleRate||0}%)<br>四重彩命中 ${last?.quartetHit||0}/${last?.quartetTotal||0} (${last?.quartetRate||0}%)</div>
-                <div>📈 累積命中率 (所有紀錄)：<br>三重彩 <span class="hit-rate">${overallTripleRate.toFixed(2)}%</span> (${totalTripleHit}/${totalTripleTotal})<br>四重彩 <span class="hit-rate">${overallQuartetRate.toFixed(2)}%</span> (${totalQuartetHit}/${totalQuartetTotal})</div>
-            </div>
-            <div style="margin-top:12px;">💾 資料已儲存至瀏覽器，清除網站資料將會遺失歷史紀錄。</div>
-        `;
+            <div>📅 本日 (${today.date})：三重彩 ${tripleHit}/${valid} (${tripleRate}%) &nbsp; 四重彩 ${quartetHit}/${valid} (${quartetRate}%)</div>
+            <div>📈 累積 (${arr.length}天)：三重彩 ${overallTriple}% (${totalTriple}/${totalTripleCnt}) &nbsp; 四重彩 ${overallQuartet}% (${totalQuartet}/${totalQuartetCnt})</div>
+            <div style="margin-top:8px;">💾 已儲存至瀏覽器</div>`;
     }
-    const stored = localStorage.getItem('SHTSN_hitrate_history');
-    if (stored) displayStats(JSON.parse(stored));
-    else document.getElementById('hitRateDisplay').innerHTML = '<div>尚未有任何賽後驗證紀錄，請輸入真實賽果並點擊計算。</div>';
-    document.getElementById('calcHitRateBtn').addEventListener('click', computeAndSave);
+    document.getElementById('calcHitRateBtn').addEventListener('click', computeHitRate);
+    const stored = localStorage.getItem('SHTSN_hitrate');
+    if(stored) {
+        const arr = JSON.parse(stored);
+        const last = arr[arr.length-1];
+        document.getElementById('hitRateDisplay').innerHTML = `<div>上次紀錄 (${last.date})：三重彩 ${last.tripleHit}/${last.tripleTotal} (${last.tripleRate}%) &nbsp; 四重彩 ${last.quartetHit}/${last.quartetTotal} (${last.quartetRate}%)<br>輸入今日賽果後再按計算</div>`;
+    } else {
+        document.getElementById('hitRateDisplay').innerHTML = '<div>尚未有任何紀錄，請輸入真實賽果並按計算。</div>';
+    }
 </script>
 </body>
 </html>
