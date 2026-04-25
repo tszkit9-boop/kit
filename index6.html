@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN 賽馬預測 | 沙田2026-04-26 | 複雜性·風險·賠率錯覺</title>
+    <title>SHTSN 賽馬預測 | 沙田2026-04-26 | 複雜性·風險·賠率錯覺·走位記錄分析</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
         body{background:#0f1a0f;color:#e6f0e6;font-family:system-ui;padding:1rem;}
@@ -21,34 +21,36 @@
         .bet-slip,.opt-box{background:#111d15;border-radius:14px;padding:0.5rem;margin-top:0.6rem;font-size:0.75rem;}
         .risk-box{background:#1c2418;border-radius:14px;padding:0.5rem;margin-top:0.6rem;border-left:3px solid #ffb347;font-size:0.75rem;}
         .illusion-box{background:#1c2418;border-radius:14px;padding:0.5rem;margin-top:0.5rem;border-left:3px solid #e67e22;font-size:0.7rem;}
+        .position-box{background:#1c2418;border-radius:14px;padding:0.5rem;margin-top:0.5rem;border-left:3px solid #6fcf97;font-size:0.7rem;}
         .risk-low{color:#6fcf97;}
         .risk-medium{color:#ffb347;}
         .risk-high{color:#e67e22;}
         .risk-extreme{color:#e74c3c;}
         .illusion-warning{color:#ff8888;}
         .illusion-opportunity{color:#88ff88;}
-        .verify-panel{background:#132015;border-radius:24px;padding:1rem;margin-top:1.5rem;border:1px solid #ffb347;}
+        .verify-panel, .position-panel{background:#132015;border-radius:24px;padding:1rem;margin-top:1.5rem;border:1px solid #ffb347;}
         .result-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:8px;background:#1e2e23;padding:4px 10px;border-radius:30px;}
         .result-row .rname{width:120px;font-size:0.75rem;font-weight:bold;}
         .result-row input{background:#2a3a2f;border:1px solid #ffb347;padding:3px 6px;border-radius:20px;color:#fff;width:75px;font-size:0.7rem;}
+        .result-row select{background:#2a3a2f;border:1px solid #ffb347;padding:3px 6px;border-radius:20px;color:#fff;font-size:0.7rem;}
         .calc-btn{background:#ffb347;color:#1a2a1f;font-weight:bold;border:none;padding:5px 14px;border-radius:30px;cursor:pointer;margin:10px 5px 0 0;font-size:0.75rem;}
         .stats-box{background:#0a130e;border-radius:18px;padding:0.8rem;margin-top:0.8rem;font-size:0.75rem;}
         .hit-rate{color:#ffb347;font-weight:bold;}
         .info-box{background:#162218;border-radius:14px;padding:0.5rem;margin-top:0.5rem;font-size:0.7rem;}
         .disclaimer{font-size:0.65rem;text-align:center;margin-top:1.5rem;padding:0.5rem;background:#0a130e;border-radius:16px;color:#aaa;}
-        @media(max-width:700px){.result-row .rname{width:90px;}.result-row input{width:65px;}}
+        @media(max-width:700px){.result-row .rname{width:90px;}.result-row input,.result-row select{width:70px;}}
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="header"><h1>🕸️ SHTSN V8.8 + 複雜性·風險·賠率錯覺</h1><div class="sub">沙田日賽 2026-04-26 | 每場風險評估 + 賠率與系統評分偏差警示</div></div>
+    <div class="header"><h1>🕸️ SHTSN V8.8 + 走位記錄分析</h1><div class="sub">沙田日賽 2026-04-26 | 每場風險+賠率錯覺+走位統計 | 賽後自動驗證三四重彩</div></div>
 
     <!-- 資料部簡短回顧 -->
     <div class="card"><div class="race-title">📊 過往戰績</div><div class="info-box">近10場精選池入圍率100% | 獨贏命中55.6% | 四重彩2場完美命中</div></div>
 
     <div id="racesContainer"></div>
 
-    <!-- 賽後驗證 -->
+    <!-- 賽後驗證面板 (三四重彩) -->
     <div class="verify-panel">
         <div class="race-title" style="font-size:1rem;">📈 賽後驗證 (三重彩/四重彩)</div>
         <div id="resultInputs"></div>
@@ -57,7 +59,18 @@
         <div id="stats" class="stats-box"></div>
         <div class="info-box">輸入每場真實頭馬、二馬、三馬、四馬 (名稱需與表格一致) → 比對順序。</div>
     </div>
-    <div class="disclaimer">模擬數據僅供研究 | 紀錄儲存於瀏覽器 | 風險評估及賠率錯覺僅供參考</div>
+
+    <!-- 新增走位記錄分析面板 -->
+    <div class="position-panel">
+        <div class="race-title" style="font-size:1rem;">🏃 走位記錄分析 (賽後填寫)</div>
+        <div id="positionInputs"></div>
+        <button class="calc-btn" id="savePositionBtn">儲存走位紀錄</button>
+        <button class="calc-btn" id="resetPositionBtn">清除走位紀錄</button>
+        <div id="positionStats" class="stats-box"></div>
+        <div class="info-box">💡 記錄頭馬走位類型及勝負距離，系統將統計全日走位分佈，並提供未來預測調整建議。</div>
+    </div>
+
+    <div class="disclaimer">模擬數據僅供研究 | 所有紀錄儲存於瀏覽器 | 風險評估及走位分析僅供參考</div>
 </div>
 
 <script>
@@ -76,7 +89,7 @@
         { name:"第11場 二班1400米", time:"18:45", horses:[{n:"時時歡聲",t:94.5,odds:7.0},{n:"章金主",t:88.2,odds:5.1},{n:"極上紗璠",t:86.0,odds:4.2},{n:"千帆駒",t:81.5,odds:8.0}], win:"時時歡聲", qin:"時時歡聲+章金主", flow:"時時歡聲 -28%重飛", conf:"極高" }
     ];
 
-    // 計算每場複雜性指數及風險等級
+    // ========== 複雜性、風險、賠率錯覺函數 (與之前相同) ==========
     function calcComplexityAndRisk(race) {
         const horses = race.horses;
         const n = horses.length;
@@ -103,21 +116,17 @@
         return { complexity: Math.round(complexity), riskLevel, advice };
     }
 
-    // 新增：賠率錯覺分析（比較綜合分排名與賠率排名）
     function findOddsIllusion(race) {
         const horses = race.horses;
-        // 按綜合分排名 (分數高者排名1)
         let sortedByTotal = [...horses].sort((a,b)=>b.t - a.t);
         let totalRank = {};
         sortedByTotal.forEach((h,idx) => totalRank[h.n] = idx+1);
-        // 按賠率排名 (賠率低者排名1)
         let sortedByOdds = [...horses].sort((a,b)=> (a.odds||999) - (b.odds||999));
         let oddsRank = {};
         sortedByOdds.forEach((h,idx) => oddsRank[h.n] = idx+1);
-        
         let illusions = [];
         for (let h of horses) {
-            let diff = oddsRank[h.n] - totalRank[h.n]; // 正值：市場比系統看好；負值：市場比系統看淡
+            let diff = oddsRank[h.n] - totalRank[h.n];
             if (Math.abs(diff) >= 2) {
                 let type = diff > 0 ? "overrated" : "underrated";
                 illusions.push({ name: h.n, diff, type, oddsRank: oddsRank[h.n], totalRank: totalRank[h.n] });
@@ -126,18 +135,7 @@
         return illusions;
     }
 
-    // 獲取預測順序
-    function getPredOrders() {
-        let triple=[], quartet=[];
-        for(let r of races){
-            let sorted = [...r.horses].sort((a,b)=>b.t - a.t);
-            triple.push(sorted.slice(0,3).map(h=>h.n));
-            quartet.push(sorted.slice(0,4).map(h=>h.n));
-        }
-        return {triple, quartet};
-    }
-
-    // 渲染賽事卡片 (包含複雜性、風險、賠率錯覺)
+    // 渲染賽事卡片
     function renderRaces(){
         const container = document.getElementById('racesContainer');
         container.innerHTML = '';
@@ -149,7 +147,6 @@
             else if (risk.riskLevel === "中風險") riskClass = "risk-medium";
             else if (risk.riskLevel === "高風險") riskClass = "risk-high";
             else riskClass = "risk-extreme";
-            
             let illusionHtml = '';
             if (illusions.length > 0) {
                 illusionHtml = '<div class="illusion-box"><strong>🔍 賠率錯覺：</strong><br>';
@@ -162,9 +159,8 @@
                 });
                 illusionHtml += '</div>';
             } else {
-                illusionHtml = '<div class="illusion-box">✅ 無明顯賠率錯覺，市場與系統判斷一致。</div>';
+                illusionHtml = '<div class="illusion-box">✅ 無明顯賠率錯覺。</div>';
             }
-            
             let card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
@@ -175,7 +171,7 @@
                     <div class="money-flow">💰 ${r.flow}</div>
                 </div>
                 <div class="risk-box">
-                    <span>📊 複雜性指數: ${risk.complexity} / 100</span> &nbsp;|&nbsp;
+                    <span>📊 複雜性: ${risk.complexity}</span> &nbsp;|&nbsp;
                     <span class="${riskClass}">⚠️ 風險: ${risk.riskLevel}</span><br>
                     <span>💡 建議: ${risk.advice}</span>
                 </div>
@@ -187,8 +183,18 @@
         }
     }
 
-    // 建立輸入框
-    function buildInputs(){
+    // ========== 三四重彩驗證功能 ==========
+    function getPredOrders() {
+        let triple=[], quartet=[];
+        for(let r of races){
+            let sorted = [...r.horses].sort((a,b)=>b.t - a.t);
+            triple.push(sorted.slice(0,3).map(h=>h.n));
+            quartet.push(sorted.slice(0,4).map(h=>h.n));
+        }
+        return {triple, quartet};
+    }
+
+    function buildResultInputs(){
         const div = document.getElementById('resultInputs');
         div.innerHTML = '';
         races.forEach((r,i)=>{
@@ -203,8 +209,7 @@
         });
     }
 
-    // 計算並儲存命中率
-    function compute(){
+    function computeHitRate(){
         let {triple:predTriple, quartet:predQuartet} = getPredOrders();
         let tripleHit=0, quartetHit=0, valid=0;
         for(let i=0;i<races.length;i++){
@@ -243,20 +248,119 @@
     }
 
     function resetHistory(){
-        if(confirm('清除所有紀錄？')){ localStorage.removeItem('SHTSN_hitrate'); displayStats([]); }
+        if(confirm('清除所有三四重彩紀錄？')){ localStorage.removeItem('SHTSN_hitrate'); displayStats([]); }
     }
 
-    function loadHistory(){
+    // ========== 走位記錄分析功能 ==========
+    function buildPositionInputs(){
+        const div = document.getElementById('positionInputs');
+        div.innerHTML = '';
+        races.forEach((r,i)=>{
+            let row = document.createElement('div');
+            row.className = 'result-row';
+            row.innerHTML = `
+                <span class="rname">${r.name}</span>
+                <select id="pos_${i}">
+                    <option value="">選擇走位</option>
+                    <option value="領放">領放 (全程領先)</option>
+                    <option value="跟前">跟前 (早段2-4位)</option>
+                    <option value="居中">居中 (中段5-8位)</option>
+                    <option value="後上">後上 (尾列追趕)</option>
+                </select>
+                <input type="text" id="margin_${i}" placeholder="勝負距離, e.g. 1.5" style="width:70px;">
+            `;
+            div.appendChild(row);
+        });
+        loadPositionData();
+    }
+
+    function loadPositionData(){
+        let saved = localStorage.getItem('SHTSN_position');
+        if(saved){
+            let data = JSON.parse(saved);
+            for(let i=0;i<races.length;i++){
+                let posSelect = document.getElementById(`pos_${i}`);
+                let marginInput = document.getElementById(`margin_${i}`);
+                if(posSelect && data[i]){
+                    if(data[i].position) posSelect.value = data[i].position;
+                    if(data[i].margin) marginInput.value = data[i].margin;
+                }
+            }
+        }
+        updatePositionStats();
+    }
+
+    function savePositionData(){
+        let positionData = [];
+        for(let i=0;i<races.length;i++){
+            let posSelect = document.getElementById(`pos_${i}`);
+            let marginInput = document.getElementById(`margin_${i}`);
+            positionData.push({
+                position: posSelect ? posSelect.value : '',
+                margin: marginInput ? marginInput.value : ''
+            });
+        }
+        localStorage.setItem('SHTSN_position', JSON.stringify(positionData));
+        updatePositionStats();
+        alert('走位紀錄已儲存！');
+    }
+
+    function resetPositionData(){
+        if(confirm('清除所有走位紀錄？')){
+            localStorage.removeItem('SHTSN_position');
+            for(let i=0;i<races.length;i++){
+                let posSelect = document.getElementById(`pos_${i}`);
+                let marginInput = document.getElementById(`margin_${i}`);
+                if(posSelect) posSelect.value = '';
+                if(marginInput) marginInput.value = '';
+            }
+            updatePositionStats();
+        }
+    }
+
+    function updatePositionStats(){
+        let saved = localStorage.getItem('SHTSN_position');
+        let counts = { 領放:0, 跟前:0, 居中:0, 後上:0 };
+        let total = 0;
+        if(saved){
+            let data = JSON.parse(saved);
+            for(let d of data){
+                if(d.position && counts.hasOwnProperty(d.position)){
+                    counts[d.position]++;
+                    total++;
+                }
+            }
+        }
+        let advice = '';
+        if(total>0){
+            let maxCount = Math.max(counts.領放, counts.跟前, counts.居中, counts.後上);
+            let dominant = Object.keys(counts).find(k => counts[k] === maxCount);
+            advice = `📊 全日走位統計：領放 ${counts.領放} | 跟前 ${counts.跟前} | 居中 ${counts.居中} | 後上 ${counts.後上}<br>`;
+            if(dominant === '領放') advice += '🔍 觀察：領放馬勝出率最高，未來可優先考慮具前速且檔位內側的馬匹。';
+            else if(dominant === '跟前') advice += '🔍 觀察：跟前馬表現最佳，建議留意早段能佔據好位且末段有衝刺力的馬。';
+            else if(dominant === '居中') advice += '🔍 觀察：居中馬較多勝出，步速可能偏快，後上馬受惠。';
+            else advice += '🔍 觀察：後上馬勝出率高，未來可留意步速預測偏快的賽事，優先選擇後勁強馬匹。';
+        } else {
+            advice = '尚未有走位紀錄，請填寫後儲存。';
+        }
+        document.getElementById('positionStats').innerHTML = `<div>${advice}</div>`;
+    }
+
+    // 初始化載入歷史
+    function loadHistoryStats(){
         let stored = localStorage.getItem('SHTSN_hitrate');
         if(stored) displayStats(JSON.parse(stored));
         else document.getElementById('stats').innerHTML = '<div>尚未有紀錄，輸入賽果後按計算。</div>';
     }
 
     renderRaces();
-    buildInputs();
-    loadHistory();
-    document.getElementById('calcBtn').addEventListener('click', compute);
+    buildResultInputs();
+    buildPositionInputs();
+    loadHistoryStats();
+    document.getElementById('calcBtn').addEventListener('click', computeHitRate);
     document.getElementById('resetBtn').addEventListener('click', resetHistory);
+    document.getElementById('savePositionBtn').addEventListener('click', savePositionData);
+    document.getElementById('resetPositionBtn').addEventListener('click', resetPositionData);
 </script>
 </body>
 </html>
