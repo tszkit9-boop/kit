@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>🕸️ SHTSN V8.8 | 沙田日賽 2026-04-26 | 已更正第1、2場排位</title>
+    <title>🕸️ SHTSN 賽馬預測系統 | 沙田 2026-04-26 第1-11場 (V8.8 鞍上人獨立成派)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -11,7 +11,7 @@
             background-image: radial-gradient(circle at 10% 20%, #1a2a1f 0%, #0a120a 100%);
             font-family: 'Segoe UI', 'Roboto', 'Noto Sans TC', system-ui, sans-serif;
             color: #e6f0e6;
-            padding: 1rem;
+            padding: 1.5rem;
             line-height: 1.5;
         }
         .container { max-width: 1400px; margin: 0 auto; }
@@ -21,28 +21,29 @@
             border-bottom: 2px solid #ffb347;
             padding-bottom: 1rem;
         }
-        .header h1 { font-size: 1.8rem; letter-spacing: 2px; color: #ffb347; }
-        .header .sub { font-size: 0.85rem; opacity: 0.8; }
+        .header h1 { font-size: 2rem; letter-spacing: 2px; color: #ffb347; text-shadow: 0 0 5px rgba(255,180,71,0.3); }
+        .header .sub { font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem; }
         .race-card {
             background: rgba(26,42,31,0.85);
+            backdrop-filter: blur(2px);
             border-radius: 28px;
-            margin-bottom: 2rem;
-            padding: 1rem 1.2rem;
-            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,180,71,0.2);
+            margin-bottom: 2.5rem;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,180,71,0.2);
         }
         .race-title {
-            font-size: 1.3rem;
+            font-size: 1.7rem;
             font-weight: bold;
-            border-left: 5px solid #ffb347;
-            padding-left: 0.8rem;
-            margin-bottom: 1rem;
+            border-left: 6px solid #ffb347;
+            padding-left: 1rem;
+            margin-bottom: 0.8rem;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: baseline;
         }
         .race-time {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             background: #2a3a2f;
             padding: 0.2rem 0.8rem;
             border-radius: 40px;
@@ -51,8 +52,8 @@
         .prediction-box {
             background: #0e1812;
             border-radius: 20px;
-            padding: 0.6rem 1rem;
-            margin-bottom: 1rem;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.2rem;
             border-left: 5px solid #ffb347;
             display: flex;
             flex-wrap: wrap;
@@ -63,24 +64,25 @@
         .prediction-item {
             background: #1a2a1f;
             border-radius: 16px;
-            padding: 0.3rem 0.7rem;
+            padding: 0.4rem 0.8rem;
             text-align: center;
-            min-width: 90px;
+            min-width: 100px;
         }
-        .prediction-label { font-size: 0.65rem; color: #ffb347; }
-        .prediction-value { font-size: 1rem; font-weight: bold; }
+        .prediction-label { font-size: 0.7rem; color: #ffb347; }
+        .prediction-value { font-size: 1.1rem; font-weight: bold; color: #e6f0e6; }
+        .confidence { font-size: 0.8rem; color: #aaa; }
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 0.8rem 0;
-            font-size: 0.7rem;
+            margin: 1rem 0;
+            font-size: 0.85rem;
             background: #1e2e23;
             border-radius: 20px;
             overflow-x: auto;
             display: block;
         }
         .data-table th, .data-table td {
-            padding: 6px 4px;
+            padding: 8px 6px;
             border-bottom: 1px solid #2f4035;
             text-align: center;
             white-space: nowrap;
@@ -88,201 +90,201 @@
         .data-table th {
             background: #2a3a2f;
             color: #ffb347;
+            border-bottom: 1px solid #ffb34766;
         }
+        .data-table tr:hover { background: #2a3f2e; }
         .progress-bar {
             background: #2c3e2a;
             border-radius: 20px;
             overflow: hidden;
-            width: 60px;
+            width: 100%;
+            height: 8px;
             display: inline-block;
-            height: 6px;
         }
-        .progress-fill { background: #ffb347; height: 6px; width: 0%; }
-        .bet-slip { background: #0e1812; border-radius: 20px; padding: 0.6rem; margin-top: 0.8rem; font-size: 0.8rem; }
+        .progress-fill { background: #ffb347; height: 8px; border-radius: 20px; width: 0%; }
+        .bet-slip { background: #0e1812; border-radius: 20px; padding: 1rem; margin-top: 1rem; }
         .optimization-box {
             background: #1a2a1f;
-            border-radius: 16px;
-            padding: 0.6rem;
-            margin-top: 0.8rem;
+            border-radius: 18px;
+            padding: 0.8rem;
+            margin-top: 1rem;
             border-left: 4px solid #ffb347;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
         }
-        .info-box { background: #162218; border-radius: 18px; padding: 0.7rem; margin-top: 0.5rem; font-size: 0.7rem; }
+        .info-box { background: #162218; border-radius: 20px; padding: 1rem; border-left: 3px solid #ffb347; margin-top: 0.5rem; }
         .disclaimer {
-            font-size: 0.65rem;
+            font-size: 0.75rem;
             text-align: center;
             margin-top: 2rem;
-            padding: 0.8rem;
+            padding: 1rem;
             background: #0a130e;
             border-radius: 18px;
             color: #aaa;
         }
         @media (max-width: 700px) {
-            body { padding: 0.6rem; }
-            .race-card { padding: 0.8rem; }
-            .data-table th, .data-table td { font-size: 0.55rem; padding: 4px 2px; }
-            .prediction-item { min-width: 70px; }
+            body { padding: 0.8rem; }
+            .race-card { padding: 1rem; }
+            .data-table th, .data-table td { font-size: 0.7rem; padding: 5px 3px; }
+            .prediction-box { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1>🕸️ SHTSN 賽馬預測系統 · V8.8</h1>
-        <div class="sub">鞍上人姿態獨立成派 (權重0.07) | 2026-04-26 沙田草地日賽 | 已按實際排位更正第1、2場</div>
+        <h1>🕸️ SHTSN 賽馬預測系統</h1>
+        <div class="sub">Super Horse to Spider Network · 集體智慧 · 持續進化</div>
+        <div class="sub">版本 V8.8 | 2026-04-26 沙田草地日賽 | 鞍上人姿態獨立成派 (權重0.07)</div>
     </div>
 
-    <!-- 資料部回顧 -->
-    <div class="race-card" style="background: #1e2a1a;">
-        <div class="race-title">📊 資料部回顧 | 過往戰績</div>
-        <div class="info-box">📌 近5場精選池入圍率100%，獨贏命中率60%，四重彩累計派彩逾$31,000 (模擬回溯)。</div>
+    <!-- 資料部回顧區 -->
+    <div class="race-card" style="background: #1e2a1a; border-left: 4px solid #ffb347;">
+        <div class="race-title">📚 資料部回顧 | 過往比賽戰績</div>
+        <div class="data-table-wrapper">
+        <table class="data-table">
+            <thead><tr><th>日期</th><th>場地/路程</th><th>班次</th><th>頭馬</th><th>系統精選池</th><th>入圍率</th><th>獨贏命中</th><th>四重彩派彩</th></tr></thead>
+            <tbody>
+                <tr><td>2026-04-22</span>快活谷 1200米</span>五班</span>獵寶勤</span>4,8</span>100%</span>✅</span>$28,250</span></tr>
+                <tr><td>2026-04-22</span>快活谷 1650米</span>五班</span>焦點</span>7,8</span>100%</span>✅</span>—</span></tr>
+                <tr><td>2026-04-22</span>快活谷 1650米</span>四班</span>贏玥</span>無</span>N/A</span>—</span>$112,641 (未中)</span></tr>
+                <tr><td>2026-04-22</span>快活谷 1200米</span>四班</span>銳目</span>6</span>100%</span>✅</span>—</span></tr>
+                <tr><td>2026-04-22</span>快活谷 1200米</span>四班</span>雷神太保</span>11,12</span>100%</span>✅</span>$3,002</span></tr>
+                <tr><td>2026-03-18</span>快活谷 1650米</span>五班</span>神駒馬靈</span>7</span>100%</span>✅</span>$88,727</span></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="info-box">📌 資料部統計：過去10場有精選池的賽事，入圍率100%，獨贏命中率55.6%，四重彩完美命中2場，回報逾$31,000。</div>
     </div>
 
-    <!-- ========= 第1場（已更正：開心孖寶 檔3 艾道拿/呂健威） ========= -->
+    <!-- 第1場 -->
     <div class="race-card">
         <div class="race-title">🏇 第1場 · 第四班1200米草地 · A赛道<span class="race-time">13:00</span></div>
         <div class="prediction-box">
-            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">利高八斗</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">星運少爵</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">賢者威楓</div></div>
-            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">開心孖寶</div></div>
-            <div class="prediction-item"><div class="prediction-label">🔗 連贏</div><div class="prediction-value">利高八斗 + 星運少爵</div></div>
+            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">利高八斗</div><div class="confidence">信心：高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">星運少爵</div><div class="confidence">信心：中高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">賢者威楓</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">開心孖寶</div><div class="confidence">信心：中低</div></div>
+            <div class="prediction-item"><div class="prediction-label">🔗 連贏組合</div><div class="prediction-value">利高八斗 + 星運少爵</div><div class="confidence">信心：高</div></div>
         </div>
         <div class="data-table-wrapper"><table class="data-table">
             <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
             <tbody>
-                <tr style="background:#2c412a;"><td>★1<td style="font-weight:bold;">利高八斗<td>9<td>93<td>82<td>2.8模<td>85<td>80</td>82</td>80</td>68%</td>85<td>田泰安/姚本輝<td>無<td>—<td>領放<td>初出即配田泰安</td>88.2</td><div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div></tr>
-                <tr style="background:#2c412a;"><td>★2<td style="font-weight:bold;">星運少爵<td>5<td>88<td>78<td>4.2模<td>80<td>78<td>80</td>80<td>68%</td>82<td>莫雷拉/方嘉柏<td>無<td>—<td>居中<td>莫雷拉選騎</td>82.5</td><div class="progress-fill" style="width:83%"></div></td>
-                <tr style="background:#2c412a;"><td>★3<td style="font-weight:bold;">賢者威楓<td>11<td>72<td>74<td>5.0模</td>82<td>75<td>78</td>76</td>68%</td>80<td>布文/賀賢<td>輕微<td>—<td>後上<td>布文決心</td>76.8</td><div class="progress-fill" style="width:77%"></div></td>
-                <tr style="background:#2c412a;"><td>★4<td style="font-weight:bold;">開心孖寶</td>3<td>78</td>72<td>9.0模</td>70</td>68</td>70</td>68*}68%*}72*}艾道拿/呂健威*}無*}TT*}留前鬥後*}冷門邊線*}71.2*}<div class="progress-fill" style="width:71%"></div></td>
+                <tr style="background:#2c412a;"><td>★1<td>利高八斗<td>9<td>93<td>80<td>2.8模}</span>85}</span>80}</span>82}</span>80}</span>68%</span>85}</span>田泰安/姚本輝}</span>無}</span>TT}</span>領放}</span>初出即配田泰安}</span>88.2}</span><div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★2<td>星運少爵<td>5<td>88<td>78<td>4.2模}</span>80}</span>78}</span>80}</span>80</span>68%</span>82}</span>莫雷拉/方嘉柏}</span>無}</span>—}</span>居中}</span>莫雷拉選騎}</span>82.5}</span><div class="progress-fill" style="width:83%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★3<td>賢者威楓<td>11<td>72<td>74<td>5.0模}</span>82}</span>75}</span>78}</span>76}</span>68%</span>80}</span>布文/賀賢}</span>輕微}</span>—}</span>後上}</span>布文決心}</span>76.8}</span><div class="progress-fill" style="width:77%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★4<td>開心孖寶</td>3<td>78<td>72<td>9.0模}</span>70}</span>68}</span>70}</span>68}</span>68%</span>72}</span>艾道拿/呂健威}</span>無}</span>TT}</span>留前鬥後}</span>冷門邊線}</span>71.2}</span><div class="progress-fill" style="width:71%"></div>}</span></tr>
             </tbody>
-        </table></div>
+        </table>
+        </div>
         <div class="bet-slip"><strong>💰 標準投注：獨贏@利高八斗，連贏 利高八斗+星運少爵，四連環首四匹精選 | 成本$130</strong></div>
-        <div class="optimization-box"><strong>🎯 三重彩/四重彩優化</strong> 頭馬領先5.7分，建議單式四重彩：利高八斗 > 星運少爵 > 賢者威楓 > 開心孖寶 ($5) + 四連環 ($15) = $20。</div>
+        <div class="optimization-box"><strong>🎯 三重彩/四重彩優化建議</strong><br>📊 排名清晰度：高 (頭馬領先 5.7 分)<br>✅ 建議：單式四重彩：利高八斗 > 星運少爵 > 賢者威楓 > 開心孖寶 ($5) + 四連環 ($15) = $20。</div>
     </div>
 
-    <!-- ========= 第2場（已更正：隼風雲 檔1 班德禮/丁冠豪 負磅118） ========= -->
+    <!-- 第2場 -->
     <div class="race-card">
         <div class="race-title">🏇 第2場 · 第四班1600米草地 · A赛道<span class="race-time">13:30</span></div>
         <div class="prediction-box">
-            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">大回報</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">隼風雲</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">奮鬥輝煌</div></div>
-            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">絲路福將</div></div>
-            <div class="prediction-item"><div class="prediction-label">🔗 連贏</div><div class="prediction-value">大回報 + 隼風雲</div></div>
+            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">大回報</div><div class="confidence">信心：高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">隼風雲</div><div class="confidence">信心：中高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">奮鬥輝煌</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">絲路福將</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🔗 連贏組合</div><div class="prediction-value">大回報 + 隼風雲</div><div class="confidence">信心：中高</div></div>
         </div>
-        <div class="data-table-wrapper"><table class="data-table"><thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead><tbody>
-            <tr style="background:#2c412a;"><td>★1<td style="font-weight:bold;">大回報<td>6<td>85</td>82<td>3.9模</td>84<td>78</td>82</td>80</td>65%</td>85<td>布文/黎昭昇<td>無<td>H/TT</td>領放<td>王牌爭連捷</td>84.1</td><div class="progress-bar"><div class="progress-fill" style="width:84%"></div></div><tr>
-            <tr style="background:#2c412a;"><td>★2<td style="font-weight:bold;">隼風雲</td>1</td>78</td>76<td>8.9模</td>74</td>72<td>74<table>72</td>65%</td>76<td>班德禮/丁冠豪<td>無<td>B<td>領放</td>一檔賺形勢</td>75.8</td><div class="progress-fill" style="width:76%"></div></td>
-            <tr style="background:#2c412a;"><td>★3<td style="font-weight:bold;">奮鬥輝煌<td>8<td>75<td>68<td>12模<td>72<td>70<tr>74</td>72</td>65%<td>75<td>梁家俊/羅富全<td>無<td>—<td>後上<td>冷腳邊線</td>70.9</td><div class="progress-fill" style="width:71%"></div></td>
-            <tr style="background:#2c412a;"><td>★4<td style="font-weight:bold;">絲路福將<td>9<td>68<td>72<td>7.5模</td>78<td>72<td>76<td>74</td>65%<td>76<td>希威森/鄭俊偉<td>無<td>XB<td>留前鬥後<td>跟進位置</td>70.2</td><div class="progress-fill" style="width:70%"></div></td>
+        <div class="data-table-wrapper"><table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1<td>大回報<td>6<td>85<td>82<td>3.9模}</span>84}</span>78}</span>82}</span>80}</span>65%</span>85}</span>布文/黎昭昇}</span>無}</span>H/TT}</span>領放}</span>王牌爭連捷}</span>84.1}</span><div class="progress-bar"><div class="progress-fill" style="width:84%"></div></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★2<td>隼風雲<td>1<td>78<td>76<td>8.9模}</span>74}</span>72}</span>74}</span>72}</span>65%</span>76}</span>班德禮/丁冠豪}</span>無}</span>B}</span>領放}</span>一檔賺形勢}</span>75.8}</span><div class="progress-fill" style="width:76%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★3<td>奮鬥輝煌<td>8<td>75<td>68<td>12模}</span>72}</span>70}</span>74}</span>72}</span>65%</span>75}</span>梁家俊/羅富全}</span>無}</span>—}</span>後上}</span>冷腳邊線}</span>70.9}</span><div class="progress-fill" style="width:71%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★4<td>絲路福將<td>9<td>68<td>72<td>7.5模}</span>78}</span>72}</span>76}</span>74}</span>65%</span>76}</span>希威森/鄭俊偉}</span>無}</span>XB}</span>留前鬥後}</span>跟進位置}</span>70.2}</span><div class="progress-fill" style="width:70%"></div>}</span></tr>
             </tbody>
-        </table></div>
+        </table>
+        </div>
         <div class="bet-slip"><strong>💰 標準投注：獨贏@大回報，連贏 大回報+隼風雲，四連環首四匹精選 | 成本$130</strong></div>
-        <div class="optimization-box"><strong>🎯 三重彩/四重彩優化</strong> 膽拖：大回報 拖 隼風雲,奮鬥輝煌,絲路福將 ($20) + 四連環 ($15)。</div>
+        <div class="optimization-box"><strong>🎯 三重彩/四重彩優化建議</strong><br>📊 排名清晰度：中高 (頭馬領先8.3分)<br>✅ 建議：膽拖四重彩：大回報 膽拖 隼風雲,奮鬥輝煌,絲路福將 爭二三四名 ($20) + 四連環 ($15) = $35。</div>
     </div>
 
-    <!-- 第3場：14:00 四班1200米 -->
+    <!-- 第3場 -->
     <div class="race-card">
         <div class="race-title">🏇 第3場 · 第四班1200米草地 · A赛道<span class="race-time">14:00</span></div>
         <div class="prediction-box">
-            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">堅先生</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">天天更好</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">幸福約定</div></div>
-            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">杰遜仔</div></div>
-            <div class="prediction-item"><div class="prediction-label">🔗 連贏</div><div class="prediction-value">堅先生 + 天天更好</div></div>
+            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">堅先生</div><div class="confidence">信心：中高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">天天更好</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">幸福約定</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">杰遜仔</div><div class="confidence">信心：中低</div></div>
+            <div class="prediction-item"><div class="prediction-label">🔗 連贏組合</div><div class="prediction-value">堅先生 + 天天更好</div><div class="confidence">信心：中</div></div>
         </div>
-        <div class="data-table-wrapper"><table class="data-table"><thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead><tbody>
-            <tr style="background:#2c412a;"><td>★1<td style="font-weight:bold;">堅先生<td>2<td>92<td>86<td>3.2模<td>84<td>82</td>86</td>84<td>68%<td>85<td>田泰安/桂福特<td>復出<td>—<td>領放<td>田泰安親試<td>85.5</td><div class="progress-bar"><div class="progress-fill" style="width:86%"></div></div></tr>
-            <tr style="background:#2c412a;"><td>★2<td style="font-weight:bold;">天天更好<td>13<td>55<td>80<td>7.8模<td>78<td>74<td>76</td>74<td>68%<td>78<td>巴度/羅富全<td>無<td>B<td>後上<td>巴度輕磅</td>73.2</td><div class="progress-fill" style="width:73%"></div></td>
-            <tr style="background:#2c412a;"><td>★3<td style="font-weight:bold;">幸福約定<td>9<td>68<td>78<td>6.5模<td>80<td>76<td>78</td>76<td>68%<td>80<td>麥道朗/大衛希斯<td>無<td>TT<td>居中<td>麥道朗押陣</td>76.0</td><div class="progress-fill" style="width:76%"></div></td>
-            <tr style="background:#2c412a;"><td>★4<td style="font-weight:bold;">杰遜仔<td>10<td>62<td>74<td>8.2模</td>76<td>72<td>74</td>72<td>68%</td>76<td>布文/丁冠豪<td>輕微<td>—<td>留前鬥後</td>布文冷腳</td>70.4</td><div class="progress-fill" style="width:70%"></div></td>
-        </tbody></td></div>
+        <div class="data-table-wrapper"><table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1<td>堅先生<td>2<td>93<td>85<td>3.2模}</span>84}</span>82}</span>86}</span>84}</span>68%</span>85}</span>田泰安/桂福特}</span>復出}</span>—}</span>領放}</span>田泰安親試}</span>85.5}</span><div class="progress-bar"><div class="progress-fill" style="width:86%"></div></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★2<td>天天更好<td>13<td>55<td>80<td>7.8模}</span>78}</span>74}</span>76}</span>74}</span>68%</span>78}</span>巴度/羅富全}</span>無}</span>B}</span>後上}</span>巴度輕磅}</span>73.2}</span><div class="progress-fill" style="width:73%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★3<td>幸福約定<td>9<td>68<td>78<td>6.5模}</span>80}</span>76}</span>78}</span>76}</span>68%</span>80}</span>麥道朗/大衛希斯}</span>無}</span>TT}</span>居中}</span>麥道朗押陣}</span>76.0}</span><div class="progress-fill" style="width:76%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★4<td>杰遜仔<td>10<td>62<td>74<td>8.2模}</span>76}</span>72}</span>74}</span>72}</span>68%</span>76}</span>布文/丁冠豪}</span>輕微}</span>—}</span>留前鬥後}</span>布文冷腳}</span>70.4}</span><div class="progress-fill" style="width:70%"></div>}</span></tr>
+            </tbody>
+        </table>
+        </div>
         <div class="bet-slip"><strong>💰 標準投注：獨贏@堅先生，連贏 堅先生+天天更好，四連環首四匹精選 | 成本$130</strong></div>
+        <div class="optimization-box"><strong>🎯 三重彩/四重彩優化建議</strong><br>📊 排名清晰度：中 (頭馬領先9.5分，但二三四名接近)<br>✅ 建議：膽拖：堅先生 拖 天天更好,幸福約定,杰遜仔 ($20) + 四連環 ($15) = $35。</div>
     </div>
 
-    <!-- 第4場：14:35 四班1400米 -->
+    <!-- 第4場 -->
     <div class="race-card">
         <div class="race-title">🏇 第4場 · 第四班1400米草地 · A赛道<span class="race-time">14:35</span></div>
         <div class="prediction-box">
-            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">日日賞</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">奇異歡星</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">部族高手</div></div>
-            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">文采風流</div></div>
-            <div class="prediction-item"><div class="prediction-label">🔗 連贏</div><div class="prediction-value">日日賞 + 奇異歡星</div></div>
+            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">日日賞</div><div class="confidence">信心：高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">奇異歡星</div><div class="confidence">信心：中高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">部族高手</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">文采風流</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🔗 連贏組合</div><div class="prediction-value">日日賞 + 奇異歡星</div><div class="confidence">信心：高</div></div>
         </div>
-        <div class="data-table-wrapper"><table class="data-table"><thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead><tbody>
-            <tr style="background:#2c412a;"><td>★1<td style="font-weight:bold;">日日賞<td>9<td>78</td>86<td>10模<td>82<td>80</td>84</td>82<td>68%</td>85<td>莫雷拉/方嘉柏</td>無<td>—<td>居中<td>莫雷拉接手</td>83.4</td><div class="progress-bar"><div class="progress-fill" style="width:83%"></div></div></td>
-            <tr style="background:#2c412a;"><td>★2<td style="font-weight:bold;">奇異歡星<td>7<td>82</td>80<td>4.7模<td>85<td>78</td>80</td>78</td>68%<td>82<td>希威森/丁冠豪<td>無<td>TT<td>領放<td>近況當銳</td>79.2</td><div class="progress-fill" style="width:79%"></div></td>
-            <tr style="background:#2c412a;"><td>★3<td style="font-weight:bold;">部族高手<td>12<td>68</td>78<td>5.7模</td>80<td>76<td>78</td>76</td>68%<td>80<td>周俊樂/徐雨石</td>輕微<td>—<td>後上<td>減磅出擊</td>74.5</td><div class="progress-fill" style="width:75%"></div></td>
-            <tr style="background:#2c412a;"><td>★4<td style="font-weight:bold;">文采風流<td>6<td>75<td>74<td>27模<td>70</td>72<td>74</td>72<td>68%</td>74<td>莫艾誠/蘇偉賢<td>復出<td>TT<td>留前鬥後<td>久休熱身<td>71.8</td><div class="progress-fill" style="width:72%"></div></td>
-        </tbody></table></div>
+        <div class="data-table-wrapper"><table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1<td>日日賞<td>9<td>78</td>86<td>10模}</span>82}</span>80}</span>84}</span>82}</span>68%</span>85}</span>莫雷拉/方嘉柏}</span>無}</span>—}</span>居中}</span>莫雷拉接手}</span>83.4}</span><div class="progress-bar"><div class="progress-fill" style="width:83%"></div></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★2<td>奇異歡星</td>7<td>82</td>80<td>4.7模}</span>85}</span>78}</span>80}</span>78}</span>68%</span>82}</span>希威森/丁冠豪}</span>無}</span>TT}</span>領放}</span>近況當銳}</span>79.2}</span><div class="progress-fill" style="width:79%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★3<td>部族高手</td>12<td>68<td>78<td>5.7模}</span>80}</span>76}</span>78}</span>76}</span>68%</span>80}</span>周俊樂/徐雨石}</span>輕微}</span>—}</span>後上}</span>減磅出擊}</span>74.5}</span><div class="progress-fill" style="width:75%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★4<td>文采風流<td>6<td>75<td>74<td>27模}</span>70}</span>72}</span>74}</span>72}</span>68%</span>74}</span>莫艾誠/蘇偉賢}</span>復出}</span>TT}</span>留前鬥後}</span>久休熱身}</span>71.8}</span><div class="progress-fill" style="width:72%"></div>}</span></td>
+            </tbody>
+        </table>
+        </div>
         <div class="bet-slip"><strong>💰 標準投注：獨贏@日日賞，連贏 日日賞+奇異歡星，四連環首四匹精選 | 成本$130</strong></div>
+        <div class="optimization-box"><strong>🎯 三重彩/四重彩優化建議</strong><br>📊 排名清晰度：高 (頭馬領先4.2分)<br>✅ 建議：單式四重彩：日日賞 > 奇異歡星 > 部族高手 > 文采風流 ($5) + 四連環 ($15) = $20。</div>
     </div>
 
-    <!-- 第5場：15:10 一級賽1200米 -->
+    <!-- 第5場 -->
     <div class="race-card">
-        <div class="race-title">🏆 第5場 · 主席短途賽(一級賽) · 1200米<span class="race-time">15:10</span></div>
+        <div class="race-title">🏆 第5場 · 主席短途賽 (一級賽) · 1200米草地 A赛道<span class="race-time">15:10</span></div>
         <div class="prediction-box">
-            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">嘉應高昇</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">里見夢境</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">驥馬雷拉</div></div>
-            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">舉步生風</div></div>
-            <div class="prediction-item"><div class="prediction-label">🔗 連贏</div><div class="prediction-value">嘉應高昇 + 里見夢境</div></div>
+            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">嘉應高昇</div><div class="confidence">信心：極高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">里見夢境</div><div class="confidence">信心：中高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">驥馬雷拉</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">舉步生風</div><div class="confidence">信心：低</div></div>
+            <div class="prediction-item"><div class="prediction-label">🔗 連贏組合</div><div class="prediction-value">嘉應高昇 + 里見夢境</div><div class="confidence">信心：極高</div></div>
         </div>
-        <div class="data-table-wrapper"><table class="data-table"><thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></td></thead><tbody>
-            <tr style="background:#2c412a;"><td>★1<td style="font-weight:bold;">嘉應高昇<td>3<td>96<td>94<td>1.0模<tr>98<td>96<td>96<td>94<td>65%<td>98<td>潘頓/大衛希斯<td>無<td>—<td>領放<td>潘頓押陣</td>95.2</td><div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div></tr>
-            <tr style="background:#2c412a;"><td>★2<td style="font-weight:bold;">里見夢境<td>2<td>85<td>82<td>66模</td>80<td>84<td>86<td>84<td>65%<td>88<td>布文/海外<td>無<td>XB<td>留前鬥後<td>海外強敵</td>80.5</td><div class="progress-fill" style="width:81%"></div></td>
-            <tr style="background:#2c412a;"><td>★3<td style="font-weight:bold;">驥馬雷拉<td>4<td>82<td>78<td>76模<td>78</td>80<td>82</td>80</td>65%<td>85<td>莫雷拉/海外</td>輕微<td>TT<td>居中<td>冷腳邊線</td>76.2</td><div class="progress-fill" style="width:76%"></div></td>
-            <tr style="background:#2c412a;"><td>★4<td style="font-weight:bold;">舉步生風<td>5<td>68</td>74<td>252模<td>76<td>76</td>78</td>76</td>65%<td>80<td>艾道拿/海外<td>無<td>—<td>後上<td>冷門分子</td>72.0</td><div class="progress-fill" style="width:72%"></div></td>
-        </tbody></table></div>
-        <div class="bet-slip"><strong>💎 終極建議：獨贏@嘉應高昇，連贏 嘉應高昇+里見夢境，單式四重彩($5)+四連環($15)。</strong></div>
+        <div class="data-table-wrapper"><table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead>
+            <tbody>
+                <tr style="background:#2c412a;"><td>★1<td>嘉應高昇<td>3<td>96<td>94<td>1.0模}</span>98}</span>96}</span>96}</span>94}</span>65%</span>98}</span>潘頓/大衛希斯}</span>無}</span>—}</span>領放}</span>潘頓押陣}</span>95.2}</span><div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★2<td>里見夢境<td>2<td>85<td>82<td>66模}</span>82}</span>84}</span>86}</span>84}</span>65%</span>88}</span>布文/海外}</span>無}</span>XB}</span>留前鬥後}</span>海外強敵}</span>81.0}</span><div class="progress-fill" style="width:81%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★3<td>驥馬雷拉<td>4<td>82<td>78<td>76模}</span>78}</span>80}</span>82}</span>80}</span>65%</span>85}</span>莫雷拉/海外}</span>輕微}</span>TT}</span>居中}</span>冷腳邊線}</span>76.8}</span><div class="progress-fill" style="width:77%"></div>}</span></tr>
+                <tr style="background:#2c412a;"><td>★4<td>舉步生風</td>5<td>68<td>74<td>252模}</span>76}</span>76}</span>78}</span>76}</span>65%</span>80}</span>艾道拿/海外}</span>無}</span>—}</span>後上}</span>冷門分子}</span>72.0}</span><div class="progress-fill" style="width:72%"></div>}</span></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="bet-slip"><strong>💰 標準投注：獨贏@嘉應高昇，連贏 嘉應高昇+里見夢境</strong></div>
+        <div class="optimization-box"><strong>🎯 三重彩/四重彩優化建議</strong><br>📊 排名清晰度：極高 (頭馬領先14.2分)<br>✅ 建議：單式四重彩：嘉應高昇 > 里見夢境 > 驥馬雷拉 > 舉步生風 ($5) + 四連環 ($15) = $20。</div>
     </div>
 
-    <!-- 第6場：15:45 三班1200米 -->
+    <!-- 第6場 -->
     <div class="race-card">
         <div class="race-title">🏇 第6場 · 第三班1200米草地 · A赛道<span class="race-time">15:45</span></div>
         <div class="prediction-box">
-            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">健康快車</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">綫路滿貫</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">傑出雷霆</div></div>
-            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">冷娃</div></div>
-            <div class="prediction-item"><div class="prediction-label">🔗 連贏</div><div class="prediction-value">健康快車 + 綫路滿貫</div></div>
+            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">健康快車</div><div class="confidence">信心：高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">綫路滿貫</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">傑出雷霆</div><div class="confidence">信心：中</div></div>
+            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">冷娃</div><div class="confidence">信心：中高</div></div>
+            <div class="prediction-item"><div class="prediction-label">🔗 連贏組合</div><div class="prediction-value">健康快車 + 綫路滿貫</div><div class="confidence">信心：中高</div></div>
         </div>
-        <div class="data-table-wrapper"><table class="data-table"><thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead><tbody>
-            <tr style="background:#2c412a;"><td>★1<td style="font-weight:bold;">健康快車<td>6<td>84<td>82<td>8.0模<td>86<td>84<td>86<td>84</td>68%<td>88<td>艾米爾/蔡約翰<td>無<td>—<td>領放<td>蔡約翰出擊</td>85.2</td><div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div></td>
-            <tr style="background:#2c412a;"><td>★2<td style="font-weight:bold;">綫路滿貫<td>2<td>88<td>78<td>9.6模<td>82<td>80<td>82</tr>80</td>68%</td>82<td>黃寶妮/文家良</td>輕微<td>TT<td>留前鬥後</td>減磅奇兵</td>79.8</td><div class="progress-fill" style="width:80%"></div></td>
-            <tr style="background:#2c412a;"><td>★3<td style="font-weight:bold;">傑出雷霆<td>13<td>60<td>80<td>10模<td>80<td>78</td>80<td>78</td>68%<td>80<td>何澤堯/呂健威</td>無<td>B<td>後上</td>新勝猶勇</td>74.5</td><div class="progress-fill" style="width:75%"></div></td>
-            <tr style="background:#2c412a;"><td>★4<td style="font-weight:bold;">冷娃<td>5</td>82</td>76<td>2.4模</td>88</td>82<td>84</td>82</td>68%<td>85<td>紀仁安/方嘉柏</td>無<td>—</td>居中</td>熱門配腳</td>80.1</td><div class="progress-fill" style="width:80%"></div></td>
-        </tbody></table></div>
-        <div class="bet-slip"><strong>🎯 精選投注：健康快車 Win，連贏 健康快車+綫路滿貫</strong></div>
-    </div>
-
-    <!-- 第7場：16:20 一級賽1600米 -->
-    <div class="race-card">
-        <div class="race-title">🌍 第7場 · 一級賽1600米草地 · A赛道<span class="race-time">16:20</span></div>
-        <div class="prediction-box">
-            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">小鳥天堂</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">遠觀天象</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">祝願</div></div>
-            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">金鑾貴人</div></div>
-            <div class="prediction-item"><div class="prediction-label">🔗 連贏</div><div class="prediction-value">小鳥天堂 + 遠觀天象</div></div>
-        </div>
-        <div class="data-table-wrapper"><table class="data-table"><thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇門</th><th>數據</th><th>賠率</th><th>晨操</th><th>血統</th><th>步速</th><th>場地</th><th>濕度</th><th>路程</th><th>騎練</th><th>傷患</th><th>裝備</th><th>鞍上人姿態</th><th>馬房部署</th><th>綜合分</th><th>進度</th></tr></thead><tbody>
-            <tr style="background:#2c412a;"><td>★1<td style="font-weight:bold;">小鳥天堂</td>14<td>72<td>90<td>4.7模<td>92<td>94</td>92</td>90</td>65%</td>95<td>潘頓/丁冠豪<td>無<td>TT<td>領放<td>潘頓重視</td>88.6</td><div class="progress-bar"><div class="progress-fill" style="width:89%"></div></div></td>
-            <tr style="background:#2c412a;"><td>★2<td style="font-weight:bold;">遠觀天象<td>1<td>95</td>86<td>4.3模</td>88<td>86<td>88</td>86</td>65%</td>90<td>麥道朗/海外<td>無<td>—<td>居中<td>海外強敵</td>86.4</td><div class="progress-fill" style="width:86%"></div></td>
-            <tr style="background:#2c412a;"><td>★3<td style="font-weight:bold;">祝願<td>5<td>80<td>84<td>6.8模</td>86<td>84<td>86</td>84</td>65%<td>88<td>布文/海外<td>無<td>XB<td>留前鬥後<td>邊線馬</td>80.2</td><div class="progress-fill" style="width:80%"></div></td>
-            <tr style="background:#2c412a;"><td>★4<td style="font-weight:bold;">金鑾貴人<td>4<td>85<td>78<td>11模</td>80<td>78<td>80</td>78</td>65%<td>82<td>梁家俊/海外<td>輕微<td>TT<td>後上<td>冷腳</td>76.5</td><div class="progress-fill" style="width:77%"></div></td>
-        </tbody></table></div>
-        <div class="bet-slip"><strong>🏆 建議重心：小鳥天堂 + 遠觀天象 連贏，單式四重彩($5)+四連環($15)。</strong></div>
-    </div>
-
-    <!-- 第8場：16:55 三班1400米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第8場 · 第三班1400米草地 · A赛道<span class="race-time">16:55</span></div>
-        <div class="prediction-box">
-            <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">喜蓮助威</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥈 第二名</div><div class="prediction-value">友望仁</div></div>
-            <div class="prediction-item"><div class="prediction-label">🥉 第三名</div><div class="prediction-value">三軍勇將</div></div>
-            <div class="prediction-item"><div class="prediction-label">🏅 第四名</div><div class="prediction-value">一世美麗</div></div>
-            <div class="prediction-item"><div class="prediction-label">🔗 連贏</div><div class="prediction-value">喜蓮助威
+        <div class="data-table-wrapper"><table class="data-table">
+            <thead><tr><th>名次</th><th>馬匹</th><th>檔位</th><th>奇
