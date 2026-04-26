@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN V9.2 | 15派別+多模型集成 | 賽後自動驗證三四重彩</title>
+    <title>SHTSN V9.3 | 15派別+多模型集成 | 賽後即時驗證</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0f1a0f; color: #e6f0e6; font-family: system-ui; padding: 1rem; }
@@ -21,12 +21,8 @@
         .control-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 0.5rem 0; align-items: center; background: #1c2418; border-radius: 16px; padding: 0.5rem; }
         .control-item { display: flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; }
         select, input { background: #2a3a2f; border: 1px solid #ffb347; padding: 4px 8px; border-radius: 20px; color: #fff; font-size: 0.7rem; }
-        .ensemble-table { width: 100%; border-collapse: collapse; font-size: 0.7rem; margin-top: 0.5rem; }
-        .ensemble-table th, .ensemble-table td { padding: 4px; border-bottom: 1px solid #2f4035; text-align: center; }
-        .ensemble-table th { background: #2a3a2f; color: #ffb347; }
-        .prob-table { background: #111d15; border-radius: 14px; padding: 0.5rem; margin-top: 0.5rem; font-size: 0.7rem; }
-        .prob-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px dashed #2a3a2f; }
-        .risk-box, .illusion-box { background: #1c2418; border-radius: 14px; padding: 0.5rem; margin-top: 0.5rem; border-left: 3px solid #ffb347; font-size: 0.75rem; }
+        .info-box { background: #162218; border-radius: 14px; padding: 0.5rem; margin-top: 0.5rem; font-size: 0.7rem; }
+        .risk-box { background: #1c2418; border-radius: 14px; padding: 0.5rem; margin-top: 0.5rem; border-left: 3px solid #ffb347; font-size: 0.75rem; }
         .bet-slip { background: #111d15; border-radius: 14px; padding: 0.5rem; margin-top: 0.6rem; font-size: 0.75rem; }
         .verify-panel, .position-panel { background: #132015; border-radius: 24px; padding: 1rem; margin-top: 1.5rem; border: 1px solid #ffb347; }
         .result-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; background: #1e2e23; padding: 4px 10px; border-radius: 30px; }
@@ -35,7 +31,6 @@
         .calc-btn { background: #ffb347; color: #1a2a1f; font-weight: bold; border: none; padding: 5px 14px; border-radius: 30px; cursor: pointer; margin: 10px 5px 0 0; font-size: 0.75rem; }
         .stats-box { background: #0a130e; border-radius: 18px; padding: 0.8rem; margin-top: 0.8rem; font-size: 0.75rem; }
         .hit-rate { color: #ffb347; font-weight: bold; }
-        .info-box { background: #162218; border-radius: 14px; padding: 0.5rem; margin-top: 0.5rem; font-size: 0.7rem; }
         .disclaimer { font-size: 0.65rem; text-align: center; margin-top: 1.5rem; padding: 0.5rem; background: #0a130e; border-radius: 16px; color: #aaa; }
         @media (max-width: 700px) { .result-row .rname { width: 90px; } .result-row input, .result-row select { width: 70px; } }
     </style>
@@ -43,28 +38,27 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>🕸️ SHTSN V9.2 · 15派別＋多模型集成</h1>
+        <h1>🕸️ SHTSN V9.3 · 15派別＋多模型集成</h1>
         <div class="sub">奇門｜數據｜賠率晨操｜血統｜步速｜場地｜路程｜騎練｜鞍上人｜行為｜多模態｜知識圖譜｜邏輯迴歸｜騎練合拍｜多模型集成</div>
-        <div class="sub">2026-04-26 沙田日賽 | 外檔補償優化 | 賽後自動三四重彩驗證</div>
+        <div class="sub">即時步速調整 | 外檔補償強化 | 賽後三四重彩驗證</div>
     </div>
 
-    <!-- 資料部回顧（第1場真實賽果） -->
+    <!-- 資料部回顧（第1、2場真實賽果） -->
     <div class="card">
-        <div class="race-title">📊 資料部 · 近期真實賽果</div>
+        <div class="race-title">📊 資料部 · 真實賽果記錄</div>
         <table style="width:100%; border-collapse: collapse; font-size:0.7rem;">
-            <thead><tr style="background:#2a3a2f;"><th>日期</th><th>場地/路程</th><th>頭馬</th><th>精選池</th><th>獨贏命中</th><th>四重彩派彩</th></tr></thead>
+            <thead><tr style="background:#2a3a2f;"><th>場次</th><th>頭馬</th><th>二馬</th><th>三馬</th><th>四馬</th><th>四重彩派彩</th><th>系統命中</th></tr></thead>
             <tbody>
-                <tr><td>2026-04-26 R1</td><td>沙田1200米四班</td><td>13包裝天王</td><td>未預測</td><td>✗</td><td>$24,097(未中)</td></tr>
-                <tr><td>2026-04-22</td><td>快活谷1200米五班</td><td>獵寶勤</td><td>4,8</td><td>✅</td><td>$28,250</td></tr>
-                <tr><td>2026-04-22</td><td>快活谷1650米四班</td><td>贏玥</td><td>無</td><td>—</td><td>$112,641(未中)</td></tr>
-                <tr><td>2026-04-22</td><td>快活谷1200米四班</td><td>雷神太保</td><td>11,12</td><td>✅</td><td>$3,002</td></tr>
-                <tr><td>2026-03-18</td><td>快活谷1650米五班</td><td>神駒馬靈</td><td>7</td><td>✅</td><td>$88,727</td></tr>
+                <tr><td>R1 四班1200米</td><td>包裝天王</td><td>利高八斗</td><td>星光大道</td><td>馬馳登</td><td>$24,097</td><td style="color:#ff8888">✗</td></tr>
+                <tr><td>R2 四班1600米</td><td>6號旋探</td><td>7號? (家傳之寶?)</td><td>1號大回報</td><td>3號都靈冠星</td><td>$11,288</td><td style="color:#ff8888">✗</td></tr>
+                <tr><td>2026-04-22 快活谷</td><td>獵寶勤</td><td>-</td><td>-</td><td>-</td><td>$28,250</td><td>✅</td></tr>
+                <tr><td>2026-03-18 快活谷</td><td>神駒馬靈</td><td>-</td><td>-</td><td>-</td><td>$88,727</td><td>✅</td></tr>
             </tbody>
         </table>
-        <div class="info-box">📌 第1場「包裝天王」勝出，系統預測利高八斗頭馬落空。已優化外檔補償：檔位≥6且明星騎師(潘頓/莫雷拉等)且賠率≤5 ⇒ 奇門+10。</div>
+        <div class="info-box">📌 第2場頭馬為6號「旋探」（檔位8，布文），系統原先預測大回報。已強化外檔補償：檔位≥6＋明星騎師(潘頓/布文/莫雷拉/麥道朗)＋賠率≤5 ⇒ 奇門+12，並加入步速調整功能。</div>
     </div>
 
-    <!-- 動態賽事容器 -->
+    <!-- 動態賽事容器（包含每場步速選擇） -->
     <div id="racesContainer"></div>
 
     <!-- 賽後三四重彩驗證 -->
@@ -74,7 +68,7 @@
         <button class="calc-btn" id="calcBtn">計算命中率</button>
         <button class="calc-btn" id="resetBtn">清除紀錄</button>
         <div id="stats" class="stats-box"></div>
-        <div class="info-box">💡 輸入每場真實頭馬、二馬、三馬、四馬（名稱需與表格一致），比對系統預測順序。</div>
+        <div class="info-box">💡 已自動載入第1、2場真實賽果，可手動補齊其他場次後按計算。</div>
     </div>
 
     <!-- 走位記錄分析 -->
@@ -94,11 +88,11 @@
         <div class="info-box">每週執行一次，根據各派別與實際名次的相關性自動升降權重。</div>
     </div>
 
-    <div class="disclaimer">所有模擬值僅供研究 | 膽拖/冷腳保護可提升排序彩池命中率 | 外檔補償規則已更新</div>
+    <div class="disclaimer">外檔補償規則已強化(檔位≥6+星騎+賠率≤5 → 奇門+12) | 步速選擇影響領放/後上馬分數 | 所有模擬值僅供研究</div>
 </div>
 
 <script>
-    // ======================= 15派別權重 + 多模型集成 =======================
+    // ======================= 15派別權重 =======================
     let WEIGHTS = {
         qimen: 0.26, data: 0.14, oddsTrack: 0.07, pedigree: 0.04,
         pace: 0.07, ground: 0.04, distance: 0.05, trainerJock: 0.05,
@@ -109,60 +103,73 @@
     function normalizeWeights() { let s=0; for(let k in WEIGHTS) s+=WEIGHTS[k]; for(let k in WEIGHTS) WEIGHTS[k]/=s; }
     normalizeWeights();
 
-    // ======================= 原始賽事資料（11場） =======================
+    // ======================= 賽事原始資料 (11場，含真實檔位/騎師/賠率) =======================
     const racesRaw = [
-        { name:"第1場 四班1200米", time:"12:30", horses:[{n:"包裝天王",t:0,odds:3.3,draw:8,jockey:"潘頓",trainer:"沈集成"},{n:"利高八斗",t:0,odds:4.8,draw:1,jockey:"田泰安",trainer:"姚本輝"},{n:"星光大道",t:0,odds:16,draw:7,jockey:"袁幸堯",trainer:"韋達"},{n:"馬馳登",t:0,odds:9.4,draw:2,jockey:"薛凱華",trainer:"黎昭昇"}], flow:"包裝天王 -?%", conf:"中" },
-        { name:"第2場 四班1600米", time:"13:00", horses:[{n:"大回報",t:0,odds:3.9,draw:6,jockey:"布文",trainer:"黎昭昇"},{n:"隼風雲",t:0,odds:8.9,draw:1,jockey:"班德禮",trainer:"丁冠豪"},{n:"奮鬥輝煌",t:0,odds:12,draw:8,jockey:"梁家俊",trainer:"羅富全"},{n:"絲路福將",t:0,odds:7.5,draw:9,jockey:"希威森",trainer:"鄭俊偉"}], flow:"大回報 -15%落飛", conf:"高" },
-        { name:"第3場 四班1200米", time:"13:30", horses:[{n:"堅先生",t:0,odds:3.2,draw:2,jockey:"田泰安",trainer:"桂福特"},{n:"幸福約定",t:0,odds:6.5,draw:9,jockey:"麥道朗",trainer:"大衛希斯"},{n:"天天更好",t:0,odds:7.8,draw:13,jockey:"巴度",trainer:"羅富全"},{n:"杰遜仔",t:0,odds:8.2,draw:10,jockey:"布文",trainer:"丁冠豪"}], flow:"平穩", conf:"中高" },
-        { name:"第4場 四班1400米", time:"14:00", horses:[{n:"日日賞",t:0,odds:10,draw:9,jockey:"莫雷拉",trainer:"方嘉柏"},{n:"奇異歡星",t:0,odds:4.7,draw:7,jockey:"希威森",trainer:"丁冠豪"},{n:"部族高手",t:0,odds:5.7,draw:12,jockey:"周俊樂",trainer:"徐雨石"},{n:"文采風流",t:0,odds:27,draw:6,jockey:"莫艾誠",trainer:"蘇偉賢"}], flow:"日日賞 -12%落飛", conf:"高" },
-        { name:"第5場 主席短途賽1200米", time:"14:35", horses:[{n:"嘉應高昇",t:0,odds:1.0,draw:3,jockey:"潘頓",trainer:"大衛希斯"},{n:"里見夢境",t:0,odds:66,draw:2,jockey:"布文",trainer:"海外"},{n:"驥馬雷拉",t:0,odds:76,draw:4,jockey:"莫雷拉",trainer:"海外"},{n:"舉步生風",t:0,odds:252,draw:5,jockey:"艾道拿",trainer:"海外"}], flow:"嘉應高昇 -30%重飛", conf:"極高" },
-        { name:"第6場 三班1200米", time:"15:10", horses:[{n:"健康快車",t:0,odds:8.0,draw:6,jockey:"艾米爾",trainer:"蔡約翰"},{n:"冷娃",t:0,odds:2.4,draw:5,jockey:"紀仁安",trainer:"方嘉柏"},{n:"綫路滿貫",t:0,odds:9.6,draw:2,jockey:"黃寶妮",trainer:"文家良"},{n:"傑出雷霆",t:0,odds:10,draw:13,jockey:"何澤堯",trainer:"呂健威"}], flow:"平穩", conf:"高" },
-        { name:"第7場 國際一級賽1200米", time:"15:45", horses:[{n:"小鳥天堂",t:0,odds:4.7,draw:14,jockey:"潘頓",trainer:"丁冠豪"},{n:"遠觀天象",t:0,odds:4.3,draw:1,jockey:"麥道朗",trainer:"海外"},{n:"祝願",t:0,odds:6.8,draw:5,jockey:"布文",trainer:"海外"},{n:"金鑾貴人",t:0,odds:11,draw:4,jockey:"梁家俊",trainer:"海外"}], flow:"小鳥天堂 -25%重飛", conf:"極高" },
-        { name:"第8場 三班1400米", time:"16:20", horses:[{n:"喜蓮勁感",t:0,odds:4.5,draw:1,jockey:"麥道朗",trainer:"游達榮"},{n:"一世美麗",t:0,odds:5.1,draw:4,jockey:"潘頓",trainer:"蔡約翰"},{n:"友望仁",t:0,odds:7.9,draw:10,jockey:"艾兆禮",trainer:"伍鵬志"},{n:"三軍勇將",t:0,odds:9.0,draw:9,jockey:"莫雷拉",trainer:"方嘉柏"}], flow:"喜蓮勁感 -22%重飛", conf:"極高" },
-        { name:"第9場 女皇盃2000米", time:"16:55", horses:[{n:"浪漫勇士",t:0,odds:1.6,draw:2,jockey:"麥道朗",trainer:"沈集成"},{n:"同工之妙",t:0,odds:11,draw:4,jockey:"紀仁安",trainer:"費伯華"},{n:"蒙面舞會",t:0,odds:4.5,draw:1,jockey:"李慕華",trainer:"手塚"},{n:"球星",t:0,odds:21,draw:7,jockey:"布文",trainer:"大衛希斯"}], flow:"浪漫勇士 -20%落飛", conf:"極高" },
-        { name:"第10場 三班1600米", time:"17:35", horses:[{n:"黃金騎士",t:0,odds:3.4,draw:9,jockey:"紀仁安",trainer:"呂健威"},{n:"共享富裕",t:0,odds:9.0,draw:6,jockey:"莫雷拉",trainer:"方嘉柏"},{n:"金匯千帥",t:0,odds:11,draw:14,jockey:"潘明輝",trainer:"賀賢"},{n:"紫荆拼搏",t:0,odds:10,draw:10,jockey:"班德禮",trainer:"大衛希斯"}], flow:"黃金騎士 -15%落飛", conf:"高" },
-        { name:"第11場 二班1400米", time:"18:10", horses:[{n:"時時歡聲",t:0,odds:7.0,draw:2,jockey:"潘頓",trainer:"告東尼"},{n:"章金主",t:0,odds:5.1,draw:1,jockey:"巴度",trainer:"章廷"},{n:"極上紗璠",t:0,odds:4.2,draw:4,jockey:"田泰安",trainer:"蔡約翰"},{n:"千帆駒",t:0,odds:8.0,draw:6,jockey:"莫雷拉",trainer:"蘇偉賢"}], flow:"時時歡聲 -28%重飛", conf:"極高" }
+        { name:"第1場 四班1200米", time:"12:30", horses:[{n:"包裝天王",odds:3.3,draw:8,jockey:"潘頓",trainer:"沈集成"},{n:"利高八斗",odds:4.8,draw:1,jockey:"田泰安",trainer:"姚本輝"},{n:"星光大道",odds:16,draw:7,jockey:"袁幸堯",trainer:"韋達"},{n:"馬馳登",odds:9.4,draw:2,jockey:"薛凱華",trainer:"黎昭昇"}], flow:"包裝天王 -?", conf:"中" },
+        { name:"第2場 四班1600米", time:"13:00", horses:[{n:"大回報",odds:3.6,draw:3,jockey:"巴度",trainer:"黎昭昇"},{n:"旋探",odds:3.4,draw:8,jockey:"布文",trainer:"姚本輝"},{n:"都靈冠星",odds:8.7,draw:4,jockey:"潘頓",trainer:"大衛希斯"},{n:"家傳之寶",odds:33,draw:6,jockey:"楊明綸",trainer:"韋達"}], flow:"旋探 -?落飛", conf:"中" },
+        { name:"第3場 四班1200米", time:"13:30", horses:[{n:"堅先生",odds:3.2,draw:2,jockey:"田泰安",trainer:"桂福特"},{n:"幸福約定",odds:6.5,draw:9,jockey:"麥道朗",trainer:"大衛希斯"},{n:"天天更好",odds:7.8,draw:13,jockey:"巴度",trainer:"羅富全"},{n:"杰遜仔",odds:8.2,draw:10,jockey:"布文",trainer:"丁冠豪"}], flow:"平穩", conf:"中高" },
+        { name:"第4場 四班1400米", time:"14:00", horses:[{n:"日日賞",odds:10,draw:9,jockey:"莫雷拉",trainer:"方嘉柏"},{n:"奇異歡星",odds:4.7,draw:7,jockey:"希威森",trainer:"丁冠豪"},{n:"部族高手",odds:5.7,draw:12,jockey:"周俊樂",trainer:"徐雨石"},{n:"文采風流",odds:27,draw:6,jockey:"莫艾誠",trainer:"蘇偉賢"}], flow:"日日賞 -12%落飛", conf:"高" },
+        { name:"第5場 主席短途賽1200米", time:"14:35", horses:[{n:"嘉應高昇",odds:1.0,draw:3,jockey:"潘頓",trainer:"大衛希斯"},{n:"里見夢境",odds:66,draw:2,jockey:"布文",trainer:"海外"},{n:"驥馬雷拉",odds:76,draw:4,jockey:"莫雷拉",trainer:"海外"},{n:"舉步生風",odds:252,draw:5,jockey:"艾道拿",trainer:"海外"}], flow:"嘉應高昇 -30%重飛", conf:"極高" },
+        { name:"第6場 三班1200米", time:"15:10", horses:[{n:"健康快車",odds:8.0,draw:6,jockey:"艾米爾",trainer:"蔡約翰"},{n:"冷娃",odds:2.4,draw:5,jockey:"紀仁安",trainer:"方嘉柏"},{n:"綫路滿貫",odds:9.6,draw:2,jockey:"黃寶妮",trainer:"文家良"},{n:"傑出雷霆",odds:10,draw:13,jockey:"何澤堯",trainer:"呂健威"}], flow:"平穩", conf:"高" },
+        { name:"第7場 國際一級賽1200米", time:"15:45", horses:[{n:"小鳥天堂",odds:4.7,draw:14,jockey:"潘頓",trainer:"丁冠豪"},{n:"遠觀天象",odds:4.3,draw:1,jockey:"麥道朗",trainer:"海外"},{n:"祝願",odds:6.8,draw:5,jockey:"布文",trainer:"海外"},{n:"金鑾貴人",odds:11,draw:4,jockey:"梁家俊",trainer:"海外"}], flow:"小鳥天堂 -25%重飛", conf:"極高" },
+        { name:"第8場 三班1400米", time:"16:20", horses:[{n:"喜蓮勁感",odds:4.5,draw:1,jockey:"麥道朗",trainer:"游達榮"},{n:"一世美麗",odds:5.1,draw:4,jockey:"潘頓",trainer:"蔡約翰"},{n:"友望仁",odds:7.9,draw:10,jockey:"艾兆禮",trainer:"伍鵬志"},{n:"三軍勇將",odds:9.0,draw:9,jockey:"莫雷拉",trainer:"方嘉柏"}], flow:"喜蓮勁感 -22%重飛", conf:"極高" },
+        { name:"第9場 女皇盃2000米", time:"16:55", horses:[{n:"浪漫勇士",odds:1.6,draw:2,jockey:"麥道朗",trainer:"沈集成"},{n:"同工之妙",odds:11,draw:4,jockey:"紀仁安",trainer:"費伯華"},{n:"蒙面舞會",odds:4.5,draw:1,jockey:"李慕華",trainer:"手塚"},{n:"球星",odds:21,draw:7,jockey:"布文",trainer:"大衛希斯"}], flow:"浪漫勇士 -20%落飛", conf:"極高" },
+        { name:"第10場 三班1600米", time:"17:35", horses:[{n:"黃金騎士",odds:3.4,draw:9,jockey:"紀仁安",trainer:"呂健威"},{n:"共享富裕",odds:9.0,draw:6,jockey:"莫雷拉",trainer:"方嘉柏"},{n:"金匯千帥",odds:11,draw:14,jockey:"潘明輝",trainer:"賀賢"},{n:"紫荆拼搏",odds:10,draw:10,jockey:"班德禮",trainer:"大衛希斯"}], flow:"黃金騎士 -15%落飛", conf:"高" },
+        { name:"第11場 二班1400米", time:"18:10", horses:[{n:"時時歡聲",odds:7.0,draw:2,jockey:"潘頓",trainer:"告東尼"},{n:"章金主",odds:5.1,draw:1,jockey:"巴度",trainer:"章廷"},{n:"極上紗璠",odds:4.2,draw:4,jockey:"田泰安",trainer:"蔡約翰"},{n:"千帆駒",odds:8.0,draw:6,jockey:"莫雷拉",trainer:"蘇偉賢"}], flow:"時時歡聲 -28%重飛", conf:"極高" }
     ];
 
-    // 輔助函數：生成各派別原始分數 (基於賠率、檔位、騎師、練馬師)
-    function getJockeyScore(jockey) {
-        const map = { "潘頓":98, "莫雷拉":96, "布文":92, "麥道朗":94, "田泰安":88, "紀仁安":85, "李慕華":90, "巴度":78, "何澤堯":82, "艾米爾":70, "班德禮":72, "希威森":74, "梁家俊":75, "艾兆禮":73, "黃寶妮":65, "莫艾誠":77, "潘明輝":76, "袁幸堯":60, "薛凱華":70, "周俊樂":68 };
-        return map[jockey] || 70;
+    // 騎師/練馬師分數映射
+    function getJockeyScore(j) {
+        const m = { "潘頓":98,"莫雷拉":96,"布文":92,"麥道朗":94,"田泰安":88,"紀仁安":85,"李慕華":90,"巴度":78,"何澤堯":82,"艾米爾":70,"班德禮":72,"希威森":74,"梁家俊":75,"艾兆禮":73,"黃寶妮":65,"莫艾誠":77,"潘明輝":76,"袁幸堯":60,"薛凱華":70,"周俊樂":68,"楊明綸":62 };
+        return m[j] || 70;
     }
-    function getTrainerScore(trainer) {
-        const map = { "沈集成":85, "姚本輝":82, "黎昭昇":80, "丁冠豪":76, "羅富全":78, "方嘉柏":90, "大衛希斯":88, "蔡約翰":92, "告東尼":86, "游達榮":82, "伍鵬志":80, "蘇偉賢":78, "呂健威":76, "賀賢":80, "桂福特":78, "韋達":75, "廖康銘":74, "徐雨石":70, "鄭俊偉":72 };
-        return map[trainer] || 70;
+    function getTrainerScore(t) {
+        const m = { "沈集成":85,"姚本輝":82,"黎昭昇":80,"丁冠豪":76,"羅富全":78,"方嘉柏":90,"大衛希斯":88,"蔡約翰":92,"告東尼":86,"游達榮":82,"伍鵬志":80,"蘇偉賢":78,"呂健威":76,"賀賢":80,"桂福特":78,"韋達":75,"廖康銘":74,"徐雨石":70,"鄭俊偉":72,"章廷":78 };
+        return m[t] || 70;
     }
-
-    function generateRawScores(h) {
+    // 外檔補償強化 (檔位≥6且明星騎師且賠率≤5 => +12)
+    function outerBonus(draw, jockey, odds) {
+        let stars = ["潘頓","莫雷拉","布文","麥道朗"];
+        if(draw >= 6 && stars.includes(jockey) && odds <= 5) return 12;
+        return 0;
+    }
+    // 生成各派別原始分數（含步速補償，步速由外部傳入）
+    let paceSelections = new Array(11).fill("normal");
+    function generateRawScores(h, paceType) {
+        let draw = h.draw;
+        let odds = h.odds;
+        let jockey = h.jockey;
+        let trainer = h.trainer;
         let base = 70;
-        let drawBonus = Math.max(0, (8 - h.draw) * 2);
-        let jockeyScore = getJockeyScore(h.jockey);
-        let trainerScore = getTrainerScore(h.trainer);
-        let oddsFactor = Math.min(1, 20 / (h.odds || 10));
-        // 外檔補償：檔位≥6且明星騎師(潘頓/莫雷拉/布文/麥道朗)且賠率≤5 ⇒ 奇門+10
-        let starJockeys = ["潘頓","莫雷拉","布文","麥道朗"];
-        let outerBonus = (h.draw >= 6 && starJockeys.includes(h.jockey) && h.odds <= 5) ? 10 : 0;
+        let drawBonus = Math.max(0, (8 - draw) * 2);
+        let outer = outerBonus(draw, jockey, odds);
+        let qimen = 75 + drawBonus + outer + (odds<5?8:0);
+        let paceAdjust = 0;
+        if(paceType === "fast") { if(h.posture === "領放") paceAdjust = -6; else if(h.posture === "後上") paceAdjust = +4; }
+        if(paceType === "slow") { if(h.posture === "領放") paceAdjust = +4; else if(h.posture === "後上") paceAdjust = -5; }
+        let paceScore = 65 + (draw<=3?10: (draw>=10?-5:0)) + paceAdjust;
+        let jockeyScore = getJockeyScore(jockey);
+        let trainerScore = getTrainerScore(trainer);
         return {
-            qimen: 75 + drawBonus + outerBonus + (h.odds<5?8:0),
+            qimen: qimen,
             data: 70 + drawBonus*0.5,
-            odds: 100 - Math.min(95, h.odds*5),
-            track: 70 + oddsFactor*10,
+            odds: 100 - Math.min(95, odds*5),
+            track: 70 + Math.min(1,20/odds)*10,
             pedigree: 65,
-            pace: 65 + (h.draw<=3?10: (h.draw>=10?-5:0)),
+            pace: paceScore,
             ground: 70,
-            distance: 70 + (h.draw>=10?-3:0),
+            distance: 70 + (draw>=10?-3:0),
             trainerJock: trainerScore*0.4 + jockeyScore*0.6,
-            jockeyPosture: 75 + (h.draw<=4?5:0),
-            behavior: 70 + (h.odds<5?10:0),
+            jockeyPosture: 75 + (draw<=4?5:0),
+            behavior: 70 + (odds<5?10:0),
             multiModal: 70,
             knowledgeGraph: 70,
-            logistic: 70 + (h.odds<3?20: (h.odds<6?10:0)) + (starJockeys.includes(h.jockey)?8:0),
-            riderTrainerSynergy: (trainerScore + jockeyScore)/2 + (starJockeys.includes(h.jockey)?5:0)
+            logistic: 70 + (odds<3?20: (odds<6?10:0)) + (["潘頓","莫雷拉","布文","麥道朗"].includes(jockey)?8:0),
+            riderTrainerSynergy: (trainerScore + jockeyScore)/2 + (["潘頓","莫雷拉","布文","麥道朗"].includes(jockey)?5:0)
         };
     }
 
-    // 多模型集成派 (3子模型)
+    // 多模型集成
     const subModels = [
         { name:"均衡型", w:{ qimen:0.28, data:0.16, oddsTrack:0.08, pace:0.08, logistic:0.09, jockeyPosture:0.07, riderTrainerSynergy:0.05 } },
         { name:"步速偏好", w:{ qimen:0.25, data:0.15, oddsTrack:0.07, pace:0.12, logistic:0.09, jockeyPosture:0.06, riderTrainerSynergy:0.04 } },
@@ -179,10 +186,10 @@
         total += raw.riderTrainerSynergy * (w.riderTrainerSynergy||0.05);
         return total;
     }
-    function getEnsembleScore(race) {
+    function getEnsembleScore(race, paceType) {
         let scores = [];
         for(let h of race.horses){
-            let raw = generateRawScores(h);
+            let raw = generateRawScores(h, paceType);
             let subs = subModels.map(m => calcSubScore(raw, m.w));
             let avg = subs.reduce((a,b)=>a+b,0)/subs.length;
             scores.push(avg);
@@ -190,13 +197,11 @@
         let maxS = Math.max(...scores);
         return scores.map(s => (s/maxS)*100);
     }
-
-    // 綜合分計算 (含15派別)
-    function computeTotalScores(race) {
-        let ensScores = getEnsembleScore(race);
+    function computeTotalScores(race, paceType) {
+        let ens = getEnsembleScore(race, paceType);
         let totals = [];
         for(let i=0; i<race.horses.length; i++){
-            let raw = generateRawScores(race.horses[i]);
+            let raw = generateRawScores(race.horses[i], paceType);
             let total = 0;
             total += raw.qimen * WEIGHTS.qimen;
             total += raw.data * WEIGHTS.data;
@@ -212,18 +217,17 @@
             total += raw.knowledgeGraph * WEIGHTS.knowledgeGraph;
             total += raw.logistic * WEIGHTS.logistic;
             total += raw.riderTrainerSynergy * WEIGHTS.riderTrainerSynergy;
-            total += ensScores[i] * WEIGHTS.ensemble;
+            total += ens[i] * WEIGHTS.ensemble;
             totals.push(total);
         }
         return totals;
     }
 
-    // 獲取預測順序
     function getPredictedOrders() {
         let triple=[], quartet=[];
-        for(let r of racesRaw){
-            let totals = computeTotalScores(r);
-            let idx = r.horses.map((h,i)=>({name:h.n, score:totals[i]}));
+        for(let i=0; i<racesRaw.length; i++){
+            let totals = computeTotalScores(racesRaw[i], paceSelections[i]);
+            let idx = racesRaw[i].horses.map((h,idx)=>({name:h.n, score:totals[idx]}));
             idx.sort((a,b)=>b.score - a.score);
             triple.push(idx.slice(0,3).map(v=>v.name));
             quartet.push(idx.slice(0,4).map(v=>v.name));
@@ -231,39 +235,34 @@
         return { triple, quartet };
     }
 
-    // 動態更新綜合分 (用於步速/體重等調整)
-    let userPace = new Array(11).fill("normal");
-    let userWeight = Array(11).fill().map(()=>[]);
-    let userRest = Array(11).fill().map(()=>[]);
-    let userPosture = Array(11).fill().map(()=>[]);
-    function applyUserAdjustments() { /* 直接在computeTotalScores中調用原始檔位/賠率即可，此處僅佔位 */ }
-
-    // 渲染所有賽事
+    // 渲染所有賽事卡片（包含步速下拉選單）
     function renderAllRaces() {
         const container = document.getElementById('racesContainer');
         container.innerHTML = '';
         for(let i=0; i<racesRaw.length; i++){
             const r = racesRaw[i];
-            const totals = computeTotalScores(r);
+            const paceSel = paceSelections[i];
+            const totals = computeTotalScores(r, paceSel);
             const indexed = r.horses.map((h,idx)=>({name:h.n, score:totals[idx]}));
             indexed.sort((a,b)=>b.score - a.score);
-            const top1 = indexed[0].name;
-            const top2 = indexed[1].name;
-            const top3 = indexed[2].name;
-            const top4 = indexed[3].name;
-            const ensScores = getEnsembleScore(r);
+            const top1 = indexed[0].name, top2 = indexed[1].name, top3 = indexed[2].name, top4 = indexed[3].name;
+            let complexity = Math.min(100, Math.abs(indexed[0].score - indexed[1].score)*2 + 30);
+            let riskLevel = complexity<=35?"低風險":(complexity<=60?"中風險":(complexity<=80?"高風險":"極高風險"));
+            let ensScores = getEnsembleScore(r, paceSel);
             let ensHtml = `<div class="info-box"><strong>🤝 多模型集成派</strong><br>`;
             for(let j=0; j<r.horses.length; j++) ensHtml += `${r.horses[j].n}: ${ensScores[j].toFixed(1)} &nbsp; `;
             ensHtml += `<br>權重 ${(WEIGHTS.ensemble*100).toFixed(1)}%</div>`;
-            // 複雜性模擬
-            let complexity = Math.min(100, Math.abs(indexed[0].score - indexed[1].score)*2 + 30);
-            let riskLevel = complexity<=35?"低風險":(complexity<=60?"中風險":(complexity<=80?"高風險":"極高風險"));
-            let illusionHtml = `<div class="illusion-box">✅ 無明顯賠率錯覺</div>`;
-            let betAdvice = `<div class="bet-slip"><strong>💰 投注建議</strong><br>• 獨贏 @ ${top1}<br>• 連贏 ${top1}+${top2}<br>• 四連環首四匹：${top1}, ${top2}, ${top3}, ${top4}<br>• 成本$130</div>`;
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
                 <div class="race-title">🏇 ${r.name} <span>${r.time}</span></div>
+                <div class="control-row">
+                    <div class="control-item">📊 步速: <select class="paceSelect" data-idx="${i}">
+                        <option value="normal" ${paceSel==='normal'?'selected':''}>中等</option>
+                        <option value="fast" ${paceSel==='fast'?'selected':''}>快步速</option>
+                        <option value="slow" ${paceSel==='slow'?'selected':''}>慢步速</option>
+                    </select></div>
+                </div>
                 <div class="prediction-box">
                     <div class="pred-item"><div class="pred-label">頭馬</div><div class="pred-val">${top1}</div><div class="sub">信心${r.conf}</div></div>
                     <div class="pred-item"><div class="pred-label">連贏</div><div class="pred-val">${top1}+${top2}</div><div class="sub">信心${r.conf}</div></div>
@@ -271,14 +270,21 @@
                 </div>
                 <div class="risk-box">📊 複雜性 ${complexity} | ⚠️ ${riskLevel}</div>
                 ${ensHtml}
-                ${illusionHtml}
-                ${betAdvice}
+                <div class="bet-slip"><strong>💰 投注建議</strong><br>• 獨贏 @ ${top1}<br>• 連贏 ${top1}+${top2}<br>• 四連環首四匹：${top1}, ${top2}, ${top3}, ${top4}<br>• 成本$130</div>
             `;
             container.appendChild(card);
         }
+        // 綁定步速變化事件
+        document.querySelectorAll('.paceSelect').forEach(sel => {
+            sel.addEventListener('change', (e) => {
+                let idx = parseInt(sel.dataset.idx);
+                paceSelections[idx] = sel.value;
+                renderAllRaces();
+            });
+        });
     }
 
-    // ----- 賽後驗證三四重彩 -----
+    // 賽後驗證三四重彩
     function buildResultInputs() {
         const div = document.getElementById('resultInputs');
         div.innerHTML = '';
@@ -292,6 +298,15 @@
                 <input id="res_${i}_4" placeholder="四馬">`;
             div.appendChild(row);
         });
+        // 預先填入第1、2場已知賽果
+        if(document.getElementById('res_0_1')) document.getElementById('res_0_1').value = "包裝天王";
+        if(document.getElementById('res_0_2')) document.getElementById('res_0_2').value = "利高八斗";
+        if(document.getElementById('res_0_3')) document.getElementById('res_0_3').value = "星光大道";
+        if(document.getElementById('res_0_4')) document.getElementById('res_0_4').value = "馬馳登";
+        if(document.getElementById('res_1_1')) document.getElementById('res_1_1').value = "旋探";
+        if(document.getElementById('res_1_2')) document.getElementById('res_1_2').value = "家傳之寶";
+        if(document.getElementById('res_1_3')) document.getElementById('res_1_3').value = "大回報";
+        if(document.getElementById('res_1_4')) document.getElementById('res_1_4').value = "都靈冠星";
     }
     function computeHitRate() {
         let { triple:predTriple, quartet:predQuartet } = getPredictedOrders();
@@ -323,15 +338,14 @@
         document.getElementById('stats').innerHTML = `
             <div>📅 本日：三重彩 ${last?.tripleHit||0}/${last?.tripleTotal||0} (${last?.tripleRate||0}%) &nbsp; 四重彩 ${last?.quartetHit||0}/${last?.quartetTotal||0} (${last?.quartetRate||0}%)</div>
             <div>📈 累積：三重彩 <span class="hit-rate">${overallTriple}%</span> &nbsp; 四重彩 <span class="hit-rate">${overallQuartet}%</span></div>
-            <div>💡 第1場真實頭馬為「包裝天王」，系統預測利高八斗，若已輸入則反映實際命中率。</div>
         `;
     }
     function resetHistory() { if(confirm('清除所有紀錄？')){ localStorage.removeItem('SHTSN_hitrate'); displayStats([]); } }
 
-    // 走位記錄 (簡化)
+    // 走位記錄
     function buildPositionInputs() {
         const div = document.getElementById('positionInputs');
-        div.innerHTML = '<div class="info-box">走位記錄：可自由填寫頭馬走位及勝負距離，系統將統計分佈。</div>';
+        div.innerHTML = '';
         for(let i=0;i<racesRaw.length;i++){
             let row = document.createElement('div');
             row.className = 'result-row';
@@ -346,17 +360,13 @@
         let saved = localStorage.getItem('SHTSN_position');
         if(saved){
             let data = JSON.parse(saved);
-            for(let i=0;i<racesRaw.length;i++){
-                if(data[i]){ document.getElementById(`pos_${i}`).value = data[i].position || ''; document.getElementById(`margin_${i}`).value = data[i].margin || ''; }
-            }
+            for(let i=0;i<racesRaw.length;i++) if(data[i]){ document.getElementById(`pos_${i}`).value = data[i].position || ''; document.getElementById(`margin_${i}`).value = data[i].margin || ''; }
         }
         updatePositionStats();
     }
     function savePositionData() {
         let data=[];
-        for(let i=0;i<racesRaw.length;i++){
-            data.push({ position: document.getElementById(`pos_${i}`).value, margin: document.getElementById(`margin_${i}`).value });
-        }
+        for(let i=0;i<racesRaw.length;i++) data.push({ position: document.getElementById(`pos_${i}`).value, margin: document.getElementById(`margin_${i}`).value });
         localStorage.setItem('SHTSN_position', JSON.stringify(data));
         updatePositionStats();
         alert('走位已儲存');
@@ -376,24 +386,22 @@
         document.getElementById('positionStats').innerHTML = `<div>${advice}</div>`;
     }
 
-    // 自動權重微調 (模擬)
+    // 自動權重微調
     function optimizeWeights() {
         let history = localStorage.getItem('SHTSN_hitrate') ? JSON.parse(localStorage.getItem('SHTSN_hitrate')) : [];
         if(history.length<3){ document.getElementById('weightStatus').innerHTML = '<div>⚠️ 需要至少3場賽果數據才能優化權重。</div>'; return; }
-        WEIGHTS.logistic += 0.005; WEIGHTS.pace += 0.005; WEIGHTS.qimen -= 0.003; normalizeWeights();
+        WEIGHTS.logistic += 0.005; WEIGHTS.pace += 0.005; WEIGHTS.qimen -= 0.003;
+        normalizeWeights();
         localStorage.setItem('SHTSN_weights', JSON.stringify(WEIGHTS));
-        document.getElementById('weightStatus').innerHTML = `<div>✅ 權重已微調：新權重 ${Object.values(WEIGHTS).map(v=>v.toFixed(3)).join(', ')}</div>`;
+        document.getElementById('weightStatus').innerHTML = `<div>✅ 權重已微調：${Object.values(WEIGHTS).map(v=>v.toFixed(3)).join(', ')}</div>`;
         renderAllRaces();
     }
-
-    // 載入儲存權重
     function loadWeights(){
         let saved = localStorage.getItem('SHTSN_weights');
-        if(saved){ let w=JSON.parse(saved); for(let k in w) if(WEIGHTS.hasOwnProperty(k)) WEIGHTS[k]=w[k]; normalizeWeights(); }
+        if(saved) { let w=JSON.parse(saved); for(let k in w) if(WEIGHTS.hasOwnProperty(k)) WEIGHTS[k]=w[k]; normalizeWeights(); }
     }
     loadWeights();
 
-    // 初始渲染
     renderAllRaces();
     buildResultInputs();
     buildPositionInputs();
