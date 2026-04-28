@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>賽果彩池記錄系統｜已載入2026-04-26沙田賽果</title>
+    <title>賽果彩池記錄系統｜2026年4月1日至19日 沙田+跑馬地賽果存放</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -136,14 +136,14 @@
 <body>
 <div class="container">
     <h1>🏇 派彩記錄器</h1>
-    <div class="sub">獨贏 · 位置 · 連贏 · 三重彩 · 四重彩｜已預載 2026-04-26 沙田日賽11場賽果</div>
+    <div class="sub">獨贏 · 位置 · 連贏 · 三重彩 · 四重彩｜可儲存任意日期賽果｜已預留2026-04-01至04-19空白記錄</div>
 
     <!-- 輸入表單 -->
     <div class="card">
         <div style="font-weight: bold; margin-bottom: 0.8rem;">📝 新增 / 編輯 派彩記錄</div>
         <div class="form-grid">
-            <div class="field"><label>日期</label><input type="date" id="date" value="2026-04-29"></div>
-            <div class="field"><label>場地名稱</label><select id="venue"><option value="跑馬地">跑馬地</option><option value="沙田">沙田</option></select></div>
+            <div class="field"><label>日期</label><input type="date" id="date" value="2026-04-01"></div>
+            <div class="field"><label>場地名稱</label><select id="venue"><option value="沙田">沙田</option><option value="跑馬地">跑馬地</option></select></div>
             <div class="field"><label>場次 (R)</label><input type="number" id="raceNum" value="1" min="1" max="12"></div>
             <div class="field"><label>班次/路程</label><input type="text" id="classDist" placeholder="例: 四班1200米"></div>
             <div class="field"><label>頭馬名稱</label><input type="text" id="winner" placeholder="馬名"></div>
@@ -171,7 +171,7 @@
         <div style="font-weight: bold; margin-bottom: 0.8rem;">🔍 查詢記錄</div>
         <div class="search-bar">
             <div class="search-item"><label>篩選日期</label><input type="date" id="filterDate"></div>
-            <div class="search-item"><label>篩選場地</label><select id="filterVenue"><option value="">全部</option><option value="跑馬地">跑馬地</option><option value="沙田">沙田</option></select></div>
+            <div class="search-item"><label>篩選場地</label><select id="filterVenue"><option value="">全部</option><option value="沙田">沙田</option><option value="跑馬地">跑馬地</option></select></div>
             <div class="search-item"><label>篩選場次</label><input type="number" id="filterRaceNum" placeholder="場次" style="width:70px;"></div>
             <div class="search-item"><button id="searchBtn">🔍 查詢</button><button id="resetFilterBtn">重置篩選</button></div>
         </div>
@@ -187,36 +187,81 @@
     </div>
 
     <div class="disclaimer">
-        💡 所有資料儲存於瀏覽器 localStorage，可匯出 JSON 備份。支援編輯/刪除，即時更新。<br>
-        📅 已預先載入 2026-04-26 沙田日賽 11 場完整賽果（頭馬至四馬及四重彩派彩）。
+        💡 所有資料儲存於瀏覽器 localStorage，可匯出 JSON 備份。<br>
+        📅 系統已預設建立 2026-04-01 至 2026-04-19 每天沙田及跑馬地各一場的空白記錄（場次1，可自行編輯或刪除）。<br>
+        ✏️ 請點擊「編輯」按鈕填入真實賽果，或直接「新增」記錄。
     </div>
 </div>
 
 <script>
-    const STORAGE_KEY = 'SHTSN_payouts';
+    const STORAGE_KEY = 'SHTSN_payouts_april_2026';
 
-    // ---------- 預設資料：2026-04-26 沙田日賽 11 場 ----------
-    const defaultRecords = [
-        { date:"2026-04-26", venue:"沙田", raceNum:1, classDist:"第四班1200米", winner:"包裝天王", second:"利高八斗", third:"星光大道", fourth:"馬馳登", winDiv:33.5, place1:14.5, place2:17.0, place3:49.0, quinellaDiv:92.5, tripleDiv:2486, quartetDiv:24097, remark:"四重彩$24,097" },
-        { date:"2026-04-26", venue:"沙田", raceNum:2, classDist:"第四班1600米", winner:"旋探", second:"家傳之寶", third:"大回報", fourth:"都靈冠星", winDiv:36.0, place1:15.0, place2:15.0, place3:27.0, quinellaDiv:63.0, tripleDiv:809, quartetDiv:11288, remark:"四重彩$11,288" },
-        { date:"2026-04-26", venue:"沙田", raceNum:3, classDist:"第四班1200米", winner:"堅先生", second:"天天更好", third:"實力加", fourth:"幸福約定", winDiv:52.0, place1:15.0, place2:19.5, place3:19.5, quinellaDiv:149.0, tripleDiv:1330, quartetDiv:9574, remark:"四重彩$9,574" },
-        { date:"2026-04-26", venue:"沙田", raceNum:4, classDist:"第四班1400米", winner:"勁勇皇駒", second:"嵐臣", third:"星光快驅", fourth:"部族高手", winDiv:61.5, place1:19.5, place2:35.0, place3:118.0, quinellaDiv:362.5, tripleDiv:19295, quartetDiv:135026, remark:"四重彩$135,026" },
-        { date:"2026-04-26", venue:"沙田", raceNum:5, classDist:"一級賽1200米", winner:"嘉應高昇", second:"里見夢境", third:"精算暴雪", fourth:"舉步生風", winDiv:10.5, place1:10.1, place2:21.0, place3:49.0, quinellaDiv:35.0, tripleDiv:305, quartetDiv:1041, remark:"四重彩$1,041" },
-        { date:"2026-04-26", venue:"沙田", raceNum:6, classDist:"第三班1200米", winner:"增強", second:"傑出雷霆", third:"幸運糖", fourth:"冷娃", winDiv:39.5, place1:14.5, place2:22.5, place3:47.5, quinellaDiv:157.5, tripleDiv:2923, quartetDiv:10643, remark:"四重彩$10,643" },
-        { date:"2026-04-26", venue:"沙田", raceNum:7, classDist:"一級賽1600米", winner:"祝願", second:"百賀飛駒", third:"港邊小區", fourth:"白鷺金剛", winDiv:54.0, place1:19.5, place2:58.5, place3:58.0, quinellaDiv:644.5, tripleDiv:30648, quartetDiv:187520, remark:"四重彩$187,520" },
-        { date:"2026-04-26", venue:"沙田", raceNum:8, classDist:"第三班1400米", winner:"三軍勇將", second:"喜蓮勁威", third:"一世美麗", fourth:"友瑩仁", winDiv:189.0, place1:53.5, place2:23.0, place3:15.5, quinellaDiv:654.5, tripleDiv:4097, quartetDiv:23377, remark:"四重彩$23,377" },
-        { date:"2026-04-26", venue:"沙田", raceNum:9, classDist:"一級賽2000米", winner:"浪漫勇士", second:"蒙面舞會", third:"同工之妙", fourth:"御冠軍", winDiv:13.0, place1:10.1, place2:13.5, place3:18.0, quinellaDiv:27.0, tripleDiv:76, quartetDiv:235, remark:"四重彩$235" },
-        { date:"2026-04-26", venue:"沙田", raceNum:10, classDist:"第三班1600米", winner:"火悟空", second:"開心勇駒", third:"安都", fourth:"三寶進財", winDiv:68.5, place1:27.0, place2:27.0, place3:19.0, quinellaDiv:282.0, tripleDiv:4067, quartetDiv:332775, remark:"四重彩$332,775" },
-        { date:"2026-04-26", venue:"沙田", raceNum:11, classDist:"第二班1400米", winner:"時時歡聲", second:"章金主", third:"千帆駒", fourth:"極上紗璫", winDiv:40.0, place1:14.5, place2:19.5, place3:16.5, quinellaDiv:119.5, tripleDiv:846, quartetDiv:2198, remark:"四重彩$2,198" }
-    ];
+    // 生成日期範圍：2026-04-01 至 2026-04-19
+    function generateDateRange() {
+        const start = new Date(2026, 3, 1); // 注意月份從0開始，4月 => 3
+        const end = new Date(2026, 3, 19);
+        const dates = [];
+        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+            dates.push(d.toISOString().slice(0,10));
+        }
+        return dates;
+    }
 
-    // 載入資料：若 localStorage 為空則寫入預設資料
+    // 建立預設空白記錄（每個日期 + 沙田 + 跑馬地各一場）
+    function createDefaultRecords() {
+        const dates = generateDateRange();
+        const records = [];
+        let idCounter = Date.now();
+        dates.forEach(date => {
+            // 沙田一場
+            records.push({
+                id: idCounter++,
+                date: date,
+                venue: "沙田",
+                raceNum: 1,
+                classDist: "",
+                winner: "",
+                second: "",
+                third: "",
+                fourth: "",
+                winDiv: 0,
+                place1: 0,
+                place2: 0,
+                place3: 0,
+                quinellaDiv: 0,
+                tripleDiv: 0,
+                quartetDiv: 0,
+                remark: "待填寫"
+            });
+            // 跑馬地一場
+            records.push({
+                id: idCounter++,
+                date: date,
+                venue: "跑馬地",
+                raceNum: 1,
+                classDist: "",
+                winner: "",
+                second: "",
+                third: "",
+                fourth: "",
+                winDiv: 0,
+                place1: 0,
+                place2: 0,
+                place3: 0,
+                quinellaDiv: 0,
+                tripleDiv: 0,
+                quartetDiv: 0,
+                remark: "待填寫"
+            });
+        });
+        return records;
+    }
+
     function initData() {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (!stored) {
-            // 為每個記錄加上唯一 id
-            const withIds = defaultRecords.map((r, idx) => ({ ...r, id: Date.now() + idx }));
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(withIds));
+            const defaultRecords = createDefaultRecords();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultRecords));
         }
     }
 
@@ -270,8 +315,8 @@
                 <td>${r.date}</td>
                 <td>${r.venue}</td>
                 <td>${r.raceNum}</td>
-                <td>${r.classDist || '-'}</td>
-                <td style="color:#ffb347;">${escapeHtml(r.winner)}</td>
+                <td>${escapeHtml(r.classDist || '-')}</td>
+                <td style="color:#ffb347;">${escapeHtml(r.winner || '-')}</td>
                 <td>${escapeHtml(r.second || '-')}</td>
                 <td>${escapeHtml(r.third || '-')}</td>
                 <td>${escapeHtml(r.fourth || '-')}</td>
@@ -284,7 +329,7 @@
                 <td>
                     <button class="edit-btn" data-id="${r.id}">✏️</button>
                     <button class="delete-btn" data-id="${r.id}">🗑️</button>
-                </td>
+                 </td>
             </tr>`;
         });
         tbody.innerHTML = html;
@@ -316,7 +361,7 @@
         document.getElementById('venue').value = record.venue;
         document.getElementById('raceNum').value = record.raceNum;
         document.getElementById('classDist').value = record.classDist || '';
-        document.getElementById('winner').value = record.winner;
+        document.getElementById('winner').value = record.winner || '';
         document.getElementById('second').value = record.second || '';
         document.getElementById('third').value = record.third || '';
         document.getElementById('fourth').value = record.fourth || '';
@@ -355,8 +400,8 @@
     }
 
     function clearForm() {
-        document.getElementById('date').value = new Date().toISOString().slice(0,10);
-        document.getElementById('venue').value = '跑馬地';
+        document.getElementById('date').value = '2026-04-01';
+        document.getElementById('venue').value = '沙田';
         document.getElementById('raceNum').value = '1';
         document.getElementById('classDist').value = '';
         document.getElementById('winner').value = '';
@@ -412,7 +457,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `SHTSN_payouts_${new Date().toISOString().slice(0,19)}.json`;
+        a.download = `SHTSN_payouts_april_1_19_${new Date().toISOString().slice(0,19)}.json`;
         a.click();
         URL.revokeObjectURL(url);
     }
@@ -427,10 +472,8 @@
         });
     }
 
-    // 初始化資料庫
+    // 初始化
     initData();
-
-    // 事件綁定
     document.getElementById('saveBtn').addEventListener('click', saveRecord);
     document.getElementById('clearFormBtn').addEventListener('click', clearForm);
     document.getElementById('searchBtn').addEventListener('click', applyFilter);
@@ -441,8 +484,6 @@
         applyFilter();
     });
     document.getElementById('exportBtn').addEventListener('click', exportJSON);
-
-    // 初始載入
     applyFilter();
 </script>
 </body>
