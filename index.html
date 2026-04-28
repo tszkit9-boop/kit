@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN V9.8 | 跑馬地極致版 | 目標命中率 >90%</title>
+    <title>SHTSN V9.8 | 跑馬地夜賽 2026-04-29 | 完整排位+獨贏賠率</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0f1a0f; color: #e6f0e6; font-family: system-ui; padding: 1rem; }
@@ -48,9 +48,9 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>🕸️ SHTSN V9.8 · 跑馬地極致版</h1>
-        <div class="sub">內檔加成｜彎道走位評分｜智能步速｜多模型集成｜目標獨贏/位置/連贏/三重彩/四重彩 >90%</div>
-        <div class="sub">2026-04-29 跑馬地夜賽 | 9場精準預測 (基於沙田實戰90.9%命中率算法)</div>
+        <h1>🕸️ SHTSN V9.8 · 跑馬地夜賽 · 完整排位</h1>
+        <div class="sub">15派別＋多模型集成｜外檔補償分級｜跑馬地特化 (內檔+彎道加分)｜智能步速 | 賽後自動驗證</div>
+        <div class="sub">2026-04-29 跑馬地草地夜賽 | 共9場 (根據最新官方排位及賠率)</div>
     </div>
 
     <!-- 賽前分析面板 -->
@@ -105,7 +105,7 @@
         <button class="calc-btn" id="calcBtn">計算命中率</button>
         <button class="calc-btn" id="resetBtn">清除紀錄</button>
         <div id="stats" class="stats-box"></div>
-        <div class="info-box">💡 賽後輸入真實名次，點擊計算比對系統預測順序，儲存命中率。目標累積 >90%。</div>
+        <div class="info-box">💡 賽後輸入真實名次，點擊計算比對系統預測順序，儲存命中率。</div>
     </div>
 
     <div class="position-panel">
@@ -121,7 +121,7 @@
         <div id="weightStatus" class="stats-box"></div>
     </div>
 
-    <div class="disclaimer">跑馬地極致版：內檔加成、彎道評分、智能步速 | 賽後累積數據可達 90%+ 命中率</div>
+    <div class="disclaimer">跑馬地極致版：內檔加成、彎道評分、智能步速 | 所有排位賠率按最新圖片</div>
 </div>
 
 <script>
@@ -136,88 +136,141 @@
     function normalizeWeights() { let s=0; for(let k in WEIGHTS) s+=WEIGHTS[k]; for(let k in WEIGHTS) WEIGHTS[k]/=s; }
     normalizeWeights();
 
-    // ======================= 9場賽事數據 (完全按最新圖片) =======================
+    // ======================= 9場賽事數據 (完全按最新圖片整合) =======================
+    // 檔位、負磅來自先前圖片 (IMG_6770-6778)，騎師、練馬師、賠率來自 IMG_6786-6794
     const racesData = [
         { name:"第1場 五班1800米", time:"18:40", dist:1800, horses:[
-            {n:"悠悠乾坤",draw:7,lb:135,odds:5.0,jockey:"模",trainer:"模"},{n:"綏放的心",draw:3,lb:135,odds:6.0,jockey:"模",trainer:"模"},
-            {n:"揚威四海",draw:2,lb:135,odds:7.0,jockey:"模",trainer:"模"},{n:"滿洛城",draw:9,lb:134,odds:8.0,jockey:"模",trainer:"模"},
-            {n:"富裕君子",draw:8,lb:134,odds:9.0,jockey:"模",trainer:"模"},{n:"架勢奇爸",draw:10,lb:133,odds:10.0,jockey:"模",trainer:"模"},
-            {n:"幸運同行",draw:5,lb:130,odds:12.0,jockey:"模",trainer:"模"},{n:"桃花多",draw:1,lb:129,odds:14.0,jockey:"模",trainer:"模"},
-            {n:"皇金風速",draw:11,lb:122,odds:16.0,jockey:"模",trainer:"模"},{n:"金德義",draw:12,lb:120,odds:18.0,jockey:"模",trainer:"模"},
-            {n:"鼓浪飛凡",draw:4,lb:115,odds:20.0,jockey:"模",trainer:"模"},{n:"同寶寶",draw:6,lb:115,odds:22.0,jockey:"模",trainer:"模"}
-        ], flow:"無明顯落飛", conf:"中" },
+            {n:"悠悠乾坤",draw:7,lb:135,odds:12,jockey:"田泰安",trainer:"桂福特"},
+            {n:"綻放的心",draw:3,lb:135,odds:13,jockey:"金誠剛",trainer:"章達"},
+            {n:"揚威四海",draw:2,lb:135,odds:7.7,jockey:"蔡明紹",trainer:"葉楚航"},
+            {n:"滿洛城",draw:9,lb:134,odds:5.6,jockey:"班德禮",trainer:"大衛希斯"},
+            {n:"富裕君子",draw:8,lb:134,odds:5.7,jockey:"黃智弘",trainer:"方嘉柏"},
+            {n:"架勢奇爸",draw:10,lb:133,odds:7.0,jockey:"周俊樂",trainer:"告東尼"},
+            {n:"幸運同行",draw:5,lb:130,odds:5.6,jockey:"布文",trainer:"蔡約翰"},
+            {n:"桃花多",draw:1,lb:129,odds:23,jockey:"何澤堯",trainer:"鄭俊偉"},
+            {n:"皇金風速",draw:11,lb:122,odds:28,jockey:"楊明倫",trainer:"蘇偉賢"},
+            {n:"快樂之友",draw:12,lb:120,odds:21,jockey:"梁家俊",trainer:"巫偉傑"},
+            {n:"鼓浪飛凡",draw:4,lb:115,odds:73,jockey:"鍾易禮",trainer:"文家良"},
+            {n:"同寶寶",draw:6,lb:115,odds:8.6,jockey:"黃寶妮",trainer:"伍鵬志"}
+        ], flow:"滿洛城、幸運同行熱門", conf:"中" },
         { name:"第2場 四班1200米", time:"19:10", dist:1200, horses:[
-            {n:"驍將",draw:11,lb:135,odds:5.0,jockey:"模",trainer:"模"},{n:"凱皇寶",draw:8,lb:134,odds:6.0,jockey:"模",trainer:"模"},
-            {n:"尉神",draw:9,lb:130,odds:7.0,jockey:"模",trainer:"模"},{n:"可靠大師",draw:4,lb:129,odds:8.0,jockey:"模",trainer:"模"},
-            {n:"君至酷",draw:12,lb:128,odds:9.0,jockey:"模",trainer:"模"},{n:"至合拍",draw:7,lb:128,odds:10.0,jockey:"模",trainer:"模"},
-            {n:"獵有心得",draw:1,lb:126,odds:12.0,jockey:"模",trainer:"模"},{n:"海鑽石",draw:6,lb:124,odds:14.0,jockey:"模",trainer:"模"},
-            {n:"皇帝英豪",draw:3,lb:123,odds:16.0,jockey:"模",trainer:"模"},{n:"金多囂",draw:5,lb:122,odds:18.0,jockey:"模",trainer:"模"},
-            {n:"精益大師",draw:10,lb:119,odds:20.0,jockey:"模",trainer:"模"},{n:"友得益",draw:2,lb:117,odds:22.0,jockey:"模",trainer:"模"}
-        ], flow:"無明顯落飛", conf:"中" },
+            {n:"驍將",draw:11,lb:135,odds:18,jockey:"鍾易禮",trainer:"告東尼"},
+            {n:"凱皇寶",draw:8,lb:134,odds:18,jockey:"梁家俊",trainer:"巫偉傑"},
+            {n:"廟神",draw:9,lb:130,odds:8.1,jockey:"奧爾民",trainer:"徐雨石"},
+            {n:"可靠大師",draw:4,lb:129,odds:2.8,jockey:"潘頓",trainer:"大衛希斯"},
+            {n:"君至酷",draw:12,lb:128,odds:32,jockey:"潘明輝",trainer:"呂健威"},
+            {n:"至合拍",draw:7,lb:128,odds:6.4,jockey:"周俊樂",trainer:"沈集成"},
+            {n:"猶有心得",draw:1,lb:126,odds:31,jockey:"艾道章",trainer:"桂福特"},
+            {n:"海鑽石",draw:6,lb:124,odds:11,jockey:"布浩榮",trainer:"游達榮"},
+            {n:"皇帝英豪",draw:3,lb:123,odds:9.7,jockey:"何澤堯",trainer:"文家良"},
+            {n:"金多囂",draw:5,lb:122,odds:12,jockey:"田泰安",trainer:"伍鵬志"},
+            {n:"精益大師",draw:10,lb:119,odds:20,jockey:"班德禮",trainer:"葉楚航"},
+            {n:"友得益",draw:2,lb:117,odds:10,jockey:"巫顯東",trainer:"丁冠豪"}
+        ], flow:"可靠大師大熱", conf:"中高" },
         { name:"第3場 四班2200米", time:"19:40", dist:2200, horses:[
-            {n:"清雲龍駒",draw:10,lb:135,odds:5.0,jockey:"模",trainer:"賀賀"},{n:"大千氣象",draw:3,lb:133,odds:6.0,jockey:"模",trainer:"方嘉柏"},
-            {n:"八駿笑昇",draw:1,lb:132,odds:7.0,jockey:"模",trainer:"告東尼"},{n:"捧馬之皇",draw:11,lb:130,odds:8.0,jockey:"模",trainer:"巫僧保"},
-            {n:"雙贏",draw:7,lb:129,odds:9.0,jockey:"模",trainer:"文家良"},{n:"包裝旋風",draw:4,lb:127,odds:10.0,jockey:"模",trainer:"伍鵬志"},
-            {n:"蜜蜜送",draw:2,lb:126,odds:12.0,jockey:"模",trainer:"章達"},{n:"富喜來",draw:8,lb:123,odds:14.0,jockey:"模",trainer:"沈集成"},
-            {n:"禾道威",draw:5,lb:122,odds:16.0,jockey:"模",trainer:"大衛希斯"},{n:"佰勝金龍",draw:6,lb:121,odds:18.0,jockey:"模",trainer:"巫僧保"},
-            {n:"夢照發",draw:12,lb:119,odds:20.0,jockey:"模",trainer:"黎昭昇"},{n:"君智盛",draw:9,lb:119,odds:22.0,jockey:"模",trainer:"姚本輝"}
-        ], flow:"無明顯落飛", conf:"中" },
+            {n:"清雲龍駒",draw:10,lb:135,odds:13,jockey:"潘明輝",trainer:"賀賢"},
+            {n:"大千氣象",draw:3,lb:133,odds:7.0,jockey:"布文",trainer:"方嘉柏"},
+            {n:"八駿笑昇",draw:1,lb:132,odds:9.6,jockey:"田泰安",trainer:"告東尼"},
+            {n:"捧馬之皇",draw:11,lb:130,odds:49,jockey:"周俊樂",trainer:"巫偉傑"},
+            {n:"雙贏",draw:7,lb:129,odds:10,jockey:"何澤堯",trainer:"文家良"},
+            {n:"包裝旋風",draw:4,lb:127,odds:17,jockey:"班德禮",trainer:"伍鵬志"},
+            {n:"蜜蜜送",draw:2,lb:126,odds:12,jockey:"霍宏聲",trainer:"韋達"},
+            {n:"富喜來",draw:8,lb:123,odds:10,jockey:"艾道章",trainer:"沈集成"},
+            {n:"禾道威",draw:5,lb:122,odds:3.4,jockey:"潘頓",trainer:"大衛希斯"},
+            {n:"佰勝金龍",draw:6,lb:121,odds:45,jockey:"梁家俊",trainer:"巫偉傑"},
+            {n:"夢照發",draw:12,lb:119,odds:5.6,jockey:"巴度",trainer:"黎昭昇"},
+            {n:"君智盛",draw:9,lb:119,odds:19,jockey:"金誠剛",trainer:"姚本輝"}
+        ], flow:"禾道威重飛", conf:"中高" },
         { name:"第4場 四班1200米", time:"20:10", dist:1200, horses:[
-            {n:"跨境駿馬",draw:5,lb:135,odds:4.5,jockey:"模",trainer:"蔡約翰"},{n:"笑盈喜",draw:9,lb:131,odds:5.5,jockey:"模",trainer:"蘇偉賢"},
-            {n:"紅愛舍",draw:2,lb:129,odds:6.5,jockey:"模",trainer:"韋達"},{n:"朗日自強",draw:10,lb:128,odds:7.5,jockey:"模",trainer:"文家良"},
-            {n:"祥勝力駒",draw:1,lb:125,odds:8.5,jockey:"模",trainer:"廖康銘"},{n:"悠然常勝",draw:11,lb:125,odds:9.5,jockey:"模",trainer:"巫偉傑"},
-            {n:"星威心得",draw:4,lb:125,odds:11.0,jockey:"模",trainer:"大衛希斯"},{n:"佳運發",draw:3,lb:121,odds:13.0,jockey:"模",trainer:"黎昭昇"},
-            {n:"閃電星福",draw:12,lb:120,odds:15.0,jockey:"模",trainer:"沈集成"},{n:"勇敢孖寶",draw:8,lb:117,odds:17.0,jockey:"模",trainer:"呂健威"},
-            {n:"勝在當下",draw:7,lb:117,odds:19.0,jockey:"模",trainer:"羅富全"},{n:"英雄豪邁",draw:6,lb:116,odds:21.0,jockey:"模",trainer:"徐雨石"}
-        ], flow:"無明顯落飛", conf:"中" },
+            {n:"跨境駿馬",draw:5,lb:135,odds:2.4,jockey:"潘頓",trainer:"蔡約翰"},
+            {n:"笑盈喜",draw:9,lb:131,odds:55,jockey:"奧爾民",trainer:"蘇偉賢"},
+            {n:"紅愛舍",draw:2,lb:129,odds:7.3,jockey:"布文",trainer:"韋達"},
+            {n:"朗日自強",draw:10,lb:128,odds:15,jockey:"周俊樂",trainer:"文家良"},
+            {n:"祥勝力駒",draw:1,lb:125,odds:4.5,jockey:"霍宏聲",trainer:"廖康銘"},
+            {n:"悠然常勝",draw:11,lb:125,odds:39,jockey:"布浩榮",trainer:"巫偉傑"},
+            {n:"星威心得",draw:4,lb:125,odds:45,jockey:"班德禮",trainer:"大衛希斯"},
+            {n:"佳運發",draw:3,lb:121,odds:14,jockey:"黃寶妮",trainer:"黎昭昇"},
+            {n:"閃電星福",draw:12,lb:120,odds:25,jockey:"金誠剛",trainer:"沈集成"},
+            {n:"勇敢孖寶",draw:8,lb:117,odds:9.4,jockey:"何澤堯",trainer:"呂健威"},
+            {n:"勝在當下",draw:7,lb:117,odds:20,jockey:"田泰安",trainer:"羅富全"},
+            {n:"英雄豪邁",draw:6,lb:116,odds:20,jockey:"巴度",trainer:"徐雨石"}
+        ], flow:"跨境駿馬大熱", conf:"高" },
         { name:"第5場 四班1200米", time:"20:40", dist:1200, horses:[
-            {n:"幸運大夫",draw:12,lb:135,odds:4.5,jockey:"模",trainer:"伍鵬志"},{n:"巴開王",draw:6,lb:134,odds:5.5,jockey:"模",trainer:"呂健威"},
-            {n:"方圓星",draw:5,lb:131,odds:6.5,jockey:"模",trainer:"羅富全"},{n:"你知我賣",draw:11,lb:128,odds:7.5,jockey:"模",trainer:"姚本輝"},
-            {n:"雷神太保",draw:8,lb:127,odds:8.5,jockey:"模",trainer:"黎昭昇"},{n:"勁砲王",draw:4,lb:126,odds:9.5,jockey:"模",trainer:"游達榮"},
-            {n:"領袖勳力",draw:7,lb:125,odds:11.0,jockey:"模",trainer:"徐雨石"},{n:"電玩精英",draw:1,lb:125,odds:13.0,jockey:"模",trainer:"章達"},
-            {n:"有盈勇士",draw:3,lb:123,odds:15.0,jockey:"模",trainer:"沈集成"},{n:"瑰麗人生",draw:10,lb:120,odds:17.0,jockey:"模",trainer:"丁冠豪"},
-            {n:"不勞而獲",draw:9,lb:119,odds:19.0,jockey:"模",trainer:"葉楚航"},{n:"銳高",draw:2,lb:116,odds:21.0,jockey:"模",trainer:"文良"}
-        ], flow:"雷神太保落飛", conf:"中高" },
+            {n:"幸運大夫",draw:12,lb:135,odds:53,jockey:"奧爾民",trainer:"伍鵬志"},
+            {n:"巴開王",draw:6,lb:134,odds:3.3,jockey:"黃寶妮",trainer:"呂健威"},
+            {n:"方圓星",draw:5,lb:131,odds:35,jockey:"潘明輝",trainer:"羅富全"},
+            {n:"你知我寶",draw:11,lb:128,odds:23,jockey:"布文",trainer:"姚本輝"},
+            {n:"雷神太保",draw:8,lb:127,odds:5.1,jockey:"潘頓",trainer:"黎昭昇"},
+            {n:"勁砲王",draw:4,lb:126,odds:44,jockey:"金誠剛",trainer:"游達榮"},
+            {n:"領袖勳力",draw:7,lb:125,odds:45,jockey:"梁家俊",trainer:"徐雨石"},
+            {n:"電玩精英",draw:1,lb:125,odds:3.7,jockey:"班德禮",trainer:"章達"},
+            {n:"有盈勇士",draw:3,lb:123,odds:10,jockey:"鍾易禮",trainer:"沈集成"},
+            {n:"瑰麗人生",draw:10,lb:120,odds:25,jockey:"楊明倫",trainer:"丁冠豪"},
+            {n:"不勞而獲",draw:9,lb:119,odds:37,jockey:"田泰安",trainer:"葉楚航"},
+            {n:"銳高",draw:2,lb:116,odds:7.1,jockey:"蔡明紹",trainer:"文家良"}
+        ], flow:"巴開王、電玩精英熱門", conf:"中" },
         { name:"第6場 四班1650米", time:"21:10", dist:1650, horses:[
-            {n:"勁進駒",draw:12,lb:135,odds:5.0,jockey:"模",trainer:"模"},{n:"浪漫老撾",draw:4,lb:135,odds:6.0,jockey:"模",trainer:"模"},
-            {n:"爆出美麗",draw:3,lb:133,odds:7.0,jockey:"模",trainer:"模"},{n:"暴風之子",draw:7,lb:131,odds:8.0,jockey:"模",trainer:"模"},
-            {n:"越發齊歡",draw:10,lb:131,odds:9.0,jockey:"模",trainer:"模"},{n:"快搏",draw:2,lb:131,odds:10.0,jockey:"模",trainer:"模"},
-            {n:"定數",draw:11,lb:131,odds:11.0,jockey:"模",trainer:"模"},{n:"上浦福旺",draw:9,lb:130,odds:12.0,jockey:"模",trainer:"模"},
-            {n:"快觀旺",draw:1,lb:129,odds:13.0,jockey:"模",trainer:"模"},{n:"隨緣得勝",draw:6,lb:123,odds:14.0,jockey:"模",trainer:"模"},
-            {n:"真叻仔",draw:5,lb:121,odds:15.0,jockey:"模",trainer:"模"},{n:"大數據",draw:8,lb:121,odds:16.0,jockey:"模",trainer:"模"}
-        ], flow:"無明顯落飛", conf:"中" },
+            {n:"勁進駒",draw:12,lb:135,odds:12,jockey:"潘頓",trainer:"呂健威"},
+            {n:"浪漫老撻",draw:4,lb:135,odds:8.1,jockey:"布浩榮",trainer:"巫偉傑"},
+            {n:"爆出美麗",draw:3,lb:133,odds:7.8,jockey:"布文",trainer:"告東尼"},
+            {n:"暴風之子",draw:7,lb:131,odds:10,jockey:"蔡明紹",trainer:"徐雨石"},
+            {n:"越發齊歡",draw:10,lb:131,odds:48,jockey:"梁家俊",trainer:"羅富全"},
+            {n:"快搏",draw:2,lb:131,odds:10,jockey:"艾道章",trainer:"賀賢"},
+            {n:"定數",draw:11,lb:131,odds:13,jockey:"霍宏聲",trainer:"丁冠豪"},
+            {n:"上浦福旺",draw:9,lb:130,odds:10,jockey:"鍾易禮",trainer:"沈集成"},
+            {n:"快觀旺",draw:1,lb:129,odds:11,jockey:"黃智弘",trainer:"方嘉柏"},
+            {n:"隨緣得勝",draw:6,lb:123,odds:4.4,jockey:"周俊樂",trainer:"游達榮"},
+            {n:"真叻仔",draw:5,lb:121,odds:7.7,jockey:"楊明綸",trainer:"鄭俊偉"},
+            {n:"大數據",draw:8,lb:121,odds:18,jockey:"潘明輝",trainer:"姚本輝"}
+        ], flow:"隨緣得勝熱門", conf:"中" },
         { name:"第7場 二班1000米", time:"21:45", dist:1000, horses:[
-            {n:"星際快車",draw:9,lb:135,odds:3.0,jockey:"模",trainer:"模"},{n:"顏色之皇",draw:5,lb:130,odds:4.0,jockey:"模",trainer:"模"},
-            {n:"天天同樂",draw:4,lb:125,odds:5.0,jockey:"模",trainer:"模"},{n:"魔術控制",draw:1,lb:119,odds:6.0,jockey:"模",trainer:"模"},
-            {n:"勇敢巨星",draw:3,lb:117,odds:7.0,jockey:"模",trainer:"模"},{n:"天星",draw:7,lb:115,odds:8.0,jockey:"模",trainer:"模"},
-            {n:"小霸王",draw:10,lb:115,odds:9.0,jockey:"模",trainer:"模"},{n:"好評如潮",draw:8,lb:115,odds:10.0,jockey:"模",trainer:"模"},
-            {n:"年少多好",draw:6,lb:115,odds:11.0,jockey:"模",trainer:"模"},{n:"燭光晚餐",draw:2,lb:115,odds:12.0,jockey:"模",trainer:"模"}
-        ], flow:"星際快車重飛", conf:"高" },
+            {n:"星際快車",draw:9,lb:135,odds:10,jockey:"艾道拿",trainer:"蔡約翰"},
+            {n:"顏色之皇",draw:5,lb:130,odds:4.9,jockey:"潘頓",trainer:"游達榮"},
+            {n:"天天同樂",draw:4,lb:125,odds:12,jockey:"霍宏聲",trainer:"羅富全"},
+            {n:"魔術控制",draw:1,lb:119,odds:16,jockey:"田泰安",trainer:"巫偉傑"},
+            {n:"勇敢巨星",draw:3,lb:117,odds:8.3,jockey:"何澤堯",trainer:"呂健威"},
+            {n:"天星",draw:7,lb:115,odds:12,jockey:"班德禮",trainer:"大衛希斯"},
+            {n:"小霸王",draw:10,lb:115,odds:14,jockey:"鍾易禮",trainer:"告東尼"},
+            {n:"好評如潮",draw:8,lb:115,odds:4.5,jockey:"黃寶妮",trainer:"鄭俊偉"},
+            {n:"年少多好",draw:6,lb:115,odds:6.3,jockey:"蔡明紹",trainer:"廖康銘"},
+            {n:"燭光晚餐",draw:2,lb:115,odds:8.4,jockey:"巴度",trainer:"徐雨石"}
+        ], flow:"顏色之皇、好評如潮熱門", conf:"高" },
         { name:"第8場 三班1200米", time:"22:15", dist:1200, horses:[
-            {n:"駿跑得",draw:7,lb:135,odds:4.0,jockey:"模",trainer:"模"},{n:"開心指數",draw:12,lb:133,odds:5.0,jockey:"模",trainer:"模"},
-            {n:"川河動騎",draw:2,lb:126,odds:6.0,jockey:"模",trainer:"模"},{n:"踏雪尋梅",draw:6,lb:124,odds:7.0,jockey:"模",trainer:"模"},
-            {n:"高士威勁",draw:11,lb:122,odds:8.0,jockey:"模",trainer:"模"},{n:"東來欣賞",draw:5,lb:121,odds:9.0,jockey:"模",trainer:"模"},
-            {n:"智勝一籌",draw:10,lb:120,odds:10.0,jockey:"模",trainer:"模"},{n:"香港仔",draw:3,lb:119,odds:11.0,jockey:"模",trainer:"模"},
-            {n:"合彩飛馳",draw:8,lb:116,odds:12.0,jockey:"模",trainer:"模"},{n:"團結巴打",draw:1,lb:116,odds:13.0,jockey:"模",trainer:"模"},
-            {n:"泰泰精神",draw:9,lb:116,odds:14.0,jockey:"模",trainer:"模"},{n:"喵喵怪",draw:4,lb:115,odds:15.0,jockey:"模",trainer:"模"}
-        ], flow:"川河動騎熱門", conf:"中" },
+            {n:"駿跑得",draw:7,lb:135,odds:13,jockey:"霍宏聲",trainer:"廖康銘"},
+            {n:"開心指數",draw:12,lb:133,odds:12,jockey:"布文",trainer:"文家良"},
+            {n:"川河動齣",draw:2,lb:126,odds:14,jockey:"鍾易禮",trainer:"游達榮"},
+            {n:"踏雪尋梅",draw:6,lb:124,odds:3.4,jockey:"潘頓",trainer:"章達"},
+            {n:"高士威勁",draw:11,lb:122,odds:20,jockey:"班德禮",trainer:"姚本輝"},
+            {n:"東來欣賞",draw:5,lb:121,odds:15,jockey:"周俊樂",trainer:"告東尼"},
+            {n:"智勝一籌",draw:10,lb:120,odds:18,jockey:"蔡明紹",trainer:"蘇偉賢"},
+            {n:"香港仔",draw:3,lb:119,odds:8.9,jockey:"潘明輝",trainer:"羅富全"},
+            {n:"合夥飛馳",draw:8,lb:116,odds:22,jockey:"楊明綸",trainer:"呂健威"},
+            {n:"團結巴打",draw:1,lb:116,odds:13,jockey:"黃寶妮",trainer:"桂福特"},
+            {n:"泰泰精神",draw:9,lb:116,odds:8.4,jockey:"田泰安",trainer:"蔡約翰"},
+            {n:"喵喵怪",draw:4,lb:115,odds:5.6,jockey:"巴度",trainer:"巫偉傑"}
+        ], flow:"踏雪尋梅重飛", conf:"中高" },
         { name:"第9場 三班1650米", time:"22:50", dist:1650, horses:[
-            {n:"一定掂",draw:9,lb:135,odds:4.0,jockey:"模",trainer:"模"},{n:"瑪瑙",draw:10,lb:134,odds:5.0,jockey:"模",trainer:"模"},
-            {n:"相映紅",draw:8,lb:132,odds:6.0,jockey:"模",trainer:"模"},{n:"我做到",draw:2,lb:127,odds:7.0,jockey:"模",trainer:"模"},
-            {n:"凡凡有餘",draw:6,lb:124,odds:8.0,jockey:"模",trainer:"模"},{n:"穿甲金鷹",draw:4,lb:123,odds:9.0,jockey:"模",trainer:"模"},
-            {n:"加州活力",draw:11,lb:122,odds:10.0,jockey:"模",trainer:"模"},{n:"椒椒醒",draw:5,lb:122,odds:11.0,jockey:"模",trainer:"模"},
-            {n:"翠兒威威",draw:12,lb:122,odds:12.0,jockey:"模",trainer:"模"},{n:"爆笑",draw:1,lb:122,odds:13.0,jockey:"模",trainer:"模"},
-            {n:"雙星報喜",draw:7,lb:119,odds:14.0,jockey:"模",trainer:"模"},{n:"魅力知耀",draw:3,lb:118,odds:15.0,jockey:"模",trainer:"模"}
-        ], flow:"一定掂熱門", conf:"中" }
+            {n:"一定掂",draw:9,lb:135,odds:8.6,jockey:"布文",trainer:"姚本輝"},
+            {n:"瑪瑙",draw:10,lb:134,odds:12,jockey:"潘明輝",trainer:"羅富全"},
+            {n:"相映紅",draw:8,lb:132,odds:8.4,jockey:"黃智弘",trainer:"方嘉柏"},
+            {n:"我做到",draw:2,lb:127,odds:31,jockey:"鍾易禮",trainer:"伍鵬志"},
+            {n:"凡凡有餘",draw:6,lb:124,odds:6.6,jockey:"布浩榮",trainer:"沈集成"},
+            {n:"穿甲金鷹",draw:4,lb:123,odds:6.0,jockey:"潘頓",trainer:"廖康銘"},
+            {n:"加州活力",draw:11,lb:122,odds:22,jockey:"巴度",trainer:"告東尼"},
+            {n:"椒椒醒",draw:5,lb:122,odds:17,jockey:"蔡明紹",trainer:"黎昭昇"},
+            {n:"翠兒威威",draw:12,lb:122,odds:17,jockey:"周俊樂",trainer:"巫偉傑"},
+            {n:"爆笑",draw:1,lb:122,odds:5.5,jockey:"黃寶妮",trainer:"告東尼"},
+            {n:"雙星報喜",draw:7,lb:119,odds:20,jockey:"班德禮",trainer:"呂健威"},
+            {n:"魅力知耀",draw:3,lb:118,odds:6.5,jockey:"田泰安",trainer:"大衛希斯"}
+        ], flow:"穿甲金鷹、爆笑熱門", conf:"中" }
     ];
 
     // ======================= 跑馬地極致評分函數 =======================
-    function getJockeyScore(j) { const m={ "潘頓":98,"莫雷拉":96,"布文":92,"麥道朗":94,"田泰安":88,"梁家俊":75,"巴度":78,"何澤堯":82,"潘明輝":76,"班德禮":72,"周俊樂":68,"黃寶妮":65,"蔡明紹":70,"楊明倫":62,"金誠剛":70,"韋紀力":70,"艾道拿":72,"鍾易禮":65,"奧爾民":70,"蔡明":70,"霍宏聲":68,"布浩榮":68 }; return m[j]||70; }
-    function getTrainerScore(t) { const m={ "蔡約翰":92,"大衛希斯":88,"沈集成":85,"方嘉柏":90,"告東尼":86,"呂健威":76,"黎昭昇":80,"羅富全":78,"姚本輝":82,"丁冠豪":76,"賀賢":80,"伍鵬志":80,"文家良":78,"徐雨石":70,"廖康銘":74,"葉楚航":76,"游達榮":82,"章達":78,"蘇偉賢":78,"韋達":75,"巫偉傑":70,"巫僧保":70,"賀賀":70,"章廷":78,"文良":70 }; return m[t]||70; }
+    function getJockeyScore(j) { const m={ "潘頓":98,"莫雷拉":96,"布文":92,"麥道朗":94,"田泰安":88,"梁家俊":75,"巴度":78,"何澤堯":82,"潘明輝":76,"班德禮":72,"周俊樂":68,"黃寶妮":65,"蔡明紹":70,"楊明倫":62,"金誠剛":70,"韋紀力":70,"艾道拿":72,"鍾易禮":65,"奧爾民":70,"蔡明":70,"霍宏聲":68,"布浩榮":68,"巫顯東":65,"艾道章":70,"黃智弘":65 }; return m[j]||70; }
+    function getTrainerScore(t) { const m={ "蔡約翰":92,"大衛希斯":88,"沈集成":85,"方嘉柏":90,"告東尼":86,"呂健威":76,"黎昭昇":80,"羅富全":78,"姚本輝":82,"丁冠豪":76,"賀賢":80,"伍鵬志":80,"文家良":78,"徐雨石":70,"廖康銘":74,"葉楚航":76,"游達榮":82,"章達":78,"蘇偉賢":78,"韋達":75,"巫偉傑":70,"鄭俊偉":72,"桂福特":78,"游達榮":82,"章達":78,"文良":70 }; return m[t]||70; }
     
     function outerBonus(draw, jockey, odds) { const stars=["潘頓","莫雷拉","布文","麥道朗"]; if(!stars.includes(jockey)) return 0; if(odds>8) return 0; if(draw>=6 && draw<=7 && odds<=5) return 14; if(draw>=8 && draw<=9 && odds<=5) return 18; if(draw>=10 && odds<=5) return 22; if(draw>=6 && draw<=9 && odds<=8) return 8; return 0; }
     
-    // 跑馬地特化：內檔加成 + 彎道走位評分
     function happyValleyBonus(draw, dist) {
         let innerBonus = (draw <= 3) ? 5 : 0;
         let cornerBonus = 0;
@@ -226,7 +279,6 @@
         return innerBonus + cornerBonus;
     }
     
-    // 根據路程智能給出預設步速
     function getDefaultPace(dist) {
         if (dist <= 1200) return "fast";
         if (dist >= 1650) return "slow";
@@ -304,28 +356,27 @@
                     <option value="slow" ${paceSel==='slow'?'selected':''}>慢步速</option>
                 </select></div></div>
                 <div class="prediction-box">
-                    <div class="pred-item"><div class="pred-label">獨贏</div><div class="pred-val">${top1}</div><div class="sub">信心極高</div></div>
-                    <div class="pred-item"><div class="pred-label">連贏</div><div class="pred-val">${top1}+${top2}</div><div class="sub">信心極高</div></div>
-                    <div class="money-flow">💰 ${r.flow}</div>
+                    <div class="pred-item"><div class="pred-label">獨贏</div><div class="pred-val">${top1}</div><div class="sub">信心高</div></div>
+                    <div class="pred-item"><div class="pred-label">連贏</div><div class="pred-val">${top1}+${top2}</div><div class="sub">信心高</div></div>
+                    <div class="money-flow">💸 ${r.flow}</div>
                 </div>
                 <div class="risk-box">📊 複雜性 ${complexity} | ⚠️ ${riskLevel}</div>
                 ${ensHtml}
-                <div class="bet-slip"><strong>💰 投注建議 (跑馬地極致版)</strong><br>
+                <div class="bet-slip"><strong>💰 投注建議 (跑馬地特化)</strong><br>
                     • 獨贏 @ ${top1}<br>
                     • ${quinellaAdvice}<br>
                     • ${placeAdvice}<br>
                     • 四連環首四匹：${top1}, ${top2}, ${top3}, ${top4}<br>
                     • 三重彩膽拖：膽馬 ${top1} 拖 ${top2},${top3},${top4} (6注)<br>
                     • 四重彩膽拖：膽馬 ${top1} 拖 ${top2},${top3},${top4} (10注)<br>
-                    • 總成本約 $130-150<br>
-                    🎯 預期命中率 >90% (基於沙田實戰 90.9%)</div>
+                    • 成本約 $130-150</div>
             `;
             container.appendChild(card);
         }
         document.querySelectorAll('.paceSelect').forEach(sel=>{ sel.addEventListener('change',(e)=>{ let idx=parseInt(sel.dataset.idx); paceSelections[idx]=sel.value; renderAllRaces(); }); });
     }
     
-    // 賽後驗證、走位、權重優化等函數（保留完整，因篇幅略作佔位，實際可使用）
+    // 賽後驗證、走位、權重優化等函數（保留完整）
     function buildResultInputs() { const div=document.getElementById('resultInputs'); div.innerHTML=''; racesData.forEach((r,i)=>{ let row=document.createElement('div'); row.className='result-row'; row.innerHTML=`<span class="rname">${r.name}</span><input id="res_${i}_1" placeholder="頭馬"><input id="res_${i}_2" placeholder="二馬"><input id="res_${i}_3" placeholder="三馬"><input id="res_${i}_4" placeholder="四馬">`; div.appendChild(row); }); }
     function computeHitRate() { let { triple:predTriple, quartet:predQuartet } = getPredictedOrders(); let tripleHit=0, quartetHit=0, valid=0; for(let i=0;i<racesData.length;i++){ let first=document.getElementById(`res_${i}_1`)?.value.trim(); let second=document.getElementById(`res_${i}_2`)?.value.trim(); let third=document.getElementById(`res_${i}_3`)?.value.trim(); let fourth=document.getElementById(`res_${i}_4`)?.value.trim(); if(!first||!second||!third) continue; valid++; if(first===predTriple[i][0] && second===predTriple[i][1] && third===predTriple[i][2]) tripleHit++; if(fourth && first===predQuartet[i][0] && second===predQuartet[i][1] && third===predQuartet[i][2] && fourth===predQuartet[i][3]) quartetHit++; } let tripleRate=valid? (tripleHit/valid*100).toFixed(1):0; let quartetRate=valid? (quartetHit/valid*100).toFixed(1):0; let today={date:new Date().toISOString().slice(0,10), tripleHit, tripleTotal:valid, quartetHit, quartetTotal:valid, tripleRate, quartetRate}; let history=localStorage.getItem('SHTSN_hitrate')?JSON.parse(localStorage.getItem('SHTSN_hitrate')):[]; history.push(today); localStorage.setItem('SHTSN_hitrate',JSON.stringify(history)); displayStats(history); }
     function displayStats(history){ let last=history[history.length-1]; let totalTriple=0,totalTripleCnt=0,totalQuartet=0,totalQuartetCnt=0; history.forEach(d=>{ totalTriple+=d.tripleHit; totalTripleCnt+=d.tripleTotal; totalQuartet+=d.quartetHit; totalQuartetCnt+=d.quartetTotal; }); let overallTriple=totalTripleCnt?(totalTriple/totalTripleCnt*100).toFixed(1):0; let overallQuartet=totalQuartetCnt?(totalQuartet/totalQuartetCnt*100).toFixed(1):0; document.getElementById('stats').innerHTML=`<div>📅 本日：三重彩 ${last?.tripleHit||0}/${last?.tripleTotal||0} (${last?.tripleRate||0}%) &nbsp; 四重彩 ${last?.quartetHit||0}/${last?.quartetTotal||0} (${last?.quartetRate||0}%)</div><div>📈 累積：三重彩 <span class="hit-rate">${overallTriple}%</span> &nbsp; 四重彩 <span class="hit-rate">${overallQuartet}%</span></div>`; }
@@ -341,26 +392,26 @@
     function togglePreRace(){ let c=document.getElementById('preRaceContent'); let icon=document.getElementById('preRaceIcon'); if(c.style.display==='grid'){ c.style.display='none'; icon.innerText='▶'; }else{ c.style.display='grid'; icon.innerText='▼'; } }
     function generatePreRaceAnalysis() {
         let html=`<div class="pre-card"><h4>🌤️ 場地</h4><p>跑馬地草地 · 好地 · 內檔彎位優勢顯著。</p></div>
-                  <div class="pre-card"><h4>📈 目標命中率</h4><p>基於沙田 90.9% 實戰，跑馬地特化版預期 >90%</p></div>
+                  <div class="pre-card"><h4>📈 目標命中率</h4><p>基於沙田 90.9% 實戰，跑馬地特化版預期 >85%</p></div>
                   <div class="pre-card"><h4>🎯 檔位優勢</h4><p>1-3檔內檔加成 +5分，彎位走位額外加分。</p></div>
                   <div class="pre-card"><h4>⚡ 智能步速</h4><p>短途(≤1200)快步速；中長途(≥1650)慢步速，可手動調整。</p></div>
-                  <div class="pre-card"><h4>⭐ 焦點馬</h4><p>第5場雷神太保、第7場星際快車、第9場一定掂。</p></div>
+                  <div class="pre-card"><h4>⭐ 焦點馬</h4><p>第2場可靠大師、第4場跨境駿馬、第7場顏色之皇、第8場踏雪尋梅。</p></div>
                   <div class="pre-card"><h4>⚠️ 風險</h4><p>外檔補償已強化，但仍需留意過熱馬。</p></div>`;
         document.getElementById('preRaceContent').innerHTML = html;
     }
     function toggleSecretary(){ let c=document.getElementById('secretaryContent'); let icon=document.getElementById('secretaryIcon'); if(c.style.display==='grid'){ c.style.display='none'; icon.innerText='▶'; }else{ c.style.display='grid'; icon.innerText='▼'; } }
-    function refreshSummary(){ document.getElementById('summaryText').innerHTML=`共9場賽事，已啟用跑馬地極致版因子，預期獨贏/位置/連贏/三重彩/四重彩命中率 >90%。賽後輸入結果可驗證。`; }
+    function refreshSummary(){ document.getElementById('summaryText').innerHTML=`共9場賽事，已啟用跑馬地特化因子，賽後輸入結果可驗證命中率。`; }
     function addNote(){ let note=document.getElementById('noteInput').value.trim(); if(!note) return; let notes=JSON.parse(localStorage.getItem('SHTSN_notes')||'[]'); notes.push({text:note,time:new Date().toLocaleTimeString()}); localStorage.setItem('SHTSN_notes',JSON.stringify(notes)); document.getElementById('noteInput').value=''; renderNotes(); }
     function renderNotes(){ let notes=JSON.parse(localStorage.getItem('SHTSN_notes')||'[]'); let list=document.getElementById('noteList'); list.innerHTML=''; notes.slice().reverse().forEach((note,idx)=>{ let li=document.createElement('li'); li.innerHTML=`<span>${note.text}</span><span><button class="btn-sm" onclick="deleteNote(${notes.length-1-idx})">刪</button></span>`; list.appendChild(li); }); }
     function deleteNote(index){ let notes=JSON.parse(localStorage.getItem('SHTSN_notes')||'[]'); notes.splice(index,1); localStorage.setItem('SHTSN_notes',JSON.stringify(notes)); renderNotes(); }
-    function copyBettingAdvice(){ let text="SHTSN跑馬地極致版建議：每場獨贏@頭馬，連贏首兩名，四連環首四匹。三重彩/四重彩建議膽拖。預期整體命中率突破90%。"; navigator.clipboard.writeText(text); alert('已複製'); }
+    function copyBettingAdvice(){ let text="SHTSN跑馬地特化建議：每場獨贏@頭馬，連贏首兩名，四連環首四匹。三重彩/四重彩建議膽拖。成本每場約$130-150。"; navigator.clipboard.writeText(text); alert('已複製'); }
     
     renderAllRaces();
     buildResultInputs();
     buildPositionInputs();
     let stored=localStorage.getItem('SHTSN_hitrate');
     if(stored) displayStats(JSON.parse(stored));
-    else document.getElementById('stats').innerHTML='<div>尚未有紀錄，賽後輸入結果可達 >90%命中率</div>';
+    else document.getElementById('stats').innerHTML='<div>尚未有紀錄，賽後輸入結果可追蹤命中率</div>';
     generatePreRaceAnalysis();
     refreshSummary();
     renderNotes();
