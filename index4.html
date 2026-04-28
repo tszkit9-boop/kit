@@ -3,388 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>🕸️ SHTSN 賽馬預測系統 | 沙田 2026-04-26 | 三四重彩自動驗證</title>
+    <title>賽果彩池記錄系統｜已載入2026-04-26沙田賽果</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background-color: #0f1a0f;
-            background-image: radial-gradient(circle at 10% 20%, #1a2a1f 0%, #0a120a 100%);
-            font-family: 'Segoe UI', 'Roboto', 'Noto Sans TC', system-ui, sans-serif;
+            background: #0f1a0f;
+            font-family: system-ui, 'Segoe UI', sans-serif;
             color: #e6f0e6;
-            padding: 1rem;
-            line-height: 1.5;
+            padding: 1.2rem;
         }
-        .container { max-width: 1300px; margin: 0 auto; }
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: #ffb347;
             border-bottom: 2px solid #ffb347;
-            padding-bottom: 1rem;
+            display: inline-block;
+            margin-bottom: 1rem;
         }
-        .header h1 { font-size: 1.8rem; color: #ffb347; }
-        .sub { font-size: 0.85rem; opacity: 0.8; }
-        .race-card, .data-card {
+        .sub {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+        }
+        .card {
             background: rgba(26,42,31,0.85);
             border-radius: 28px;
+            padding: 1rem;
             margin-bottom: 2rem;
-            padding: 1.2rem;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
         }
-        .race-title {
-            font-size: 1.4rem;
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        .field label {
+            font-size: 0.7rem;
+            color: #ffb347;
             font-weight: bold;
-            border-left: 5px solid #ffb347;
-            padding-left: 0.8rem;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
         }
-        .prediction-box {
-            background: #0e1812;
-            border-radius: 20px;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid #ffb347;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .prediction-item {
-            background: #1a2a1f;
-            border-radius: 16px;
-            padding: 0.3rem 0.8rem;
-            text-align: center;
-            min-width: 100px;
-        }
-        .prediction-label { font-size: 0.7rem; color: #ffb347; }
-        .prediction-value { font-size: 1.1rem; font-weight: bold; }
-        .money-flow { font-size: 0.7rem; color: #ffaa66; margin-top: 0.2rem; }
-        .bet-slip, .optimization-box {
-            background: #111d15;
-            border-radius: 18px;
-            padding: 0.7rem;
-            margin-top: 0.8rem;
-            font-size: 0.8rem;
-        }
-        .verify-panel {
-            background: #132015;
-            border-radius: 28px;
-            padding: 1.2rem;
-            margin-top: 2rem;
-            border: 1px solid #ffb347;
-        }
-        .race-result-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
-            background: #1e2e23;
-            padding: 6px 12px;
-            border-radius: 40px;
-        }
-        .race-result-row .race-name { width: 140px; font-weight: bold; font-size: 0.8rem; }
-        .race-result-row input {
+        input, select {
             background: #2a3a2f;
             border: 1px solid #ffb347;
-            padding: 4px 8px;
-            border-radius: 24px;
-            color: #fff;
-            width: 85px;
-            font-size: 0.75rem;
+            border-radius: 20px;
+            padding: 0.4rem 0.7rem;
+            color: white;
+            font-size: 0.8rem;
         }
-        .calc-btn {
+        button {
             background: #ffb347;
             color: #1a2a1f;
             font-weight: bold;
             border: none;
-            padding: 6px 16px;
-            border-radius: 40px;
+            border-radius: 30px;
+            padding: 0.4rem 1.2rem;
             cursor: pointer;
-            margin: 10px 5px 0 0;
+            font-size: 0.8rem;
+            margin: 0.2rem 0.2rem 0 0;
         }
-        .stats-box {
-            background: #0a130e;
-            border-radius: 20px;
-            padding: 1rem;
-            margin-top: 1rem;
-            font-size: 0.85rem;
+        button:hover {
+            background: #e6a132;
         }
-        .hit-rate { color: #ffb347; font-weight: bold; }
-        .info-box { background: #162218; border-radius: 18px; padding: 0.7rem; margin-top: 0.5rem; font-size: 0.75rem; }
-        .disclaimer { font-size: 0.7rem; text-align: center; margin-top: 2rem; padding: 0.8rem; background: #0a130e; border-radius: 18px; color: #aaa; }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+        .search-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
+            margin-bottom: 1rem;
+        }
+        .search-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            overflow-x: auto;
+            display: block;
+        }
+        th, td {
+            padding: 0.4rem 0.2rem;
+            text-align: center;
+            border-bottom: 1px solid #2f4035;
+        }
+        th {
+            background: #2a3a2f;
+            color: #ffb347;
+        }
+        .delete-btn, .edit-btn {
+            background: #6e2c2c;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.65rem;
+            margin: 0 2px;
+        }
+        .edit-btn { background: #2c6e6e; }
+        .stats {
+            background: #162218;
+            border-radius: 18px;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.75rem;
+        }
+        .disclaimer {
+            font-size: 0.65rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #aaa;
+        }
         @media (max-width: 700px) {
-            body { padding: 0.6rem; }
-            .race-result-row .race-name { width: 100px; }
-            .race-result-row input { width: 70px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .search-bar { flex-direction: column; }
+            th, td { font-size: 0.65rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h1>🕸️ SHTSN 賽馬預測系統 · V8.8</h1>
-        <div class="sub">鞍上人姿態獨立 | 騎練合拍度 | 賠率變動監測 | 賽後自動驗證三四重彩命中率</div>
-        <div class="sub">2026-04-26 沙田草地日賽</div>
-    </div>
+    <h1>🏇 派彩記錄器</h1>
+    <div class="sub">獨贏 · 位置 · 連贏 · 三重彩 · 四重彩｜已預載 2026-04-26 沙田日賽11場賽果</div>
 
-    <!-- 資料部回顧 -->
-    <div class="data-card">
-        <div class="race-title">📚 資料部回顧 | 過往戰績</div>
-        <table style="width:100%; border-collapse: collapse; font-size:0.75rem;">
-            <thead><tr style="background:#2a3a2f;"><th>日期</th><th>場地/路程</th><th>頭馬</th><th>精選池</th><th>獨贏命中</th><th>四重彩派彩</th></tr></thead>
-            <tbody>
-                <tr><td>2026-04-22</td><td>快活谷1200米五班</td><td>獵寶勤</td><td>4,8</td><td>✅</td><td>$28,250</td></tr>
-                <tr><td>2026-04-22</td><td>快活谷1650米五班</td><td>焦點</td><td>7,8</td><td>✅</td><td>—</td></tr>
-                <tr><td>2026-04-22</td><td>快活谷1650米四班</td><td>贏玥</td><td>無</td><td>—</td><td>$112,641(未中)</td></tr>
-                <tr><td>2026-04-22</td><td>快活谷1200米四班</td><td>銳目</td><td>6</td><td>✅</td><td>—</td></tr>
-                <tr><td>2026-04-22</td><td>快活谷1200米四班</td><td>雷神太保</td><td>11,12</td><td>✅</td><td>$3,002</td></tr>
-                <tr><td>2026-03-18</td><td>快活谷1650米五班</td><td>神駒馬靈</td><td>7</td><td>✅</td><td>$88,727</td></tr>
-            </tbody>
-        </table>
-        <div class="info-box">📌 過去10場有精選池的賽事，入圍率100%，獨贏命中率55.6%，四重彩完美命中2場。</div>
-    </div>
-
-    <!-- 11場賽事預測容器 -->
-    <div id="racesContainer"></div>
-
-    <!-- 賽後驗證面板 -->
-    <div class="verify-panel">
-        <div class="race-title" style="font-size:1.2rem;">📊 賽後自動驗證：三重彩 & 四重彩命中率</div>
-        <div id="resultInputs"></div>
-        <div>
-            <button class="calc-btn" id="calcHitRateBtn">✅ 計算本日命中率 (儲存紀錄)</button>
-            <button class="calc-btn" id="resetHistoryBtn">🗑️ 清除所有歷史紀錄</button>
+    <!-- 輸入表單 -->
+    <div class="card">
+        <div style="font-weight: bold; margin-bottom: 0.8rem;">📝 新增 / 編輯 派彩記錄</div>
+        <div class="form-grid">
+            <div class="field"><label>日期</label><input type="date" id="date" value="2026-04-29"></div>
+            <div class="field"><label>場地名稱</label><select id="venue"><option value="跑馬地">跑馬地</option><option value="沙田">沙田</option></select></div>
+            <div class="field"><label>場次 (R)</label><input type="number" id="raceNum" value="1" min="1" max="12"></div>
+            <div class="field"><label>班次/路程</label><input type="text" id="classDist" placeholder="例: 四班1200米"></div>
+            <div class="field"><label>頭馬名稱</label><input type="text" id="winner" placeholder="馬名"></div>
+            <div class="field"><label>第二名</label><input type="text" id="second" placeholder="馬名"></div>
+            <div class="field"><label>第三名</label><input type="text" id="third" placeholder="馬名"></div>
+            <div class="field"><label>第四名</label><input type="text" id="fourth" placeholder="馬名"></div>
+            <div class="field"><label>獨贏派彩 ($)</label><input type="number" id="winDiv" step="0.5" placeholder="例: 33.5"></div>
+            <div class="field"><label>位置派彩 (頭馬)</label><input type="number" id="place1" step="0.5" placeholder="例: 14.5"></div>
+            <div class="field"><label>位置派彩 (第二名)</label><input type="number" id="place2" step="0.5" placeholder="例: 17.0"></div>
+            <div class="field"><label>位置派彩 (第三名)</label><input type="number" id="place3" step="0.5" placeholder="例: 49.0"></div>
+            <div class="field"><label>連贏派彩 ($)</label><input type="number" id="quinellaDiv" step="0.5" placeholder="例: 92.5"></div>
+            <div class="field"><label>三重彩派彩 ($)</label><input type="number" id="tripleDiv" step="0.5" placeholder="例: 2486"></div>
+            <div class="field"><label>四重彩派彩 ($)</label><input type="number" id="quartetDiv" step="0.5" placeholder="例: 24097"></div>
+            <div class="field"><label>備註</label><input type="text" id="remark" placeholder="選填"></div>
         </div>
-        <div id="hitRateDisplay" class="stats-box"></div>
-        <div class="info-box">💡 說明：<br>
-            - 三重彩預測 = 每場綜合分排名 ★1,★2,★3 順序；四重彩 = ★1,★2,★3,★4 順序。<br>
-            - 請輸入每場真實頭馬、二馬、三馬、四馬（名稱需與表格馬名完全一致），比對順序相同即命中。<br>
-            - 所有紀錄儲存於瀏覽器 localStorage，可累積統計。</div>
+        <div class="btn-group">
+            <button id="saveBtn">💾 儲存記錄</button>
+            <button id="clearFormBtn">🗑️ 清空表單</button>
+            <button id="exportBtn">📄 匯出 JSON</button>
+        </div>
+    </div>
+
+    <!-- 查詢及列表 -->
+    <div class="card">
+        <div style="font-weight: bold; margin-bottom: 0.8rem;">🔍 查詢記錄</div>
+        <div class="search-bar">
+            <div class="search-item"><label>篩選日期</label><input type="date" id="filterDate"></div>
+            <div class="search-item"><label>篩選場地</label><select id="filterVenue"><option value="">全部</option><option value="跑馬地">跑馬地</option><option value="沙田">沙田</option></select></div>
+            <div class="search-item"><label>篩選場次</label><input type="number" id="filterRaceNum" placeholder="場次" style="width:70px;"></div>
+            <div class="search-item"><button id="searchBtn">🔍 查詢</button><button id="resetFilterBtn">重置篩選</button></div>
+        </div>
+        <div id="statsArea" class="stats"></div>
+        <div style="overflow-x: auto;">
+            <table id="resultTable">
+                <thead>
+                    <tr><th>日期</th><th>場地</th><th>場次</th><th>班次/路程</th><th>頭馬</th><th>二馬</th><th>三馬</th><th>四馬</th><th>獨贏</th><th>位置(1,2,3)</th><th>連贏</th><th>三重彩</th><th>四重彩</th><th>備註</th><th>操作</th></tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
     </div>
 
     <div class="disclaimer">
-        🧾 誠實聲明：所有評分、預測及信心評級均為系統基於模擬數據的運算結果，實際賽果可能不同。<br>
-        賽後命中率紀錄儲存於瀏覽器，清除資料會遺失。本報告僅供系統協作研究，不構成實際投注建議。
+        💡 所有資料儲存於瀏覽器 localStorage，可匯出 JSON 備份。支援編輯/刪除，即時更新。<br>
+        📅 已預先載入 2026-04-26 沙田日賽 11 場完整賽果（頭馬至四馬及四重彩派彩）。
     </div>
 </div>
 
 <script>
-    // 完整賽事數據 (11場，每場包含頭馬、連贏、資金流向及綜合分排序用)
-    const racesData = [
-        { name: "第1場 · 第四班1200米草地", time: "13:00",
-          horses: [
-            { name:"利高八斗", total:88.2, rank:1 },
-            { name:"星運少爵", total:82.5, rank:2 },
-            { name:"賢者威楓", total:76.8, rank:3 },
-            { name:"開心孖寶", total:71.2, rank:4 }
-          ], winPred:"利高八斗", quinella:"利高八斗+星運少爵", conf:"高", flow:"利高八斗 -18% 🔥重飛" },
-        { name: "第2場 · 第四班1600米草地", time: "13:30",
-          horses: [
-            { name:"大回報", total:84.1, rank:1 },
-            { name:"隼風雲", total:75.8, rank:2 },
-            { name:"奮鬥輝煌", total:70.9, rank:3 },
-            { name:"絲路福將", total:70.2, rank:4 }
-          ], winPred:"大回報", quinella:"大回報+隼風雲", conf:"高", flow:"大回報 -15% 落飛" },
-        { name: "第3場 · 第四班1200米草地", time: "14:00",
-          horses: [
-            { name:"堅先生", total:85.5, rank:1 },
-            { name:"天天更好", total:73.2, rank:3 },
-            { name:"幸福約定", total:76.0, rank:2 },
-            { name:"杰遜仔", total:70.4, rank:4 }
-          ], winPred:"堅先生", quinella:"堅先生+天天更好", conf:"中高", flow:"平穩" },
-        { name: "第4場 · 第四班1400米草地", time: "14:35",
-          horses: [
-            { name:"日日賞", total:83.4, rank:1 },
-            { name:"奇異歡星", total:79.2, rank:2 },
-            { name:"部族高手", total:74.5, rank:3 },
-            { name:"文采風流", total:71.8, rank:4 }
-          ], winPred:"日日賞", quinella:"日日賞+奇異歡星", conf:"高", flow:"日日賞 -12% 落飛" },
-        { name: "第5場 · 主席短途賽(一級賽)1200米", time: "15:10",
-          horses: [
-            { name:"嘉應高昇", total:95.2, rank:1 },
-            { name:"里見夢境", total:81.0, rank:2 },
-            { name:"驥馬雷拉", total:76.8, rank:3 },
-            { name:"舉步生風", total:72.0, rank:4 }
-          ], winPred:"嘉應高昇", quinella:"嘉應高昇+里見夢境", conf:"極高", flow:"嘉應高昇 -30% 🔥超級重飛" },
-        { name: "第6場 · 第三班1200米草地", time: "15:45",
-          horses: [
-            { name:"健康快車", total:85.2, rank:1 },
-            { name:"綫路滿貫", total:79.8, rank:3 },
-            { name:"傑出雷霆", total:74.5, rank:4 },
-            { name:"冷娃", total:80.6, rank:2 }
-          ], winPred:"健康快車", quinella:"健康快車+綫路滿貫", conf:"高", flow:"平穩" },
-        { name: "第7場 · 國際一級賽1200米草地", time: "16:20",
-          horses: [
-            { name:"小鳥天堂", total:88.6, rank:1 },
-            { name:"遠觀天象", total:86.4, rank:2 },
-            { name:"祝願", total:80.2, rank:3 },
-            { name:"金鑾貴人", total:76.5, rank:4 }
-          ], winPred:"小鳥天堂", quinella:"小鳥天堂+遠觀天象", conf:"極高", flow:"小鳥天堂 -25% 重飛" },
-        { name: "第8場 · 第三班1400米草地", time: "16:55",
-          horses: [
-            { name:"喜蓮勁感", total:91.2, rank:1 },
-            { name:"友望仁", total:78.5, rank:3 },
-            { name:"三軍勇將", total:78.0, rank:4 },
-            { name:"一世美麗", total:80.4, rank:2 }
-          ], winPred:"喜蓮勁感", quinella:"喜蓮勁感+友望仁", conf:"極高", flow:"喜蓮勁感 -22% 重飛" },
-        { name: "第9場 · 富衛保險女皇盃2000米", time: "17:35",
-          horses: [
-            { name:"浪漫勇士", total:94.1, rank:1 },
-            { name:"同工之妙", total:86.5, rank:2 },
-            { name:"蒙面舞會", total:85.2, rank:3 },
-            { name:"球星", total:81.0, rank:4 }
-          ], winPred:"浪漫勇士", quinella:"浪漫勇士+同工之妙", conf:"極高", flow:"浪漫勇士 -20% 落飛" },
-        { name: "第10場 · 第三班1600米草地", time: "18:10",
-          horses: [
-            { name:"黃金騎士", total:86.4, rank:1 },
-            { name:"共享富裕", total:82.5, rank:2 },
-            { name:"紫荆拼搏", total:76.8, rank:4 },
-            { name:"金匯千帥", total:79.8, rank:3 }
-          ], winPred:"黃金騎士", quinella:"黃金騎士+共享富裕", conf:"高", flow:"黃金騎士 -15% 落飛" },
-        { name: "第11場 · 第二班1400米草地", time: "18:45",
-          horses: [
-            { name:"時時歡聲", total:94.5, rank:1 },
-            { name:"章金主", total:88.2, rank:2 },
-            { name:"極上紗璠", total:86.0, rank:3 },
-            { name:"千帆駒", total:81.5, rank:4 }
-          ], winPred:"時時歡聲", quinella:"時時歡聲+章金主", conf:"極高", flow:"時時歡聲 -28% 🔥重飛" }
+    const STORAGE_KEY = 'SHTSN_payouts';
+
+    // ---------- 預設資料：2026-04-26 沙田日賽 11 場 ----------
+    const defaultRecords = [
+        { date:"2026-04-26", venue:"沙田", raceNum:1, classDist:"第四班1200米", winner:"包裝天王", second:"利高八斗", third:"星光大道", fourth:"馬馳登", winDiv:33.5, place1:14.5, place2:17.0, place3:49.0, quinellaDiv:92.5, tripleDiv:2486, quartetDiv:24097, remark:"四重彩$24,097" },
+        { date:"2026-04-26", venue:"沙田", raceNum:2, classDist:"第四班1600米", winner:"旋探", second:"家傳之寶", third:"大回報", fourth:"都靈冠星", winDiv:36.0, place1:15.0, place2:15.0, place3:27.0, quinellaDiv:63.0, tripleDiv:809, quartetDiv:11288, remark:"四重彩$11,288" },
+        { date:"2026-04-26", venue:"沙田", raceNum:3, classDist:"第四班1200米", winner:"堅先生", second:"天天更好", third:"實力加", fourth:"幸福約定", winDiv:52.0, place1:15.0, place2:19.5, place3:19.5, quinellaDiv:149.0, tripleDiv:1330, quartetDiv:9574, remark:"四重彩$9,574" },
+        { date:"2026-04-26", venue:"沙田", raceNum:4, classDist:"第四班1400米", winner:"勁勇皇駒", second:"嵐臣", third:"星光快驅", fourth:"部族高手", winDiv:61.5, place1:19.5, place2:35.0, place3:118.0, quinellaDiv:362.5, tripleDiv:19295, quartetDiv:135026, remark:"四重彩$135,026" },
+        { date:"2026-04-26", venue:"沙田", raceNum:5, classDist:"一級賽1200米", winner:"嘉應高昇", second:"里見夢境", third:"精算暴雪", fourth:"舉步生風", winDiv:10.5, place1:10.1, place2:21.0, place3:49.0, quinellaDiv:35.0, tripleDiv:305, quartetDiv:1041, remark:"四重彩$1,041" },
+        { date:"2026-04-26", venue:"沙田", raceNum:6, classDist:"第三班1200米", winner:"增強", second:"傑出雷霆", third:"幸運糖", fourth:"冷娃", winDiv:39.5, place1:14.5, place2:22.5, place3:47.5, quinellaDiv:157.5, tripleDiv:2923, quartetDiv:10643, remark:"四重彩$10,643" },
+        { date:"2026-04-26", venue:"沙田", raceNum:7, classDist:"一級賽1600米", winner:"祝願", second:"百賀飛駒", third:"港邊小區", fourth:"白鷺金剛", winDiv:54.0, place1:19.5, place2:58.5, place3:58.0, quinellaDiv:644.5, tripleDiv:30648, quartetDiv:187520, remark:"四重彩$187,520" },
+        { date:"2026-04-26", venue:"沙田", raceNum:8, classDist:"第三班1400米", winner:"三軍勇將", second:"喜蓮勁威", third:"一世美麗", fourth:"友瑩仁", winDiv:189.0, place1:53.5, place2:23.0, place3:15.5, quinellaDiv:654.5, tripleDiv:4097, quartetDiv:23377, remark:"四重彩$23,377" },
+        { date:"2026-04-26", venue:"沙田", raceNum:9, classDist:"一級賽2000米", winner:"浪漫勇士", second:"蒙面舞會", third:"同工之妙", fourth:"御冠軍", winDiv:13.0, place1:10.1, place2:13.5, place3:18.0, quinellaDiv:27.0, tripleDiv:76, quartetDiv:235, remark:"四重彩$235" },
+        { date:"2026-04-26", venue:"沙田", raceNum:10, classDist:"第三班1600米", winner:"火悟空", second:"開心勇駒", third:"安都", fourth:"三寶進財", winDiv:68.5, place1:27.0, place2:27.0, place3:19.0, quinellaDiv:282.0, tripleDiv:4067, quartetDiv:332775, remark:"四重彩$332,775" },
+        { date:"2026-04-26", venue:"沙田", raceNum:11, classDist:"第二班1400米", winner:"時時歡聲", second:"章金主", third:"千帆駒", fourth:"極上紗璫", winDiv:40.0, place1:14.5, place2:19.5, place3:16.5, quinellaDiv:119.5, tripleDiv:846, quartetDiv:2198, remark:"四重彩$2,198" }
     ];
 
-    // 獲取每場的預測排序（基於綜合分降序）
-    function getPredictedOrders() {
-        const triple = [];
-        const quartet = [];
-        for (let race of racesData) {
-            const sorted = [...race.horses].sort((a,b) => b.total - a.total);
-            triple.push(sorted.slice(0,3).map(h => h.name));
-            quartet.push(sorted.slice(0,4).map(h => h.name));
-        }
-        return { triple, quartet };
-    }
-
-    // 渲染所有賽事卡片
-    function renderRaces() {
-        const container = document.getElementById('racesContainer');
-        container.innerHTML = '';
-        for (let race of racesData) {
-            const card = document.createElement('div');
-            card.className = 'race-card';
-            card.innerHTML = `
-                <div class="race-title">🏇 ${race.name} <span style="font-size:0.8rem; background:#2a3a2f; padding:0.2rem 0.8rem; border-radius:40px;">${race.time}</span></div>
-                <div class="prediction-box">
-                    <div class="prediction-item"><div class="prediction-label">🎯 頭馬</div><div class="prediction-value">${race.winPred}</div><div class="confidence">信心：${race.conf}</div></div>
-                    <div class="prediction-item"><div class="prediction-label">🔗 連贏組合</div><div class="prediction-value">${race.quinella}</div><div class="confidence">信心：${race.conf}</div></div>
-                    <div class="money-flow">💰 資金流向：${race.flow}</div>
-                </div>
-                <div class="bet-slip"><strong>💰 標準投注：獨贏@${race.winPred}，連贏 ${race.quinella}，四連環首四匹精選 | 成本$130</strong></div>
-                <div class="optimization-box"><strong>🎯 三重彩/四重彩優化建議</strong><br>排名清晰度高，建議單式四重彩或膽拖，詳見上方預測。</div>
-            `;
-            container.appendChild(card);
+    // 載入資料：若 localStorage 為空則寫入預設資料
+    function initData() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+            // 為每個記錄加上唯一 id
+            const withIds = defaultRecords.map((r, idx) => ({ ...r, id: Date.now() + idx }));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(withIds));
         }
     }
 
-    // 建構賽果輸入框 (11場)
-    function buildResultInputs() {
-        const div = document.getElementById('resultInputs');
-        div.innerHTML = '';
-        racesData.forEach((race, idx) => {
-            const row = document.createElement('div');
-            row.className = 'race-result-row';
-            row.innerHTML = `
-                <span class="race-name">${race.name}</span>
-                <input type="text" placeholder="頭馬" id="r${idx}_1">
-                <input type="text" placeholder="二馬" id="r${idx}_2">
-                <input type="text" placeholder="三馬" id="r${idx}_3">
-                <input type="text" placeholder="四馬" id="r${idx}_4">
-            `;
-            div.appendChild(row);
+    function loadAll() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveAll(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function addRecord(record) {
+        const data = loadAll();
+        record.id = Date.now();
+        data.unshift(record);
+        saveAll(data);
+        return data;
+    }
+
+    function updateRecord(id, updatedRecord) {
+        let data = loadAll();
+        const index = data.findIndex(r => r.id == id);
+        if (index !== -1) {
+            data[index] = { ...updatedRecord, id: parseInt(id) };
+            saveAll(data);
+        }
+        return data;
+    }
+
+    function deleteRecord(id) {
+        let data = loadAll();
+        data = data.filter(r => r.id != id);
+        saveAll(data);
+        return data;
+    }
+
+    let editingId = null;
+
+    function renderTable(filtered) {
+        const tbody = document.getElementById('tableBody');
+        if (!filtered.length) {
+            tbody.innerHTML = '<tr><td colspan="15" style="text-align:center;">暫無派彩記錄</td></tr>';
+            document.getElementById('statsArea').innerHTML = '📊 共 0 筆記錄';
+            return;
+        }
+        let html = '';
+        filtered.forEach(r => {
+            const placeStr = `${r.place1 || '-'} / ${r.place2 || '-'} / ${r.place3 || '-'}`;
+            html += `<tr>
+                <td>${r.date}</td>
+                <td>${r.venue}</td>
+                <td>${r.raceNum}</td>
+                <td>${r.classDist || '-'}</td>
+                <td style="color:#ffb347;">${escapeHtml(r.winner)}</td>
+                <td>${escapeHtml(r.second || '-')}</td>
+                <td>${escapeHtml(r.third || '-')}</td>
+                <td>${escapeHtml(r.fourth || '-')}</td>
+                <td>${r.winDiv ? `$${r.winDiv.toFixed(2)}` : '-'}</td>
+                <td>${placeStr}</td>
+                <td>${r.quinellaDiv ? `$${r.quinellaDiv.toFixed(2)}` : '-'}</td>
+                <td>${r.tripleDiv ? `$${r.tripleDiv.toFixed(2)}` : '-'}</td>
+                <td>${r.quartetDiv ? `$${r.quartetDiv.toFixed(2)}` : '-'}</td>
+                <td>${escapeHtml(r.remark || '-')}</td>
+                <td>
+                    <button class="edit-btn" data-id="${r.id}">✏️</button>
+                    <button class="delete-btn" data-id="${r.id}">🗑️</button>
+                </td>
+            </tr>`;
+        });
+        tbody.innerHTML = html;
+        const totalRaces = filtered.length;
+        const totalQuartet = filtered.filter(r => r.quartetDiv && r.quartetDiv > 0).length;
+        const sumQuartet = filtered.reduce((s, r) => s + (r.quartetDiv || 0), 0);
+        document.getElementById('statsArea').innerHTML = `📊 共 ${totalRaces} 場 | 已記錄四重彩派彩: ${totalQuartet} 場 | 四重彩總派彩: $${sumQuartet.toLocaleString()}`;
+
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.dataset.id);
+                const record = filtered.find(r => r.id === id);
+                if (record) loadToForm(record, id);
+            });
+        });
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.dataset.id);
+                if (confirm('確定刪除此筆記錄？')) {
+                    deleteRecord(id);
+                    applyFilter();
+                }
+            });
         });
     }
 
-    // 計算並儲存命中率
-    function computeAndSave() {
-        const { triple: predTriple, quartet: predQuartet } = getPredictedOrders();
-        let tripleHit = 0, quartetHit = 0, validRaces = 0;
-        for (let i = 0; i < racesData.length; i++) {
-            const first = document.getElementById(`r${i}_1`)?.value.trim();
-            const second = document.getElementById(`r${i}_2`)?.value.trim();
-            const third = document.getElementById(`r${i}_3`)?.value.trim();
-            const fourth = document.getElementById(`r${i}_4`)?.value.trim();
-            if (!first || !second || !third) continue;
-            validRaces++;
-            const actualTriple = [first, second, third];
-            const actualQuartet = [first, second, third, fourth];
-            if (actualTriple[0] === predTriple[i][0] && actualTriple[1] === predTriple[i][1] && actualTriple[2] === predTriple[i][2]) tripleHit++;
-            if (fourth && actualQuartet[0] === predQuartet[i][0] && actualQuartet[1] === predQuartet[i][1] && actualQuartet[2] === predQuartet[i][2] && actualQuartet[3] === predQuartet[i][3]) quartetHit++;
-        }
-        const tripleRate = validRaces ? (tripleHit / validRaces * 100).toFixed(1) : 0;
-        const quartetRate = validRaces ? (quartetHit / validRaces * 100).toFixed(1) : 0;
-        const todayData = {
-            date: new Date().toISOString().slice(0,10),
-            tripleHit, tripleTotal: validRaces,
-            quartetHit, quartetTotal: validRaces,
-            tripleRate, quartetRate
+    function loadToForm(record, id) {
+        document.getElementById('date').value = record.date;
+        document.getElementById('venue').value = record.venue;
+        document.getElementById('raceNum').value = record.raceNum;
+        document.getElementById('classDist').value = record.classDist || '';
+        document.getElementById('winner').value = record.winner;
+        document.getElementById('second').value = record.second || '';
+        document.getElementById('third').value = record.third || '';
+        document.getElementById('fourth').value = record.fourth || '';
+        document.getElementById('winDiv').value = record.winDiv || '';
+        document.getElementById('place1').value = record.place1 || '';
+        document.getElementById('place2').value = record.place2 || '';
+        document.getElementById('place3').value = record.place3 || '';
+        document.getElementById('quinellaDiv').value = record.quinellaDiv || '';
+        document.getElementById('tripleDiv').value = record.tripleDiv || '';
+        document.getElementById('quartetDiv').value = record.quartetDiv || '';
+        document.getElementById('remark').value = record.remark || '';
+        editingId = id;
+        const saveBtn = document.getElementById('saveBtn');
+        saveBtn.textContent = '✏️ 更新記錄';
+    }
+
+    function getFormData() {
+        return {
+            date: document.getElementById('date').value,
+            venue: document.getElementById('venue').value,
+            raceNum: parseInt(document.getElementById('raceNum').value),
+            classDist: document.getElementById('classDist').value,
+            winner: document.getElementById('winner').value,
+            second: document.getElementById('second').value,
+            third: document.getElementById('third').value,
+            fourth: document.getElementById('fourth').value,
+            winDiv: parseFloat(document.getElementById('winDiv').value) || 0,
+            place1: parseFloat(document.getElementById('place1').value) || 0,
+            place2: parseFloat(document.getElementById('place2').value) || 0,
+            place3: parseFloat(document.getElementById('place3').value) || 0,
+            quinellaDiv: parseFloat(document.getElementById('quinellaDiv').value) || 0,
+            tripleDiv: parseFloat(document.getElementById('tripleDiv').value) || 0,
+            quartetDiv: parseFloat(document.getElementById('quartetDiv').value) || 0,
+            remark: document.getElementById('remark').value
         };
-        let history = localStorage.getItem('SHTSN_hitrate_history');
-        let historyArr = history ? JSON.parse(history) : [];
-        historyArr.push(todayData);
-        localStorage.setItem('SHTSN_hitrate_history', JSON.stringify(historyArr));
-        displayStats(historyArr);
     }
 
-    function displayStats(historyArr) {
-        let last = historyArr[historyArr.length-1];
-        let totalTripleHit=0, totalTripleTotal=0, totalQuartetHit=0, totalQuartetTotal=0;
-        historyArr.forEach(day => {
-            totalTripleHit += day.tripleHit;
-            totalTripleTotal += day.tripleTotal;
-            totalQuartetHit += day.quartetHit;
-            totalQuartetTotal += day.quartetTotal;
-        });
-        const overallTriple = totalTripleTotal ? (totalTripleHit/totalTripleTotal*100).toFixed(1) : 0;
-        const overallQuartet = totalQuartetTotal ? (totalQuartetHit/totalQuartetTotal*100).toFixed(1) : 0;
-        document.getElementById('hitRateDisplay').innerHTML = `
-            <div style="display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:space-between;">
-                <div>📅 本日 (${last?.date || '今天'})：<br>
-                三重彩 ${last?.tripleHit||0}/${last?.tripleTotal||0} (${last?.tripleRate||0}%)<br>
-                四重彩 ${last?.quartetHit||0}/${last?.quartetTotal||0} (${last?.quartetRate||0}%)
-                </div>
-                <div>📈 累積 (${historyArr.length}天)：<br>
-                三重彩 <span class="hit-rate">${overallTriple}%</span> (${totalTripleHit}/${totalTripleTotal})<br>
-                四重彩 <span class="hit-rate">${overallQuartet}%</span> (${totalQuartetHit}/${totalQuartetTotal})
-                </div>
-            </div>
-            <div style="margin-top:12px;">💾 資料已儲存至瀏覽器，清除網站資料將會遺失歷史紀錄。</div>
-        `;
+    function clearForm() {
+        document.getElementById('date').value = new Date().toISOString().slice(0,10);
+        document.getElementById('venue').value = '跑馬地';
+        document.getElementById('raceNum').value = '1';
+        document.getElementById('classDist').value = '';
+        document.getElementById('winner').value = '';
+        document.getElementById('second').value = '';
+        document.getElementById('third').value = '';
+        document.getElementById('fourth').value = '';
+        document.getElementById('winDiv').value = '';
+        document.getElementById('place1').value = '';
+        document.getElementById('place2').value = '';
+        document.getElementById('place3').value = '';
+        document.getElementById('quinellaDiv').value = '';
+        document.getElementById('tripleDiv').value = '';
+        document.getElementById('quartetDiv').value = '';
+        document.getElementById('remark').value = '';
+        editingId = null;
+        const saveBtn = document.getElementById('saveBtn');
+        saveBtn.textContent = '💾 儲存記錄';
     }
 
-    function clearHistory() {
-        if (confirm('⚠️ 確定清除所有賽後命中率紀錄？此操作不可復原。')) {
-            localStorage.removeItem('SHTSN_hitrate_history');
-            displayStats([]);
+    function saveRecord() {
+        const data = getFormData();
+        if (!data.date || !data.winner) {
+            alert('請填寫日期及頭馬名稱');
+            return;
         }
-    }
-
-    // 載入既有歷史
-    function loadHistoryStats() {
-        const stored = localStorage.getItem('SHTSN_hitrate_history');
-        if (stored) {
-            displayStats(JSON.parse(stored));
+        if (editingId !== null) {
+            updateRecord(editingId, data);
+            alert('記錄已更新');
         } else {
-            document.getElementById('hitRateDisplay').innerHTML = '<div>尚未有任何賽後驗證紀錄，請輸入真實賽果並點擊計算。</div>';
+            addRecord(data);
+            alert('記錄已新增');
         }
+        clearForm();
+        applyFilter();
     }
 
-    // 初始化
-    renderRaces();
-    buildResultInputs();
-    loadHistoryStats();
-    document.getElementById('calcHitRateBtn').addEventListener('click', computeAndSave);
-    document.getElementById('resetHistoryBtn').addEventListener('click', clearHistory);
+    function applyFilter() {
+        const filterDate = document.getElementById('filterDate').value;
+        const filterVenue = document.getElementById('filterVenue').value;
+        const filterRaceNum = document.getElementById('filterRaceNum').value;
+        let data = loadAll();
+        if (filterDate) data = data.filter(r => r.date === filterDate);
+        if (filterVenue) data = data.filter(r => r.venue === filterVenue);
+        if (filterRaceNum) data = data.filter(r => r.raceNum == filterRaceNum);
+        data.sort((a,b) => new Date(b.date) - new Date(a.date));
+        renderTable(data);
+    }
+
+    function exportJSON() {
+        const data = loadAll();
+        const dataStr = JSON.stringify(data, null, 2);
+        const blob = new Blob([dataStr], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `SHTSN_payouts_${new Date().toISOString().slice(0,19)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // 初始化資料庫
+    initData();
+
+    // 事件綁定
+    document.getElementById('saveBtn').addEventListener('click', saveRecord);
+    document.getElementById('clearFormBtn').addEventListener('click', clearForm);
+    document.getElementById('searchBtn').addEventListener('click', applyFilter);
+    document.getElementById('resetFilterBtn').addEventListener('click', () => {
+        document.getElementById('filterDate').value = '';
+        document.getElementById('filterVenue').value = '';
+        document.getElementById('filterRaceNum').value = '';
+        applyFilter();
+    });
+    document.getElementById('exportBtn').addEventListener('click', exportJSON);
+
+    // 初始載入
+    applyFilter();
 </script>
 </body>
 </html>
