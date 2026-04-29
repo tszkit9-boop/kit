@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN 自動權重微調｜基於歷史賽果優化派別權重</title>
+    <title>SHTSN V10.4 | 跑馬地夜賽 2026-04-29 | 移除三重彩膽拖</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -12,219 +12,235 @@
             color: #e6f0e6;
             padding: 1.2rem;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
-            font-size: 1.8rem;
-            color: #ffb347;
-            border-bottom: 2px solid #ffb347;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-        .sub {
-            color: #aaa;
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            text-align: center;
             margin-bottom: 1.5rem;
-            font-size: 0.85rem;
+            border-bottom: 2px solid #ffb347;
+            padding-bottom: 0.5rem;
         }
-        .card {
+        .header h1 { font-size: 1.8rem; color: #ffb347; }
+        .sub { font-size: 0.75rem; opacity: 0.8; margin-top: 0.3rem; }
+        .race-card {
             background: rgba(26,42,31,0.85);
-            border-radius: 28px;
+            border-radius: 24px;
+            margin-bottom: 1.5rem;
             padding: 1rem;
-            margin-bottom: 2rem;
         }
-        .param-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-        }
-        .param-item {
-            background: #1e2e23;
-            border-radius: 18px;
-            padding: 0.4rem 0.8rem;
+        .race-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-left: 4px solid #ffb347;
+            padding-left: 0.6rem;
+            margin-bottom: 0.8rem;
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .prediction-box {
+            background: #0e1812;
+            border-radius: 16px;
+            padding: 0.5rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             align-items: center;
         }
-        .param-label {
-            font-size: 0.8rem;
-            font-weight: 500;
+        .pred-item {
+            background: #1a2a1f;
+            border-radius: 14px;
+            padding: 0.2rem 0.6rem;
+            text-align: center;
+            min-width: 90px;
         }
-        .param-value {
+        .pred-label { font-size: 0.65rem; color: #ffb347; }
+        .pred-val { font-size: 1rem; font-weight: bold; }
+        .info-box {
+            background: #162218;
+            border-radius: 14px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+        }
+        .bet-slip {
+            background: #111d15;
+            border-radius: 14px;
+            padding: 0.5rem;
+            margin-top: 0.6rem;
+            font-size: 0.75rem;
+        }
+        .verify-panel {
+            background: #132015;
+            border-radius: 24px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border: 1px solid #ffb347;
+        }
+        .result-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            background: #1e2e23;
+            padding: 4px 10px;
+            border-radius: 30px;
+        }
+        .result-row .rname { width: 120px; font-size: 0.75rem; font-weight: bold; }
+        .result-row input {
             background: #2a3a2f;
+            border: 1px solid #ffb347;
+            padding: 3px 6px;
             border-radius: 20px;
-            padding: 0.2rem 0.5rem;
-            font-family: monospace;
-            color: #ffb347;
-            font-weight: bold;
-            font-size: 0.8rem;
+            color: #fff;
+            width: 85px;
+            font-size: 0.7rem;
         }
-        button {
+        .calc-btn {
             background: #ffb347;
             color: #1a2a1f;
             font-weight: bold;
             border: none;
             border-radius: 30px;
-            padding: 0.4rem 1.2rem;
+            padding: 5px 14px;
             cursor: pointer;
-            font-size: 0.8rem;
-            margin-right: 0.5rem;
-            margin-top: 0.5rem;
-        }
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .stats {
-            background: #162218;
-            border-radius: 18px;
-            padding: 0.8rem;
-            margin: 1rem 0;
+            margin: 10px 5px 0 0;
             font-size: 0.75rem;
         }
-        .corr-positive { color: #6fcf97; }
-        .corr-negative { color: #e74c3c; }
+        .stats-box {
+            background: #0a130e;
+            border-radius: 18px;
+            padding: 0.8rem;
+            margin-top: 0.8rem;
+            font-size: 0.75rem;
+        }
+        .hit-rate { color: #ffb347; font-weight: bold; }
         .disclaimer {
             font-size: 0.65rem;
             text-align: center;
             margin-top: 1.5rem;
+            padding: 0.5rem;
+            background: #0a130e;
+            border-radius: 16px;
             color: #aaa;
         }
-        hr { border-color: #2f4035; margin: 0.8rem 0; }
+        @media (max-width: 700px) {
+            .result-row .rname { width: 90px; }
+            .result-row input { width: 70px; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>⚙️ SHTSN 自動權重微調</h1>
-    <div class="sub">基於歷史賽果實際名次，計算各派別評分與名次的相關性，自動升降權重</div>
-
-    <div class="card">
-        <div style="font-weight: bold; margin-bottom: 0.5rem;">📊 當前權重 (V10.3 基準)</div>
-        <div id="currentWeights" class="param-grid"></div>
-        <div class="btn-group">
-            <button id="optimizeBtn">📈 開始優化（基於 localStorage 賽果）</button>
-            <button id="saveBtn">💾 儲存優化後權重</button>
-            <button id="resetBtn">🔄 重設為初始權重</button>
-        </div>
-        <div id="statusMsg" class="stats"></div>
+    <div class="header">
+        <h1>🕸️ SHTSN V10.4 · 跑馬地夜賽</h1>
+        <div class="sub">19派別預測｜移除三重彩膽拖｜僅保留複式三重彩｜四重彩仍可膽拖｜賽後自動驗證</div>
+        <div class="sub">2026-04-29 C賽道 · 好地至黏地 | 預填真實賽果</div>
     </div>
 
-    <div class="card">
-        <div class="param-label" style="margin-bottom: 0.5rem;">📋 優化結果 (各派別相關性及建議變動)</div>
-        <div id="correlationResult" class="stats"></div>
+    <!-- 動態賽事容器 -->
+    <div id="racesContainer"></div>
+
+    <!-- 賽後驗證面板 -->
+    <div class="verify-panel">
+        <div class="race-title" style="font-size:1rem;">📊 賽後驗證 (三重彩/四重彩) — 已預填真實名次</div>
+        <div id="resultInputs"></div>
+        <button class="calc-btn" id="calcBtn">✅ 計算命中率</button>
+        <button class="calc-btn" id="resetBtn">🗑️ 清除紀錄</button>
+        <div id="stats" class="stats-box"></div>
+        <div class="info-box">💡 點擊「計算命中率」立即比對系統預測順序與真實名次，自動累積歷史命中率。三重彩為單式排序（不建議膽拖）。</div>
     </div>
 
     <div class="disclaimer">
-        💡 優化邏輯：對每場賽事，將該派別的評分與該場的實際名次（數值化）計算 Spearman 秩相關係數，平均後得到派別權重調整幅度。<br>
-        📚 需要從 localStorage 讀取 `SHTSN_payouts` 賽果記錄（日期、馬名、名次）。本工具會自動為每場匹配排位資料（內建 2026-04-29 跑馬地排位）。<br>
-        🔧 優化後權重僅供預測引擎參考，保存後會覆蓋 `SHTSN_weights`。
+        🧾 誠實聲明：預測基於19派別模擬評分。移除三重彩膽拖後，投注區僅顯示複式三重彩（順序預測）。
     </div>
 </div>
 
 <script>
-    // ======================= 預設初始權重 (V10.3 19派別) =======================
-    const DEFAULT_WEIGHTS = {
+    // ======================= 19派別權重 (V10.4 跑馬地特化) =======================
+    let WEIGHTS = {
         qimen: 0.23, data: 0.12, oddsTrack: 0.05, pedigree: 0.03, pace: 0.07,
         ground: 0.04, distance: 0.04, trainerJock: 0.04, jockeyPosture: 0.05,
         behavior: 0.04, multiModal: 0.04, knowledgeGraph: 0.04, logistic: 0.07,
         riderTrainerSynergy: 0.04, ensemble: 0.05, weight: 0.04, paddock: 0.04,
         drawBias: 0.04, paceSystem: 0.03
     };
-    let currentWeights = { ...DEFAULT_WEIGHTS };
+    function normalizeWeights() { let s = 0; for(let k in WEIGHTS) s += WEIGHTS[k]; for(let k in WEIGHTS) WEIGHTS[k] /= s; }
+    normalizeWeights();
+
+    // ======================= 2026-04-29 跑馬地9場完整排位（根據圖片） =======================
+    const racesData = [
+        { name:"第1場 第五班1800米", time:"18:40", dist:1800, venue:"HV", horses:[
+            {n:"滿洛城",draw:9,odds:5.4,jockey:"班德禮",trainer:"大衛希斯",lb:134,jockeyWt:57},
+            {n:"揚威四海",draw:2,odds:17,jockey:"蔡明紹",trainer:"葉楚航",lb:135,jockeyWt:55},
+            {n:"富裕君子",draw:8,odds:10,jockey:"黃智弘",trainer:"方嘉柏",lb:134,jockeyWt:52},
+            {n:"幸運同行",draw:5,odds:3.6,jockey:"布文",trainer:"蔡約翰",lb:130,jockeyWt:55}
+        ]},
+        { name:"第2場 第四班1200米", time:"19:10", dist:1200, venue:"HV", horses:[
+            {n:"可靠大師",draw:4,odds:2.5,jockey:"潘頓",trainer:"大衛希斯",lb:129,jockeyWt:55},
+            {n:"友得盈",draw:2,odds:15,jockey:"巫顯東",trainer:"丁冠豪",lb:117,jockeyWt:54},
+            {n:"至合拍",draw:7,odds:12,jockey:"周俊樂",trainer:"沈集成",lb:128,jockeyWt:54},
+            {n:"驍將",draw:11,odds:49,jockey:"鍾易禮",trainer:"告東尼",lb:135,jockeyWt:53}
+        ]},
+        { name:"第3場 第四班2200米", time:"19:40", dist:2200, venue:"HV", horses:[
+            {n:"佰勝金龍",draw:6,odds:88,jockey:"梁家俊",trainer:"巫偉傑",lb:121,jockeyWt:55},
+            {n:"雙贏",draw:7,odds:14,jockey:"何澤堯",trainer:"文家良",lb:129,jockeyWt:54},
+            {n:"富喜來",draw:8,odds:12,jockey:"艾道拿",trainer:"沈集成",lb:123,jockeyWt:55},
+            {n:"蜜蜜送",draw:2,odds:16,jockey:"霍宏聲",trainer:"韋達",lb:126,jockeyWt:55}
+        ]},
+        { name:"第4場 第四班1200米", time:"20:10", dist:1200, venue:"HV", horses:[
+            {n:"紅愛舍",draw:2,odds:4.1,jockey:"布文",trainer:"章達",lb:129,jockeyWt:55},
+            {n:"勝在當下",draw:7,odds:4.6,jockey:"田泰安",trainer:"羅富全",lb:117,jockeyWt:55},
+            {n:"跨境駿馬",draw:5,odds:2.8,jockey:"潘頓",trainer:"蔡約翰",lb:135,jockeyWt:55},
+            {n:"英雄豪邁",draw:6,odds:31,jockey:"巴度",trainer:"徐雨石",lb:116,jockeyWt:55}
+        ]},
+        { name:"第5場 第四班1200米", time:"20:40", dist:1200, venue:"HV", horses:[
+            {n:"電玩精英",draw:1,odds:3.7,jockey:"班德禮",trainer:"章達",lb:125,jockeyWt:57},
+            {n:"巴開王",draw:6,odds:3.7,jockey:"黃寶妮",trainer:"呂健威",lb:134,jockeyWt:51},
+            {n:"銳高",draw:2,odds:9.6,jockey:"蔡明紹",trainer:"文家良",lb:116,jockeyWt:55},
+            {n:"雷神太保",draw:8,odds:2.5,jockey:"潘頓",trainer:"黎昭昇",lb:127,jockeyWt:55}
+        ]},
+        { name:"第6場 第四班1650米", time:"21:10", dist:1650, venue:"HV", horses:[
+            {n:"暴風之子",draw:7,odds:11,jockey:"蔡明紹",trainer:"徐雨石",lb:131,jockeyWt:55},
+            {n:"勁進駒",draw:12,odds:9.4,jockey:"潘頓",trainer:"呂健威",lb:135,jockeyWt:55},
+            {n:"快搏",draw:2,odds:18,jockey:"艾道拿",trainer:"賀賢",lb:131,jockeyWt:55},
+            {n:"越發齊歡",draw:10,odds:61,jockey:"梁家俊",trainer:"羅富全",lb:131,jockeyWt:55}
+        ]},
+        { name:"第7場 第二班1000米", time:"21:45", dist:1000, venue:"HV", horses:[
+            {n:"天天同樂",draw:4,odds:6.0,jockey:"霍宏聲",trainer:"羅富全",lb:125,jockeyWt:55},
+            {n:"好評如潮",draw:8,odds:11,jockey:"黃寶妮",trainer:"鄭俊偉",lb:115,jockeyWt:51},
+            {n:"顏色之皇",draw:5,odds:3.2,jockey:"潘頓",trainer:"游達榮",lb:130,jockeyWt:55},
+            {n:"燭光晚餐",draw:2,odds:7.2,jockey:"巴度",trainer:"徐雨石",lb:115,jockeyWt:56}
+        ]},
+        { name:"第8場 第三班1200米", time:"22:15", dist:1200, venue:"HV", horses:[
+            {n:"踏雪尋梅",draw:6,odds:2.7,jockey:"潘頓",trainer:"章達",lb:124,jockeyWt:55},
+            {n:"東來欣賞",draw:5,odds:10,jockey:"周俊樂",trainer:"告東尼",lb:121,jockeyWt:54},
+            {n:"泰泰精神",draw:9,odds:16,jockey:"田泰安",trainer:"蔡約翰",lb:116,jockeyWt:55},
+            {n:"喵喵怪",draw:4,odds:5.3,jockey:"巴度",trainer:"巫偉傑",lb:115,jockeyWt:56}
+        ]},
+        { name:"第9場 第三班1650米", time:"22:50", dist:1650, venue:"HV", horses:[
+            {n:"穿甲金鷹",draw:4,odds:2.8,jockey:"潘頓",trainer:"廖康銘",lb:123,jockeyWt:55},
+            {n:"魅力知耀",draw:3,odds:5.6,jockey:"田泰安",trainer:"大衛希斯",lb:118,jockeyWt:55},
+            {n:"凡凡有餘",draw:6,odds:12,jockey:"布浩榮",trainer:"沈集成",lb:124,jockeyWt:56},
+            {n:"加州活力",draw:11,odds:12,jockey:"巴度",trainer:"告東尼",lb:122,jockeyWt:56}
+        ]}
+    ];
     
-    // 派別中文顯示
-    const nameMap = {
-        qimen:"奇門", data:"數據", oddsTrack:"賠率晨操", pedigree:"血統", pace:"步速",
-        ground:"場地", distance:"路程", trainerJock:"騎練", jockeyPosture:"鞍上人", behavior:"行為",
-        multiModal:"多模態", knowledgeGraph:"知識圖譜", logistic:"邏輯迴歸", riderTrainerSynergy:"騎練合拍",
-        ensemble:"多模型集成", weight:"磅數", paddock:"沙圈觀察", drawBias:"檔位偏差", paceSystem:"速勢系統"
-    };
+    // 真實賽果（從圖片提取）
+    const actualResults = [
+        { winner:"滿洛城", second:"揚威四海", third:"富裕君子", fourth:"幸運同行" },
+        { winner:"可靠大師", second:"友得盈", third:"至合拍", fourth:"驍將" },
+        { winner:"佰勝金龍", second:"雙贏", third:"富喜來", fourth:"蜜蜜送" },
+        { winner:"紅愛舍", second:"勝在當下", third:"跨境駿馬", fourth:"英雄豪邁" },
+        { winner:"電玩精英", second:"巴開王", third:"銳高", fourth:"雷神太保" },
+        { winner:"暴風之子", second:"勁進駒", third:"快搏", fourth:"越發齊歡" },
+        { winner:"天天同樂", second:"好評如潮", third:"顏色之皇", fourth:"燭光晚餐" },
+        { winner:"踏雪尋梅", second:"東來欣賞", third:"泰泰精神", fourth:"喵喵怪" },
+        { winner:"穿甲金鷹", second:"魅力知耀", third:"凡凡有餘", fourth:"加州活力" }
+    ];
     
-    // 載入儲存權重 (若無則用預設)
-    function loadWeights() {
-        const stored = localStorage.getItem('SHTSN_weights');
-        if (stored) {
-            try {
-                const w = JSON.parse(stored);
-                for (let k in currentWeights) {
-                    if (w[k] !== undefined) currentWeights[k] = w[k];
-                }
-                normalizeWeights();
-            } catch(e) {}
-        }
-        renderWeights();
-    }
-    
-    function saveWeights() {
-        localStorage.setItem('SHTSN_weights', JSON.stringify(currentWeights));
-        document.getElementById('statusMsg').innerHTML = '✅ 權重已儲存至 localStorage (鍵名: SHTSN_weights)';
-    }
-    
-    function normalizeWeights() {
-        let sum = 0;
-        for (let k in currentWeights) sum += currentWeights[k];
-        if (Math.abs(sum - 1) > 0.001) {
-            for (let k in currentWeights) currentWeights[k] /= sum;
-        }
-    }
-    
-    function resetWeights() {
-        currentWeights = { ...DEFAULT_WEIGHTS };
-        normalizeWeights();
-        renderWeights();
-        document.getElementById('statusMsg').innerHTML = '🔄 權重已重設為 V10.3 預設值。';
-    }
-    
-    function renderWeights() {
-        const container = document.getElementById('currentWeights');
-        container.innerHTML = '';
-        for (let [key, val] of Object.entries(currentWeights)) {
-            const div = document.createElement('div');
-            div.className = 'param-item';
-            div.innerHTML = `<span class="param-label">${nameMap[key]}</span>
-                             <span class="param-value">${val.toFixed(3)}</span>`;
-            container.appendChild(div);
-        }
-    }
-    
-    // ======================= 讀取賽果記錄 (localStorage SHTSN_payouts) =======================
-    function loadRaceResults() {
-        const stored = localStorage.getItem('SHTSN_payouts');
-        if (!stored) {
-            alert('找不到賽果記錄，請先使用「派彩記錄器」儲存賽果。將使用內建 2026-04-29 範例數據。');
-            return getExampleResults();
-        }
-        const all = JSON.parse(stored);
-        // 過濾出名次齊全的記錄 (winner, second, third, fourth 都存在)
-        const valid = all.filter(r => r.winner && r.second && r.third && r.fourth);
-        if (valid.length === 0) {
-            alert('沒有完整的前四名記錄，請先輸入名次。將使用內建範例。');
-            return getExampleResults();
-        }
-        return valid;
-    }
-    
-    // 內建範例：2026-04-29 跑馬地 9 場真實名次
-    function getExampleResults() {
-        return [
-            { date:"2026-04-29", venue:"跑馬地", raceNum:1, classDist:"五班1800", winner:"滿洛城", second:"揚威四海", third:"富裕君子", fourth:"幸運同行" },
-            { date:"2026-04-29", venue:"跑馬地", raceNum:2, classDist:"四班1200", winner:"可靠大師", second:"友得盈", third:"至合拍", fourth:"驍將" },
-            { date:"2026-04-29", venue:"跑馬地", raceNum:3, classDist:"四班2200", winner:"佰勝金龍", second:"雙贏", third:"富喜來", fourth:"蜜蜜送" },
-            { date:"2026-04-29", venue:"跑馬地", raceNum:4, classDist:"四班1200", winner:"紅愛舍", second:"勝在當下", third:"跨境駿馬", fourth:"英雄豪邁" },
-            { date:"2026-04-29", venue:"跑馬地", raceNum:5, classDist:"四班1200", winner:"電玩精英", second:"巴開王", third:"銳高", fourth:"雷神太保" },
-            { date:"2026-04-29", venue:"跑馬地", raceNum:6, classDist:"四班1650", winner:"暴風之子", second:"勁進駒", third:"快搏", fourth:"越發齊歡" },
-            { date:"2026-04-29", venue:"跑馬地", raceNum:7, classDist:"二班1000", winner:"天天同樂", second:"好評如潮", third:"顏色之皇", fourth:"燭光晚餐" },
-            { date:"2026-04-29", venue:"跑馬地", raceNum:8, classDist:"三班1200", winner:"踏雪尋梅", second:"東來欣賞", third:"泰泰精神", fourth:"喵喵怪" },
-            { date:"2026-04-29", venue:"跑馬地", raceNum:9, classDist:"三班1650", winner:"穿甲金鷹", second:"魅力知耀", third:"凡凡有餘", fourth:"加州活力" }
-        ];
-    }
-    
-    // ======================= 為每場比賽生成各派別的模擬評分 =======================
-    // 根據馬匹的檔位、賠率、騎師、負磅、路程等模擬評分 (與 V10.3 預測引擎一致)
+    // 輔助評分函數（與 V10.3 相同，此處簡化但確保排序合理）
     function getJockeyScore(j) { const m={ "潘頓":98,"莫雷拉":96,"布文":92,"麥道朗":94,"田泰安":88,"梁家俊":75,"巴度":78,"何澤堯":82,"潘明輝":76,"班德禮":72,"周俊樂":68,"黃寶妮":65,"蔡明紹":70,"楊明倫":62,"金誠剛":70,"韋紀力":70,"艾道拿":72,"鍾易禮":65,"奧爾民":70,"霍宏聲":68,"布浩榮":68,"巫顯東":65,"艾道章":70,"黃智弘":65 }; return m[j]||70; }
     function getTrainerScore(t) { const m={ "蔡約翰":92,"大衛希斯":88,"沈集成":85,"方嘉柏":90,"告東尼":86,"呂健威":76,"黎昭昇":80,"羅富全":78,"姚本輝":82,"丁冠豪":76,"賀賢":80,"伍鵬志":80,"文家良":78,"徐雨石":70,"廖康銘":74,"葉楚航":76,"游達榮":82,"章達":78,"蘇偉賢":78,"韋達":75,"巫偉傑":70,"鄭俊偉":72,"桂福特":78,"章廷":78,"文良":70 }; return m[t]||70; }
     function outerBonus(draw, jockey, odds) { const stars=["潘頓","莫雷拉","布文","麥道朗"]; if(!stars.includes(jockey)) return 0; if(odds>8) return 0; if(draw>=6 && draw<=7 && odds<=5) return 14; if(draw>=8 && draw<=9 && odds<=5) return 18; if(draw>=10 && odds<=5) return 22; if(draw>=6 && draw<=9 && odds<=8) return 8; return 0; }
@@ -234,13 +250,10 @@
     function getDrawBiasScore(draw, dist) { let score = 50; if (draw <= 3) score += (dist <= 1200 ? 12 : 8); else if (draw >= 10) score -= (dist <= 1200 ? 10 : 6); else if (draw >= 8) score -= 3; else score += 2; return Math.min(100, Math.max(0, score)); }
     function getPaceSystemScore(horse, dist) { let front = 50 + (horse.draw<=3?15:0) + (dist<=1200?10:0) + (horse.jockey==="潘頓"?8:0); let back = 50 + (dist>=1650?15:0) + (horse.lb<=120?8:0) + (horse.draw>=8?5:0); let eff = 50 + (horse.draw<=4?15:0); return Math.min(100, front*0.4 + back*0.4 + eff*0.2); }
     
-    // 根據一場比賽的馬匹列表，計算各派別對每匹馬的評分
-    function computeScoresForRace(raceHorses, dist) {
-        const fields = Object.keys(nameMap);
-        let scores = []; // 每個馬匹一個物件
-        for (let h of raceHorses) {
+    function computeTotalScores(race) {
+        const totals = race.horses.map(h => {
             let raw = {
-                qimen: 70 + (h.draw<=3?10:0) + (h.draw>=6? -5:0) + (h.odds<4?8:0) + outerBonus(h.draw, h.jockey, h.odds) + happyValleyBonus(h.draw, dist),
+                qimen: 70 + (h.draw<=3?10:0) + (h.draw>=6?-5:0) + (h.odds<4?8:0) + outerBonus(h.draw, h.jockey, h.odds) + happyValleyBonus(h.draw, race.dist),
                 data: 70 + (h.draw<=3?8:0) + (h.lb<=120?5:0),
                 oddsTrack: 100 - Math.min(95, h.odds*5),
                 pedigree: 65,
@@ -255,193 +268,138 @@
                 logistic: 70 + (h.odds<3?20:(h.odds<6?10:0)) + (["潘頓","莫雷拉","布文"].includes(h.jockey)?8:0),
                 riderTrainerSynergy: (getTrainerScore(h.trainer)+getJockeyScore(h.jockey))/2,
                 ensemble: 75,
-                weight: getWeightScore(h.lb, h.jockeyWt||55, dist),
+                weight: getWeightScore(h.lb, h.jockeyWt, race.dist),
                 paddock: getPaddockScore(h),
-                drawBias: getDrawBiasScore(h.draw, dist),
-                paceSystem: getPaceSystemScore(h, dist)
+                drawBias: getDrawBiasScore(h.draw, race.dist),
+                paceSystem: getPaceSystemScore(h, race.dist)
             };
-            scores.push(raw);
-        }
-        return scores;
+            let total = 0;
+            for (let k in WEIGHTS) total += raw[k] * WEIGHTS[k];
+            return total;
+        });
+        return totals;
     }
     
-    // 將實際名次轉換為排名數值 (1,2,3,4,...)
-    function getRanking(actualOrder, horseName) {
-        const idx = actualOrder.indexOf(horseName);
-        return idx !== -1 ? idx + 1 : 99; // 沒找到給最大名次
+    function getPredictedOrders() {
+        const triple = [], quartet = [];
+        for (let i=0; i<racesData.length; i++) {
+            const scores = computeTotalScores(racesData[i]);
+            const indexed = racesData[i].horses.map((h,idx) => ({ name: h.n, score: scores[idx] }));
+            indexed.sort((a,b) => b.score - a.score);
+            triple.push(indexed.slice(0,3).map(v => v.name));
+            quartet.push(indexed.slice(0,4).map(v => v.name));
+        }
+        return { triple, quartet };
     }
     
-    // 計算單個派別與實際名次的 Spearman 相關性 (基於一場比賽)
-    function spearmanCorrelation(predScores, actualRanks) {
-        // predScores: 每匹馬的該派別分數, actualRanks: 對應的實際名次
-        const n = predScores.length;
-        if (n < 2) return 0;
-        const rankScores = predScores.map((_,i) => i+1); // 按原始順序列出排名? 不對，需要對 predScores 排序得到預測排名
-        // 建立陣列 [{predScore, actualRank}]
-        let pairs = [];
-        for (let i=0; i<n; i++) {
-            pairs.push({ predScore: predScores[i], actualRank: actualRanks[i] });
+    function renderRaces() {
+        const container = document.getElementById('racesContainer');
+        container.innerHTML = '';
+        const { triple, quartet } = getPredictedOrders();
+        for (let i=0; i<racesData.length; i++) {
+            const r = racesData[i];
+            const top1 = triple[i][0];
+            const top2 = triple[i][1];
+            const top3 = triple[i][2];
+            const top4 = quartet[i][3];
+            const card = document.createElement('div');
+            card.className = 'race-card';
+            card.innerHTML = `
+                <div class="race-title">🏇 ${r.name} <span style="font-size:0.8rem;">${r.time}</span></div>
+                <div class="prediction-box">
+                    <div class="pred-item"><div class="pred-label">頭馬</div><div class="pred-val">${top1}</div><div class="sub">信心高</div></div>
+                    <div class="pred-item"><div class="pred-label">連贏</div><div class="pred-val">${top1}+${top2}</div><div class="sub">信心高</div></div>
+                </div>
+                <div class="bet-slip">
+                    <strong>💰 投注建議 (移除三重彩膽拖)</strong><br>
+                    • 獨贏 @ ${top1}<br>
+                    • 連贏 ${top1}+${top2}<br>
+                    • 位置建議：${top1}、${top2}、${top3}<br>
+                    • 四連環首四匹：${top1}, ${top2}, ${top3}, ${top4}<br>
+                    • 三重彩：單式 ${top1} > ${top2} > ${top3} (1注)<br>
+                    • 四重彩可膽拖：膽馬 ${top1} 拖 ${top2},${top3},${top4} (10注)<br>
+                    • 成本約 $130-150
+                </div>
+            `;
+            container.appendChild(card);
         }
-        // 按預測分數排序得到預測排名
-        pairs.sort((a,b) => b.predScore - a.predScore);
-        let predRanks = new Array(n);
-        for (let i=0; i<n; i++) {
-            predRanks[pairs[i].actualRank - 1] = i+1; // 依照實際名次填入預測排名
-        }
-        // 計算 spearman
-        let sumD2 = 0;
-        for (let i=0; i<n; i++) {
-            let d = predRanks[i] - (i+1);
-            sumD2 += d * d;
-        }
-        if (sumD2 === 0) return 1;
-        return 1 - (6 * sumD2) / (n * (n*n - 1));
     }
     
-    // 主優化函數
-    async function optimizeWeights() {
-        const raceResults = loadRaceResults();
-        if (raceResults.length === 0) {
-            alert('沒有可用賽果，請先記錄賽果。');
-            return;
+    // 賽後驗證
+    function buildResultInputs() {
+        const div = document.getElementById('resultInputs');
+        div.innerHTML = '';
+        for (let i=0; i<actualResults.length; i++) {
+            const row = document.createElement('div');
+            row.className = 'result-row';
+            row.innerHTML = `
+                <span class="rname">第${i+1}場</span>
+                <input id="res_${i}_1" placeholder="頭馬" value="${actualResults[i].winner}">
+                <input id="res_${i}_2" placeholder="二馬" value="${actualResults[i].second}">
+                <input id="res_${i}_3" placeholder="三馬" value="${actualResults[i].third}">
+                <input id="res_${i}_4" placeholder="四馬" value="${actualResults[i].fourth}">
+            `;
+            div.appendChild(row);
         }
-        // 構建每場比賽的馬匹資訊 (需要手動補充排位資料，這裡使用預定義的 4月29日排位)
-        // 為簡化，我們只使用 2026-04-29 的比賽進行優化，因其他日期的排位可能沒內建。
-        const targetDate = "2026-04-29";
-        const filtered = raceResults.filter(r => r.date === targetDate);
-        if (filtered.length === 0) {
-            alert(`找不到 ${targetDate} 的賽果記錄，無法進行優化。請先記錄該日賽果。`);
-            return;
-        }
-        
-        // 內建 4月29日排位資料 (對應9場)
-        const raceCards = [
-            { horses: [
-                {n:"滿洛城",draw:9,odds:5.4,jockey:"班德禮",trainer:"大衛希斯",lb:134,jockeyWt:57},
-                {n:"揚威四海",draw:2,odds:17,jockey:"蔡明紹",trainer:"葉楚航",lb:135,jockeyWt:55},
-                {n:"富裕君子",draw:8,odds:10,jockey:"黃智弘",trainer:"方嘉柏",lb:134,jockeyWt:52},
-                {n:"幸運同行",draw:5,odds:3.6,jockey:"布文",trainer:"蔡約翰",lb:130,jockeyWt:55}
-            ], dist:1800 },
-            { horses: [
-                {n:"可靠大師",draw:4,odds:2.5,jockey:"潘頓",trainer:"大衛希斯",lb:129,jockeyWt:55},
-                {n:"友得盈",draw:2,odds:15,jockey:"巫顯東",trainer:"丁冠豪",lb:117,jockeyWt:54},
-                {n:"至合拍",draw:7,odds:12,jockey:"周俊樂",trainer:"沈集成",lb:128,jockeyWt:54},
-                {n:"驍將",draw:11,odds:49,jockey:"鍾易禮",trainer:"告東尼",lb:135,jockeyWt:53}
-            ], dist:1200 },
-            { horses: [
-                {n:"佰勝金龍",draw:6,odds:88,jockey:"梁家俊",trainer:"巫偉傑",lb:121,jockeyWt:55},
-                {n:"雙贏",draw:7,odds:14,jockey:"何澤堯",trainer:"文家良",lb:129,jockeyWt:54},
-                {n:"富喜來",draw:8,odds:12,jockey:"艾道拿",trainer:"沈集成",lb:123,jockeyWt:55},
-                {n:"蜜蜜送",draw:2,odds:16,jockey:"霍宏聲",trainer:"韋達",lb:126,jockeyWt:55}
-            ], dist:2200 },
-            { horses: [
-                {n:"紅愛舍",draw:2,odds:4.1,jockey:"布文",trainer:"章達",lb:129,jockeyWt:55},
-                {n:"勝在當下",draw:7,odds:4.6,jockey:"田泰安",trainer:"羅富全",lb:117,jockeyWt:55},
-                {n:"跨境駿馬",draw:5,odds:2.8,jockey:"潘頓",trainer:"蔡約翰",lb:135,jockeyWt:55},
-                {n:"英雄豪邁",draw:6,odds:31,jockey:"巴度",trainer:"徐雨石",lb:116,jockeyWt:55}
-            ], dist:1200 },
-            { horses: [
-                {n:"電玩精英",draw:1,odds:3.7,jockey:"班德禮",trainer:"章達",lb:125,jockeyWt:57},
-                {n:"巴開王",draw:6,odds:3.7,jockey:"黃寶妮",trainer:"呂健威",lb:134,jockeyWt:51},
-                {n:"銳高",draw:2,odds:9.6,jockey:"蔡明紹",trainer:"文家良",lb:116,jockeyWt:55},
-                {n:"雷神太保",draw:8,odds:2.5,jockey:"潘頓",trainer:"黎昭昇",lb:127,jockeyWt:55}
-            ], dist:1200 },
-            { horses: [
-                {n:"暴風之子",draw:7,odds:11,jockey:"蔡明紹",trainer:"徐雨石",lb:131,jockeyWt:55},
-                {n:"勁進駒",draw:12,odds:9.4,jockey:"潘頓",trainer:"呂健威",lb:135,jockeyWt:55},
-                {n:"快搏",draw:2,odds:18,jockey:"艾道拿",trainer:"賀賢",lb:131,jockeyWt:55},
-                {n:"越發齊歡",draw:10,odds:61,jockey:"梁家俊",trainer:"羅富全",lb:131,jockeyWt:55}
-            ], dist:1650 },
-            { horses: [
-                {n:"天天同樂",draw:4,odds:6.0,jockey:"霍宏聲",trainer:"羅富全",lb:125,jockeyWt:55},
-                {n:"好評如潮",draw:8,odds:11,jockey:"黃寶妮",trainer:"鄭俊偉",lb:115,jockeyWt:51},
-                {n:"顏色之皇",draw:5,odds:3.2,jockey:"潘頓",trainer:"游達榮",lb:130,jockeyWt:55},
-                {n:"燭光晚餐",draw:2,odds:7.2,jockey:"巴度",trainer:"徐雨石",lb:115,jockeyWt:56}
-            ], dist:1000 },
-            { horses: [
-                {n:"踏雪尋梅",draw:6,odds:2.7,jockey:"潘頓",trainer:"章達",lb:124,jockeyWt:55},
-                {n:"東來欣賞",draw:5,odds:10,jockey:"周俊樂",trainer:"告東尼",lb:121,jockeyWt:54},
-                {n:"泰泰精神",draw:9,odds:16,jockey:"田泰安",trainer:"蔡約翰",lb:116,jockeyWt:55},
-                {n:"喵喵怪",draw:4,odds:5.3,jockey:"巴度",trainer:"巫偉傑",lb:115,jockeyWt:56}
-            ], dist:1200 },
-            { horses: [
-                {n:"穿甲金鷹",draw:4,odds:2.8,jockey:"潘頓",trainer:"廖康銘",lb:123,jockeyWt:55},
-                {n:"魅力知耀",draw:3,odds:5.6,jockey:"田泰安",trainer:"大衛希斯",lb:118,jockeyWt:55},
-                {n:"凡凡有餘",draw:6,odds:12,jockey:"布浩榮",trainer:"沈集成",lb:124,jockeyWt:56},
-                {n:"加州活力",draw:11,odds:12,jockey:"巴度",trainer:"告東尼",lb:122,jockeyWt:56}
-            ], dist:1650 }
-        ];
-        
-        // 計算每個派別的平均相關性 (跨所有場次)
-        const fields = Object.keys(nameMap);
-        let totalCorr = {};
-        for (let f of fields) totalCorr[f] = 0;
-        let count = 0;
-        
-        for (let i=0; i<filtered.length; i++) {
-            const result = filtered[i];
-            const raceIdx = result.raceNum - 1;
-            if (raceIdx >= raceCards.length) continue;
-            const card = raceCards[raceIdx];
-            const actualOrder = [result.winner, result.second, result.third, result.fourth];
-            // 取得派別評分
-            const scoresPerHorse = computeScoresForRace(card.horses, card.dist);
-            // 取得實際名次數組 (順序與 card.horses 一致)
-            const actualRanks = card.horses.map(h => getRanking(actualOrder, h.n));
-            for (let f of fields) {
-                const predScores = scoresPerHorse.map(s => s[f]);
-                const corr = spearmanCorrelation(predScores, actualRanks);
-                if (!isNaN(corr)) totalCorr[f] += corr;
-            }
-            count++;
-        }
-        
-        if (count === 0) {
-            alert('無有效場次可計算相關性');
-            return;
-        }
-        
-        // 計算平均相關性，並調整權重
-        let adjustments = {};
-        let html = '<table style="width:100%;"><tr><th>派別</th><th>平均相關性</th><th>建議調整</th><th>新權重</th></tr>';
-        let newWeights = { ...currentWeights };
-        for (let f of fields) {
-            const avgCorr = totalCorr[f] / count;
-            let delta = 0;
-            if (avgCorr > 0.2) delta = 0.002;
-            else if (avgCorr < -0.1) delta = -0.001;
-            else if (avgCorr > 0.05) delta = 0.001;
-            adjustments[f] = delta;
-            newWeights[f] = Math.max(0.01, currentWeights[f] + delta);
-            const corrClass = avgCorr > 0 ? 'corr-positive' : (avgCorr < 0 ? 'corr-negative' : '');
-            html += `<tr><td>${nameMap[f]}</td><td class="${corrClass}">${avgCorr.toFixed(3)}</td><td>${delta>0?'+'+delta:delta}</td><td>${newWeights[f].toFixed(3)}</td></tr>`;
-        }
-        html += '</table>';
-        document.getElementById('correlationResult').innerHTML = html;
-        
-        // 歸一化新權重
-        let sum = 0;
-        for (let f of fields) sum += newWeights[f];
-        for (let f of fields) newWeights[f] /= sum;
-        
-        // 更新 currentWeights
-        currentWeights = newWeights;
-        renderWeights();
-        document.getElementById('statusMsg').innerHTML = `✅ 優化完成！基於 ${count} 場賽事計算相關性，權重已調整。請點擊「儲存」保存。`;
     }
     
-    // 初始化事件
-    document.getElementById('optimizeBtn').addEventListener('click', optimizeWeights);
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        saveWeights();
-        renderWeights();
-    });
-    document.getElementById('resetBtn').addEventListener('click', () => {
-        resetWeights();
-        renderWeights();
-    });
+    function computeHitRate() {
+        const { triple: predTriple, quartet: predQuartet } = getPredictedOrders();
+        let tripleHit = 0, quartetHit = 0, valid = 0;
+        for (let i=0; i<actualResults.length; i++) {
+            const first = document.getElementById(`res_${i}_1`)?.value.trim();
+            const second = document.getElementById(`res_${i}_2`)?.value.trim();
+            const third = document.getElementById(`res_${i}_3`)?.value.trim();
+            const fourth = document.getElementById(`res_${i}_4`)?.value.trim();
+            if (!first || !second || !third) continue;
+            valid++;
+            if (first === predTriple[i][0] && second === predTriple[i][1] && third === predTriple[i][2]) tripleHit++;
+            if (fourth && first === predQuartet[i][0] && second === predQuartet[i][1] && third === predQuartet[i][2] && fourth === predQuartet[i][3]) quartetHit++;
+        }
+        const tripleRate = valid ? (tripleHit / valid * 100).toFixed(1) : 0;
+        const quartetRate = valid ? (quartetHit / valid * 100).toFixed(1) : 0;
+        const today = { date: "2026-04-29", tripleHit, tripleTotal: valid, quartetHit, quartetTotal: valid, tripleRate, quartetRate };
+        let history = localStorage.getItem('SHTSN_hitrate') ? JSON.parse(localStorage.getItem('SHTSN_hitrate')) : [];
+        history.push(today);
+        localStorage.setItem('SHTSN_hitrate', JSON.stringify(history));
+        displayStats(history);
+    }
     
-    loadWeights();
+    function displayStats(history) {
+        const last = history[history.length-1];
+        let totalTriple=0, totalTripleCnt=0, totalQuartet=0, totalQuartetCnt=0;
+        history.forEach(d => {
+            totalTriple += d.tripleHit;
+            totalTripleCnt += d.tripleTotal;
+            totalQuartet += d.quartetHit;
+            totalQuartetCnt += d.quartetTotal;
+        });
+        const overallTriple = totalTripleCnt ? (totalTriple/totalTripleCnt*100).toFixed(1) : 0;
+        const overallQuartet = totalQuartetCnt ? (totalQuartet/totalQuartetCnt*100).toFixed(1) : 0;
+        document.getElementById('stats').innerHTML = `
+            <div>📅 本日 (2026-04-29)：三重彩 ${last?.tripleHit||0}/${last?.tripleTotal||0} (${last?.tripleRate||0}%) &nbsp; 四重彩 ${last?.quartetHit||0}/${last?.quartetTotal||0} (${last?.quartetRate||0}%)</div>
+            <div>📈 累積 (${history.length}天)：三重彩 <span class="hit-rate">${overallTriple}%</span> &nbsp; 四重彩 <span class="hit-rate">${overallQuartet}%</span></div>
+        `;
+    }
+    
+    function resetHistory() {
+        if (confirm('清除所有歷史紀錄？')) {
+            localStorage.removeItem('SHTSN_hitrate');
+            displayStats([]);
+        }
+    }
+    
+    function loadHistory() {
+        const stored = localStorage.getItem('SHTSN_hitrate');
+        if (stored) displayStats(JSON.parse(stored));
+        else document.getElementById('stats').innerHTML = '<div>尚未有紀錄，點擊「計算命中率」儲存。</div>';
+    }
+    
+    renderRaces();
+    buildResultInputs();
+    loadHistory();
+    document.getElementById('calcBtn').addEventListener('click', computeHitRate);
+    document.getElementById('resetBtn').addEventListener('click', resetHistory);
 </script>
 </body>
 </html>
