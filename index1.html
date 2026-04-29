@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN V10.4 | 跑馬地夜賽 2026-04-29 | 移除三重彩膽拖</title>
+    <title>SHTSN V10.4 | 跑馬地夜賽 2026-04-29 | 內建官方賽果記錄</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -21,6 +21,12 @@
         }
         .header h1 { font-size: 1.8rem; color: #ffb347; }
         .sub { font-size: 0.75rem; opacity: 0.8; margin-top: 0.3rem; }
+        .card {
+            background: rgba(26,42,31,0.85);
+            border-radius: 24px;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+        }
         .race-card {
             background: rgba(26,42,31,0.85);
             border-radius: 24px;
@@ -116,6 +122,22 @@
             font-size: 0.75rem;
         }
         .hit-rate { color: #ffb347; font-weight: bold; }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            overflow-x: auto;
+            display: block;
+        }
+        .data-table th, .data-table td {
+            padding: 0.4rem 0.2rem;
+            text-align: center;
+            border-bottom: 1px solid #2f4035;
+        }
+        .data-table th {
+            background: #2a3a2f;
+            color: #ffb347;
+        }
         .disclaimer {
             font-size: 0.65rem;
             text-align: center;
@@ -128,6 +150,7 @@
         @media (max-width: 700px) {
             .result-row .rname { width: 90px; }
             .result-row input { width: 70px; }
+            .data-table th, .data-table td { font-size: 0.65rem; }
         }
     </style>
 </head>
@@ -136,15 +159,39 @@
     <div class="header">
         <h1>🕸️ SHTSN V10.4 · 跑馬地夜賽</h1>
         <div class="sub">19派別預測｜移除三重彩膽拖｜僅保留複式三重彩｜四重彩仍可膽拖｜賽後自動驗證</div>
-        <div class="sub">2026-04-29 C賽道 · 好地至黏地 | 預填真實賽果</div>
+        <div class="sub">2026-04-29 C賽道 · 好地至黏地 | 內建官方賽果記錄</div>
     </div>
 
-    <!-- 動態賽事容器 -->
+    <!-- 資料部：真實賽果記錄 -->
+    <div class="card">
+        <div class="race-title">📊 資料部 · 2026-04-29 跑馬地官方賽果</div>
+        <div style="overflow-x: auto;">
+            <table class="data-table">
+                <thead>
+                    <tr><th>場次</th><th>班次/路程</th><th>頭馬</th><th>第二名</th><th>第三名</th><th>第四名</th><th>四重彩派彩($)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>R1</td><td>五班1800米</td><td>滿洛城</td><td>揚威四海</td><td>富裕君子</td><td>幸運同行</td><td>22,939</td></tr>
+                    <tr><td>R2</td><td>四班1200米</td><td>可靠大師</td><td>友得盈</td><td>至合拍</td><td>驍將</td><td>63,355</td></tr>
+                    <tr><td>R3</td><td>四班2200米</td><td>佰勝金龍</td><td>雙贏</td><td>富喜來</td><td>蜜蜜送</td><td>1,847,947</td></tr>
+                    <tr><td>R4</td><td>四班1200米</td><td>紅愛舍</td><td>勝在當下</td><td>跨境駿馬</td><td>英雄豪邁</td><td>9,835</td></tr>
+                    <tr><td>R5</td><td>四班1200米</td><td>電玩精英</td><td>巴開王</td><td>銳高</td><td>雷神太保</td><td>1,818</td></tr>
+                    <tr><td>R6</td><td>四班1650米</td><td>暴風之子</td><td>勁進駒</td><td>快搏</td><td>越發齊歡</td><td>852,450</td></tr>
+                    <tr><td>R7</td><td>二班1000米</td><td>天天同樂</td><td>好評如潮</td><td>顏色之皇</td><td>燭光晚餐</td><td>17,154</td></tr>
+                    <tr><td>R8</td><td>三班1200米</td><td>踏雪尋梅</td><td>東來欣賞</td><td>泰泰精神</td><td>喵喵怪</td><td>5,447</td></tr>
+                    <tr><td>R9</td><td>三班1650米</td><td>穿甲金鷹</td><td>魅力知耀</td><td>凡凡有餘</td><td>加州活力</td><td>12,681</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="info-box">📌 以上賽果根據香港賽馬會當日派彩記錄整理，四重彩派彩已列。</div>
+    </div>
+
+    <!-- 動態賽事容器（預測） -->
     <div id="racesContainer"></div>
 
     <!-- 賽後驗證面板 -->
     <div class="verify-panel">
-        <div class="race-title" style="font-size:1rem;">📊 賽後驗證 (三重彩/四重彩) — 已預填真實名次</div>
+        <div class="race-title" style="font-size:1rem;">📈 賽後驗證 (三重彩/四重彩) — 已預填真實名次</div>
         <div id="resultInputs"></div>
         <button class="calc-btn" id="calcBtn">✅ 計算命中率</button>
         <button class="calc-btn" id="resetBtn">🗑️ 清除紀錄</button>
@@ -227,7 +274,7 @@
         ]}
     ];
     
-    // 真實賽果（從圖片提取）
+    // 真實賽果（從圖片提取，與表格一致）
     const actualResults = [
         { winner:"滿洛城", second:"揚威四海", third:"富裕君子", fourth:"幸運同行" },
         { winner:"可靠大師", second:"友得盈", third:"至合拍", fourth:"驍將" },
@@ -240,7 +287,7 @@
         { winner:"穿甲金鷹", second:"魅力知耀", third:"凡凡有餘", fourth:"加州活力" }
     ];
     
-    // 輔助評分函數（與 V10.3 相同，此處簡化但確保排序合理）
+    // 輔助評分函數（保持與 V10.4 一致）
     function getJockeyScore(j) { const m={ "潘頓":98,"莫雷拉":96,"布文":92,"麥道朗":94,"田泰安":88,"梁家俊":75,"巴度":78,"何澤堯":82,"潘明輝":76,"班德禮":72,"周俊樂":68,"黃寶妮":65,"蔡明紹":70,"楊明倫":62,"金誠剛":70,"韋紀力":70,"艾道拿":72,"鍾易禮":65,"奧爾民":70,"霍宏聲":68,"布浩榮":68,"巫顯東":65,"艾道章":70,"黃智弘":65 }; return m[j]||70; }
     function getTrainerScore(t) { const m={ "蔡約翰":92,"大衛希斯":88,"沈集成":85,"方嘉柏":90,"告東尼":86,"呂健威":76,"黎昭昇":80,"羅富全":78,"姚本輝":82,"丁冠豪":76,"賀賢":80,"伍鵬志":80,"文家良":78,"徐雨石":70,"廖康銘":74,"葉楚航":76,"游達榮":82,"章達":78,"蘇偉賢":78,"韋達":75,"巫偉傑":70,"鄭俊偉":72,"桂福特":78,"章廷":78,"文良":70 }; return m[t]||70; }
     function outerBonus(draw, jockey, odds) { const stars=["潘頓","莫雷拉","布文","麥道朗"]; if(!stars.includes(jockey)) return 0; if(odds>8) return 0; if(draw>=6 && draw<=7 && odds<=5) return 14; if(draw>=8 && draw<=9 && odds<=5) return 18; if(draw>=10 && odds<=5) return 22; if(draw>=6 && draw<=9 && odds<=8) return 8; return 0; }
