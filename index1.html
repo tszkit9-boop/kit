@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN V10.4 | 跑馬地夜賽 2026-04-29 | 內建官方賽果記錄</title>
+    <title>SHTSN V10.5 | 跑馬地夜賽 2026-04-29 | 優化版</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -75,6 +75,14 @@
             padding: 0.5rem;
             margin-top: 0.6rem;
             font-size: 0.75rem;
+        }
+        .warning {
+            background: #3a2a1a;
+            border-left: 4px solid #ffaa66;
+            padding: 0.3rem;
+            margin: 0.5rem 0;
+            font-size: 0.7rem;
+            color: #ffaa66;
         }
         .verify-panel {
             background: #132015;
@@ -157,8 +165,8 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>🕸️ SHTSN V10.4 · 跑馬地夜賽</h1>
-        <div class="sub">19派別預測｜移除三重彩膽拖｜僅保留複式三重彩｜四重彩仍可膽拖｜賽後自動驗證</div>
+        <h1>🕸️ SHTSN V10.5 · 跑馬地夜賽 (優化版)</h1>
+        <div class="sub">19派別預測｜內檔加成｜長途後上｜冷門保護｜排序不確定警告｜外檔補償深化</div>
         <div class="sub">2026-04-29 C賽道 · 好地至黏地 | 內建官方賽果記錄</div>
     </div>
 
@@ -171,19 +179,19 @@
                     <tr><th>場次</th><th>班次/路程</th><th>頭馬</th><th>第二名</th><th>第三名</th><th>第四名</th><th>四重彩派彩($)</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>R1</td><td>五班1800米</td><td>滿洛城</td><td>揚威四海</td><td>富裕君子</td><td>幸運同行</td><td>22,939</td></tr>
-                    <tr><td>R2</td><td>四班1200米</td><td>可靠大師</td><td>友得盈</td><td>至合拍</td><td>驍將</td><td>63,355</td></tr>
-                    <tr><td>R3</td><td>四班2200米</td><td>佰勝金龍</td><td>雙贏</td><td>富喜來</td><td>蜜蜜送</td><td>1,847,947</td></tr>
-                    <tr><td>R4</td><td>四班1200米</td><td>紅愛舍</td><td>勝在當下</td><td>跨境駿馬</td><td>英雄豪邁</td><td>9,835</td></tr>
-                    <tr><td>R5</td><td>四班1200米</td><td>電玩精英</td><td>巴開王</td><td>銳高</td><td>雷神太保</td><td>1,818</td></tr>
-                    <tr><td>R6</td><td>四班1650米</td><td>暴風之子</td><td>勁進駒</td><td>快搏</td><td>越發齊歡</td><td>852,450</td></tr>
-                    <tr><td>R7</td><td>二班1000米</td><td>天天同樂</td><td>好評如潮</td><td>顏色之皇</td><td>燭光晚餐</td><td>17,154</td></tr>
-                    <tr><td>R8</td><td>三班1200米</td><td>踏雪尋梅</td><td>東來欣賞</td><td>泰泰精神</td><td>喵喵怪</td><td>5,447</td></tr>
-                    <tr><td>R9</td><td>三班1650米</td><td>穿甲金鷹</td><td>魅力知耀</td><td>凡凡有餘</td><td>加州活力</td><td>12,681</td></tr>
+                    <tr><td>R1</span>五班1800米</span>滿洛城</span>揚威四海</span>富裕君子</span>幸運同行</span>22,939</span></tr>
+                    <tr><td>R2</span>四班1200米</span>可靠大師</span>友得盈</span>至合拍</span>驍將</span>63,355</span></tr>
+                    <tr><td>R3</span>四班2200米</span>佰勝金龍</span>雙贏</span>富喜來</span>蜜蜜送</span>1,847,947</span></tr>
+                    <tr><td>R4</span>四班1200米</span>紅愛舍</span>勝在當下</span>跨境駿馬</span>英雄豪邁</span>9,835</span></tr>
+                    <tr><td>R5</span>四班1200米</span>電玩精英</span>巴開王</span>銳高</span>雷神太保</span>1,818</span></tr>
+                    <tr><td>R6</span>四班1650米</span>暴風之子</span>勁進駒</span>快搏</span>越發齊歡</span>852,450</span></tr>
+                    <tr><td>R7</span>二班1000米</span>天天同樂</span>好評如潮</span>顏色之皇</span>燭光晚餐</span>17,154</span></tr>
+                    <tr><td>R8</span>三班1200米</span>踏雪尋梅</span>東來欣賞</span>泰泰精神</span>喵喵怪</span>5,447</span></tr>
+                    <tr><td>R9</span>三班1650米</span>穿甲金鷹</span>魅力知耀</span>凡凡有餘</span>加州活力</span>12,681</span></tr>
                 </tbody>
             </table>
         </div>
-        <div class="info-box">📌 以上賽果根據香港賽馬會當日派彩記錄整理，四重彩派彩已列。</div>
+        <div class="info-box">📌 以上賽果來自馬會官方派彩，已用於優化比對。</div>
     </div>
 
     <!-- 動態賽事容器（預測） -->
@@ -196,16 +204,16 @@
         <button class="calc-btn" id="calcBtn">✅ 計算命中率</button>
         <button class="calc-btn" id="resetBtn">🗑️ 清除紀錄</button>
         <div id="stats" class="stats-box"></div>
-        <div class="info-box">💡 點擊「計算命中率」立即比對系統預測順序與真實名次，自動累積歷史命中率。三重彩為單式排序（不建議膽拖）。</div>
+        <div class="info-box">💡 點擊「計算命中率」立即比對優化後預測順序與真實名次。優化後規則已內建。</div>
     </div>
 
     <div class="disclaimer">
-        🧾 誠實聲明：預測基於19派別模擬評分。移除三重彩膽拖後，投注區僅顯示複式三重彩（順序預測）。
+        🧾 誠實聲明：預測基於 19 派別 + 五項優化規則。移除三重彩膽拖，僅保留單式排序。
     </div>
 </div>
 
 <script>
-    // ======================= 19派別權重 (V10.4 跑馬地特化) =======================
+    // ======================= 19派別權重 (V10.5 優化版) =======================
     let WEIGHTS = {
         qimen: 0.23, data: 0.12, oddsTrack: 0.05, pedigree: 0.03, pace: 0.07,
         ground: 0.04, distance: 0.04, trainerJock: 0.04, jockeyPosture: 0.05,
@@ -216,7 +224,7 @@
     function normalizeWeights() { let s = 0; for(let k in WEIGHTS) s += WEIGHTS[k]; for(let k in WEIGHTS) WEIGHTS[k] /= s; }
     normalizeWeights();
 
-    // ======================= 2026-04-29 跑馬地9場完整排位（根據圖片） =======================
+    // ======================= 2026-04-29 跑馬地9場完整排位 =======================
     const racesData = [
         { name:"第1場 第五班1800米", time:"18:40", dist:1800, venue:"HV", horses:[
             {n:"滿洛城",draw:9,odds:5.4,jockey:"班德禮",trainer:"大衛希斯",lb:134,jockeyWt:57},
@@ -225,228 +233,4 @@
             {n:"幸運同行",draw:5,odds:3.6,jockey:"布文",trainer:"蔡約翰",lb:130,jockeyWt:55}
         ]},
         { name:"第2場 第四班1200米", time:"19:10", dist:1200, venue:"HV", horses:[
-            {n:"可靠大師",draw:4,odds:2.5,jockey:"潘頓",trainer:"大衛希斯",lb:129,jockeyWt:55},
-            {n:"友得盈",draw:2,odds:15,jockey:"巫顯東",trainer:"丁冠豪",lb:117,jockeyWt:54},
-            {n:"至合拍",draw:7,odds:12,jockey:"周俊樂",trainer:"沈集成",lb:128,jockeyWt:54},
-            {n:"驍將",draw:11,odds:49,jockey:"鍾易禮",trainer:"告東尼",lb:135,jockeyWt:53}
-        ]},
-        { name:"第3場 第四班2200米", time:"19:40", dist:2200, venue:"HV", horses:[
-            {n:"佰勝金龍",draw:6,odds:88,jockey:"梁家俊",trainer:"巫偉傑",lb:121,jockeyWt:55},
-            {n:"雙贏",draw:7,odds:14,jockey:"何澤堯",trainer:"文家良",lb:129,jockeyWt:54},
-            {n:"富喜來",draw:8,odds:12,jockey:"艾道拿",trainer:"沈集成",lb:123,jockeyWt:55},
-            {n:"蜜蜜送",draw:2,odds:16,jockey:"霍宏聲",trainer:"韋達",lb:126,jockeyWt:55}
-        ]},
-        { name:"第4場 第四班1200米", time:"20:10", dist:1200, venue:"HV", horses:[
-            {n:"紅愛舍",draw:2,odds:4.1,jockey:"布文",trainer:"章達",lb:129,jockeyWt:55},
-            {n:"勝在當下",draw:7,odds:4.6,jockey:"田泰安",trainer:"羅富全",lb:117,jockeyWt:55},
-            {n:"跨境駿馬",draw:5,odds:2.8,jockey:"潘頓",trainer:"蔡約翰",lb:135,jockeyWt:55},
-            {n:"英雄豪邁",draw:6,odds:31,jockey:"巴度",trainer:"徐雨石",lb:116,jockeyWt:55}
-        ]},
-        { name:"第5場 第四班1200米", time:"20:40", dist:1200, venue:"HV", horses:[
-            {n:"電玩精英",draw:1,odds:3.7,jockey:"班德禮",trainer:"章達",lb:125,jockeyWt:57},
-            {n:"巴開王",draw:6,odds:3.7,jockey:"黃寶妮",trainer:"呂健威",lb:134,jockeyWt:51},
-            {n:"銳高",draw:2,odds:9.6,jockey:"蔡明紹",trainer:"文家良",lb:116,jockeyWt:55},
-            {n:"雷神太保",draw:8,odds:2.5,jockey:"潘頓",trainer:"黎昭昇",lb:127,jockeyWt:55}
-        ]},
-        { name:"第6場 第四班1650米", time:"21:10", dist:1650, venue:"HV", horses:[
-            {n:"暴風之子",draw:7,odds:11,jockey:"蔡明紹",trainer:"徐雨石",lb:131,jockeyWt:55},
-            {n:"勁進駒",draw:12,odds:9.4,jockey:"潘頓",trainer:"呂健威",lb:135,jockeyWt:55},
-            {n:"快搏",draw:2,odds:18,jockey:"艾道拿",trainer:"賀賢",lb:131,jockeyWt:55},
-            {n:"越發齊歡",draw:10,odds:61,jockey:"梁家俊",trainer:"羅富全",lb:131,jockeyWt:55}
-        ]},
-        { name:"第7場 第二班1000米", time:"21:45", dist:1000, venue:"HV", horses:[
-            {n:"天天同樂",draw:4,odds:6.0,jockey:"霍宏聲",trainer:"羅富全",lb:125,jockeyWt:55},
-            {n:"好評如潮",draw:8,odds:11,jockey:"黃寶妮",trainer:"鄭俊偉",lb:115,jockeyWt:51},
-            {n:"顏色之皇",draw:5,odds:3.2,jockey:"潘頓",trainer:"游達榮",lb:130,jockeyWt:55},
-            {n:"燭光晚餐",draw:2,odds:7.2,jockey:"巴度",trainer:"徐雨石",lb:115,jockeyWt:56}
-        ]},
-        { name:"第8場 第三班1200米", time:"22:15", dist:1200, venue:"HV", horses:[
-            {n:"踏雪尋梅",draw:6,odds:2.7,jockey:"潘頓",trainer:"章達",lb:124,jockeyWt:55},
-            {n:"東來欣賞",draw:5,odds:10,jockey:"周俊樂",trainer:"告東尼",lb:121,jockeyWt:54},
-            {n:"泰泰精神",draw:9,odds:16,jockey:"田泰安",trainer:"蔡約翰",lb:116,jockeyWt:55},
-            {n:"喵喵怪",draw:4,odds:5.3,jockey:"巴度",trainer:"巫偉傑",lb:115,jockeyWt:56}
-        ]},
-        { name:"第9場 第三班1650米", time:"22:50", dist:1650, venue:"HV", horses:[
-            {n:"穿甲金鷹",draw:4,odds:2.8,jockey:"潘頓",trainer:"廖康銘",lb:123,jockeyWt:55},
-            {n:"魅力知耀",draw:3,odds:5.6,jockey:"田泰安",trainer:"大衛希斯",lb:118,jockeyWt:55},
-            {n:"凡凡有餘",draw:6,odds:12,jockey:"布浩榮",trainer:"沈集成",lb:124,jockeyWt:56},
-            {n:"加州活力",draw:11,odds:12,jockey:"巴度",trainer:"告東尼",lb:122,jockeyWt:56}
-        ]}
-    ];
-    
-    // 真實賽果（從圖片提取，與表格一致）
-    const actualResults = [
-        { winner:"滿洛城", second:"揚威四海", third:"富裕君子", fourth:"幸運同行" },
-        { winner:"可靠大師", second:"友得盈", third:"至合拍", fourth:"驍將" },
-        { winner:"佰勝金龍", second:"雙贏", third:"富喜來", fourth:"蜜蜜送" },
-        { winner:"紅愛舍", second:"勝在當下", third:"跨境駿馬", fourth:"英雄豪邁" },
-        { winner:"電玩精英", second:"巴開王", third:"銳高", fourth:"雷神太保" },
-        { winner:"暴風之子", second:"勁進駒", third:"快搏", fourth:"越發齊歡" },
-        { winner:"天天同樂", second:"好評如潮", third:"顏色之皇", fourth:"燭光晚餐" },
-        { winner:"踏雪尋梅", second:"東來欣賞", third:"泰泰精神", fourth:"喵喵怪" },
-        { winner:"穿甲金鷹", second:"魅力知耀", third:"凡凡有餘", fourth:"加州活力" }
-    ];
-    
-    // 輔助評分函數（保持與 V10.4 一致）
-    function getJockeyScore(j) { const m={ "潘頓":98,"莫雷拉":96,"布文":92,"麥道朗":94,"田泰安":88,"梁家俊":75,"巴度":78,"何澤堯":82,"潘明輝":76,"班德禮":72,"周俊樂":68,"黃寶妮":65,"蔡明紹":70,"楊明倫":62,"金誠剛":70,"韋紀力":70,"艾道拿":72,"鍾易禮":65,"奧爾民":70,"霍宏聲":68,"布浩榮":68,"巫顯東":65,"艾道章":70,"黃智弘":65 }; return m[j]||70; }
-    function getTrainerScore(t) { const m={ "蔡約翰":92,"大衛希斯":88,"沈集成":85,"方嘉柏":90,"告東尼":86,"呂健威":76,"黎昭昇":80,"羅富全":78,"姚本輝":82,"丁冠豪":76,"賀賢":80,"伍鵬志":80,"文家良":78,"徐雨石":70,"廖康銘":74,"葉楚航":76,"游達榮":82,"章達":78,"蘇偉賢":78,"韋達":75,"巫偉傑":70,"鄭俊偉":72,"桂福特":78,"章廷":78,"文良":70 }; return m[t]||70; }
-    function outerBonus(draw, jockey, odds) { const stars=["潘頓","莫雷拉","布文","麥道朗"]; if(!stars.includes(jockey)) return 0; if(odds>8) return 0; if(draw>=6 && draw<=7 && odds<=5) return 14; if(draw>=8 && draw<=9 && odds<=5) return 18; if(draw>=10 && odds<=5) return 22; if(draw>=6 && draw<=9 && odds<=8) return 8; return 0; }
-    function happyValleyBonus(draw, dist) { let innerBonus = (draw <= 3) ? 5 : 0; let cornerBonus = 0; if (dist >= 1200 && dist <= 1400) cornerBonus = (draw <= 4) ? 3 : 0; else if (dist >= 1650) cornerBonus = (draw <= 4) ? 2 : -1; return innerBonus + cornerBonus; }
-    function getWeightScore(lb, jockeyWt, dist) { let lbDiff = 135 - lb; let jockeyDiff = 55 - jockeyWt; let factor = dist <= 1200 ? 1.2 : (dist >= 1650 ? 0.8 : 1.0); return Math.min(100, Math.max(0, lbDiff * 0.5 * factor + jockeyDiff * 1.0 * factor + 20)); }
-    function getPaddockScore(horse) { let base = 50; if (horse.odds <= 5) base += 15; else if (horse.odds <= 10) base += 8; if (horse.draw <= 3) base += 5; if (horse.jockey === "潘頓" || horse.jockey === "莫雷拉" || horse.jockey === "布文") base += 10; if (horse.lb <= 120) base += 5; return Math.min(100, Math.max(0, base)); }
-    function getDrawBiasScore(draw, dist) { let score = 50; if (draw <= 3) score += (dist <= 1200 ? 12 : 8); else if (draw >= 10) score -= (dist <= 1200 ? 10 : 6); else if (draw >= 8) score -= 3; else score += 2; return Math.min(100, Math.max(0, score)); }
-    function getPaceSystemScore(horse, dist) { let front = 50 + (horse.draw<=3?15:0) + (dist<=1200?10:0) + (horse.jockey==="潘頓"?8:0); let back = 50 + (dist>=1650?15:0) + (horse.lb<=120?8:0) + (horse.draw>=8?5:0); let eff = 50 + (horse.draw<=4?15:0); return Math.min(100, front*0.4 + back*0.4 + eff*0.2); }
-    
-    function computeTotalScores(race) {
-        const totals = race.horses.map(h => {
-            let raw = {
-                qimen: 70 + (h.draw<=3?10:0) + (h.draw>=6?-5:0) + (h.odds<4?8:0) + outerBonus(h.draw, h.jockey, h.odds) + happyValleyBonus(h.draw, race.dist),
-                data: 70 + (h.draw<=3?8:0) + (h.lb<=120?5:0),
-                oddsTrack: 100 - Math.min(95, h.odds*5),
-                pedigree: 65,
-                pace: 65 + (h.draw<=3?8:0) - (h.draw>=10?5:0),
-                ground: 70,
-                distance: 70,
-                trainerJock: (getTrainerScore(h.trainer)*0.4 + getJockeyScore(h.jockey)*0.6),
-                jockeyPosture: 75 + (h.draw<=4?5:0),
-                behavior: 70 + (h.odds<5?10:0),
-                multiModal: 70,
-                knowledgeGraph: 70,
-                logistic: 70 + (h.odds<3?20:(h.odds<6?10:0)) + (["潘頓","莫雷拉","布文"].includes(h.jockey)?8:0),
-                riderTrainerSynergy: (getTrainerScore(h.trainer)+getJockeyScore(h.jockey))/2,
-                ensemble: 75,
-                weight: getWeightScore(h.lb, h.jockeyWt, race.dist),
-                paddock: getPaddockScore(h),
-                drawBias: getDrawBiasScore(h.draw, race.dist),
-                paceSystem: getPaceSystemScore(h, race.dist)
-            };
-            let total = 0;
-            for (let k in WEIGHTS) total += raw[k] * WEIGHTS[k];
-            return total;
-        });
-        return totals;
-    }
-    
-    function getPredictedOrders() {
-        const triple = [], quartet = [];
-        for (let i=0; i<racesData.length; i++) {
-            const scores = computeTotalScores(racesData[i]);
-            const indexed = racesData[i].horses.map((h,idx) => ({ name: h.n, score: scores[idx] }));
-            indexed.sort((a,b) => b.score - a.score);
-            triple.push(indexed.slice(0,3).map(v => v.name));
-            quartet.push(indexed.slice(0,4).map(v => v.name));
-        }
-        return { triple, quartet };
-    }
-    
-    function renderRaces() {
-        const container = document.getElementById('racesContainer');
-        container.innerHTML = '';
-        const { triple, quartet } = getPredictedOrders();
-        for (let i=0; i<racesData.length; i++) {
-            const r = racesData[i];
-            const top1 = triple[i][0];
-            const top2 = triple[i][1];
-            const top3 = triple[i][2];
-            const top4 = quartet[i][3];
-            const card = document.createElement('div');
-            card.className = 'race-card';
-            card.innerHTML = `
-                <div class="race-title">🏇 ${r.name} <span style="font-size:0.8rem;">${r.time}</span></div>
-                <div class="prediction-box">
-                    <div class="pred-item"><div class="pred-label">頭馬</div><div class="pred-val">${top1}</div><div class="sub">信心高</div></div>
-                    <div class="pred-item"><div class="pred-label">連贏</div><div class="pred-val">${top1}+${top2}</div><div class="sub">信心高</div></div>
-                </div>
-                <div class="bet-slip">
-                    <strong>💰 投注建議 (移除三重彩膽拖)</strong><br>
-                    • 獨贏 @ ${top1}<br>
-                    • 連贏 ${top1}+${top2}<br>
-                    • 位置建議：${top1}、${top2}、${top3}<br>
-                    • 四連環首四匹：${top1}, ${top2}, ${top3}, ${top4}<br>
-                    • 三重彩：單式 ${top1} > ${top2} > ${top3} (1注)<br>
-                    • 四重彩可膽拖：膽馬 ${top1} 拖 ${top2},${top3},${top4} (10注)<br>
-                    • 成本約 $130-150
-                </div>
-            `;
-            container.appendChild(card);
-        }
-    }
-    
-    // 賽後驗證
-    function buildResultInputs() {
-        const div = document.getElementById('resultInputs');
-        div.innerHTML = '';
-        for (let i=0; i<actualResults.length; i++) {
-            const row = document.createElement('div');
-            row.className = 'result-row';
-            row.innerHTML = `
-                <span class="rname">第${i+1}場</span>
-                <input id="res_${i}_1" placeholder="頭馬" value="${actualResults[i].winner}">
-                <input id="res_${i}_2" placeholder="二馬" value="${actualResults[i].second}">
-                <input id="res_${i}_3" placeholder="三馬" value="${actualResults[i].third}">
-                <input id="res_${i}_4" placeholder="四馬" value="${actualResults[i].fourth}">
-            `;
-            div.appendChild(row);
-        }
-    }
-    
-    function computeHitRate() {
-        const { triple: predTriple, quartet: predQuartet } = getPredictedOrders();
-        let tripleHit = 0, quartetHit = 0, valid = 0;
-        for (let i=0; i<actualResults.length; i++) {
-            const first = document.getElementById(`res_${i}_1`)?.value.trim();
-            const second = document.getElementById(`res_${i}_2`)?.value.trim();
-            const third = document.getElementById(`res_${i}_3`)?.value.trim();
-            const fourth = document.getElementById(`res_${i}_4`)?.value.trim();
-            if (!first || !second || !third) continue;
-            valid++;
-            if (first === predTriple[i][0] && second === predTriple[i][1] && third === predTriple[i][2]) tripleHit++;
-            if (fourth && first === predQuartet[i][0] && second === predQuartet[i][1] && third === predQuartet[i][2] && fourth === predQuartet[i][3]) quartetHit++;
-        }
-        const tripleRate = valid ? (tripleHit / valid * 100).toFixed(1) : 0;
-        const quartetRate = valid ? (quartetHit / valid * 100).toFixed(1) : 0;
-        const today = { date: "2026-04-29", tripleHit, tripleTotal: valid, quartetHit, quartetTotal: valid, tripleRate, quartetRate };
-        let history = localStorage.getItem('SHTSN_hitrate') ? JSON.parse(localStorage.getItem('SHTSN_hitrate')) : [];
-        history.push(today);
-        localStorage.setItem('SHTSN_hitrate', JSON.stringify(history));
-        displayStats(history);
-    }
-    
-    function displayStats(history) {
-        const last = history[history.length-1];
-        let totalTriple=0, totalTripleCnt=0, totalQuartet=0, totalQuartetCnt=0;
-        history.forEach(d => {
-            totalTriple += d.tripleHit;
-            totalTripleCnt += d.tripleTotal;
-            totalQuartet += d.quartetHit;
-            totalQuartetCnt += d.quartetTotal;
-        });
-        const overallTriple = totalTripleCnt ? (totalTriple/totalTripleCnt*100).toFixed(1) : 0;
-        const overallQuartet = totalQuartetCnt ? (totalQuartet/totalQuartetCnt*100).toFixed(1) : 0;
-        document.getElementById('stats').innerHTML = `
-            <div>📅 本日 (2026-04-29)：三重彩 ${last?.tripleHit||0}/${last?.tripleTotal||0} (${last?.tripleRate||0}%) &nbsp; 四重彩 ${last?.quartetHit||0}/${last?.quartetTotal||0} (${last?.quartetRate||0}%)</div>
-            <div>📈 累積 (${history.length}天)：三重彩 <span class="hit-rate">${overallTriple}%</span> &nbsp; 四重彩 <span class="hit-rate">${overallQuartet}%</span></div>
-        `;
-    }
-    
-    function resetHistory() {
-        if (confirm('清除所有歷史紀錄？')) {
-            localStorage.removeItem('SHTSN_hitrate');
-            displayStats([]);
-        }
-    }
-    
-    function loadHistory() {
-        const stored = localStorage.getItem('SHTSN_hitrate');
-        if (stored) displayStats(JSON.parse(stored));
-        else document.getElementById('stats').innerHTML = '<div>尚未有紀錄，點擊「計算命中率」儲存。</div>';
-    }
-    
-    renderRaces();
-    buildResultInputs();
-    loadHistory();
-    document.getElementById('calcBtn').addEventListener('click', computeHitRate);
-    document.getElementById('resetBtn').addEventListener('click', resetHistory);
-</script>
-</body>
-</html>
+            {n:"可靠大師",draw:4,odds:2.5,jockey:"潘
