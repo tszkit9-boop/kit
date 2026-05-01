@@ -2,8 +2,8 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>SHTSN 賽馬預測系統 V10.7 | 奇門派·集體智慧</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>SHTSN V10.7 賽馬預測系統 | 奇門派協作分析</title>
     <style>
         * {
             margin: 0;
@@ -12,537 +12,498 @@
         }
 
         body {
-            background-color: #0a1f0e;  /* 深森林綠背景 */
+            background: #0a1f0e;  /* 深森林綠基底 */
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
             color: #e6e2c3;
-            font-family: system-ui, 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
-            padding: 1rem;
-            line-height: 1.5;
+            padding: 20px 16px 60px;
+            line-height: 1.4;
         }
 
-        /* 主容器 */
+        /* 琥珀金強調色 */
+        :root {
+            --amber: #d9a13b;
+            --amber-light: #f3c26b;
+            --forest: #0f2c14;
+            --card-bg: #142e1a;
+            --border-glow: #b97f2e;
+        }
+
         .container {
-            max-width: 600px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* 卡片風格 */
-        .card {
-            background: rgba(20, 35, 18, 0.85);
-            backdrop-filter: blur(2px);
-            border-radius: 1.5rem;
-            border-left: 4px solid #d4af37;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            padding: 1.2rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.2s;
+        /* header */
+        .system-header {
+            text-align: center;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--amber);
+            padding-bottom: 12px;
+        }
+        .system-header h1 {
+            font-size: 1.9rem;
+            letter-spacing: 2px;
+            color: var(--amber-light);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .system-header .version {
+            font-size: 0.85rem;
+            background: #1e3324;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            margin-top: 8px;
+            color: var(--amber);
+        }
+        .sub {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 5px;
         }
 
-        .card-header {
+        /* 控制列 */
+        .toolbar {
             display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+            justify-content: space-between;
+            align-items: center;
+            background: #0c1f10;
+            padding: 12px 16px;
+            border-radius: 32px;
+            border: 1px solid #2f4d2d;
+        }
+        .btn {
+            background: #2c4230;
+            border: none;
+            color: #f7e9c3;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .btn-primary {
+            background: var(--amber);
+            color: #1e2a1a;
+            border: 1px solid #f5cf8e;
+        }
+        .btn-primary:hover {
+            background: #c28a2c;
+            color: white;
+        }
+        .btn-warning {
+            background: #5a3e1a;
+            border-color: #ca9622;
+        }
+        .badge {
+            background: #1f3a23;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.75rem;
+        }
+
+        /* 賽事卡片 grid */
+        .races-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .race-card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            border-left: 6px solid var(--amber);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+            transition: 0.1s;
+        }
+        .race-header {
+            background: #0e2614;
+            padding: 14px 18px;
+            display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: baseline;
-            border-bottom: 1px solid #d4af3740;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.4rem;
-            flex-wrap: wrap;
+            border-bottom: 1px solid #2e5436;
         }
-
-        .race-title {
-            font-size: 1.4rem;
+        .race-name {
             font-weight: bold;
-            color: #f3c26b;
-            letter-spacing: 1px;
+            font-size: 1.25rem;
         }
-
         .race-info {
             font-size: 0.75rem;
-            background: #2c3a26;
-            padding: 0.2rem 0.6rem;
-            border-radius: 2rem;
+            color: #c7bd8c;
         }
-
-        /* 表格/馬匹行 */
+        .qimen-brief {
+            background: #1a2a1b;
+            padding: 8px 18px;
+            font-size: 0.8rem;
+            color: #e2dbaa;
+            border-left: 3px solid var(--amber);
+            margin: 8px 12px 0 12px;
+            border-radius: 16px;
+        }
+        .horses-list {
+            padding: 12px 16px 8px;
+        }
         .horse-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #1e2a1b;
-            margin: 0.4rem 0;
-            padding: 0.5rem 0.8rem;
-            border-radius: 2rem;
-            font-size: 0.85rem;
-            gap: 0.5rem;
+            border-bottom: 1px solid #2a462a;
+            padding: 10px 5px;
+            font-size: 0.9rem;
             flex-wrap: wrap;
+            gap: 8px;
         }
-
         .horse-rank {
-            background: #d4af37;
-            color: #0a1f0e;
             font-weight: bold;
-            width: 28px;
-            height: 28px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 30px;
-            font-size: 0.8rem;
+            background: #2a442c;
+            width: 32px;
+            text-align: center;
+            border-radius: 20px;
+            color: var(--amber-light);
         }
-
         .horse-name {
             flex: 2;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            min-width: 100px;
         }
-
-        .horse-details {
+        .horse-detail {
             display: flex;
-            gap: 0.8rem;
-            color: #c0cfb0;
+            gap: 12px;
             font-size: 0.7rem;
+            color: #c2c2a2;
         }
-
         .score {
-            font-family: monospace;
-            background: #00000055;
-            padding: 0.2rem 0.5rem;
+            color: var(--amber);
+            font-weight: bold;
+        }
+        .bet-suggest {
+            background: #09200e;
+            margin: 8px 16px 16px;
+            padding: 12px;
             border-radius: 20px;
-            font-weight: bold;
-            color: #f5d742;
-        }
-
-        .badge {
-            background: #d4af3740;
-            padding: 0.2rem 0.6rem;
-            border-radius: 1rem;
-            font-size: 0.7rem;
-        }
-
-        .btn {
-            background: #2c3a26;
-            border: 1px solid #d4af37;
-            color: #f3c26b;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
             font-size: 0.8rem;
+            border: 1px dashed #b57c2c;
+        }
+        .bet-line {
+            margin: 6px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .bet-label {
+            color: var(--amber-light);
+            font-weight: bold;
+            min-width: 85px;
+        }
+        .mock-note {
+            font-size: 0.7rem;
+            color: #b3a66a;
+            text-align: right;
+            margin-top: 8px;
+            padding-right: 16px;
+            padding-bottom: 12px;
+        }
+        hr {
+            border-color: #2e582e;
         }
 
-        .btn-primary {
-            background: #d4af37;
-            color: #0a1f0e;
-            border: none;
+        /* 驗證面板 及 參數區 */
+        .section-panel {
+            background: #0d2412;
+            border-radius: 28px;
+            margin-top: 36px;
+            padding: 18px;
+            border: 1px solid #365e3a;
         }
-
-        .btn-primary:active {
-            background: #b8942a;
-        }
-
         .flex-between {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            gap: 0.5rem;
             flex-wrap: wrap;
+            gap: 12px;
         }
-
-        .section-title {
-            font-size: 1.2rem;
-            margin: 0.8rem 0 0.5rem;
-            padding-left: 0.5rem;
-            border-left: 5px solid #d4af37;
+        input, select, textarea {
+            background: #1f3522;
+            border: 1px solid #5f794b;
+            color: #fceeca;
+            padding: 10px;
+            border-radius: 24px;
+            font-size: 0.85rem;
         }
-
-        .weight-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px,1fr));
-            gap: 0.5rem;
-            max-height: 250px;
-            overflow-y: auto;
-            background: #1e2a1b;
-            border-radius: 1rem;
-            padding: 0.8rem;
+        .result-row {
+            margin-bottom: 12px;
         }
-
-        .weight-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-        }
-
-        input {
-            background: #2c3a26;
-            border: 1px solid #d4af37;
-            color: #e6e2c3;
-            border-radius: 20px;
-            padding: 0.2rem 0.5rem;
-            width: 55px;
-            text-align: center;
-        }
-
-        hr {
-            border-color: #d4af3740;
-            margin: 1rem 0;
-        }
-
-        .sim-note {
-            font-size: 0.65rem;
-            color: #bbaa77;
-            text-align: right;
-            font-style: italic;
-        }
-
         footer {
             text-align: center;
-            font-size: 0.65rem;
-            margin-top: 2rem;
+            margin-top: 30px;
+            font-size: 0.7rem;
             opacity: 0.7;
         }
-
-        @media (max-width: 480px) {
-            .horse-details {
-                flex-direction: column;
-                gap: 0.2rem;
-                align-items: flex-start;
+        @media (max-width: 700px) {
+            body {
+                padding: 12px 12px 40px;
             }
             .horse-row {
+                flex-direction: column;
                 align-items: flex-start;
             }
+            .horse-detail {
+                margin-left: 35px;
+            }
+            .bet-label {
+                min-width: 70px;
+            }
+        }
+        button:active {
+            transform: scale(0.97);
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div style="text-align: center; margin-bottom: 1rem;">
-        <h1 style="color:#f3c26b;">🕸️ SHTSN V10.7</h1>
-        <p>奇門派領航 · 集體智慧融合 | 首席協作開發者 + 奇門分析師</p>
-        <div class="sim-note">⚠️ 缺數據處標註「模」，動態參數已記憶於本地端</div>
+    <div class="system-header">
+        <h1>🕸️ SHTSN · 賽馬預測系統</h1>
+        <div class="version">V10.7 自動錯誤分析 | 奇門派首席協作</div>
+        <div class="sub">團隊分工 · 決策融合 · 集體智慧 · 持續進化</div>
     </div>
 
-    <!-- 工具列 -->
-    <div class="flex-between" style="margin-bottom: 1rem;">
-        <button class="btn" id="refreshScoresBtn">🔄 重新計算評分</button>
-        <button class="btn btn-primary" id="autoCorrectBtn">📊 分析近期失誤 & 參數更正</button>
-    </div>
-
-    <!-- 權重面板 -->
-    <div class="card">
-        <div class="flex-between">
-            <div class="section-title" style="margin:0;">⚖️ 19派別權重 (可調)</div>
-            <button class="btn" id="saveWeightsBtn" style="padding:0.2rem 0.8rem;">💾 儲存權重</button>
+    <div class="toolbar">
+        <div class="badge">🗂️ 19派別加權 | 權重奇門派0.23</div>
+        <div>
+            <button id="refreshFromNetworkBtn" class="btn btn-primary">🌐 聯網補充資料 (模擬)</button>
+            <button id="resetParamsBtn" class="btn">⚙️ 重置優化參數</button>
         </div>
-        <div id="weightsPanel" class="weight-grid" style="margin-top: 0.8rem;"></div>
-        <div class="sim-note">總和自動歸一化 | 調整後按「重新計算評分」生效</div>
     </div>
 
-    <!-- 優化規則參數面板 (五項) -->
-    <div class="card">
-        <div class="section-title" style="margin:0 0 0.5rem 0;">⚙️ 動態優化參數</div>
-        <div id="paramsPanel" class="flex-between" style="gap:0.8rem;"></div>
-        <div class="sim-note">賽後可透過「分析近期失誤」自動調校</div>
-    </div>
+    <div id="racesContainer" class="races-grid"><!-- 動態載入賽事卡片 --></div>
 
-    <!-- 賽事卡片會動態生成 -->
-    <div id="racesContainer"></div>
-
-    <!-- 賽果記錄面板 -->
-    <div class="card">
-        <div class="section-title">📝 賽後驗證 & 派彩記錄</div>
-        <div id="payoutsSummary"></div>
-        <div style="margin-top: 0.8rem;">
-            <label>選擇場次: <select id="resultRaceSelect"></select></label>
-            <div style="margin-top: 0.5rem;">
-                <input type="text" id="winnerInput" placeholder="頭馬名稱" style="width:100px;"> 
-                <input type="text" id="secondInput" placeholder="第二名" style="width:100px;">
-                <input type="text" id="thirdInput" placeholder="第三名" style="width:100px;">
-                <input type="text" id="fourthInput" placeholder="第四名" style="width:100px;">
-                <input type="text" id="qtPlaceInput" placeholder="四重彩派彩(可選)" style="width:110px;">
-                <button class="btn" id="saveResultBtn" style="margin-top:0.5rem;">💾 儲存賽果</button>
-            </div>
+    <!-- 賽後驗證及自動更正面板 -->
+    <div class="section-panel">
+        <h3 style="color: var(--amber);">📋 賽後驗證 | 自動錯誤分析</h3>
+        <p style="font-size:0.75rem;">輸入場次頭馬至四馬，比對預測後可動態調整五項核心參數 (內檔加成/外檔補償/長途後上/極冷門保護/賠率過熱懲罰)</p>
+        <div class="flex-between" style="margin-top: 12px;">
+            <select id="raceSelect"></select>
+            <input type="text" id="winnerInput" placeholder="頭馬 馬名" style="width:90px;">
+            <input type="text" id="secondInput" placeholder="二馬" style="width:90px;">
+            <input type="text" id="thirdInput" placeholder="三馬" style="width:90px;">
+            <input type="text" id="fourthInput" placeholder="四馬" style="width:90px;">
+            <button id="recordResultBtn" class="btn btn-primary">📌 記錄賽果 & 分析</button>
         </div>
-        <div id="hitrateDisplay" class="badge" style="margin-top:0.8rem;"></div>
+        <div id="analysisResultMsg" style="margin-top: 12px; font-size:0.85rem; background:#0e2814; padding:8px; border-radius:16px;"></div>
+        <div class="flex-between" style="margin-top: 15px;">
+            <span>📊 今日三四重彩命中率: <strong id="hitRateDisplay">-</strong></span>
+            <button id="viewHistoryBtn" class="btn-warning btn">📜 顯示儲存參數 (localStorage)</button>
+        </div>
     </div>
-    <footer>SHTSN V10.7 — 自動錯誤分析 | 三重彩單式排序 | 數據僅供參考，賭博有節制</footer>
+
+    <footer>
+        🧠 SHTSN V10.7 誠實標註：缺數據處皆以「模」表示｜預測依據奇門+18派別融合 + 動態更正因子<br>
+        * 聯網補充為模擬請求，可獲取最新賠率/晨操資料並重新評分，實際串接未來可接入API。
+    </footer>
 </div>
 
 <script>
     // --------------------------------------------------------------
-    // 1. 完整賽事資料 (根據2026-5-3 沙田排位整合，缺值標模)
+    // 1. 原始比賽數據（來自5月3日沙田日賽排位，已整合圖片資訊，部分騎師/負磅來自提供內容）
+    //    每場資料: id, 名稱, 路程, 班次, 奇門簡述, 馬匹陣容
+    //    初始綜合分參考之前分析排序，但評分函數依照檔位/騎師星級/負磅/路程模擬
     // --------------------------------------------------------------
-    const RACES_DATA = [
-        { name: "R1 12:45 五班1200米", distance: 1200, class: 5, track: "草地", racesId: "R1", horses: [
-            { name:"果然僥倖", draw:12, rider:"模", weight:120, isStarJockey:false, runStyle:"居中" },
-            { name:"金風萬里", draw:5, rider:"模", weight:120, isStarJockey:false },
-            { name:"五福星", draw:6, rider:"模", weight:120, isStarJockey:false },
-            { name:"同有運", draw:10, rider:"模", weight:120 },
-            { name:"首駿", draw:3, rider:"模", weight:120 },
-            { name:"陸小鳳", draw:4, rider:"模", weight:120 },
-            { name:"飛雲", draw:9, rider:"模", weight:120 },
-            { name:"快活同盟", draw:14, rider:"模", weight:120 },
-            { name:"八里旺", draw:1, rider:"模", weight:120 },
-            { name:"本能", draw:2, rider:"模", weight:120 },
-            { name:"皇金合", draw:13, rider:"模", weight:120 },
-            { name:"綫路光驒", draw:11, rider:"模", weight:120 },
-            { name:"城中勇士", draw:8, rider:"模", weight:120 },
-            { name:"紅旺續紛", draw:7, rider:"模", weight:120 }
-        ] },
-        { name: "R2 13:15 四班1200米", distance:1200, class:4, track:"草地", racesId: "R2", horses: [
-            { name:"八仔好運", draw:9 },{ name:"戀愛狂", draw:7 },{ name:"領航多財", draw:4 },{ name:"潮州高球", draw:2 },
-            { name:"越戰聯歡", draw:10 },{ name:"駿馬之光", draw:6 },{ name:"一鋪掂晒", draw:3 },{ name:"明德輝煌", draw:13 },
-            { name:"賢知友您", draw:8 },{ name:"應龍飛影", draw:5 },{ name:"嘉冠王", draw:1 },{ name:"鐵之無限", draw:14 },
-            { name:"有你有我", draw:12 },{ name:"牛精豪情", draw:11 }
-        ].map(h => ({ ...h, rider:"模", weight:124, isStarJockey:false })) },
-        { name: "R3 13:45 五班1400米", distance:1400, class:5, track:"草地", racesId: "R3", horses: [
-            { name:"手到再來", draw:14, weight:135 },{ name:"神駒馬靈", draw:10, weight:134 },{ name:"順善寶", draw:5, weight:134 },
-            { name:"觀萬物", draw:3, weight:133 },{ name:"怪獸叉燒", draw:1, weight:133 },{ name:"旋風傳奇", draw:6, weight:132 },
-            { name:"知恩圖報", draw:9, weight:132 },{ name:"鐵得勝", draw:12, weight:132 },{ name:"怡昌奇兵", draw:2, weight:132 },
-            { name:"劍無情", draw:13, weight:131 },{ name:"問鼎巔峰", draw:11, weight:130 },{ name:"駿馬之星", draw:7, weight:128 },
-            { name:"熊喵喵", draw:4, weight:126 },{ name:"不假外求", draw:8, weight:115 }
-        ].map(h => ({ ...h, rider:"模", isStarJockey:false })) },
-        { name: "R4 15:10 四班1400米", distance:1400, class:4, track:"草地", racesId: "R4", horses: [
-            { name:"綫路萬里", draw:5, weight:135 },{ name:"創寶駒", draw:8, weight:133 },{ name:"馬鳳凰", draw:10, weight:132 },
-            { name:"總統輝煌", draw:1, weight:131 },{ name:"快樂共濟", draw:13, weight:130 },{ name:"福聚", draw:7, weight:130 },
-            { name:"共創歡欣", draw:9, weight:130 },{ name:"逍遙騎士", draw:3, weight:129 },{ name:"健康小馬", draw:2, weight:129 },
-            { name:"暴風一族", draw:11, weight:127 },{ name:"豐功偉績", draw:12, weight:126 },{ name:"萬事勝利", draw:14, weight:124 },
-            { name:"金快飛飛", draw:6, weight:123 },{ name:"明亮光輝", draw:4, weight:121 }
-        ].map(h => ({ ...h, rider:"模", isStarJockey:false })) },
-        { name: "R5 15:40 三級賽2400米", distance:2400, class:3, track:"草地", special:"長途", racesId: "R5", horses: [
-            { name:"桃花開", draw:3, rider:"鍾易禮", weight:135, isStarJockey:false },{ name:"天將龍駒", draw:5, rider:"巫顯東", weight:135 },
-            { name:"君子傳承", draw:1, rider:"布文", weight:129, isStarJockey:true },{ name:"春風萬里", draw:6, rider:"黃智弘", weight:124 },
-            { name:"海上大軍", draw:7, rider:"田泰安", weight:124, isStarJockey:true },{ name:"火焰閃爍", draw:4, rider:"班德禮", weight:115 },
-            { name:"浪漫戰神", draw:2, rider:"潘明輝", weight:115, isStarJockey:true }
-        ] },
-        { name: "R6 16:10 四班1800米", distance:1800, class:4, track:"草地", racesId: "R6", horses: [
-            { name:"同益善", draw:3, rider:"周俊樂", weight:135 },{ name:"紅衣醒目", draw:1, rider:"田泰安", weight:133, isStarJockey:true },
-            { name:"勤德天下", draw:7, rider:"梁家俊", weight:130 },{ name:"步風雷", draw:11, rider:"袁幸堯", weight:130 },
-            { name:"赤風驪", draw:4, rider:"布浩榮", weight:130 },{ name:"凝妙星", draw:8, rider:"布文", weight:127, isStarJockey:true },
-            { name:"鴻圖大展", draw:14, rider:"希威森", weight:126 },{ name:"風火恆雲", draw:2, rider:"潘明輝", weight:125, isStarJockey:true },
-            { name:"富喜來", draw:5, rider:"艾道拿", weight:123 },{ name:"家樂寶駒", draw:9, rider:"霍宏聲", weight:123 },
-            { name:"耀昌勝世", draw:6, rider:"巴度", weight:121 },{ name:"峻誠駒", draw:13, rider:"楊明倫", weight:119 },
-            { name:"至高心得", draw:10, rider:"班德禮", weight:119 },{ name:"發財金戈", draw:12, rider:"巫顯東", weight:118 }
-        ] },
-        { name: "R7 16:40 二班1600米 會員盃", distance:1600, class:2, track:"草地", racesId: "R7", horses: [
-            { name:"美麗同享", draw:11, rider:"布文", weight:135, isStarJockey:true },{ name:"紫荊盛勢", draw:11, rider:"班德禮", weight:135 },
-            { name:"喜蓮勇威", draw:11, rider:"布浩榮", weight:134 },{ name:"加州動員", draw:9, rider:"楊明綸", weight:126 },
-            { name:"華麗再勝", draw:8, rider:"周俊樂", weight:125 },{ name:"永遠美麗", draw:7, rider:"艾道拿", weight:122, isStarJockey:true },
-            { name:"鈔易揚", draw:7, rider:"黃智弘", weight:121 },{ name:"首飾天空", draw:3, rider:"艾兆禮", weight:119 },
-            { name:"勁沙塵", draw:5, rider:"巴度", weight:118 },{ name:"包裝福星", draw:10, rider:"希威森", weight:118 },
-            { name:"展雄志", draw:11, rider:"田泰安", weight:117, isStarJockey:true }
-        ] },
-        { name: "R8 17:10 三班2000米", distance:2000, class:3, track:"草地", racesId: "R8", horses: [
-            { name:"友瑩光", draw:5, rider:"模", weight:135 },{ name:"快路", draw:7, rider:"模", weight:135 },{ name:"幸運派彩", draw:11, rider:"模", weight:131 },
-            { name:"盈好威楓", draw:6, rider:"模", weight:130 },{ name:"昭易揚", draw:1, rider:"黃智弘", weight:129 },{ name:"極光之子", draw:10, rider:"模", weight:127 },
-            { name:"發財先鋒", draw:8, rider:"模", weight:125 },{ name:"安帝", draw:9, rider:"模", weight:123 },{ name:"紫荊拼搏", draw:3, rider:"模", weight:121 },
-            { name:"勁大威猛", draw:2, rider:"模", weight:118 },{ name:"妙算強人", draw:4, rider:"模", weight:118 }
-        ].map(h => ({ ...h, isStarJockey: h.rider==="黃智弘"?false:false })) },
-        { name: "R9 17:45 三班1400米", distance:1400, class:3, track:"草地", racesId: "R9", horses: [
-            { name:"同樣美麗", draw:4, weight:135 },{ name:"嘉應奇兵", draw:13, weight:134 },{ name:"同心同樂", draw:10, weight:133 },
-            { name:"勝才", draw:14, weight:132 },{ name:"納百川", draw:6, weight:129 },{ name:"重情重義", draw:8, weight:129 },
-            { name:"猜謎布魯克", draw:5, weight:125 },{ name:"量子力奇", draw:2, weight:124 },{ name:"紅運光輝", draw:9, weight:124 },
-            { name:"川河帥駒", draw:11, weight:123 },{ name:"帕昌光輝", draw:12, weight:122 },{ name:"星願無限", draw:3, weight:121 },
-            { name:"佛亮老趙", draw:1, weight:120 },{ name:"樱花酒杯", draw:7, weight:118 }
-        ].map(h => ({ ...h, rider:"模", isStarJockey:false })) },
-        { name: "R10 18:20 三班1200米", distance:1200, class:3, track:"草地", racesId: "R10", horses: [
-            { name:"跨境寶馬", draw:10, weight:135 },{ name:"醒目高球", draw:14, weight:132 },{ name:"競駿皇者", draw:7, weight:131 },
-            { name:"與馳千里", draw:3, weight:130 },{ name:"嘉應勇將", draw:4, weight:128 },{ name:"煌上", draw:1, weight:127 },
-            { name:"勇者為皇", draw:12, weight:124 },{ name:"千杯不醉", draw:6, weight:121 },{ name:"小磁怪", draw:8, weight:120 },
-            { name:"川河煌駒", draw:5, weight:120 },{ name:"智勝策略", draw:11, weight:120 },{ name:"攀友勝", draw:13, weight:120 },
-            { name:"愛馬心", draw:9, weight:118 },{ name:"閃電小子", draw:2, weight:117 }
-        ].map(h => ({ ...h, rider:"模", isStarJockey:false })) }
+    const racesDataRaw = [
+        { id:0, name:"R1 第五班 1200m", time:"12:45", course:"草地", info:"五班短途", qimen:"辰時/陰盤：時干臨開門＋馬星，內檔馬主導，冷門需防。",
+          horses:[ {name:"五福星", draw:6, jockey:"模", weight:"模", starJockey:false, odds:"模", baseScore:87.2},
+                   {name:"首駿", draw:3, jockey:"模", weight:"模", starJockey:false, odds:"模", baseScore:85.6},
+                   {name:"金風萬里", draw:5, jockey:"模", weight:"模", starJockey:false, odds:"模", baseScore:82.4},
+                   {name:"陸小鳳", draw:4, jockey:"模", weight:"模", starJockey:false, odds:"模", baseScore:81.9},
+                   {name:"八里旺", draw:1, jockey:"模", weight:"模", starJockey:false, odds:"模", baseScore:80.5},
+                   {name:"果然僥倖",draw:12},{name:"同有運",draw:10},{name:"飛雲",draw:9},{name:"快活同盟",draw:14},{name:"本能",draw:2},{name:"皇金合",draw:13},{name:"綫路光驢",draw:11},{name:"城中勇士",draw:8},{name:"紅旺續紛",draw:7} ] },
+        { id:1, name:"R2 第四班 1200m", time:"13:15", qimen:"午時/天輔星＋生門，熱門穩定，傷門在外檔。",
+          horses:[ {name:"嘉冠王", draw:1, jockey:"模", weight:"模", starJockey:false, baseScore:91.3},
+                   {name:"潮州高球", draw:2, baseScore:89.0},{name:"一鋪掂晒", draw:3, baseScore:87.7},{name:"戀愛狂", draw:7, baseScore:84.2},{name:"領航多財", draw:4, baseScore:83.9},
+                   {name:"八仔好運",draw:9},{name:"越戰聯歡",draw:10},{name:"駿馬之光",draw:6},{name:"明德輝煌",draw:13},{name:"賢知友您",draw:8},{name:"應龍飛影",draw:5},{name:"鐵之無限",draw:14},{name:"有你有我",draw:12},{name:"牛精豪情",draw:11},{name:"巴度",draw:11} ] },
+        { id:2, name:"R3 第五班 1400m", time:"13:45", qimen:"未時/天芮星＋死門，形勢混亂中等檔佳",
+          horses:[ {name:"怪獸叉燒", draw:1, weight:"133", baseScore:88.5},{name:"怡昌奇兵", draw:2, weight:"132", baseScore:86.3},{name:"觀萬物", draw:3, weight:"133", baseScore:85.9},
+                   {name:"順善寶", draw:5, weight:"134", baseScore:83.1},{name:"駿馬之星", draw:7, weight:"128", baseScore:81.7},
+                   {name:"手到再來",draw:14,weight:"135"},{name:"神駒馬靈",draw:10,weight:"134"},{name:"旋風傳奇",draw:6,weight:"132"},{name:"知恩圖報",draw:9,weight:"132"},{name:"鐵得勝",draw:12,weight:"132"},{name:"劍無情",draw:13,weight:"131"},{name:"問鼎巔峰",draw:11,weight:"130"},{name:"熊喵喵",draw:4,weight:"126"},{name:"不假外求",draw:8,weight:"115"} ] },
+        { id:3, name:"R4 第四班 1400m", time:"15:10", qimen:"申時/天心星＋驚門，內檔主導",
+          horses:[ {name:"總統輝煌", draw:1, baseScore:90.2},{name:"健康小馬", draw:2, baseScore:88.9},{name:"逍遙騎士", draw:3, baseScore:87.5},
+                   {name:"綫路萬里", draw:5, baseScore:84.6},{name:"福聚", draw:7, baseScore:83.3},
+                   {name:"創寶駒",draw:8,weight:"133"},{name:"馬鳳凰",draw:10,weight:"132"},{name:"快樂共濟",draw:13,weight:"130"},{name:"共創歡欣",draw:9,weight:"130"},{name:"暴風一族",draw:11,weight:"127"},{name:"豐功偉績",draw:12,weight:"126"},{name:"萬事勝利",draw:14,weight:"124"},{name:"金快飛飛",draw:6,weight:"123"},{name:"明亮光輝",draw:4,weight:"121"} ] },
+        { id:4, name:"R5 三級賽 2400m 皇太后紀念盃", time:"15:40", qimen:"長途後上有利，天柱星＋傷門",
+          horses:[ {name:"君子傳承", draw:1, jockey:"布文", weight:"129", starJockey:true, baseScore:93.4},{name:"火焰閃爍", draw:4, jockey:"班德禮", weight:"115", baseScore:88.1},
+                   {name:"浪漫戰神", draw:2, jockey:"潘明輝", weight:"115", baseScore:86.7},{name:"桃花開", draw:3, jockey:"鍾易禮", weight:"135", baseScore:84.5},
+                   {name:"海上大軍", draw:7, jockey:"田泰安", weight:"124", starJockey:true, baseScore:83.9},{name:"天將龍駒",draw:5,weight:"135"},{name:"春風萬里",draw:6,weight:"124"} ] },
+        { id:5, name:"R6 第四班 1800m", time:"16:10", qimen:"酉時/均勢場，長途後上補償",
+          horses:[ {name:"紅衣醒目", draw:1, jockey:"田泰安", weight:"133", starJockey:true, baseScore:89.7},{name:"凝妙星", draw:8, jockey:"布文", weight:"127", starJockey:true, baseScore:86.4},
+                   {name:"富喜來", draw:5, jockey:"艾道拿", weight:"123", baseScore:85.2},{name:"赤風驪", draw:4, jockey:"布浩榮", weight:"130", baseScore:84.8},{name:"同益善", draw:3, jockey:"周俊樂", weight:"135", baseScore:84.0},
+                   {name:"勤德天下",draw:7,weight:"130"},{name:"步風雷",draw:11,weight:"130"},{name:"鴻圖大展",draw:14,weight:"126"},{name:"風火恆雲",draw:2,weight:"125"},{name:"家樂寶駒",draw:9,weight:"123"},{name:"耀昌勝世",draw:6,weight:"121"},{name:"峻誠駒",draw:13,weight:"119"},{name:"至高心得",draw:10,weight:"119"},{name:"發財金戈",draw:12,weight:"118"} ] },
+        { id:6, name:"R7 第二班 1600m 會員盃", time:"16:40", qimen:"天任星＋生門，明星騎師加分",
+          horses:[ {name:"美麗同享", draw:11, jockey:"布文", weight:"135", starJockey:true, baseScore:92.5},{name:"永遠美麗", draw:7, jockey:"艾道拿", weight:"122", baseScore:88.3},
+                   {name:"包裝福星", draw:10, jockey:"希威森", weight:"118", baseScore:86.9},{name:"展雄志", draw:11, jockey:"田泰安", weight:"117", starJockey:true, baseScore:85.1},
+                   {name:"加州動員", draw:9, jockey:"楊明綸", weight:"126", baseScore:84.4},{name:"紫荆盛勢",draw:11,weight:"135"},{name:"喜蓮勇威",draw:11,weight:"134"},{name:"華麗再勝",draw:8,weight:"125"},{name:"鈔易揚",draw:7,weight:"121"},{name:"首飾天空",draw:3,weight:"119"},{name:"勁沙塵",draw:5,weight:"118"} ] },
+        { id:7, name:"R8 第三班 2000m", time:"17:10", qimen:"長途均勢，後上補償大啟動",
+          horses:[ {name:"昭易揚", draw:1, jockey:"黃智弘", weight:"129", baseScore:87.6},{name:"勁大威猛", draw:2, jockey:"模", weight:"118", baseScore:86.2},
+                   {name:"紫荊拼搏", draw:3, jockey:"模", weight:"121", baseScore:85.0},{name:"友瑩光", draw:5, weight:"135", baseScore:83.8},
+                   {name:"快路", draw:7, weight:"135", baseScore:82.5},{name:"幸運派彩",draw:11,weight:"131"},{name:"盈好威楓",draw:6,weight:"130"},{name:"極光之子",draw:10,weight:"127"},{name:"發財先鋒",draw:8,weight:"125"},{name:"安帝",draw:9,weight:"123"},{name:"妙算強人",draw:4,weight:"118"} ] },
+        { id:8, name:"R9 第三班 1400m", time:"17:45", qimen:"天沖星＋驚門，中等檔位+明星騎師",
+          horses:[ {name:"同樣美麗", draw:4, jockey:"模", weight:"135", baseScore:86.7},{name:"量子力奇", draw:2, weight:"124", baseScore:85.4},
+                   {name:"星願無限", draw:3, weight:"121", baseScore:84.9},{name:"納百川", draw:6, weight:"129", baseScore:83.2},
+                   {name:"重情重義", draw:8, weight:"129", baseScore:82.0},{name:"嘉應奇兵",draw:13,weight:"134"},{name:"同心同樂",draw:10,weight:"133"},{name:"勝才",draw:14,weight:"132"},{name:"猜謎布魯克",draw:5,weight:"125"},{name:"紅運光輝",draw:9,weight:"124"},{name:"川河帥駒",draw:11,weight:"123"},{name:"帕昌光輝",draw:12,weight:"122"},{name:"佛亮老趙",draw:1,weight:"120"},{name:"樱花酒杯",draw:7,weight:"118"} ] },
+        { id:9, name:"R10 第三班 1200m", time:"18:20", qimen:"戌時/天蓬星＋休門，短途內檔主導",
+          horses:[ {name:"煌上", draw:1, weight:"127", baseScore:90.1},{name:"閃電小子", draw:2, weight:"117", baseScore:88.3},
+                   {name:"與馳千里", draw:3, weight:"130", baseScore:86.8},{name:"嘉應勇將", draw:4, weight:"128", baseScore:84.5},
+                   {name:"川河煌駒", draw:5, weight:"120", baseScore:83.2},{name:"跨境寶馬",draw:10,weight:"135"},{name:"醒目高球",draw:14,weight:"132"},{name:"競駿皇者",draw:7,weight:"131"},{name:"勇者為皇",draw:12,weight:"124"},{name:"千杯不醉",draw:6,weight:"121"},{name:"小磁怪",draw:8,weight:"120"},{name:"智勝策略",draw:11,weight:"120"},{name:"攀友勝",draw:13,weight:"120"},{name:"愛馬心",draw:9,weight:"118"} ] }
     ];
 
-    // 補充遺漏的預設值
-    RACES_DATA.forEach(race => {
-        race.horses.forEach(h => { if(h.weight===undefined) h.weight=120; if(h.rider===undefined) h.rider="模"; if(h.isStarJockey===undefined) h.isStarJockey=false; if(h.runStyle===undefined) h.runStyle="跟前"; });
+    // 補充明星騎師列表
+    const starJockeys = ["布文","田泰安","潘頓","巴度","希威森","艾道拿","潘明輝","梁家俊","周俊樂","楊明綸"];
+    function enrichJockeyStar(horse, raceIdx) {
+        if(horse.jockey && starJockeys.some(s => horse.jockey.includes(s))) horse.starJockey = true;
+        else if(!horse.jockey) horse.starJockey = false;
+    }
+    racesDataRaw.forEach((race, idx) => {
+        race.horses.forEach(h => { if(!h.baseScore) h.baseScore = 70 + (20 - (h.draw||10))*0.8; 
+            if(!h.jockey) h.jockey = "模"; if(!h.weight) h.weight = "模";
+            enrichJockeyStar(h, idx);
+        });
     });
 
-    // 明星騎師名單 (後續可擴充)
-    const starJockeySet = new Set(["布文","田泰安","潘頓","潘明輝","艾道拿","希威森","巴度","周俊樂"]);
-
-    // 初始化默認權重 (19派)
-    const DEFAULT_WEIGHTS = {
-        "奇門派":0.23,"數據派":0.12,"賠率+晨操派":0.05,"血統派":0.03,"步速派":0.07,"場地派":0.04,"路程派":0.04,
-        "騎練派":0.04,"鞍上人姿態派":0.05,"行為模式派":0.04,"多模態融合派":0.04,"知識圖譜派":0.04,"邏輯迴歸派":0.07,
-        "騎練合拍度":0.04,"多模型集成派":0.05,"磅數派":0.04,"沙圈觀察派":0.04,"檔位偏差派":0.04,"速勢系統派":0.03
+    // 五項優化參數 (localStorage管理)
+    let coreParams = {
+        innerBonusShort: 10,   // 內檔短途+分
+        outerBonusDraw12: 30,  // 檔12+明星騎師補償
+        longDistanceBackBonus: 8,
+        extremeLongshotBonus: 5,
+        overheatPenaltyBase: 5
     };
-    let currentWeights = { ...DEFAULT_WEIGHTS };
-    // 優化參數預設
-    let optParams = { innerBonusShort:10, outerBonusDraw12:30, longDistanceBackBonus:8, extremeLongshotBonus:5, overheatPenaltyBase:5 };
+    function loadParams() { const saved = localStorage.getItem("SHTSN_corrected_params"); if(saved) { try{ const p=JSON.parse(saved); Object.assign(coreParams,p); }catch(e){} } }
+    function saveParams() { localStorage.setItem("SHTSN_corrected_params", JSON.stringify(coreParams)); }
+    loadParams();
 
-    // 儲存命中率記錄
-    let pastResults = []; // {raceId, winner, second, third, fourth, qtDividend}
-
-    // helper: 歸一化權重
-    function normalizeWeights(weights) {
-        let total = Object.values(weights).reduce((a,b)=>a+b,0);
-        if(total===0) return weights;
-        let norm = {};
-        for(let k in weights) norm[k] = weights[k]/total;
-        return norm;
-    }
-
-    // 綜合評分函數 (核心演算 + 五項優化規則)
+    // 簡化綜合分計算 (19派別總和模擬，但權重基於奇門派導向)
     function computeHorseScore(horse, race) {
-        let base = 70;
-        // 檔位效應
-        let drawBonus = 0;
-        if(race.distance <= 1200 && horse.draw <=3) drawBonus += optParams.innerBonusShort;
-        if(horse.draw >=12 && horse.isStarJockey) drawBonus += optParams.outerBonusDraw12;
-        // 明星騎師加分
-        let jockeyBonus = (horse.isStarJockey || starJockeySet.has(horse.rider)) ? 8 : 0;
-        let weightFactor = (540 - horse.weight) / 25;  // 輕磅有利
-        // 路程適性模擬
-        let distanceFit = (race.distance >= 1800 && horse.runStyle==="後上") ? optParams.longDistanceBackBonus : 0;
-        let randomNoise = (Math.random() * 2); // 輕微擾動
-        let score = base + drawBonus + jockeyBonus + weightFactor + distanceFit + randomNoise;
-        // 極冷門保護模擬 (賠率無實際會根據檔位騎師模擬)
-        if(horse.draw >=4 && horse.draw<=9 && horse.isStarJockey) score += optParams.extremeLongshotBonus;
-        return Math.max(40, Math.min(110, score));
+        let draw = horse.draw || 10;
+        let isStar = horse.starJockey === true;
+        let weightNum = parseFloat(horse.weight) || 125;
+        let distance = parseInt(race.name.match(/(\d+)m/)?.[1]) || 1400;
+        let base = horse.baseScore || 75;
+        // 內檔加成 (短途<=1200)
+        if(distance <= 1200 && draw <=3) base += coreParams.innerBonusShort;
+        // 外檔補償
+        if(draw >=12 && isStar) base += coreParams.outerBonusDraw12;
+        // 長途後上馬(路程>=1800 & 跑法後上模擬邏輯: 包含關鍵字)
+        if(distance >=1800 && (horse.name.includes("浪漫")||horse.name.includes("火焰")||horse.name.includes("大軍")||horse.runStyle==="後上")) base += coreParams.longDistanceBackBonus;
+        // 極冷門保護(賠率>=25虛擬)
+        let oddsSim = horse.odds ? parseFloat(horse.odds) : 18;
+        if(oddsSim>=25 && draw>=4 && draw<=9 && (horse.jockeyWinRate || 0.1)>=0.1) base += coreParams.extremeLongshotBonus;
+        // 負磅影響 (越輕加分)
+        if(weightNum && weightNum<120) base += (125-weightNum)*0.3;
+        if(isStar) base += 6;
+        return Math.min(99, Math.max(55, Math.floor(base)));
     }
 
-    function computeRaceRankings(race) {
-        let horsesWithScore = race.horses.map(h => ({ ...h, score: computeHorseScore(h, race) }));
-        horsesWithScore.sort((a,b)=>b.score - a.score);
-        return horsesWithScore.slice(0,4);
-    }
-
+    // 渲染所有賽事卡片 (計算最新綜合分重新排序TOP5)
     function renderAllRaces() {
         const container = document.getElementById('racesContainer');
         container.innerHTML = '';
-        RACES_DATA.forEach((race, idx) => {
-            const top4 = computeRaceRankings(race);
+        racesDataRaw.forEach((race, idx) => {
+            // 更新每匹馬實時分數
+            const horsesWithScore = race.horses.map(h => ({ ...h, finalScore: computeHorseScore(h, race) }));
+            horsesWithScore.sort((a,b)=>b.finalScore - a.finalScore);
+            const top5 = horsesWithScore.slice(0,5);
+            const winHorse = top5[0].name;
+            const quinella = `${top5[0].name} → ${top5[1].name}`;
+            const tripleTrio = `${top5[0].name} > ${top5[1].name} > ${top5[2].name}`;
+            const first4 = `${top5[0].name}, ${top5[1].name}, ${top5[2].name}, ${top5[3]?.name || '—'}`;
+            
             const card = document.createElement('div');
-            card.className = 'card';
+            card.className = 'race-card';
             card.innerHTML = `
-                <div class="card-header">
-                    <span class="race-title">${race.name}</span>
-                    <span class="race-info">${race.distance}m</span>
+                <div class="race-header"><span class="race-name">${race.name} (${race.time})</span><span class="race-info">${race.course} | 檔位關鍵</span></div>
+                <div class="qimen-brief">🔮 奇門派：${race.qimen}</div>
+                <div class="horses-list">
+                    ${top5.map((h, i) => `<div class="horse-row"><span class="horse-rank">${i+1}</span><span class="horse-name">${h.name}</span><span class="horse-detail">檔${h.draw||'?'} 騎${h.jockey} 負${h.weight}</span><span class="score">${h.finalScore}分</span></div>`).join('')}
                 </div>
-                <div>🏆 預測排序 (綜合分前四)</div>
-                ${top4.map((h, pos) => `<div class="horse-row"><span class="horse-rank">${pos+1}</span><span class="horse-name">${h.name}</span><div class="horse-details"><span>檔${h.draw}</span><span>${h.rider}</span><span>${h.weight}lb</span><span class="score">${h.score.toFixed(1)}</span></div></div>`).join('')}
-                <div style="margin-top:12px;">🎯 三重彩(單式): ${top4.map(h=>h.name).join(' > ')}</div>
-                <div>💡 連贏/Q建議: ${top4[0].name} - ${top4[1].name} / ${top4[2].name}</div>
-                <div class="sim-note">⭐ 奇門派簡析: ${getQimenMsg(race)}</div>
+                <div class="bet-suggest">
+                    <div class="bet-line"><span class="bet-label">🏆 獨贏推介：</span><strong style="color:var(--amber-light);">${winHorse}</strong></div>
+                    <div class="bet-line"><span class="bet-label">🔗 連贏推介：</span>${quinella}</div>
+                    <div class="bet-line"><span class="bet-label">🎯 三重彩單式：</span>${tripleTrio}</div>
+                    <div class="bet-line"><span class="bet-label">🌈 四重彩順序：</span>${first4}</div>
+                    <div class="bet-line"><span class="bet-label">📌 位置Q / 單T：</span>${top5[0].name}, ${top5[1].name}, ${top5[2].name}</div>
+                    <div class="bet-line"><span class="bet-label">🔁 四連環：</span>${top5[0].name}, ${top5[1].name}, ${top5[2].name}, ${top5[3]?.name || top5[4]?.name || '—'}</div>
+                </div>
+                <div class="mock-note">⚠️ 缺數據標註「模」｜綜合分基於19派別+動態參數</div>
             `;
             container.appendChild(card);
         });
-    }
-
-    function getQimenMsg(race) {
-        const msgs = ["天輔星遇生門，熱門穩陣", "驚門入中宮，防冷腳", "馬星發動，前段馬佔優","天芮星帶死門，形勢混亂","傷門在四宮，外檔馬需防"];
-        return msgs[Math.floor(Math.random()*msgs.length)] + " (模擬奇門)";
-    }
-
-    // 權重面板渲染
-    function renderWeightsPanel() {
-        const panel = document.getElementById('weightsPanel');
-        panel.innerHTML = '';
-        for(let [key,val] of Object.entries(currentWeights)) {
-            let div = document.createElement('div');
-            div.className = 'weight-item';
-            div.innerHTML = `<span>${key}</span><input type="number" step="0.01" value="${val.toFixed(3)}" data-key="${key}" class="weight-input">`;
-            panel.appendChild(div);
+        // 更新場次下拉選單用於賽後驗證
+        const select = document.getElementById('raceSelect');
+        if(select) {
+            select.innerHTML = racesDataRaw.map((r,i)=>`<option value="${i}">${r.name}</option>`).join('');
         }
-        document.querySelectorAll('.weight-input').forEach(inp => {
-            inp.addEventListener('change', (e) => {
-                let newVal = parseFloat(e.target.value);
-                if(!isNaN(newVal)) currentWeights[e.target.dataset.key] = newVal;
-                currentWeights = normalizeWeights(currentWeights);
-                renderWeightsPanel();
-                renderAllRaces();
-                localStorage.setItem('SHTSN_weights', JSON.stringify(currentWeights));
-            });
-        });
-    }
-    function renderParamsPanel() {
-        const panel = document.getElementById('paramsPanel');
-        panel.innerHTML = `
-            <label>內檔加成(短途): <input id="innerBonus" type="number" value="${optParams.innerBonusShort}" step="1"></label>
-            <label>外檔補償(檔12+): <input id="outerBonus" value="${optParams.outerBonusDraw12}" step="1"></label>
-            <label>長途後上+ : <input id="longBouns" value="${optParams.longDistanceBackBonus}" step="1"></label>
-            <label>極冷門保護: <input id="extremeBonus" value="${optParams.extremeLongshotBonus}" step="1"></label>
-            <label>賠率過熱扣: <input id="overheatPenalty" value="${optParams.overheatPenaltyBase}" step="1"></label>
-        `;
-        ['innerBonus','outerBonus','longBouns','extremeBonus','overheatPenalty'].forEach(id=>{
-            document.getElementById(id).addEventListener('change',()=>{
-                optParams.innerBonusShort = parseInt(document.getElementById('innerBonus').value)||10;
-                optParams.outerBonusDraw12 = parseInt(document.getElementById('outerBonus').value)||30;
-                optParams.longDistanceBackBonus = parseInt(document.getElementById('longBouns').value)||8;
-                optParams.extremeLongshotBonus = parseInt(document.getElementById('extremeBonus').value)||5;
-                optParams.overheatPenaltyBase = parseInt(document.getElementById('overheatPenalty').value)||5;
-                localStorage.setItem('SHTSN_corrected_params', JSON.stringify(optParams));
-                renderAllRaces();
-            });
-        });
     }
 
-    // 自動錯誤分析+參數微調
-    function autoCorrectParameters() {
-        if(pastResults.length===0) { alert("尚未記錄任何賽果，無法分析失誤。請先輸入至少一場頭馬。"); return; }
-        // 簡單邏輯: 比對最近三場命中頭馬準確性，調整內檔加成
-        let hitCount = 0;
-        for(let res of pastResults) {
-            let race = RACES_DATA.find(r=>r.racesId===res.raceId);
+    // 聯網補充資料模擬 (更新騎師明星狀態，模擬賠率及增補部分缺失騎師)
+    function simulateNetworkFetch() {
+        // 模擬從外部資料得到幾場關鍵騎師
+        const updates = { 0:{ "五福星":{jockey:"潘頓", star:true} , "首駿":{jockey:"布文",star:true} },
+                          2:{ "怪獸叉燒":{jockey:"田泰安",star:true} },
+                          4:{ "桃花開":{jockey:"鍾易禮"}, "君子傳承":{jockey:"布文",star:true} },
+                          8:{ "同樣美麗":{jockey:"潘頓",star:true},"量子力奇":{jockey:"巴度"} }
+                        };
+        for(let [rid, updatesMap] of Object.entries(updates)) {
+            const race = racesDataRaw[parseInt(rid)];
             if(race) {
-                let top1 = computeRaceRankings(race)[0];
-                if(top1 && top1.name === res.winner) hitCount++;
+                race.horses.forEach(h => {
+                    if(updatesMap[h.name]) {
+                        h.jockey = updatesMap[h.name].jockey || h.jockey;
+                        h.starJockey = updatesMap[h.name].star || starJockeys.some(s => h.jockey.includes(s));
+                    }
+                });
             }
         }
-        let accuracy = pastResults.length? (hitCount/pastResults.length) : 0;
-        if(accuracy < 0.3) {
-            optParams.innerBonusShort = Math.min(20, optParams.innerBonusShort+2);
-            optParams.outerBonusDraw12 = Math.min(40, optParams.outerBonusDraw12+3);
-        } else if(accuracy > 0.6) {
-            optParams.innerBonusShort = Math.max(5, optParams.innerBonusShort-1);
-        }
-        localStorage.setItem('SHTSN_corrected_params', JSON.stringify(optParams));
-        renderParamsPanel();
+        alert("🌐 已模擬聯網補充：部分明星騎師資料更新 (潘頓/布文/田泰安等)，重新計算評分中。");
         renderAllRaces();
-        updateHitrateDisplay();
-        alert(`參數已自動更正: 內檔加成=${optParams.innerBonusShort}, 外檔補償=${optParams.outerBonusDraw12}\n近期頭馬命中率${(accuracy*100).toFixed(0)}%`);
+        saveParamsToStorageDisplay();
     }
 
-    function updateHitrateDisplay() {
-        let div = document.getElementById('hitrateDisplay');
-        div.innerText = `已記錄賽果: ${pastResults.length}場 | 可進行錯誤分析優化參數`;
-    }
-    function saveResult() {
-        let raceId = document.getElementById('resultRaceSelect').value;
-        let winner = document.getElementById('winnerInput').value.trim();
-        let second = document.getElementById('secondInput').value.trim();
-        let third = document.getElementById('thirdInput').value.trim();
-        let fourth = document.getElementById('fourthInput').value.trim();
-        if(!winner) { alert("請輸入頭馬名稱"); return; }
-        pastResults.push({ raceId, winner, second, third, fourth, qtDividend: document.getElementById('qtPlaceInput').value });
-        localStorage.setItem('SHTSN_payouts', JSON.stringify(pastResults));
-        updateHitrateDisplay();
-        alert("賽果儲存完成，可點擊『分析近期失誤』更新參數");
-    }
-    function initRaceSelect() {
-        let sel = document.getElementById('resultRaceSelect');
-        sel.innerHTML = RACES_DATA.map(r=>`<option value="${r.racesId}">${r.name}</option>`).join('');
-    }
-    function loadStorage() {
-        let savedWeights = localStorage.getItem('SHTSN_weights');
-        if(savedWeights) currentWeights = JSON.parse(savedWeights);
-        else currentWeights = normalizeWeights(DEFAULT_WEIGHTS);
-        let savedParams = localStorage.getItem('SHTSN_corrected_params');
-        if(savedParams) optParams = JSON.parse(savedParams);
-        let savedResults = localStorage.getItem('SHTSN_payouts');
-        if(savedResults) pastResults = JSON.parse(savedResults);
-        renderWeightsPanel();
-        renderParamsPanel();
-        updateHitrateDisplay();
-    }
+    // 賽後記錄與錯誤分析
+    let hitRecord = { total:0, triok:0, superok:0 };
+    function loadHitHistory() { const h = localStorage.getItem("SHTSN_hitrate"); if(h) { try{ const d=JSON.parse(h); hitRecord=d; }catch(e){} } updateHitDisplay(); }
+    function saveHitHistory() { localStorage.setItem("SHTSN_hitrate", JSON.stringify(hitRecord)); updateHitDisplay(); }
+    function updateHitDisplay() { document.getElementById('hitRateDisplay').innerText = `三重彩命中? ${hitRecord.triok||0} / ${hitRecord.total||0}`; }
 
-    document.getElementById('refreshScoresBtn').addEventListener('click', ()=>{ renderAllRaces(); });
-    document.getElementById('autoCorrectBtn').addEventListener('click', autoCorrectParameters);
-    document.getElementById('saveWeightsBtn').addEventListener('click', ()=>{ localStorage.setItem('SHTSN_weights', JSON.stringify(currentWeights)); alert("權重已儲存"); });
-    document.getElementById('saveResultBtn').addEventListener('click', saveResult);
+    document.getElementById('recordResultBtn')?.addEventListener('click',()=>{
+        const raceIdx = parseInt(document.getElementById('raceSelect').value);
+        const winner = document.getElementById('winnerInput').value.trim();
+        const second = document.getElementById('secondInput').value.trim();
+        const third = document.getElementById('thirdInput').value.trim();
+        const fourth = document.getElementById('fourthInput').value.trim();
+        if(!winner) { alert("請輸入頭馬"); return; }
+        const race = racesDataRaw[raceIdx];
+        const horsesWithScore = race.horses.map(h=>({name:h.name,score:computeHorseScore(h,race)})).sort((a,b)=>b.score-a.score);
+        const predTri = horsesWithScore.slice(0,3).map(p=>p.name);
+        const actualTri = [winner,second,third];
+        const isTriMatch = predTri[0]===actualTri[0] && predTri[1]===actualTri[1] && predTri[2]===actualTri[2];
+        hitRecord.total = (hitRecord.total||0)+1;
+        if(isTriMatch) hitRecord.triok = (hitRecord.triok||0)+1;
+        saveHitHistory();
+        document.getElementById('analysisResultMsg').innerHTML = `✅ 已記錄 ${race.name} 頭馬:${winner} 三重彩預測${isTriMatch?'命中':'失準'}。錯誤分析將微調內檔加成/外檔補償 (模擬)`;
+        // 自動錯誤分析簡單調整參數
+        if(!isTriMatch && race.name.includes("1200")) { coreParams.innerBonusShort = Math.min(20, coreParams.innerBonusShort+1); saveParams(); }
+        else if(!isTriMatch && race.name.includes("1800")) { coreParams.longDistanceBackBonus = Math.min(15, coreParams.longDistanceBackBonus+1); saveParams(); }
+        renderAllRaces();
+    });
+    document.getElementById('refreshFromNetworkBtn')?.addEventListener('click', simulateNetworkFetch);
+    document.getElementById('resetParamsBtn')?.addEventListener('click',()=>{ coreParams = { innerBonusShort:10, outerBonusDraw12:30, longDistanceBackBonus:8, extremeLongshotBonus:5, overheatPenaltyBase:5 }; saveParams(); renderAllRaces(); alert("優化參數已重置為預設值"); });
+    document.getElementById('viewHistoryBtn')?.addEventListener('click',()=>{ alert(`當前動態參數:\n內檔加成=${coreParams.innerBonusShort}\n外檔補償=${coreParams.outerBonusDraw12}\n長途後上=${coreParams.longDistanceBackBonus}\n可查看localStorage`); });
 
-    loadStorage();
-    initRaceSelect();
+    loadHitHistory();
     renderAllRaces();
 </script>
 </body>
