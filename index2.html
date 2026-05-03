@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>SHTSN V10.7 | 沙田日賽 2026-05-03 (三重彩改複式)</title>
+    <title>SHTSN V10.7 | 三重彩複式版 | 沙田日賽 2026-05-03</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -60,10 +60,10 @@
     </div>
     <div id="racesContainer" class="races-grid"></div>
 
-    <!-- 賽後驗證面板 -->
+    <!-- 賽後驗證面板 (三重彩以複式命中計算) -->
     <div class="section-panel">
         <h3 style="color: var(--amber);">📋 賽後驗證 | 自動錯誤分析</h3>
-        <p style="font-size:0.75rem;">輸入頭馬至四馬，系統比對預測並動態調整五項核心參數 (內檔/外檔/長途後上/冷門保護/過熱懲罰)</p>
+        <p style="font-size:0.75rem;">輸入頭馬至四馬，系統比對預測並動態調整五項核心參數。三重彩命中條件：預測的三匹馬（不分順序）等於實際三甲。</p>
         <div class="flex-between" style="margin-top: 12px;">
             <select id="raceSelect"></select>
             <input type="text" id="winnerInput" placeholder="頭馬" style="width:85px;">
@@ -122,7 +122,7 @@
           ]},
         { id:2, name:"R3 第五班 1400m", time:"13:45", distance:1400, class:"5", qimen:"未時天芮星＋死門，形勢混亂，賠率冷熱參差。",
           horses: [
-            {name:"手到再來", draw:14, jockey:"袁幸堯", weight:135, winOdds:10, star:false, weightAdj:-10},
+            {name:"手到再來", draw:14, jockey:"袁幸堯", weight:135, winOdds:10, star:false},
             {name:"神駒馬靈", draw:10, jockey:"奧爾民", weight:134, winOdds:17, star:false},
             {name:"順善寶", draw:5, jockey:"黃智弘", weight:134, winOdds:15, star:false},
             {name:"觀萬物", draw:3, jockey:"潘頓", weight:133, winOdds:19, star:true},
@@ -302,7 +302,7 @@
             const top5 = withScores.slice(0,5);
             const winHorse = top5[0].name;
             const quinella = `${top5[0].name} → ${top5[1].name}`;
-            // 三重彩改為複式 (序目不拘) : 使用前三名馬匹名稱
+            // 三重彩複式: 列出三匹馬 (序目不拘)
             const triBox = `${top5[0].name}, ${top5[1].name}, ${top5[2].name} (序目不拘)`;
             const super4 = `${top5[0].name}, ${top5[1].name}, ${top5[2].name}, ${top5[3]?.name || '—'}`;
             const card = document.createElement('div');
@@ -329,7 +329,7 @@
         if(sel) sel.innerHTML = racesData.map((r,i)=>`<option value="${i}">${r.name}</option>`).join('');
     }
 
-    // 賽後記錄 (改為計算複式命中: 只要前三名馬匹集合包含實際三甲即算中)
+    // 賽後記錄 (複式命中：預測三匹馬集合 = 實際三甲集合)
     let hitStat = { total:0, triok:0 };
     function loadHit() { const h=localStorage.getItem("SHTSN_hitrate"); if(h) { try{ hitStat=JSON.parse(h); }catch(e){} } updateHitDisplay(); }
     function saveHit() { localStorage.setItem("SHTSN_hitrate", JSON.stringify(hitStat)); updateHitDisplay(); }
@@ -343,7 +343,7 @@
         const race = racesData[idx];
         const predTop3 = race.horses.map(h=>({name:h.name,score:computeScore(h,race)})).sort((a,b)=>b.score-a.score).slice(0,3).map(p=>p.name);
         const actualSet = new Set([w,s,t]);
-        const isTriBoxHit = predTop3.every(m => actualSet.has(m)) && actualSet.size===3; // 三匹完全相同集合
+        const isTriBoxHit = (predTop3.length === 3 && actualSet.size === 3 && predTop3.every(m => actualSet.has(m)));
         hitStat.total = (hitStat.total||0)+1;
         if(isTriBoxHit) hitStat.triok = (hitStat.triok||0)+1;
         saveHit();
