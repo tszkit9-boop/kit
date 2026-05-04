@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>SHTSN V10.8 | 全天候泥地賽事 2026-05-06</title>
+    <title>SHTSN V10.8 | 全天候泥地賽事 2026-05-06 (R1排位已更正)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -198,7 +198,7 @@
 <div class="container">
     <div class="system-header">
         <h1>🕸️ SHTSN · 賽馬預測系統</h1>
-        <div class="version">V10.8 泥地特化版 | 全天候跑道 2026-05-06</div>
+        <div class="version">V10.8 泥地特化版 | 全天候跑道 2026-05-06 (R1排位已更正)</div>
         <div class="sub">團隊分工 · 決策融合 · 9場泥地賽事 · 動態明星加分+步速+賠率走勢</div>
     </div>
     <div class="toolbar">
@@ -232,28 +232,27 @@
 
 <script>
     // --------------------------------------------------------------
-    // 2026-05-06 全天候跑道 9場排位 (根據圖片整理)
-    // 缺騎師/練馬師處標「模」，部分馬名因圖片缺字暫時標記(騎師名佔位)
+    // 2026-05-06 全天候跑道 9場排位 (R1根據用戶最新資料完整更正)
     // --------------------------------------------------------------
     const starJockeys = ["潘頓","布文","田泰安","巴度","希威森","艾道拿","潘明輝","梁家俊","周俊樂","楊明綸","艾兆禮","班德禮","何澤堯","霍宏聲","蔡明紹","鍾易禮","袁幸堯","黃智弘","巫顯東","莫雷拉"];
 
     const racesData = [
         { id:0, name:"R1 第五班 1650米", time:"18:45", distance:1650, class:"5", going:"全天候(好泥)", qimen:"酉時陰盤，泥地1650米利內檔前領。",
           horses: [
-            {name:"光輝歲月", draw:7, weight:135, jockey:"模", runStyle:"居中"},
-            {name:"君智盛", draw:6, weight:134, jockey:"模", runStyle:"跟前"},
-            {name:"歡樂老撾", draw:11, weight:131, jockey:"模", runStyle:"後上"},
-            {name:"十力", draw:3, weight:131, jockey:"模", runStyle:"領放"},
-            {name:"閃耀威龍", draw:10, weight:131, jockey:"模", runStyle:"居中"},
-            {name:"幸運傳承", draw:12, weight:130, jockey:"模", runStyle:"後上"},
-            {name:"歷險大將", draw:9, weight:129, jockey:"模", runStyle:"居中"},
-            {name:"運來勇士", draw:5, weight:129, jockey:"模", runStyle:"領放"},
-            {name:"大利好運", draw:2, weight:128, jockey:"模", runStyle:"跟前"},
-            {name:"一鹿歡騰", draw:1, weight:125, jockey:"模", runStyle:"領放"},
-            {name:"(鍾易禮佔位)", draw:4, weight:121, jockey:"鍾易禮", runStyle:"居中", star:true},
-            {name:"上市魅力", draw:8, weight:119, jockey:"模", runStyle:"後上"},
-            {name:"(田泰安佔位)", draw:13, weight:118, jockey:"田泰安", runStyle:"領放", star:true},
-            {name:"樂曬心機", draw:14, weight:115, jockey:"模", runStyle:"後上"}
+            {name:"光輝歲月", draw:7, weight:135, jockey:"霍宏聲", runStyle:"居中", trainer:"游達榮"},
+            {name:"君智盛", draw:6, weight:134, jockey:"潘頓", runStyle:"跟前", trainer:"姚本輝"},
+            {name:"歡樂老撾", draw:11, weight:131, jockey:"艾兆禮", runStyle:"後上", trainer:"桂福特"},
+            {name:"十力", draw:3, weight:131, jockey:"奧爾民", runStyle:"領放", trainer:"伍鵬志"},
+            {name:"閃耀威龍", draw:10, weight:131, jockey:"袁幸堯", runStyle:"居中", trainer:"文家良", weightAdj:-10},
+            {name:"幸運傳承", draw:12, weight:130, jockey:"莫雷拉", runStyle:"後上", trainer:"方嘉柏"},
+            {name:"歷險大將", draw:9, weight:129, jockey:"布浩榮", runStyle:"居中", trainer:"徐雨石"},
+            {name:"運來勇士", draw:5, weight:129, jockey:"黃智弘", runStyle:"領放", trainer:"葉楚航", weightAdj:-3},
+            {name:"大利好運", draw:2, weight:128, jockey:"布文", runStyle:"跟前", trainer:"蔡約翰"},
+            {name:"一鹿歡騰", draw:1, weight:125, jockey:"鍾易禮", runStyle:"領放", trainer:"告東尼", weightAdj:-2},
+            {name:"上市魅力", draw:4, weight:121, jockey:"田泰安", runStyle:"居中", trainer:"蘇偉賢"},
+            {name:"幻影旋風", draw:8, weight:119, jockey:"巴度", runStyle:"後上", trainer:"丁冠豪"},
+            {name:"東方魅影", draw:13, weight:118, jockey:"黃寶妮", runStyle:"後上", trainer:"大衛希斯", weightAdj:-7},
+            {name:"樂矚心機", draw:14, weight:115, jockey:"楊明綸", runStyle:"後上", trainer:"鄭俊偉"}
           ]},
         { id:1, name:"R2 第五班 1200米", time:"19:15", distance:1200, class:"5", going:"全天候(好泥)", qimen:"戌時短途，泥地利內檔快放。",
           horses: [
@@ -305,7 +304,7 @@
             {name:"光年程祥", draw:5, weight:132, jockey:"模", runStyle:"跟前"},
             {name:"顯勝高昇", draw:11, weight:130, jockey:"模", runStyle:"後上"},
             {name:"鎖師閃耀", draw:8, weight:128, jockey:"模", runStyle:"居中"},
-            {name:"棉棉日上", draw:9, weight:128, jockey:"模", runStyle:"跟前后"},
+            {name:"棉棉日上", draw:9, weight:128, jockey:"模", runStyle:"跟前"},
             {name:"良言一句", draw:12, weight:128, jockey:"模", runStyle:"後上"},
             {name:"杭至尊", draw:6, weight:127, jockey:"模", runStyle:"領放"},
             {name:"勤德皆備", draw:7, weight:124, jockey:"模", runStyle:"居中"},
@@ -378,7 +377,7 @@
           ]}
     ];
 
-    // 補明星騎師標記與基礎分
+    // 為所有馬匹補明星標記及基礎分 (若騎師非模則判斷明星)
     racesData.forEach(race => {
         race.horses.forEach(h => {
             if (!h.jockey) h.jockey = "模";
@@ -387,6 +386,11 @@
             else h.star = false;
             if (!h.runStyle) h.runStyle = "居中";
             if (!h.baseScore) h.baseScore = 70 + (16 - (h.draw||10)) * 0.7;
+            // 處理減磅
+            if (h.weightAdj) {
+                let w = parseInt(h.weight);
+                if (!isNaN(w)) h.weight = (w + h.weightAdj).toString();
+            }
         });
     });
 
@@ -398,7 +402,7 @@
         longDistanceBackBonus: 10,// 長途後上加分
         extremeLongshotBonus: 6,  // 極冷門保護
         overheatPenaltyBase: 3,   // 過熱懲罰
-        starJockeyBonus: 3,       // 明星騎師加分 (維持3)
+        starJockeyBonus: 3,       // 明星騎師加分
         fastPaceDrawAdjust: 3     // 快步速內檔加分
     };
     function loadParams() { const s = localStorage.getItem("SHTSN_corrected_params"); if(s) { try { Object.assign(coreParams, JSON.parse(s)); } catch(e){} } }
@@ -420,7 +424,7 @@
         if (draw >= 12 && star) base += coreParams.outerBonusDraw12;
         // 長途後上 (泥地1800米以上後上稍有利)
         if (dist >= 1800 && (runStyle === "後上" || horse.name.includes("浪漫") || horse.name.includes("火焰"))) base += coreParams.longDistanceBackBonus;
-        // 極冷門保護 (模擬賠率)
+        // 極冷門保護 (模擬賠率用15)
         let odds = 15;
         if (horse.winOdds) odds = parseFloat(horse.winOdds) || 15;
         if (odds >= 25 && draw >= 4 && draw <= 9 && star) base += coreParams.extremeLongshotBonus;
@@ -494,7 +498,6 @@
         else if(!isHit && race.distance>=1650) { coreParams.longDistanceBackBonus = Math.min(15, coreParams.longDistanceBackBonus+1); saveParams(); renderAll(); }
     });
     document.getElementById('refreshNetworkBtn')?.addEventListener('click',()=>{
-        // 模擬賠率走勢，隨機調整部分馬匹賠率趨勢
         alert("🌐 模擬聯網：已獲取最新泥地跑道狀況及賠率走勢，評分重新計算。");
         renderAll();
     });
