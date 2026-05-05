@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN 沙田馬場系統 | 19派別全激活 | 2026-05-06</title>
+    <title>SHTSN 沙田馬場系統 | 9場賽事 | 19派別全激活</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0f1a0f; font-family: system-ui, 'Segoe UI', sans-serif; color: #e6f0e6; padding: 1rem; }
-        .container { max-width: 1300px; margin: 0 auto; }
+        .container { max-width: 1400px; margin: 0 auto; }
         .header { text-align: center; margin-bottom: 1.5rem; border-bottom: 2px solid #ffb347; padding-bottom: 0.5rem; }
         .header h1 { font-size: 1.8rem; color: #ffb347; }
         .sub { font-size: 0.75rem; opacity: 0.8; }
@@ -30,9 +30,9 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>🏇 SHTSN 沙田馬場系統 | 19派別全激活</h1>
-        <div class="sub">閉環進化 | 所有專家同步運作 | 權重動態正規化 | 版本 V9.0_AllExperts</div>
-        <div class="sub">📅 2026-05-06 沙田全天候跑道 (泥地) — 已載入排位表及完整派別評分</div>
+        <h1>🏇 SHTSN 沙田馬場系統 | 9場全天候賽事 | 19派別全激活</h1>
+        <div class="sub">閉環進化 | 所有專家同步運作 | 權重動態正規化 | 版本 V9.0_9Races</div>
+        <div class="sub">📅 2026-05-06 沙田全天候跑道 (泥地) — 第1至第9場排位齊全</div>
     </div>
 
     <div id="racesContainer"></div>
@@ -57,7 +57,7 @@
         innerBonusShort: 8, outerBonusDraw12: 20, longDistanceBackBonus: 6, extremeLongshotBonus: 5
     };
 
-    // 騎師及練馬師分數表 (與之前相同)
+    // 騎師及練馬師分數表
     function getJockeyScore(j) {
         const map = { "潘頓":96,"莫雷拉":95,"布文":92,"田泰安":86,"艾兆禮":82,"巴度":80,"班德禮":78,"蔡明紹":76,
             "希威森":78,"霍宏聲":75,"梁家俊":74,"周俊樂":72,"潘明輝":72,"袁幸堯":68,"黃寶妮":65,
@@ -89,112 +89,90 @@
         return Math.max(2.5, Math.min(40, base));
     }
 
-    // ---------- 19 個派別各自的評分 (0-100) ----------
-    // 1. 奇門派 (檔位基礎 + 明星騎師 + 內檔)
+    // ---------- 19 個派別各自的評分 ----------
     function score_qimen(horse, dist) {
         let base = (horse.draw<=3?85: horse.draw<=6?72: horse.draw<=9?58:42);
         let star = (["潘頓","莫雷拉","布文"].includes(horse.jockey) ? 8 : (horse.jockey==="田泰安"?4:0));
         return Math.min(100, base + star + (horse.draw<=3?5:0));
     }
-    // 2. 數據派 (檔位+負磅+騎師)
     function score_data(horse, dist) {
         let ds = getDrawScore(horse.draw, dist);
         let ws = getWeightScore(horse.lb);
         let js = getJockeyScore(horse.jockey)/10;
         return (ds*0.35 + ws*0.35 + js*0.3)*10;
     }
-    // 3. 賠率派 (使用估算賠率)
     function score_odds(horse, dist) {
         let jk = getJockeyScore(horse.jockey), tr = getTrainerScore(horse.trainer);
         let odds = horse.odds || estimateOddsFromScore(jk, tr, horse.draw);
         return oddsToScore(odds);
     }
-    // 4. 晨操派 (模擬: 內檔+輕磅+明星騎師)
     function score_trackwork(horse, dist) {
         let base = (horse.draw<=3?82: horse.draw<=6?74:56);
         let extra = (["潘頓","莫雷拉","布文"].includes(horse.jockey)?6:0) + (horse.lb<=120?4:0);
         return Math.min(100, base+extra);
     }
-    // 5. 血統派 (缺真實數據，基於距離及騎師勝率模擬)
     function score_pedigree(horse, dist) {
         let base = 65;
         if(dist>=1600 && horse.jockey==="莫雷拉") base+=10;
         if(dist<=1200 && horse.jockey==="潘頓") base+=8;
         return Math.min(100, base);
     }
-    // 6. 路程派 (同程適性: 短途/中距離偏好)
     function score_distance(horse, dist) {
         let base = 70;
         if(dist<=1200 && horse.draw<=4) base+=8;
         if(dist>=1650 && horse.lb<=125) base+=7;
         return Math.min(100, base);
     }
-    // 7. 騎練派 (騎師+練馬師平均分)
     function score_trainerJock(horse) {
         return (getTrainerScore(horse.trainer) + getJockeyScore(horse.jockey)) / 2;
     }
-    // 8. 步速派 (根據檔位及路程判斷前領/後上)
     function score_pace(horse, dist) {
         let front = (horse.draw<=3?90:50);
         let back = (dist>=1650 && horse.draw>=7?85:50);
         return Math.min(100, front*0.5 + back*0.5);
     }
-    // 9. 場地派 (泥地性能: 根據練馬師及騎師)
     function score_ground(horse) {
         let mudTrainer = ["羅富全","方嘉柏","沈集成","姚本輝"];
         let mudJockey = ["潘頓","莫雷拉","布文","田泰安"];
         let add = (mudTrainer.includes(horse.trainer)?12:0) + (mudJockey.includes(horse.jockey)?10:0);
         return Math.min(100, 60 + add);
     }
-    // 10. 騎姿派 (騎師風格適配檔位)
     function score_jockeyPosture(horse) {
         let aggressive = ["潘頓","莫雷拉","布文","田泰安"];
         if(aggressive.includes(horse.jockey) && horse.draw<=4) return 85;
         if(aggressive.includes(horse.jockey) && horse.draw>=10) return 65;
         return 75;
     }
-    // 11. 行為派 (出賽頻率模擬: 負磅輕加分)
     function score_behavior(horse) {
         return Math.min(100, 70 + (horse.lb<=120?10:0) - (horse.lb>=133?8:0));
     }
-    // 12. 多模態派 (保留中性分)
     function score_multiModal() { return 75; }
-    // 13. 知識圖譜派 (騎練網絡協同)
     function score_knowledgeGraph(horse) {
-        let synergy = (getTrainerScore(horse.trainer) + getJockeyScore(horse.jockey)) / 2;
-        return synergy * 0.8;
+        return (getTrainerScore(horse.trainer) + getJockeyScore(horse.jockey)) / 2 * 0.8;
     }
-    // 14. 邏輯回歸派 (基於賠率估算)
     function score_logistic(horse, dist) {
         let odds = horse.odds || estimateOddsFromScore(getJockeyScore(horse.jockey), getTrainerScore(horse.trainer), horse.draw);
         return Math.max(0, 100 - odds*1.2);
     }
-    // 15. 騎練協同派 (單獨組合評分)
     function score_riderTrainerSynergy(horse) {
         let j = getJockeyScore(horse.jockey), t = getTrainerScore(horse.trainer);
         if(j>=90 && t>=85) return 95;
         if(j>=80 && t>=75) return 80;
         return 70;
     }
-    // 16. 集成派 (取目前已計算派別的平均)
-    // 將在總分中作為一個獨立派別，為避免循環，簡單使用其他派別的線性組合
-    function score_ensemble(scoresArray) { return scoresArray.reduce((a,b)=>a+b,0)/scoresArray.length; }
-
-    // 17. 負磅派 (直接使用負磅分)
     function score_weight(horse) { return getWeightScore(horse.lb)*10; }
-    // 18. 馬場偏差派 (沙田偏差: 內檔短途加分少)
     function score_drawBias(horse, dist) {
         if(dist<=1200) return horse.draw<=3?80: horse.draw<=6?70:60;
         else return horse.draw<=3?75:70;
     }
-    // 19. 步速系統派 (分段時間模擬: 外檔後上加分)
     function score_paceSystem(horse, dist) {
         if(dist>=1650 && horse.draw>=7) return 85;
         if(dist<=1200 && horse.draw<=4) return 80;
         return 70;
     }
+    function score_ensemble(scoresArray) { return scoresArray.reduce((a,b)=>a+b,0)/scoresArray.length; }
 
-    // 權重定義 (總和 1.0，可手動調整)
+    // 權重定義 (總和為1)
     let WEIGHTS = {
         qimen: 0.08, data: 0.08, oddsTrack: 0.06, trackwork: 0.05,
         pedigree: 0.04, distance: 0.05, trainerJock: 0.06, pace: 0.05,
@@ -202,16 +180,14 @@
         knowledgeGraph: 0.05, logistic: 0.06, riderTrainerSynergy: 0.05,
         ensemble: 0.04, weight: 0.04, drawBias: 0.05, paceSystem: 0.04
     };
-    // 正規化 (確保總和為1)
     function normalizeWeights() {
         let sum = 0; for(let k in WEIGHTS) sum += WEIGHTS[k];
         for(let k in WEIGHTS) WEIGHTS[k] /= sum;
     }
     normalizeWeights();
 
-    // 計算綜合分 (輸入馬匹及路程)
+    // 綜合評分 (19派別)
     function computeTotalScoreWithAllExperts(horse, dist) {
-        // 獲取每個派別的分數
         let s_qimen = score_qimen(horse, dist);
         let s_data = score_data(horse, dist);
         let s_odds = score_odds(horse, dist);
@@ -230,7 +206,6 @@
         let s_weight = score_weight(horse);
         let s_db = score_drawBias(horse, dist);
         let s_ps = score_paceSystem(horse, dist);
-        // 集成派取上述分數的平均 (不包括自己)
         let allExceptEnsemble = [s_qimen, s_data, s_odds, s_track, s_pedi, s_dist, s_tj, s_pace, s_ground, s_jp, s_beh, s_mm, s_kg, s_log, s_rts, s_weight, s_db, s_ps];
         let s_ens = allExceptEnsemble.reduce((a,b)=>a+b,0) / allExceptEnsemble.length;
         
@@ -255,18 +230,16 @@
         total += s_db * WEIGHTS.drawBias;
         total += s_ps * WEIGHTS.paceSystem;
         
-        // 額外加減項 (外檔補償, 長途後上, 極冷門)
         let oddsVal = horse.odds || estimateOddsFromScore(getJockeyScore(horse.jockey), getTrainerScore(horse.trainer), horse.draw);
         let outerBonus = (["潘頓","莫雷拉","布文"].includes(horse.jockey) && oddsVal<=5 && horse.draw>=12) ? PARAMS.outerBonusDraw12 : 0;
         let longBack = (dist>=1800 && horse.draw>=7) ? PARAMS.longDistanceBackBonus : 0;
         let extreme = (oddsVal>=25 && horse.draw>=4 && horse.draw<=9 && getJockeyScore(horse.jockey)>=70) ? PARAMS.extremeLongshotBonus : 0;
         total += outerBonus + longBack + extreme;
         
-        let finalOdds = oddsVal; // 回傳用
-        return { final: total, odds: finalOdds, details: { qimen:s_qimen, data:s_data, odds:s_odds, track:s_track } };
+        return { final: total, odds: oddsVal, details: { qimen:s_qimen, data:s_data, odds:s_odds, track:s_track } };
     }
 
-    // ---------- 2026-05-06 沙田全天候9場數據 (與前相同, 此處省略冗餘, 直接複製之前的 races 陣列) ----------
+    // ---------- 2026-05-06 沙田全天候 9場完整數據 (第1場至第9場) ----------
     const races = [
         { name:"第1場 五班1650米", dist:1650, horses:[
             {n:"光輝歲月",draw:7,lb:135,jockey:"霍宏聲",trainer:"游達榮"},
@@ -449,7 +422,7 @@
         }
     }
 
-    // 賽後驗證 (與之前相同，略作簡化)
+    // 賽後驗證UI
     function buildResultInputs() {
         const div = document.getElementById('resultInputs');
         div.innerHTML = '';
@@ -464,6 +437,7 @@
             div.appendChild(row);
         }
     }
+
     function computeHitRate() {
         const preds = computeAllPredictions();
         let tripleHit=0, quartetHit=0, valid=0;
@@ -479,11 +453,12 @@
         }
         const tripleRate = valid ? (tripleHit/valid*100).toFixed(1) : 0;
         const quartetRate = valid ? (quartetHit/valid*100).toFixed(1) : 0;
-        let history = JSON.parse(localStorage.getItem('SHTSN_Shatin_all_hitrate') || '[]');
+        let history = JSON.parse(localStorage.getItem('SHTSN_Shatin_9Races_hitrate') || '[]');
         history.push({ date:"2026-05-06", tripleHit, tripleTotal:valid, quartetHit, quartetTotal:valid, tripleRate, quartetRate });
-        localStorage.setItem('SHTSN_Shatin_all_hitrate', JSON.stringify(history));
+        localStorage.setItem('SHTSN_Shatin_9Races_hitrate', JSON.stringify(history));
         displayStats(history);
     }
+
     function displayStats(history) {
         let totalTriple=0, totalTripleCnt=0, totalQuartet=0, totalQuartetCnt=0;
         history.forEach(d=>{ totalTriple+=d.tripleHit; totalTripleCnt+=d.tripleTotal; totalQuartet+=d.quartetHit; totalQuartetCnt+=d.quartetTotal; });
@@ -491,14 +466,16 @@
         const overallQuartet = totalQuartetCnt ? (totalQuartet/totalQuartetCnt*100).toFixed(1) : 0;
         document.getElementById('stats').innerHTML = `
             <div>📅 本日 (2026-05-06)：三重彩 ${history[history.length-1]?.tripleHit||0}/${history[history.length-1]?.tripleTotal||0} (${history[history.length-1]?.tripleRate||0}%) &nbsp; 四重彩 ${history[history.length-1]?.quartetHit||0}/${history[history.length-1]?.quartetTotal||0} (${history[history.length-1]?.quartetRate||0}%)</div>
-            <div>📈 累積 (沙田19派別) 三重彩命中率 ${overallTriple}% &nbsp; 四重彩 ${overallQuartet}%</div>
+            <div>📈 累積 (沙田9場19派別) 三重彩命中率 ${overallTriple}% &nbsp; 四重彩 ${overallQuartet}%</div>
         `;
     }
+
     function loadHistory() {
-        const stored = localStorage.getItem('SHTSN_Shatin_all_hitrate');
+        const stored = localStorage.getItem('SHTSN_Shatin_9Races_hitrate');
         if(stored) displayStats(JSON.parse(stored));
         else document.getElementById('stats').innerHTML = '<div>尚未有紀錄，完成投注後請輸入名次並按計算。</div>';
     }
+
     function analyzeMistakes() { alert("自動分析模組已準備，請輸入真實賽果後再分析。"); }
     function applyFix() { alert("參數可手動調整程式碼中的 PARAMS 或 WEIGHTS 物件。"); }
 
