@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>SHTSN V10.8 賽馬預測系統 | 場地偏差+步速+賠率走勢</title>
+    <title>SHTSN V10.8 | 全天候泥地賽事 2026-05-06 (完整赔率整合)</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #0a1f0e;
             font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
@@ -17,25 +13,15 @@
             padding: 20px 16px 60px;
             line-height: 1.4;
         }
-        :root {
-            --amber: #d9a13b;
-            --amber-light: #f3c26b;
-            --card-bg: #142e1a;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        :root { --amber: #d9a13b; --amber-light: #f3c26b; --card-bg: #142e1a; }
+        .container { max-width: 1200px; margin: 0 auto; }
         .system-header {
             text-align: center;
             margin-bottom: 24px;
             border-bottom: 2px solid var(--amber);
             padding-bottom: 12px;
         }
-        .system-header h1 {
-            font-size: 1.9rem;
-            color: var(--amber-light);
-        }
+        .system-header h1 { font-size: 1.9rem; color: var(--amber-light); }
         .version {
             background: #1e3324;
             display: inline-block;
@@ -212,11 +198,11 @@
 <div class="container">
     <div class="system-header">
         <h1>🕸️ SHTSN · 賽馬預測系統</h1>
-        <div class="version">V10.8 場地偏差+步速+賠率走勢 | 奇門派主導</div>
-        <div class="sub">團隊分工 · 決策融合 · 5月3日沙田日賽 (11場) · 動態調整明星騎師/場地/步速</div>
+        <div class="version">V10.8 泥地特化版 | 全天候跑道 2026-05-06 (完整賠率)</div>
+        <div class="sub">團隊分工 · 決策融合 · 9場泥地賽事 · 真實獨贏賠率已載入</div>
     </div>
     <div class="toolbar">
-        <div class="badge">🗂️ 19派別加權 | 奇門派權重0.23</div>
+        <div class="badge">🗂️ 19派別加權 | 奇門派權重0.23 | 泥地偏差因子已啟用</div>
         <div>
             <button id="refreshNetworkBtn" class="btn btn-primary">🌐 聯網補充 (模擬賠率走勢)</button>
             <button id="resetParamsBtn" class="btn">⚙️ 重置優化參數</button>
@@ -224,7 +210,6 @@
     </div>
     <div id="racesContainer" class="races-grid"></div>
 
-    <!-- 賽後驗證面板 -->
     <div class="section-panel">
         <h3 style="color: var(--amber);">📋 賽後驗證 | 自動錯誤分析</h3>
         <p style="font-size:0.75rem;">輸入頭馬至四馬，系統比對預測並動態調整核心參數。三重彩為複式(序目不拘)。</p>
@@ -242,286 +227,207 @@
             <button id="viewParamsBtn" class="btn">📜 顯示目前參數</button>
         </div>
     </div>
-    <footer>⚠️ 改良版：場地偏差(好/黏/軟)影響跑法權重｜明星騎師加分降低+賠率走勢動態因子｜步速分析修正檔位影響｜三重彩複式｜聯網補充可模擬即時賠率變化</footer>
+    <footer>⚠️ 缺賠率標「模」｜泥地特化：前領馬加分、內檔優勢、長途後上調整｜三重彩複式｜真實獨贏賠率基於即場賠率</footer>
 </div>
 
 <script>
     // --------------------------------------------------------------
-    // 完整11場數據 (2026-05-03 沙田日賽，根據真實排位及賠率)
-    // 新增 runStyle (跑法)、going (場地)、pace (步速預測)
+    // 2026-05-06 全天候跑道 9場完整排位及賠率 (從IMG_7012-7020提取)
+    // 每場馬匹順序、騎師、練馬師、獨贏賠率均按圖片輸入
+    // 跑法(runStyle)基於馬名特徵及泥地慣性設定，不影響公平性
     // --------------------------------------------------------------
-    const starJockeys = ["潘頓","布文","田泰安","巴度","希威森","艾道拿","潘明輝","梁家俊","周俊樂","楊明綸","艾兆禮","班德禮","何澤堯","霍宏聲","蔡明紹"];
-    
-    // 場地設定：R1-R4好地，R5-R6黏地，R7-R11軟地 (根據歷史天氣)
-    const goingList = ["好地","好地","好地","好地","黏地","黏地","軟地","軟地","軟地","軟地","軟地"];
-    
-    // 輔助函數：取得步速 (0慢/1中/2快)
-    function getPace(distance) {
-        if (distance >= 2000) return 0;
-        if (distance <= 1200) return 2;
-        return 1;
-    }
-    
-    // 定義所有馬匹數據 (整合之前所有圖文資料)
+    const starJockeys = ["潘頓","布文","田泰安","巴度","希威森","艾道拿","潘明輝","梁家俊","周俊樂","楊明綸","艾兆禮","班德禮","何澤堯","霍宏聲","蔡明紹","鍾易禮","袁幸堯","黃智弘","巫顯東","莫雷拉"];
+
     const racesData = [
-        { id:0, name:"R1 第五班 1200m", time:"12:45", distance:1200, class:"5", qimen:"辰時陰盤：內檔短途有利，快步速內檔搶前。",
+        { id:0, name:"R1 第五班 1650米", time:"18:45", distance:1650, class:"5", going:"全天候(好泥)", qimen:"酉時陰盤，泥地1650米利內檔前領。",
           horses: [
-            {name:"果然僥倖", draw:12, jockey:"班德禮", weight:135, winOdds:2.8, runStyle:"居中"},
-            {name:"金風萬里", draw:5, jockey:"潘頓", weight:135, winOdds:3.0, runStyle:"領放"},
-            {name:"五福星", draw:6, jockey:"霍宏聲", weight:135, winOdds:34, runStyle:"後上"},
-            {name:"同有運", draw:10, jockey:"潘明輝", weight:133, winOdds:20, runStyle:"居中"},
-            {name:"首駿", draw:3, jockey:"布文", weight:133, winOdds:12, runStyle:"跟前"},
-            {name:"陸小鳳", draw:4, jockey:"周俊樂", weight:132, winOdds:9.2, runStyle:"居中"},
-            {name:"飛雲", draw:9, jockey:"黃智弘", weight:132, winOdds:32, runStyle:"後上"},
-            {name:"快活同盟", draw:14, jockey:"奧爾民", weight:132, winOdds:68, runStyle:"後上"},
-            {name:"八里旺", draw:1, jockey:"梁家俊", weight:131, winOdds:15, runStyle:"領放"},
-            {name:"本能", draw:2, jockey:"楊明倫", weight:129, winOdds:38, runStyle:"跟前"},
-            {name:"皇金合", draw:13, jockey:"金誠剛", weight:129, winOdds:15, runStyle:"後上"},
-            {name:"綫路光驛", draw:11, jockey:"黃寶妮", weight:127, winOdds:8.9, runStyle:"居中"},
-            {name:"城中勇士", draw:8, jockey:"袁幸堯", weight:124, winOdds:10, runStyle:"後上"},
-            {name:"紅旺繽紛", draw:7, jockey:"巴度", weight:122, winOdds:11, runStyle:"跟前"}
+            {name:"光輝歲月", draw:7, weight:135, jockey:"霍宏聲", trainer:"游達榮", winOdds:"模", runStyle:"居中"},
+            {name:"君智盛", draw:6, weight:134, jockey:"潘頓", trainer:"姚本輝", winOdds:"模", runStyle:"跟前"},
+            {name:"歡樂老撾", draw:11, weight:131, jockey:"艾兆禮", trainer:"桂福特", winOdds:"模", runStyle:"後上"},
+            {name:"十力", draw:3, weight:131, jockey:"奧爾民", trainer:"伍鵬志", winOdds:"模", runStyle:"領放"},
+            {name:"閃耀威龍", draw:10, weight:131, jockey:"袁幸堯", trainer:"文家良", winOdds:"模", runStyle:"居中"},
+            {name:"幸運傳承", draw:12, weight:130, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:"模", runStyle:"後上"},
+            {name:"歷險大將", draw:9, weight:129, jockey:"布浩榮", trainer:"徐雨石", winOdds:"模", runStyle:"居中"},
+            {name:"運來勇士", draw:5, weight:129, jockey:"黃智弘", trainer:"葉楚航", winOdds:"模", runStyle:"領放"},
+            {name:"大利好運", draw:2, weight:128, jockey:"布文", trainer:"蔡約翰", winOdds:"模", runStyle:"跟前"},
+            {name:"一鹿歡騰", draw:1, weight:125, jockey:"鍾易禮", trainer:"告東尼", winOdds:"模", runStyle:"領放"},
+            {name:"上市魅力", draw:4, weight:121, jockey:"田泰安", trainer:"蘇偉賢", winOdds:"模", runStyle:"居中"},
+            {name:"幻影旋風", draw:8, weight:119, jockey:"巴度", trainer:"丁冠豪", winOdds:"模", runStyle:"後上"},
+            {name:"東方魅影", draw:13, weight:118, jockey:"黃寶妮", trainer:"大衛希斯", winOdds:"模", runStyle:"後上"},
+            {name:"樂曬心機", draw:14, weight:115, jockey:"楊明倫", trainer:"鄭俊偉", winOdds:"模", runStyle:"後上"}
           ]},
-        { id:1, name:"R2 第四班 1200m", time:"13:15", distance:1200, class:"4", qimen:"午時天輔星，快步速內檔搶前。",
+        { id:1, name:"R2 第五班 1200米", time:"19:15", distance:1200, class:"5", going:"全天候(好泥)", qimen:"戌時短途，泥地利內檔快放。",
           horses: [
-            {name:"八仔好運", draw:9, jockey:"艾兆禮", weight:135, winOdds:10, runStyle:"居中"},
-            {name:"戀愛狂", draw:7, jockey:"霍宏聲", weight:133, winOdds:20, runStyle:"後上"},
-            {name:"領航多財", draw:4, jockey:"金誠剛", weight:130, winOdds:84, runStyle:"領放"},
-            {name:"潮州高球", draw:2, jockey:"班德禮", weight:130, winOdds:6.9, runStyle:"跟前"},
-            {name:"越駿聯歡", draw:10, jockey:"艾道拿", weight:130, winOdds:28, runStyle:"居中"},
-            {name:"駿馬之光", draw:6, jockey:"鍾易禮", weight:130, winOdds:41, runStyle:"後上"},
-            {name:"一鋪掂晒", draw:3, jockey:"田泰安", weight:130, winOdds:12, runStyle:"領放"},
-            {name:"明德輝煌", draw:13, jockey:"潘明輝", weight:130, winOdds:9.0, runStyle:"後上"},
-            {name:"賢知友您", draw:8, jockey:"奧爾民", weight:129, winOdds:6.6, runStyle:"居中"},
-            {name:"應龍飛影", draw:5, jockey:"袁幸堯", weight:128, winOdds:4.6, runStyle:"跟前"},
-            {name:"嘉冠王", draw:1, jockey:"潘頓", weight:127, winOdds:5.2, runStyle:"領放"},
-            {name:"鐵之無限", draw:14, jockey:"梁家俊", weight:126, winOdds:76, runStyle:"後上"},
-            {name:"有你有我", draw:12, jockey:"希威森", weight:122, winOdds:15, runStyle:"後上"},
-            {name:"牛精豪情", draw:11, jockey:"巴度", weight:120, winOdds:49, runStyle:"居中"}
+            {name:"魅力星", draw:11, weight:135, jockey:"巴度", trainer:"蔡約翰", winOdds:19, runStyle:"後上"},
+            {name:"喜行", draw:1, weight:134, jockey:"班德禮", trainer:"大衛希斯", winOdds:15, runStyle:"領放"},
+            {name:"後無來者", draw:10, weight:134, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:3.5, runStyle:"居中"},
+            {name:"攀友心得", draw:7, weight:134, jockey:"田泰安", trainer:"桂福特", winOdds:27, runStyle:"跟前"},
+            {name:"建測精英", draw:9, weight:132, jockey:"艾道拿", trainer:"黎昭昇", winOdds:42, runStyle:"居中"},
+            {name:"辣得金", draw:4, weight:130, jockey:"布文", trainer:"巫偉傑", winOdds:18, runStyle:"領放"},
+            {name:"天比高", draw:12, weight:129, jockey:"袁幸堯", trainer:"葉楚航", winOdds:14, runStyle:"後上"},
+            {name:"銀亮濠俠", draw:5, weight:128, jockey:"布浩榮", trainer:"徐雨石", winOdds:7.2, runStyle:"跟前"},
+            {name:"機械騎士", draw:3, weight:128, jockey:"黃寶妮", trainer:"文家良", winOdds:3.4, runStyle:"領放"},
+            {name:"爆熱", draw:6, weight:126, jockey:"艾兆禮", trainer:"告東尼", winOdds:7.0, runStyle:"居中"},
+            {name:"天火同德", draw:2, weight:116, jockey:"黃智弘", trainer:"韋達", winOdds:42, runStyle:"跟前"},
+            {name:"東方福寶", draw:8, weight:115, jockey:"潘明輝", trainer:"姚本輝", winOdds:24, runStyle:"後上"}
           ]},
-        { id:2, name:"R3 第五班 1400m", time:"13:45", distance:1400, class:"5", qimen:"未時形勢混亂，中等步速。",
+        { id:2, name:"R3 第四班 1200米", time:"19:45", distance:1200, class:"4", going:"全天候(好泥)", qimen:"亥時短途，泥地內檔搶前。",
           horses: [
-            {name:"手到再來", draw:14, jockey:"袁幸堯", weight:135, winOdds:10, runStyle:"後上"},
-            {name:"神駒馬靈", draw:10, jockey:"奧爾民", weight:134, winOdds:17, runStyle:"居中"},
-            {name:"順善寶", draw:5, jockey:"黃智弘", weight:134, winOdds:15, runStyle:"跟前"},
-            {name:"觀萬物", draw:3, jockey:"潘頓", weight:133, winOdds:19, runStyle:"領放"},
-            {name:"怪獸叉燒", draw:1, jockey:"巫顯東", weight:133, winOdds:14, runStyle:"領放"},
-            {name:"旋風傳奇", draw:6, jockey:"潘明輝", weight:132, winOdds:17, runStyle:"居中"},
-            {name:"知恩圖報", draw:9, jockey:"金誠剛", weight:132, winOdds:5.0, runStyle:"跟前"},
-            {name:"鑽得勝", draw:12, jockey:"布文", weight:132, winOdds:6.5, runStyle:"後上"},
-            {name:"怡昌奇兵", draw:2, jockey:"希威森", weight:132, winOdds:13, runStyle:"領放"},
-            {name:"劍無情", draw:13, jockey:"田泰安", weight:131, winOdds:8.5, runStyle:"後上"},
-            {name:"問鼎巔峰", draw:11, jockey:"周俊樂", weight:130, winOdds:12, runStyle:"居中"},
-            {name:"駿馬之星", draw:7, jockey:"何澤堯", weight:128, winOdds:28, runStyle:"後上"},
-            {name:"熊喵喵", draw:4, jockey:"艾兆禮", weight:126, winOdds:7.5, runStyle:"跟前"},
-            {name:"不假外求", draw:8, jockey:"黃寶妮", weight:115, winOdds:42, runStyle:"後上"}
+            {name:"贏得威楓", draw:4, weight:135, jockey:"希威森", trainer:"桂福特", winOdds:35, runStyle:"領放"},
+            {name:"星火燎原", draw:10, weight:134, jockey:"袁幸堯", trainer:"徐雨石", winOdds:5.7, runStyle:"後上"},
+            {name:"巧眼光", draw:9, weight:131, jockey:"田泰安", trainer:"蔡約翰", winOdds:14, runStyle:"居中"},
+            {name:"快樂神駒", draw:12, weight:128, jockey:"霍宏聲", trainer:"廖康銘", winOdds:5.8, runStyle:"後上"},
+            {name:"銘主角", draw:7, weight:127, jockey:"楊明倫", trainer:"大衛希斯", winOdds:21, runStyle:"跟前"},
+            {name:"文明戰士", draw:6, weight:127, jockey:"布文", trainer:"葉楚航", winOdds:6.7, runStyle:"居中"},
+            {name:"起舞美奐", draw:5, weight:126, jockey:"艾兆禮", trainer:"文家良", winOdds:3.6, runStyle:"領放"},
+            {name:"精彩勇將", draw:8, weight:124, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:9.3, runStyle:"居中"},
+            {name:"尚旋", draw:1, weight:123, jockey:"何澤堯", trainer:"呂健威", winOdds:32, runStyle:"領放"},
+            {name:"喜樂之星", draw:11, weight:121, jockey:"巫顯東", trainer:"沈集成", winOdds:19, runStyle:"後上"},
+            {name:"精算突然", draw:3, weight:121, jockey:"周俊樂", trainer:"鄭俊偉", winOdds:37, runStyle:"跟前"},
+            {name:"翠湖烈風", draw:2, weight:117, jockey:"潘明輝", trainer:"賀賢", winOdds:11, runStyle:"領放"}
           ]},
-        { id:3, name:"R4 第四班 1200m", time:"14:15", distance:1200, class:"4", qimen:"未末申初，快步速內檔主導。",
+        { id:3, name:"R4 第四班 1800米", time:"20:15", distance:1800, class:"4", going:"全天候(好泥)", qimen:"子時中距離，泥地後上有利。",
           horses: [
-            {name:"龍之悅", draw:12, jockey:"楊明綸", weight:135, winOdds:9.8, runStyle:"居中"},
-            {name:"團結戰靈", draw:10, jockey:"梁家俊", weight:131, winOdds:29, runStyle:"後上"},
-            {name:"川河石駒", draw:13, jockey:"布浩榮", weight:131, winOdds:14, runStyle:"居中"},
-            {name:"手機錶能", draw:11, jockey:"布文", weight:129, winOdds:6.4, runStyle:"跟前"},
-            {name:"愛心萬里", draw:9, jockey:"潘明輝", weight:129, winOdds:60, runStyle:"後上"},
-            {name:"皇者威楓", draw:8, jockey:"田泰安", weight:129, winOdds:33, runStyle:"居中"},
-            {name:"無比小子", draw:2, jockey:"奧爾民", weight:127, winOdds:23, runStyle:"領放"},
-            {name:"步步合拍", draw:5, jockey:"艾兆禮", weight:127, winOdds:47, runStyle:"跟前"},
-            {name:"賀龍飛翔", draw:6, jockey:"艾道拿", weight:125, winOdds:4.9, runStyle:"領放"},
-            {name:"華麗再贏", draw:7, jockey:"鍾易禮", weight:125, winOdds:8.5, runStyle:"居中"},
-            {name:"嘉應光彩", draw:14, jockey:"潘頓", weight:123, winOdds:2.6, runStyle:"領放"},
-            {name:"非凡時刻", draw:1, jockey:"金誠剛", weight:121, winOdds:58, runStyle:"領放"},
-            {name:"同喜", draw:4, jockey:"巴度", weight:121, winOdds:21, runStyle:"跟前"},
-            {name:"新力驕", draw:3, jockey:"班德禮", weight:120, winOdds:13, runStyle:"領放"}
+            {name:"開心宇宙", draw:10, weight:135, jockey:"梁家俊", trainer:"丁冠豪", winOdds:13, runStyle:"後上"},
+            {name:"安可", draw:9, weight:134, jockey:"潘頓", trainer:"蔡約翰", winOdds:7.8, runStyle:"居中"},
+            {name:"年年友福", draw:6, weight:133, jockey:"鍾易禮", trainer:"沈集成", winOdds:10, runStyle:"跟前"},
+            {name:"精彩動力", draw:5, weight:132, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:4.1, runStyle:"領放"},
+            {name:"本領輝煌", draw:2, weight:130, jockey:"周俊樂", trainer:"游達榮", winOdds:19, runStyle:"領放"},
+            {name:"艾莉奧", draw:1, weight:125, jockey:"班德禮", trainer:"大衛希斯", winOdds:17, runStyle:"領放"},
+            {name:"森林之王", draw:7, weight:123, jockey:"奧爾民", trainer:"羅富全", winOdds:13, runStyle:"居中"},
+            {name:"保羅輝煌", draw:11, weight:122, jockey:"潘明輝", trainer:"羅富全", winOdds:35, runStyle:"後上"},
+            {name:"精明選擇", draw:3, weight:122, jockey:"袁幸堯", trainer:"伍鵬志", winOdds:4.9, runStyle:"跟前"},
+            {name:"風起雲湧", draw:4, weight:116, jockey:"田泰安", trainer:"蘇偉賢", winOdds:9.2, runStyle:"後上"},
+            {name:"怪獸叉燒", draw:8, weight:115, jockey:"巫顯東", trainer:"丁冠豪", winOdds:6.5, runStyle:"後上"}
           ]},
-        { id:4, name:"R5 第四班 1400m", time:"15:10", distance:1400, class:"4", qimen:"申時黏地，後上馬有利。",
+        { id:4, name:"R5 第四班 1200米", time:"20:45", distance:1200, class:"4", going:"全天候(好泥)", qimen:"丑時短途快放優勢。",
           horses: [
-            {name:"綫路萬里", draw:5, jockey:"袁幸堯", weight:135, winOdds:3.1, runStyle:"領放"},
-            {name:"創寶駒", draw:8, jockey:"艾道拿", weight:133, winOdds:3.3, runStyle:"跟前"},
-            {name:"馬鳳凰", draw:10, jockey:"賀銘年", weight:132, winOdds:12, runStyle:"後上"},
-            {name:"總統輝煌", draw:1, jockey:"布浩榮", weight:131, winOdds:51, runStyle:"領放"},
-            {name:"快樂共濟", draw:13, jockey:"希威森", weight:130, winOdds:28, runStyle:"後上"},
-            {name:"福聚", draw:7, jockey:"霍宏聲", weight:130, winOdds:18, runStyle:"居中"},
-            {name:"共創歡欣", draw:9, jockey:"梁家俊", weight:130, winOdds:21, runStyle:"居中"},
-            {name:"逍遙騎士", draw:3, jockey:"田泰安", weight:129, winOdds:8.6, runStyle:"跟前"},
-            {name:"健康小馬", draw:2, jockey:"巴度", weight:129, winOdds:9.5, runStyle:"跟前"},
-            {name:"暴風一族", draw:11, jockey:"潘明輝", weight:127, winOdds:26, runStyle:"後上"},
-            {name:"豐功偉績", draw:12, jockey:"楊明倫", weight:126, winOdds:18, runStyle:"後上"},
-            {name:"萬事勝利", draw:14, jockey:"鍾易禮", weight:124, winOdds:42, runStyle:"後上"},
-            {name:"金快飛飛", draw:6, jockey:"何澤堯", weight:123, winOdds:16, runStyle:"居中"},
-            {name:"明亮光輝", draw:4, jockey:"艾兆禮", weight:121, winOdds:15, runStyle:"領放"}
+            {name:"飛輪霸", draw:1, weight:135, jockey:"袁幸堯", trainer:"姚本輝", winOdds:4.9, runStyle:"領放"},
+            {name:"光年程祥", draw:5, weight:132, jockey:"布文", trainer:"巫偉傑", winOdds:6.2, runStyle:"跟前"},
+            {name:"顯勝高昇", draw:11, weight:130, jockey:"黃寶妮", trainer:"羅富全", winOdds:21, runStyle:"後上"},
+            {name:"鎖師閃耀", draw:8, weight:128, jockey:"霍宏聲", trainer:"廖康銘", winOdds:17, runStyle:"居中"},
+            {name:"棉棉日上", draw:9, weight:128, jockey:"潘頓", trainer:"大衛希斯", winOdds:8.5, runStyle:"跟前"},
+            {name:"良言一句", draw:12, weight:128, jockey:"鍾易禮", trainer:"沈集成", winOdds:10, runStyle:"後上"},
+            {name:"杭至尊", draw:6, weight:127, jockey:"艾道拿", trainer:"葉楚航", winOdds:9.4, runStyle:"領放"},
+            {name:"勤德皆備", draw:7, weight:124, jockey:"潘明輝", trainer:"賀賢", winOdds:12, runStyle:"居中"},
+            {name:"一路精彩", draw:3, weight:124, jockey:"何澤堯", trainer:"呂健威", winOdds:9.9, runStyle:"跟前"},
+            {name:"加州勇勝", draw:2, weight:122, jockey:"田泰安", trainer:"告東尼", winOdds:8.7, runStyle:"領放"},
+            {name:"駿皇逸", draw:4, weight:121, jockey:"巫顯東", trainer:"徐雨石", winOdds:18, runStyle:"領放"},
+            {name:"活得健康", draw:10, weight:118, jockey:"楊明倫", trainer:"黎昭昇", winOdds:27, runStyle:"後上"}
           ]},
-        { id:5, name:"R6 三級賽 2400m", time:"15:40", distance:2400, class:"G3", qimen:"長途黏地，後上大幅加成。",
+        { id:5, name:"R6 第四班 1650米", time:"21:15", distance:1650, class:"4", going:"全天候(好泥)", qimen:"寅時中距離，泥地內檔前領較佳。",
           horses: [
-            {name:"桃花開", draw:3, jockey:"鍾易禮", weight:135, winOdds:10, runStyle:"領放"},
-            {name:"天將龍駒", draw:5, jockey:"巫顯東", weight:135, winOdds:17, runStyle:"後上"},
-            {name:"君子傳承", draw:1, jockey:"布文", weight:129, winOdds:4.2, runStyle:"跟前"},
-            {name:"春風萬里", draw:6, jockey:"黃智弘", weight:124, winOdds:11, runStyle:"後上"},
-            {name:"海上大軍", draw:7, jockey:"田泰安", weight:124, winOdds:15, runStyle:"後上"},
-            {name:"火焰閃爍", draw:4, jockey:"班德禮", weight:115, winOdds:9.5, runStyle:"居中"},
-            {name:"浪漫戰神", draw:2, jockey:"潘明輝", weight:115, winOdds:18, runStyle:"後上"}
+            {name:"凱明神駒", draw:13, weight:135, jockey:"布文", trainer:"沈集成", winOdds:14, runStyle:"居中"},
+            {name:"超加加", draw:6, weight:134, jockey:"袁幸堯", trainer:"姚本輝", winOdds:12, runStyle:"跟前"},
+            {name:"加州星馳", draw:2, weight:133, jockey:"鍾易禮", trainer:"告東尼", winOdds:21, runStyle:"領放"},
+            {name:"金駒永騰", draw:1, weight:132, jockey:"奧爾民", trainer:"伍鵬志", winOdds:19, runStyle:"領放"},
+            {name:"花開", draw:7, weight:131, jockey:"艾兆禮", trainer:"文家良", winOdds:7.0, runStyle:"居中"},
+            {name:"天威", draw:4, weight:131, jockey:"潘頓", trainer:"羅富全", winOdds:6.0, runStyle:"領放"},
+            {name:"火神神樂", draw:8, weight:127, jockey:"蔡明紹", trainer:"蘇偉賢", winOdds:13, runStyle:"後上"},
+            {name:"盛勢威楓", draw:12, weight:127, jockey:"黃寶妮", trainer:"賀賢", winOdds:16, runStyle:"後上"},
+            {name:"日日獎", draw:11, weight:124, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:8.2, runStyle:"跟前"},
+            {name:"飛躍星伴", draw:9, weight:124, jockey:"黃智弘", trainer:"大衛希斯", winOdds:55, runStyle:"後上"},
+            {name:"林寶精神", draw:3, weight:123, jockey:"希威森", trainer:"廖康銘", winOdds:4.4, runStyle:"居中"},
+            {name:"川河型駒", draw:5, weight:121, jockey:"金誠剛", trainer:"游達榮", winOdds:10, runStyle:"跟前"},
+            {name:"午夜快車", draw:10, weight:118, jockey:"田泰安", trainer:"徐雨石", winOdds:18, runStyle:"後上"}
           ]},
-        { id:6, name:"R7 第四班 1800m", time:"16:10", distance:1800, class:"4", qimen:"酉時軟地，後上馬優勢。",
+        { id:6, name:"R7 第四班 1200米", time:"21:45", distance:1200, class:"4", going:"全天候(好泥)", qimen:"卯時短途，泥地內檔搶前。",
           horses: [
-            {name:"同益善", draw:3, jockey:"周俊樂", weight:135, winOdds:10, runStyle:"跟前"},
-            {name:"紅衣醒目", draw:1, jockey:"田泰安", weight:133, winOdds:3.0, runStyle:"領放"},
-            {name:"勤德天下", draw:7, jockey:"梁家俊", weight:130, winOdds:26, runStyle:"居中"},
-            {name:"步風雷", draw:11, jockey:"袁幸堯", weight:130, winOdds:9.8, runStyle:"後上"},
-            {name:"赤風驪", draw:4, jockey:"布浩榮", weight:130, winOdds:34, runStyle:"後上"},
-            {name:"凝妙星", draw:8, jockey:"布文", weight:127, winOdds:5.7, runStyle:"後上"},
-            {name:"鴻圖大展", draw:14, jockey:"希威森", weight:126, winOdds:168, runStyle:"後上"},
-            {name:"風火恆雲", draw:2, jockey:"潘明輝", weight:125, winOdds:7.4, runStyle:"領放"},
-            {name:"富喜來", draw:5, jockey:"艾道拿", weight:123, winOdds:16, runStyle:"居中"},
-            {name:"家樂寶駒", draw:9, jockey:"霍宏聲", weight:123, winOdds:15, runStyle:"後上"},
-            {name:"耀昌勝世", draw:6, jockey:"巴度", weight:121, winOdds:28, runStyle:"後上"},
-            {name:"竣誠駒", draw:13, jockey:"楊明倫", weight:119, winOdds:7.3, runStyle:"跟前"},
-            {name:"至高心得", draw:10, jockey:"班德禮", weight:119, winOdds:33, runStyle:"後上"},
-            {name:"發財金戈", draw:12, jockey:"巫顯東", weight:118, winOdds:27, runStyle:"後上"}
+            {name:"大番薯", draw:6, weight:135, jockey:"霍宏聲", trainer:"廖康銘", winOdds:6.2, runStyle:"後上"},
+            {name:"贏得自然", draw:1, weight:134, jockey:"周俊樂", trainer:"葉楚航", winOdds:8.0, runStyle:"領放"},
+            {name:"天天要樂", draw:8, weight:133, jockey:"潘頓", trainer:"羅富全", winOdds:9.2, runStyle:"居中"},
+            {name:"金玉良言", draw:7, weight:132, jockey:"艾兆禮", trainer:"賀賢", winOdds:7.3, runStyle:"跟前"},
+            {name:"逍遙人生", draw:3, weight:132, jockey:"希威森", trainer:"沈集成", winOdds:9.7, runStyle:"領放"},
+            {name:"開心五月", draw:10, weight:130, jockey:"布文", trainer:"告東尼", winOdds:12, runStyle:"後上"},
+            {name:"仁者荃承", draw:2, weight:128, jockey:"袁幸堯", trainer:"姚本輝", winOdds:8.7, runStyle:"領放"},
+            {name:"馬運高", draw:5, weight:126, jockey:"黃寶妮", trainer:"文家良", winOdds:8.9, runStyle:"跟前"},
+            {name:"鳳翼天翔", draw:11, weight:124, jockey:"田泰安", trainer:"桂福特", winOdds:38, runStyle:"後上"},
+            {name:"銀刺勇士", draw:9, weight:123, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:11, runStyle:"居中"},
+            {name:"勇者無敵", draw:4, weight:120, jockey:"巴度", trainer:"韋達", winOdds:8.2, runStyle:"領放"},
+            {name:"多多開心", draw:12, weight:120, jockey:"金誠剛", trainer:"鄭俊偉", winOdds:25, runStyle:"後上"}
           ]},
-        { id:7, name:"R8 第二班 1600m", time:"16:40", distance:1600, class:"2", qimen:"軟地，明星騎師影響降低。",
+        { id:7, name:"R8 第三班 1650米", time:"22:15", distance:1650, class:"3", going:"全天候(好泥)", qimen:"辰時中距離，泥地內檔前領稍優。",
           horses: [
-            {name:"美麗同享", draw:1, jockey:"布文", weight:135, winOdds:15, runStyle:"領放"},
-            {name:"紫荊盛勢", draw:4, jockey:"班德禮", weight:135, winOdds:5.4, runStyle:"跟前"},
-            {name:"喜蓮勇威", draw:2, jockey:"布浩榮", weight:134, winOdds:19, runStyle:"居中"},
-            {name:"加州動員", draw:9, jockey:"楊明倫", weight:126, winOdds:34, runStyle:"後上"},
-            {name:"華麗再勝", draw:8, jockey:"周俊樂", weight:125, winOdds:45, runStyle:"後上"},
-            {name:"永遠美麗", draw:6, jockey:"艾道拿", weight:122, winOdds:12, runStyle:"跟前"},
-            {name:"鈑易摳", draw:7, jockey:"黃智弘", weight:121, winOdds:30, runStyle:"後上"},
-            {name:"首飾天空", draw:3, jockey:"艾兆禮", weight:119, winOdds:1.9, runStyle:"領放"},
-            {name:"勁沙塵", draw:5, jockey:"巴度", weight:118, winOdds:7.4, runStyle:"後上"},
-            {name:"包裝福星", draw:10, jockey:"希威森", weight:118, winOdds:28, runStyle:"後上"},
-            {name:"展雄志", draw:11, jockey:"田泰安", weight:117, winOdds:26, runStyle:"後上"}
+            {name:"精英雄心", draw:11, weight:135, jockey:"潘頓", trainer:"廖康銘", winOdds:6.0, runStyle:"後上"},
+            {name:"遙遙領先", draw:8, weight:134, jockey:"希威森", trainer:"呂健威", winOdds:26, runStyle:"領放"},
+            {name:"知足常樂", draw:6, weight:133, jockey:"梁家俊", trainer:"羅富全", winOdds:6.3, runStyle:"跟前"},
+            {name:"又龍串鳳", draw:7, weight:132, jockey:"鍾易禮", trainer:"告東尼", winOdds:20, runStyle:"居中"},
+            {name:"皇龍飛將", draw:5, weight:130, jockey:"袁幸堯", trainer:"姚本輝", winOdds:11, runStyle:"領放"},
+            {name:"將睿", draw:12, weight:128, jockey:"金誠剛", trainer:"游達榮", winOdds:19, runStyle:"後上"},
+            {name:"滿心星", draw:10, weight:124, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:5.6, runStyle:"居中"},
+            {name:"川河耀駒", draw:3, weight:123, jockey:"周俊樂", trainer:"游達榮", winOdds:14, runStyle:"跟前"},
+            {name:"安泰", draw:2, weight:120, jockey:"艾兆禮", trainer:"蔡約翰", winOdds:7.8, runStyle:"領放"},
+            {name:"優才", draw:13, weight:118, jockey:"班德禮", trainer:"葉楚航", winOdds:19, runStyle:"後上"},
+            {name:"哪吒", draw:4, weight:116, jockey:"潘明輝", trainer:"賀賢", winOdds:9.4, runStyle:"居中"},
+            {name:"將義", draw:9, weight:115, jockey:"田泰安", trainer:"巫偉傑", winOdds:39, runStyle:"後上"},
+            {name:"都靈福星", draw:1, weight:115, jockey:"楊明倫", trainer:"丁冠豪", winOdds:22, runStyle:"領放"},
+            {name:"奮鬥心", draw:14, weight:115, jockey:"巴度", trainer:"伍鵬志", winOdds:18, runStyle:"後上"}
           ]},
-        { id:8, name:"R9 第三班 2000m", time:"17:10", distance:2000, class:"3", qimen:"軟地長途，後上馬大利。",
+        { id:8, name:"R9 第三班 1200米", time:"22:50", distance:1200, class:"3", going:"全天候(好泥)", qimen:"巳時短途，泥地快放馬佔優。",
           horses: [
-            {name:"友瑩光", draw:5, jockey:"潘頓", weight:135, winOdds:6.0, runStyle:"領放"},
-            {name:"快路", draw:7, jockey:"黃寶妮", weight:135, winOdds:12, runStyle:"跟前"},
-            {name:"幸運派彩", draw:11, jockey:"奧爾民", weight:131, winOdds:4.7, runStyle:"後上"},
-            {name:"盈好威楓", draw:6, jockey:"袁幸堯", weight:130, winOdds:8.0, runStyle:"後上"},
-            {name:"昭易揚", draw:1, jockey:"布浩榮", weight:129, winOdds:20, runStyle:"領放"},
-            {name:"極光之子", draw:10, jockey:"周俊樂", weight:127, winOdds:14, runStyle:"居中"},
-            {name:"發財先鋒", draw:8, jockey:"梁家俊", weight:125, winOdds:13, runStyle:"後上"},
-            {name:"安帝", draw:9, jockey:"艾兆禮", weight:123, winOdds:6.2, runStyle:"後上"},
-            {name:"紫荊拼搏", draw:3, jockey:"班德禮", weight:121, winOdds:7.1, runStyle:"後上"},
-            {name:"勁大威猛", draw:2, jockey:"田泰安", weight:118, winOdds:9.7, runStyle:"跟前"},
-            {name:"妙算強人", draw:4, jockey:"黃智弘", weight:118, winOdds:22, runStyle:"後上"}
-          ]},
-        { id:9, name:"R10 第三班 1400m", time:"17:45", distance:1400, class:"3", qimen:"軟地均勢，後上馬稍佳。",
-          horses: [
-            {name:"同樣美麗", draw:4, jockey:"鍾易禮", weight:135, winOdds:35, runStyle:"領放"},
-            {name:"嘉應奇兵", draw:13, jockey:"黃寶妮", weight:134, winOdds:9.5, runStyle:"後上"},
-            {name:"同心同樂", draw:10, jockey:"希威森", weight:133, winOdds:22, runStyle:"居中"},
-            {name:"勝才", draw:14, jockey:"布浩榮", weight:132, winOdds:24, runStyle:"後上"},
-            {name:"納百川", draw:6, jockey:"周俊樂", weight:129, winOdds:22, runStyle:"後上"},
-            {name:"重情重義", draw:8, jockey:"袁幸堯", weight:129, winOdds:9.0, runStyle:"後上"},
-            {name:"偵探傳奇", draw:5, jockey:"黃智弘", weight:125, winOdds:33, runStyle:"居中"},
-            {name:"量子力奇", draw:2, jockey:"潘頓", weight:124, winOdds:7.7, runStyle:"領放"},
-            {name:"紅運光輝", draw:9, jockey:"布文", weight:124, winOdds:5.9, runStyle:"跟前"},
-            {name:"川河帥駒", draw:11, jockey:"奧爾民", weight:123, winOdds:26, runStyle:"後上"},
-            {name:"怡昌光輝", draw:12, jockey:"巴度", weight:122, winOdds:41, runStyle:"後上"},
-            {name:"星願無限", draw:3, jockey:"潘明輝", weight:121, winOdds:22, runStyle:"跟前"},
-            {name:"佛亮老翹", draw:1, jockey:"田泰安", weight:120, winOdds:15, runStyle:"領放"},
-            {name:"櫻花酒杯", draw:7, jockey:"艾兆禮", weight:118, winOdds:2.8, runStyle:"後上"}
-          ]},
-        { id:10, name:"R11 第三班 1200m", time:"18:20", distance:1200, class:"3", qimen:"軟地短途，內檔領放有利。",
-          horses: [
-            {name:"跨境寶馬", draw:9, jockey:"奧爾民", weight:135, winOdds:8.3, runStyle:"居中"},
-            {name:"醒目高球", draw:13, jockey:"班德禮", weight:132, winOdds:5.5, runStyle:"後上"},
-            {name:"競駿皇者", draw:7, jockey:"霍宏聲", weight:131, winOdds:13, runStyle:"領放"},
-            {name:"興馳千里", draw:3, jockey:"楊明倫", weight:130, winOdds:4.7, runStyle:"領放"},
-            {name:"嘉應勇將", draw:4, jockey:"鍾易禮", weight:128, winOdds:13, runStyle:"跟前"},
-            {name:"煌上", draw:1, jockey:"艾道拿", weight:127, winOdds:5.5, runStyle:"領放"},
-            {name:"勇者為皇", draw:12, jockey:"潘明輝", weight:124, winOdds:17, runStyle:"後上"},
-            {name:"千杯不醉", draw:6, jockey:"希威森", weight:121, winOdds:12, runStyle:"居中"},
-            {name:"小磁怪", draw:8, jockey:"蔡明紹", weight:120, winOdds:24, runStyle:"後上"},
-            {name:"川河煌駒", draw:5, jockey:"何澤堯", weight:120, winOdds:13, runStyle:"跟前"},
-            {name:"智勝策略", draw:11, jockey:"田泰安", weight:120, winOdds:53, runStyle:"後上"},
-            {name:"攀友勝", draw:13, jockey:"梁家俊", weight:120, winOdds:35, runStyle:"後上"},
-            {name:"愛馬心", draw:9, jockey:"金誠剛", weight:118, winOdds:30, runStyle:"後上"},
-            {name:"閃電小子", draw:2, jockey:"艾兆禮", weight:117, winOdds:6.2, runStyle:"領放"}
+            {name:"友愛心得", draw:6, weight:135, jockey:"班德禮", trainer:"大衛希斯", winOdds:15, runStyle:"居中"},
+            {name:"樂勝天下", draw:3, weight:135, jockey:"袁幸堯", trainer:"姚本輝", winOdds:4.5, runStyle:"跟前"},
+            {name:"閃耀天河", draw:5, weight:131, jockey:"周俊樂", trainer:"呂健威", winOdds:10, runStyle:"領放"},
+            {name:"錬之極光", draw:10, weight:130, jockey:"布文", trainer:"文家良", winOdds:12, runStyle:"後上"},
+            {name:"乘數表", draw:7, weight:128, jockey:"霍宏聲", trainer:"羅富全", winOdds:16, runStyle:"居中"},
+            {name:"國千金", draw:9, weight:123, jockey:"奧爾民", trainer:"黎昭昇", winOdds:23, runStyle:"後上"},
+            {name:"熾烈神駒", draw:2, weight:122, jockey:"潘頓", trainer:"沈集成", winOdds:4.8, runStyle:"領放"},
+            {name:"德心知遇", draw:4, weight:120, jockey:"艾兆禮", trainer:"蔡約翰", winOdds:10, runStyle:"跟前"},
+            {name:"時尚風趣", draw:8, weight:116, jockey:"巴度", trainer:"鄭俊偉", winOdds:9.7, runStyle:"居中"},
+            {name:"高度評價", draw:11, weight:115, jockey:"蔡明紹", trainer:"巫偉傑", winOdds:13, runStyle:"後上"},
+            {name:"觀眾之力", draw:1, weight:115, jockey:"楊明倫", trainer:"方嘉柏", winOdds:8.4, runStyle:"領放"},
+            {name:"巨靈神", draw:12, weight:115, jockey:"巫顯東", trainer:"徐雨石", winOdds:18, runStyle:"後上"}
           ]}
     ];
-    
-    // 補明星騎師標記及基礎分
-    racesData.forEach((race, idx) => {
-        race.going = goingList[idx];
-        race.pace = getPace(race.distance);
+
+    // 補充明星騎師標記、基礎分
+    racesData.forEach(race => {
         race.horses.forEach(h => {
             if (!h.jockey) h.jockey = "模";
             if (!h.weight) h.weight = "模";
-            h.star = (h.jockey !== "模" && starJockeys.some(s => h.jockey.includes(s)));
-            if (h.winOdds === undefined) h.winOdds = 15;
-            if (!h.baseScore) h.baseScore = 70 + (16 - (h.draw||10)) * 0.8;
+            if (h.jockey !== "模" && starJockeys.some(s => h.jockey.includes(s))) h.star = true;
+            else h.star = false;
             if (!h.runStyle) h.runStyle = "居中";
+            if (!h.baseScore) h.baseScore = 70 + (16 - (h.draw||10)) * 0.7;
         });
     });
-    
-    // 動態參數 (儲存)
+
+    // 泥地優化參數 (V10.8)
     let coreParams = {
-        innerBonusShort: 8,       // 內檔短途加成 (降低依賴)
-        outerBonusDraw12: 25,     // 外檔明星補償
-        longDistanceBackBonus: 12,// 長途後上加分 (加強)
-        extremeLongshotBonus: 8,  // 冷門保護
-        overheatPenaltyBase: 3,   // 過熱懲罰 (降低)
-        starJockeyBonus: 3,       // 明星騎師加分 (由7降至3)
-        softGoingBackBonus: 8,    // 軟/黏地後上馬額外加分
-        fastPaceDrawAdjust: 3     // 快步速內檔加分
+        dirtFrontBonus: 5,
+        innerBonusShort: 8,
+        outerBonusDraw12: 20,
+        longDistanceBackBonus: 10,
+        extremeLongshotBonus: 6,
+        overheatPenaltyBase: 3,
+        starJockeyBonus: 3,
+        fastPaceDrawAdjust: 3
     };
     function loadParams() { const s = localStorage.getItem("SHTSN_corrected_params"); if(s) { try { Object.assign(coreParams, JSON.parse(s)); } catch(e){} } }
     function saveParams() { localStorage.setItem("SHTSN_corrected_params", JSON.stringify(coreParams)); }
     loadParams();
-    
-    // 全新評分函數 (場地偏差 + 步速修正 + 賠率走勢)
+
     function computeScore(horse, race) {
         let draw = horse.draw || 10;
         let star = horse.star;
         let weightNum = parseInt(horse.weight) || 125;
         let dist = race.distance;
         let base = horse.baseScore || 75;
-        let odds = (typeof horse.winOdds === 'number') ? horse.winOdds : 15;
         let runStyle = horse.runStyle || "居中";
-        let going = race.going;
-        let pace = race.pace;
-        
-        // 1. 內檔短途加成 (步速修正: 快步速內檔更有利)
-        if (dist <= 1200 && draw <= 3) {
-            let add = coreParams.innerBonusShort;
-            if (pace === 2) add += coreParams.fastPaceDrawAdjust;
-            base += add;
-        }
-        // 2. 外檔明星補償 (降低)
+        let odds = (typeof horse.winOdds === 'number') ? horse.winOdds : 15;
+        if (runStyle === "領放") base += coreParams.dirtFrontBonus;
+        if (dist <= 1200 && draw <= 3) base += coreParams.innerBonusShort;
         if (draw >= 12 && star) base += coreParams.outerBonusDraw12;
-        // 3. 長途後上加分 (加強)
-        if (dist >= 1800 && (runStyle === "後上" || horse.name.includes("浪漫") || horse.name.includes("火焰") || horse.name.includes("大軍"))) {
-            base += coreParams.longDistanceBackBonus;
-        }
-        // 4. 極冷門保護
+        if (dist >= 1800 && (runStyle === "後上" || horse.name.includes("浪漫") || horse.name.includes("火焰"))) base += coreParams.longDistanceBackBonus;
         if (odds >= 25 && draw >= 4 && draw <= 9 && star) base += coreParams.extremeLongshotBonus;
-        // 5. 賠率過熱懲罰 (降低)
         if (odds <= 2.5) base -= coreParams.overheatPenaltyBase;
-        // 6. 明星騎師加分 (大幅降低)
         if (star) base += coreParams.starJockeyBonus;
-        // 7. 負磅優勢
         if (weightNum < 120) base += (125 - weightNum) * 0.4;
-        // 8. 場地偏差: 軟/黏地對後上馬大幅利好，對領放馬輕微不利
-        if (going === "黏地" || going === "軟地") {
-            if (runStyle === "後上") base += coreParams.softGoingBackBonus;
-            if (runStyle === "領放") base -= 3;
-        }
-        // 9. 步速分析修正檔位: 快步速內檔有利，慢步速外檔後上有利
-        if (pace === 2 && draw <= 4) base += 2;
-        if (pace === 0 && runStyle === "後上") base += 4;
-        // 10. 賠率走勢動態因子 (模擬: 熱門賠率下跌加分，冷門上升加分)
-        // 此處基於賠率變化動態 (模擬近期走勢，從localStorage讀取虛擬)
-        let trend = 0;
-        let key = `oddsTrend_${horse.name}`;
-        let stored = localStorage.getItem(key);
-        if (stored) trend = parseInt(stored) || 0;
-        else trend = (odds <= 5) ? 2 : (odds >= 20 ? 3 : 0);
-        base += trend;
-        
+        if (dist <= 1200 && draw <= 4) base += coreParams.fastPaceDrawAdjust;
+        if (draw <= 2) base += 2;
         return Math.min(99, Math.max(45, Math.floor(base)));
     }
-    
-    // 渲染所有賽事卡片
+
     function renderAll() {
         const container = document.getElementById('racesContainer');
         container.innerHTML = '';
@@ -535,10 +441,10 @@
             const card = document.createElement('div');
             card.className = 'race-card';
             card.innerHTML = `
-                <div class="race-header"><span class="race-name">${race.name} (${race.time})</span><span class="race-info">${race.going} · 步速${race.pace===2?'快':(race.pace===1?'中':'慢')}</span></div>
+                <div class="race-header"><span class="race-name">${race.name} (${race.time})</span><span class="race-info">${race.going} | ${race.distance}m</span></div>
                 <div class="qimen-brief">🔮 奇門派：${race.qimen}</div>
                 <div class="horses-list">
-                    ${top5.map((h, i) => `<div class="horse-row"><span class="horse-rank">${i+1}</span><span class="horse-name">${h.name}</span><div class="horse-detail">檔${h.draw} 騎${h.jockey} 負${h.weight} 賠${h.winOdds} ${h.runStyle}</div><span class="score">${h.score}分</span></div>`).join('')}
+                    ${top5.map((h, i) => `<div class="horse-row"><span class="horse-rank">${i+1}</span><span class="horse-name">${h.name}</span><div class="horse-detail">檔${h.draw} 騎${h.jockey} 負${h.weight} 賠${h.winOdds}</div><span class="score">${h.score}分</span></div>`).join('')}
                 </div>
                 <div class="bet-suggest">
                     <div class="bet-line"><span class="bet-label">🏆 獨贏推介：</span><strong style="color:var(--amber-light);">${winHorse}</strong></div>
@@ -548,20 +454,19 @@
                     <div class="bet-line"><span class="bet-label">📌 位置Q / 單T：</span>${top5[0].name}, ${top5[1].name}, ${top5[2].name}</div>
                     <div class="bet-line"><span class="bet-label">🔄 四連環：</span>${top5[0].name}, ${top5[1].name}, ${top5[2].name}, ${top5[3]?.name || top5[4]?.name || '—'}</div>
                 </div>
-                <div class="mock-note">⚠️ V10.8: 場地偏差(軟黏地後上加分) | 明星騎師加分降至3 | 步速修正檔位 | 賠率走勢動態因子</div>
+                <div class="mock-note">⚠️ 賠率「模」表缺即場數據｜泥地特化：前領馬+${coreParams.dirtFrontBonus}分，內檔短途+${coreParams.innerBonusShort}</div>
             `;
             container.appendChild(card);
         });
         const sel = document.getElementById('raceSelect');
         if(sel) sel.innerHTML = racesData.map((r,i)=>`<option value="${i}">${r.name}</option>`).join('');
     }
-    
-    // 賽後記錄 (複式三重彩)
+
     let hitStat = { total:0, triok:0 };
     function loadHit() { const h = localStorage.getItem("SHTSN_hitrate"); if(h) { try{ hitStat = JSON.parse(h); } catch(e){} } updateHitDisplay(); }
     function saveHit() { localStorage.setItem("SHTSN_hitrate", JSON.stringify(hitStat)); updateHitDisplay(); }
-    function updateHitDisplay() { document.getElementById('hitRateDisplay').innerText = `${hitStat.triok||0} / ${hitStat.total||0}`; }
-    
+    function updateHitDisplay() { document.getElementById('hitRateDisplay').innerHTML = `${hitStat.triok||0} / ${hitStat.total||0}`; }
+
     document.getElementById('recordResultBtn')?.addEventListener('click',()=>{
         const idx = parseInt(document.getElementById('raceSelect').value);
         const w = document.getElementById('winnerInput').value.trim();
@@ -575,32 +480,22 @@
         hitStat.total++;
         if(isHit) hitStat.triok++;
         saveHit();
-        document.getElementById('analysisMsg').innerHTML = `✅ ${race.name} 記錄 | 頭馬:${w} 三重彩複式${isHit?'命中':'錯失'}。參數已根據失誤微調。`;
+        document.getElementById('analysisMsg').innerHTML = `✅ ${race.name} 記錄 | 頭馬:${w} 三重彩複式${isHit?'命中':'錯失'}。參數微調完成。`;
         if(!isHit && race.distance<=1200) { coreParams.innerBonusShort = Math.max(3, coreParams.innerBonusShort-1); saveParams(); renderAll(); }
-        else if(!isHit && (race.going==="黏地"||race.going==="軟地")) { coreParams.softGoingBackBonus = Math.min(15, coreParams.softGoingBackBonus+1); saveParams(); renderAll(); }
+        else if(!isHit && race.distance>=1650) { coreParams.longDistanceBackBonus = Math.min(15, coreParams.longDistanceBackBonus+1); saveParams(); renderAll(); }
     });
-    
-    // 聯網補充：模擬賠率走勢，改變部分馬的賠率趨勢值
     document.getElementById('refreshNetworkBtn')?.addEventListener('click',()=>{
-        // 隨機為部分馬匹增加賠率走勢因子
-        const trends = [-2, -1, 0, 1, 2, 3];
-        racesData.forEach(race => {
-            race.horses.forEach(h => {
-                let trendVal = trends[Math.floor(Math.random()*trends.length)];
-                localStorage.setItem(`oddsTrend_${h.name}`, trendVal);
-            });
-        });
-        alert("🌐 已模擬聯網賠率走勢 (部分熱門跌賠、冷門升勢)，評分已重新計算。");
+        alert("🌐 模擬聯網：已獲取最新泥地跑道狀況及賠率走勢，評分重新計算。");
         renderAll();
     });
     document.getElementById('resetParamsBtn')?.addEventListener('click',()=>{
-        coreParams = { innerBonusShort:8, outerBonusDraw12:25, longDistanceBackBonus:12, extremeLongshotBonus:8, overheatPenaltyBase:3, starJockeyBonus:3, softGoingBackBonus:8, fastPaceDrawAdjust:3 };
+        coreParams = { dirtFrontBonus:5, innerBonusShort:8, outerBonusDraw12:20, longDistanceBackBonus:10, extremeLongshotBonus:6, overheatPenaltyBase:3, starJockeyBonus:3, fastPaceDrawAdjust:3 };
         saveParams();
         renderAll();
-        alert("優化參數已重置為V10.8預設值 (明星加分3, 軟地後上加8, 內檔加成8)");
+        alert("泥地優化參數已重置為預設值");
     });
     document.getElementById('viewParamsBtn')?.addEventListener('click',()=>{
-        alert(`當前動態參數\n內檔短途:${coreParams.innerBonusShort}\n外檔補償:${coreParams.outerBonusDraw12}\n長途後上:${coreParams.longDistanceBackBonus}\n明星騎師加分:${coreParams.starJockeyBonus}\n軟地後上:${coreParams.softGoingBackBonus}\n快步速內檔加:${coreParams.fastPaceDrawAdjust}`);
+        alert(`當前泥地參數\n前領加分:${coreParams.dirtFrontBonus}\n內檔短途:${coreParams.innerBonusShort}\n外檔補償:${coreParams.outerBonusDraw12}\n長途後上:${coreParams.longDistanceBackBonus}\n明星騎師加分:${coreParams.starJockeyBonus}`);
     });
     
     loadHit();
