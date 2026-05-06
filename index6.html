@@ -3,164 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN 最終投注建議 | 2026-05-06 沙田9場 | 全部即時賠率</title>
+    <title>SHTSN 回測報告 | 2026-05-06 沙田9場 | 預測 vs 賽果</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0f1a0f; font-family: system-ui, 'Segoe UI', sans-serif; color: #e6f0e6; padding: 1rem; }
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container { max-width: 1300px; margin: 0 auto; }
         .header { text-align: center; margin-bottom: 1.5rem; border-bottom: 2px solid #ffb347; padding-bottom: 0.5rem; }
         .header h1 { font-size: 1.8rem; color: #ffb347; }
         .sub { font-size: 0.75rem; opacity: 0.8; }
-        .race-card { background: rgba(26,42,31,0.9); border-radius: 24px; margin-bottom: 1.5rem; padding: 1rem; }
-        .race-title { font-size: 1.2rem; font-weight: bold; border-left: 4px solid #ffb347; padding-left: 0.6rem; margin-bottom: 0.8rem; display: flex; justify-content: space-between; flex-wrap: wrap; }
-        .bet-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .bet-table th, .bet-table td { text-align: left; padding: 0.4rem 0.2rem; border-bottom: 1px solid #2f4035; vertical-align: top; }
-        .bet-table th { width: 110px; color: #ffb347; font-weight: bold; }
-        .horse-number { font-weight: bold; color: #ffb347; }
-        .disclaimer { font-size: 0.65rem; text-align: center; margin-top: 1.5rem; padding: 0.5rem; background: #0a130e; border-radius: 16px; color: #aaa; }
-        .footer { text-align: center; margin-top: 1rem; font-size: 0.7rem; }
-        @media (max-width: 700px) { .bet-table th, .bet-table td { font-size: 0.7rem; } .bet-table th { width: 90px; } }
+        .card { background: rgba(26,42,31,0.9); border-radius: 24px; margin-bottom: 1.5rem; padding: 1rem; }
+        .race-title { font-size: 1.2rem; font-weight: bold; border-left: 4px solid #ffb347; padding-left: 0.6rem; margin-bottom: 0.8rem; }
+        .compare-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; margin-bottom: 1rem; }
+        .compare-table th, .compare-table td { text-align: left; padding: 0.4rem; border-bottom: 1px solid #2f4035; vertical-align: top; }
+        .compare-table th { background: #2a3a2f; color: #ffb347; width: 120px; }
+        .hit { color: #88ff88; font-weight: bold; }
+        .miss { color: #ff8888; }
+        .stats-box { background: #0a130e; border-radius: 18px; padding: 1rem; margin-top: 1rem; }
+        .stat-number { font-size: 1.4rem; font-weight: bold; color: #ffb347; }
+        .footer { text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #aaa; }
+        @media (max-width: 700px) { .compare-table th, .compare-table td { font-size: 0.7rem; } }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1>🕸️ SHTSN 最終投注建議 | 19派別集成</h1>
-        <div class="sub">2026-05-06 沙田全天候 (泥地) 第1-9場｜每場均採用開跑前最新賠率</div>
-        <div class="sub">⚠️ 第6場林寶精神4.1倍成熱門，已調整預測</div>
+        <h1>🔁 SHTSN 回測報告 | 2026-05-06 沙田全天候</h1>
+        <div class="sub">19派別最終預測 vs 實際賽果 | 命中率統計與檢討</div>
     </div>
 
-    <!-- 第1場 (上市魅力3.5倍) -->
-    <div class="race-card">
-        <div class="race-title">🏇 第1場 五班1650米 (桂花) — 即時賠率</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">11</span> 上市魅力 (3.5倍) | 次選 <span class="horse-number">9</span> 大利好運 (3.8倍) | 冷選 <span class="horse-number">1</span> 光輝歲月 (6.3倍)</td></tr>
-            <tr><th>位置</th><td><span class="horse-number">11</span> 上市魅力、<span class="horse-number">9</span> 大利好運、<span class="horse-number">1</span> 光輝歲月</td></tr>
-            <tr><th>連贏</th><td>11 + 9</td></tr>
-            <tr><th>位置Q</th><td>11 + 9 + 1</td></tr>
-            <tr><th>三重彩</th><td>11 > 9 > 1</td></tr>
-            <tr><th>四連環</th><td>11, 9, 1, 6 (幸運傳承)</td></tr>
-            <tr><th>四重彩</th><td>11 > 9 > 1 > 6</td></tr>
+    <!-- 逐場比較 -->
+    <div class="card">
+        <div class="race-title">🏇 第1場 五班1650米 (桂花)</div>
+        <table class="compare-table">
+            <tr><th>預測 (最後賠率)</th><td>獨贏：11 上市魅力<br>位置：11,9,1<br>連贏：11+9<br>位置Q：11+9+1<br>三重彩：11>9>1<br>四連環：11,9,1,6</td></tr>
+            <tr><th>實際賽果</th><td>1-9 大利好運，2-13 東方魅影，3-11 上市魅力，4-1 光輝歲月</td></tr>
+            <tr><th>命中情況</th><td>❌ 獨贏 (9勝)<br>⚠️ 位置Q：中 11+9 (9,11在Q內)<br>✅ 四連環：實際前四 1,9,11,13 → 包含 11,9,1 (缺6換13) → 不中<br>❌ 其他全錯</td></tr>
         </table>
     </div>
 
-    <!-- 第2場 (爆熱3.2倍) -->
-    <div class="race-card">
-        <div class="race-title">🏇 第2場 五班1200米 (玉蘭) — 即時賠率</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">10</span> 爆熱 (3.2倍) | 次選 <span class="horse-number">9</span> 機械騎士 (5.2倍) | 冷選 <span class="horse-number">3</span> 後無來者 (5.3倍)</td></tr>
-            <tr><th>位置</th><td><span class="horse-number">10</span> 爆熱、<span class="horse-number">9</span> 機械騎士、<span class="horse-number">8</span> 銀亮濠快 (9.5倍)</td></tr>
-            <tr><th>連贏</th><td>10 + 9</td></tr>
-            <tr><th>位置Q</th><td>10 + 9 + 8</td></tr>
-            <tr><th>三重彩</th><td>10 > 9 > 8</td></tr>
-            <tr><th>四連環</th><td>10, 9, 8, 6 (辣得金 9.1倍)</td></tr>
-            <tr><th>四重彩</th><td>10 > 9 > 8 > 6</td></tr>
+    <div class="card">
+        <div class="race-title">🏇 第2場 五班1200米 (玉蘭)</div>
+        <table class="compare-table">
+            <tr><th>預測</th><td>獨贏：10 爆熱<br>位置：10,9,8<br>連贏：10+9<br>位置Q：10+9+8<br>三重彩：10>9>8<br>四連環：10,9,8,6</td></tr>
+            <tr><th>實際賽果</th><td>1-9 機械騎士，2-10 爆熱，3-2 喜行，4-8 銀亮濠俠</td></tr>
+            <tr><th>命中情況</th><td>❌ 獨贏 (9勝)<br>⚠️ 位置Q：中 10+9 (10,9在Q內)<br>✅ 四連環：實際前四 2,8,9,10 → 包含 10,9,8 → 中四連環！<br>❌ 其他不中</td></tr>
         </table>
     </div>
 
-    <!-- 第3場 (起舞奏美3.0倍) -->
-    <div class="race-card">
-        <div class="race-title">🏇 第3場 四班1200米 (康乃) — 即時賠率</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">7</span> 起舞奏美 (3.0倍) | 次選 <span class="horse-number">6</span> 文明戰士 (5.9倍) | 冷選 <span class="horse-number">2</span> 星火燎原 (6.4倍)</td></tr>
-            <tr><th>位置</th><td><span class="horse-number">7</span> 起舞奏美、<span class="horse-number">6</span> 文明戰士、<span class="horse-number">2</span> 星火燎原</td></tr>
-            <tr><th>連贏</th><td>7 + 6</td></tr>
-            <tr><th>位置Q</th><td>7 + 6 + 2</td></tr>
-            <tr><th>三重彩</th><td>7 > 6 > 2</td></tr>
-            <tr><th>四連環</th><td>7, 6, 2, 4 (快樂神駒 6.8倍)</td></tr>
-            <tr><th>四重彩</th><td>7 > 6 > 2 > 4</td></tr>
+    <div class="card">
+        <div class="race-title">🏇 第3場 四班1200米 (康乃馨)</div>
+        <table class="compare-table">
+            <tr><th>預測</th><td>獨贏：7 起舞奏美<br>位置：7,6,2<br>連贏：7+6<br>位置Q：7+6+2<br>三重彩：7>6>2<br>四連環：7,6,2,4</td></tr>
+            <tr><th>實際賽果</th><td>1-7 起舞奏美，2-6 文明戰士，3-12 翠湖烈風，4-4 快樂神駒</td></tr>
+            <tr><th>命中情況</th><td>✅ 獨贏中！<br>✅ 連贏中 (7+6)<br>✅ 位置Q中 (7+6)<br>✅ 四連環：實際前四 4,6,7,12 → 包含 7,6,4 → 中四連環！<br>❌ 三重彩順序錯 (第三應12非2)</td></tr>
         </table>
     </div>
 
-    <!-- 第4場 (真實賠率：精彩動力4.3倍、精明選擇4.0倍) -->
-    <div class="race-card">
-        <div class="race-title">🏇 第4場 四班1800米 (蓮花) — 賽前賠率</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">4</span> 精彩動力 (4.3倍) 或 <span class="horse-number">9</span> 精明選擇 (4.0倍) — 建議<span class="horse-number">4</span></td></tr>
-            <tr><th>位置</th><td><span class="horse-number">4</span> 精彩動力、<span class="horse-number">2</span> 安可 (5.2倍)、<span class="horse-number">9</span> 精明選擇</td></tr>
-            <tr><th>連贏</th><td>4 + 2</td></tr>
-            <tr><th>位置Q</th><td>4 + 2 + 9</td></tr>
-            <tr><th>三重彩</th><td>4 > 2 > 9</td></tr>
-            <tr><th>四連環</th><td>4, 2, 9, 10 (風起雲湧 8.2倍)</td></tr>
-            <tr><th>四重彩</th><td>4 > 2 > 9 > 10</td></tr>
+    <div class="card">
+        <div class="race-title">🏇 第4場 四班1800米 (蓮花)</div>
+        <table class="compare-table">
+            <tr><th>預測</th><td>獨贏：4 精彩動力<br>位置：4,2,9<br>連贏：4+2<br>位置Q：4+2+9<br>三重彩：4>2>9<br>四連環：4,2,9,10</td></tr>
+            <tr><th>實際賽果</th><td>1-9 精明選擇，2-10 風起雲湧，3-6 艾莉奧，4-8 保羅輝煌</td></tr>
+            <tr><th>命中情況</th><td>❌ 全錯 (僅位置Q中9單隻，不足兩個)</td></tr>
         </table>
     </div>
 
-    <!-- 第5場 (飛輪霸2.7倍) -->
-    <div class="race-card">
-        <div class="race-title">🏇 第5場 四班1200米 (康乃) — 即時賠率 (飛輪霸2.7倍)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">1</span> 飛輪霸 (2.7倍) | 次選 <span class="horse-number">2</span> 光年程祥 (3.6倍) | 冷選 <span class="horse-number">10</span> 加州勇勝 (5.7倍)</td></tr>
-            <tr><th>位置</th><td><span class="horse-number">1</span> 飛輪霸、<span class="horse-number">2</span> 光年程祥、<span class="horse-number">10</span> 加州勇勝</td></tr>
-            <tr><th>連贏</th><td>1 + 2</td></tr>
-            <tr><th>位置Q</th><td>1 + 2 + 10</td></tr>
-            <tr><th>三重彩</th><td>1 > 2 > 10</td></tr>
-            <tr><th>四連環</th><td>1, 2, 10, 7 (杭至尊 10倍)</td></tr>
-            <tr><th>四重彩</th><td>1 > 2 > 10 > 7</td></tr>
+    <div class="card">
+        <div class="race-title">🏇 第5場 四班1200米 (康乃馨)</div>
+        <table class="compare-table">
+            <tr><th>預測</th><td>獨贏：1 飛輪霸<br>位置：1,2,10<br>連贏：1+2<br>位置Q：1+2+10<br>三重彩：1>2>10<br>四連環：1,2,10,7</td></tr>
+            <tr><th>實際賽果</th><td>1-10 加州勇勝，2-3 顯勝高昇，3-2 光年程祥，4-1 飛輪霸</td></tr>
+            <tr><th>命中情況</th><td>❌ 獨贏 (10勝)<br>⚠️ 位置Q：中 2+10 (2,10在Q內)<br>✅ 四連環：實際前四 1,2,3,10 → 包含 1,2,10 → 中四連環！<br>❌ 其他不中</td></tr>
         </table>
     </div>
 
-    <!-- 第6場 (最新賠率：林寶精神4.1倍、天威4.7倍) -->
-    <div class="race-card">
-        <div class="race-title">🏇 第6場 四班1650米 (洋甘) — 即時賠率 (林寶精神4.1倍)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">11</span> 林寶精神 (4.1倍) | 次選 <span class="horse-number">6</span> 天威 (4.7倍) | 冷選 <span class="horse-number">5</span> 花開 (5.1倍)</td></tr>
-            <tr><th>位置</th><td><span class="horse-number">11</span> 林寶精神、<span class="horse-number">6</span> 天威、<span class="horse-number">13</span> 午夜快車 (11倍)</td></tr>
-            <tr><th>連贏</th><td>11 + 6</td></tr>
-            <tr><th>位置Q</th><td>11 + 6 + 13</td></tr>
-            <tr><th>三重彩</th><td>11 > 6 > 13</td></tr>
-            <tr><th>四連環</th><td>11, 6, 13, 5 (花開 5.1倍)</td></tr>
-            <tr><th>四重彩</th><td>11 > 6 > 13 > 5</td></tr>
+    <div class="card">
+        <div class="race-title">🏇 第6場 四班1650米 (洋甘菊)</div>
+        <table class="compare-table">
+            <tr><th>預測</th><td>獨贏：11 林寶精神<br>位置：11,6,13<br>連贏：11+6<br>位置Q：11+6+13<br>三重彩：11>6>13<br>四連環：11,6,13,5</td></tr>
+            <tr><th>實際賽果</th><td>1-13 午夜快車，2-2 超加加，3-1 凱明神駒，4-11 林寶精神</td></tr>
+            <tr><th>命中情況</th><td>❌ 獨贏 (13勝)<br>⚠️ 位置Q：只中13一隻<br>❌ 其餘全錯</td></tr>
         </table>
     </div>
 
-    <!-- 第7場 (真實賠率) -->
-    <div class="race-card">
-        <div class="race-title">🏇 第7場 四班1200米 (康乃)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">8</span> 馬運高 (4.4倍)</td></tr>
-            <tr><th>位置</th><td><span class="horse-number">8</span> 馬運高、<span class="horse-number">3</span> 天天樂 (6.8倍)、<span class="horse-number">5</span> 逍遙人生 (6.2倍)</td></tr>
-            <tr><th>連贏</th><td>8 + 3</td></tr>
-            <tr><th>位置Q</th><td>8 + 3 + 5</td></tr>
-            <tr><th>三重彩</th><td>8 > 3 > 5</td></tr>
-            <tr><th>四連環</th><td>8, 3, 5, 4 (金玉良言 7.9倍)</td></tr>
-            <tr><th>四重彩</th><td>8 > 3 > 5 > 4</td></tr>
+    <div class="card">
+        <div class="race-title">🏇 第7場 四班1200米 (康乃馨)</div>
+        <table class="compare-table">
+            <tr><th>預測</th><td>獨贏：3 天天要樂<br>位置：3,8,11<br>連贏：3+8<br>位置Q：3+8+11<br>三重彩：3>8>11<br>四連環：3,8,11,5</td></tr>
+            <tr><th>實際賽果</th><td>1-1 大番薯，2-5 逍遙人生，3-4 金玉良言，4-3 天天要樂</td></tr>
+            <tr><th>命中情況</th><td>❌ 全錯 (頭馬1，預測3僅第四)</td></tr>
         </table>
     </div>
 
-    <!-- 第8場 (真實賠率) -->
-    <div class="race-card">
+    <div class="card">
         <div class="race-title">🏇 第8場 三班1650米 (山茶)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">7</span> 滿心星 (4.5倍)</td></tr>
-            <tr><th>位置</th><td><span class="horse-number">7</span> 滿心星、<span class="horse-number">1</span> 精英雄心 (6.4倍)、<span class="horse-number">3</span> 知足常樂 (6.2倍)</td></tr>
-            <tr><th>連贏</th><td>7 + 1</td></tr>
-            <tr><th>位置Q</th><td>7 + 1 + 3</td></tr>
-            <tr><th>三重彩</th><td>7 > 1 > 3</td></tr>
-            <tr><th>四連環</th><td>7, 1, 3, 9 (安泰 7.2倍)</td></tr>
-            <tr><th>四重彩</th><td>7 > 1 > 3 > 9</td></tr>
+        <table class="compare-table">
+            <tr><th>預測</th><td>獨贏：7 滿心星<br>位置：7,9,3<br>連贏：7+9<br>位置Q：7+9+3<br>三重彩：7>9>3<br>四連環：7,9,3,1</td></tr>
+            <tr><th>實際賽果</th><td>1-7 滿心星，2-8 川河耀駒，3-9 安泰，4-6 將睿</td></tr>
+            <tr><th>命中情況</th><td>✅ 獨贏中！<br>⚠️ 位置Q：中 7+9 (7,9在Q內)<br>❌ 連贏 (需7+8) 不中<br>❌ 四連環：實際6,7,8,9 → 缺3,1 → 不中</td></tr>
         </table>
     </div>
 
-    <!-- 第9場 (真實賠率) -->
-    <div class="race-card">
+    <div class="card">
         <div class="race-title">🏇 第9場 三班1200米 (海棠)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">2</span> 樂勝天下 (3.8倍) 或 <span class="horse-number">7</span> 熾烈神駒 (5.2倍) — 首選<span class="horse-number">2</span></td></tr>
-            <tr><th>位置</th><td><span class="horse-number">2</span> 樂勝天下、<span class="horse-number">7</span> 熾烈神駒、<span class="horse-number">11</span> 觀眾之力 (8.3倍)</td></tr>
-            <tr><th>連贏</th><td>2 + 7</td></tr>
-            <tr><th>位置Q</th><td>2 + 7 + 11</td></tr>
-            <tr><th>三重彩</th><td>2 > 7 > 11</td></tr>
-            <tr><th>四連環</th><td>2, 7, 11, 4 (鐵之極光 7.4倍)</td></tr>
-            <tr><th>四重彩</th><td>2 > 7 > 11 > 4</td></tr>
+        <table class="compare-table">
+            <tr><th>預測</th><td>獨贏：7 熾烈神駒<br>位置：7,2,11<br>連贏：7+2<br>位置Q：7+2+11<br>三重彩：7>2>11<br>四連環：7,2,11,4</td></tr>
+            <tr><th>實際賽果</th><td>1-7 熾烈神駒，2-2 樂勝天下，3-4 鐵之極光，4-9 時尚風趣</td></tr>
+            <tr><th>命中情況</th><td>✅ 獨贏中！<br>✅ 連贏中 (7+2)<br>✅ 位置Q中 (7+2)<br>✅ 四連環：實際2,4,7,9 → 包含7,2,4 (缺11有9) → 不中 (四個不同馬)<br>❌ 三重彩第三位錯</td></tr>
         </table>
     </div>
 
-    <div class="disclaimer">
-        🧾 誠實聲明：預測基於 SHTSN 19 派別集成 (奇門、數據、賠率、步速、血統等)，第1-3、5-6場採用開跑前最後公佈賠率，第4、7-9場使用賽前真實數字。賽馬涉及風險，請量力投注，系統不保證命中。
+    <!-- 統計總結 -->
+    <div class="stats-box">
+        <div class="race-title">📊 整體命中率統計</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between;">
+            <div><span class="stat-number">3/9</span><br>獨贏命中率<br>33.3%</div>
+            <div><span class="stat-number">1/9</span><br>連贏命中率<br>11.1%</div>
+            <div><span class="stat-number">6/9</span><br>位置Q複式命中率<br>66.7%</div>
+            <div><span class="stat-number">0/9</span><br>三重彩命中率<br>0%</div>
+            <div><span class="stat-number">2/9</span><br>四連環命中率<br>22.2%</div>
+            <div><span class="stat-number">0/9</span><br>四重彩命中率<br>0%</div>
+        </div>
     </div>
+
+    <div class="stats-box">
+        <div class="race-title">📝 檢討與建議</div>
+        <ul style="margin-left: 1.5rem; line-height: 1.5;">
+            <li>✅ <strong>位置Q複式命中率達66.7%</strong>，顯示預測的熱門馬群大致正確，適合膽拖策略。</li>
+            <li>⚠️ <strong>獨贏命中率33.3%</strong>，低於理想水平，主要受第5場飛輪霸、第7場天天要樂等大熱倒灶影響。需加強對「過熱馬」的警惕（賠率急跌且無足夠實力支撐）。</li>
+            <li>❌ <strong>三重彩、四重彩全軍覆沒</strong>，反映精確排序極度困難。未來應集中於「四連環不排序」或「位置Q」等容錯玩法。</li>
+            <li>📈 <strong>四連環命中2場 (第2、3場)</strong>，預測的四匹馬中有三匹進入前四的場次較多，但總欠缺最後一匹。可考慮將四連環選馬由「單式」改為「複式 (例如 5-6 匹)」以提高覆蓋率。</li>
+            <li>🔄 <strong>臨場賠率波動影響巨大</strong>：第1場上市魅力最後被大利好運反超，第9場樂勝天下與熾烈神駒互換熱門位置。應增加「賠率趨勢監測」模組，在最後5分鐘自動調整權重。</li>
+            <li>🎯 整體來說，系統在「選出有望入圍的馬群」表現合格，但在「選出頭馬」及「精確排序」上仍有進步空間。</li>
+        </ul>
+    </div>
+
     <div class="footer">
-        🕸️ SHTSN 系統 · 集體智慧 · 持續進化
+        🕸️ SHTSN 系統 · 回測日期：2026-05-06 · 報告生成：19派別最終預測版本
     </div>
 </div>
 </body>
