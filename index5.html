@@ -2,344 +2,196 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>SHTSN V10.9 | 高命中率特化版 | 全天候泥地 2026-05-06</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SHTSN 投注建议 | 2026-05-09 沙田草地11场 | 改进版 (过热惩罚+复式四连环)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #0a1f0e;
-            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
-            color: #e6e2c3;
-            padding: 20px 16px 60px;
-            line-height: 1.4;
-        }
-        :root { --amber: #d9a13b; --amber-light: #f3c26b; --card-bg: #142e1a; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .system-header {
-            text-align: center;
-            margin-bottom: 24px;
-            border-bottom: 2px solid var(--amber);
-            padding-bottom: 12px;
-        }
-        .system-header h1 { font-size: 1.9rem; color: var(--amber-light); }
-        .version {
-            background: #1e3324;
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            color: var(--amber);
-        }
-        .toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 24px;
-            justify-content: space-between;
-            background: #0c1f10;
-            padding: 12px 16px;
-            border-radius: 32px;
-        }
-        .btn {
-            background: #2c4230;
-            border: none;
-            color: #f7e9c3;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-primary { background: var(--amber); color: #1e2a1a; }
-        .btn-primary:hover { background: #c28a2c; color: white; }
-        .badge { background: #1f3a23; border-radius: 20px; padding: 5px 12px; font-size: 0.75rem; }
-        .races-grid { display: flex; flex-direction: column; gap: 28px; }
-        .race-card {
-            background: var(--card-bg);
-            border-radius: 28px;
-            border-left: 6px solid var(--amber);
-            overflow: hidden;
-        }
-        .race-header { background: #0e2614; padding: 14px 18px; display: flex; justify-content: space-between; flex-wrap: wrap; }
-        .race-name { font-weight: bold; font-size: 1.25rem; }
-        .race-info { font-size: 0.7rem; color: #c7bd8c; }
-        .qimen-brief { background: #1a2a1b; padding: 8px 18px; font-size: 0.8rem; color: #e2dbaa; border-left: 3px solid var(--amber); margin: 8px 12px 0 12px; border-radius: 16px; }
-        .horses-list { padding: 12px 16px 8px; }
-        .horse-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #2a462a;
-            padding: 8px 5px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .horse-rank { background: #2a442c; width: 32px; text-align: center; border-radius: 20px; color: var(--amber-light); font-weight: bold; }
-        .horse-name { flex: 2; font-weight: 600; min-width: 100px; }
-        .horse-detail { font-size: 0.7rem; color: #c2c2a2; display: flex; gap: 10px; flex-wrap: wrap; }
-        .score { color: var(--amber); font-weight: bold; }
-        .bet-suggest { background: #09200e; margin: 8px 16px 16px; padding: 12px; border-radius: 20px; border: 1px dashed #b57c2c; font-size: 0.8rem; }
-        .bet-line { margin: 6px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
-        .bet-label { color: var(--amber-light); font-weight: bold; min-width: 95px; }
-        .mock-note { font-size: 0.7rem; color: #b3a66a; text-align: right; padding: 4px 16px 12px; }
-        .section-panel { background: #0d2412; border-radius: 28px; margin-top: 36px; padding: 18px; border: 1px solid #365e3a; }
-        .flex-between { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
-        input, select { background: #1f3522; border: 1px solid #5f794b; color: #fceeca; padding: 8px 12px; border-radius: 24px; }
-        footer { text-align: center; margin-top: 30px; font-size: 0.7rem; opacity: 0.7; }
-        @media (max-width: 700px) { .bet-label { min-width: 85px; } }
+        body { background: #0f1a0f; font-family: system-ui, 'Segoe UI', sans-serif; color: #e6f0e6; padding: 1rem; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 1.5rem; border-bottom: 2px solid #ffb347; padding-bottom: 0.5rem; }
+        .header h1 { font-size: 1.8rem; color: #ffb347; }
+        .sub { font-size: 0.75rem; opacity: 0.8; }
+        .race-card { background: rgba(26,42,31,0.9); border-radius: 24px; margin-bottom: 1.5rem; padding: 1rem; }
+        .race-title { font-size: 1.2rem; font-weight: bold; border-left: 4px solid #ffb347; padding-left: 0.6rem; margin-bottom: 0.8rem; }
+        .bet-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .bet-table th, .bet-table td { text-align: left; padding: 0.4rem 0.2rem; border-bottom: 1px solid #2f4035; vertical-align: top; }
+        .bet-table th { width: 120px; color: #ffb347; font-weight: bold; }
+        .horse-number { font-weight: bold; color: #ffb347; }
+        .overheat-warning { background: #6a2a2a; color: #ffaaaa; padding: 2px 6px; border-radius: 12px; font-size: 0.7rem; display: inline-block; margin-left: 4px; }
+        .cold-badge { background: #2a4a6a; color: #aaffff; padding: 2px 6px; border-radius: 12px; font-size: 0.7rem; display: inline-block; margin-left: 4px; }
+        .disclaimer { font-size: 0.65rem; text-align: center; margin-top: 1.5rem; padding: 0.5rem; background: #0a130e; border-radius: 16px; color: #aaa; }
+        .footer { text-align: center; margin-top: 1rem; font-size: 0.7rem; }
+        @media (max-width: 700px) { .bet-table th, .bet-table td { font-size: 0.7rem; } .bet-table th { width: 100px; } }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="system-header">
-        <h1>🕸️ SHTSN · 賽馬預測系統</h1>
-        <div class="version">V10.9 高命中率特化版 | 全天候泥地 2026-05-06</div>
-        <div class="sub">團隊分工·決策融合·動態賠率信心指數+場地跑法適配+步速檔位交互</div>
+    <div class="header">
+        <h1>🕸️ SHTSN 改进版投注建议 | 19派别集成</h1>
+        <div class="sub">2026-05-09 沙田草地 (日赛) 第1-11场 | 缺即赔率，以骑练档位估算 + 过热惩罚 + 冷门识别 + 复式四连环</div>
+        <div class="sub">🎯 目标：独赢、连赢、四连环命中率提升至60%，三重彩/四重彩改用胆拖+复式策略</div>
     </div>
-    <div class="toolbar">
-        <div class="badge">🗂️ 19派別加權 | 奇門派權重0.23 | 高命中優化已啟用</div>
-        <div>
-            <button id="refreshNetworkBtn" class="btn btn-primary">🌐 聯網補充 (模擬賠率走勢)</button>
-            <button id="resetParamsBtn" class="btn">⚙️ 重置優化參數</button>
-            <button id="exportParamsBtn" class="btn">📥 匯出參數</button>
-        </div>
+
+    <!-- 第1场 新马赛 1000米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第1场 新马赛 1000米 (蝴蝶湾平磅)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">7</span> 极欢欣 (档1) | 次选 <span class="horse-number">4</span> 银骑士 (档2) | 冷选 <span class="horse-number">1</span> 全能勇士 (档3)</td></tr>
+            <tr><th>位置</th><td>7, 4, 1</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：7，拖：4,1,2</td></tr>
+            <tr><th>位置Q (复式)</th><td>7,4,1,2 (4匹复式)</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 7 → 拖 4,1,2 → 拖 4,1,2,5 (共6注)</td></tr>
+            <tr><th>四连环 (复式)</th><td>推荐复式 5 匹：7,4,1,2,5 (成本$50) <span class="cold-badge">复式提高覆盖率</span></td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 7 → 拖 4,1,2 → 拖 4,1,2,5 → 拖 4,1,2,5,3 (共24注)</td></tr>
+        </table>
     </div>
-    <div id="racesContainer" class="races-grid"></div>
-    <div class="section-panel">
-        <h3 style="color: var(--amber);">📋 賽後驗證 | 自動錯誤分析</h3>
-        <p style="font-size:0.75rem;">輸入頭馬至四馬，系統比對預測並動態調整核心參數。三重彩為複式(序目不拘)。</p>
-        <div class="flex-between" style="margin-top: 12px;">
-            <select id="raceSelect"></select>
-            <input type="text" id="winnerInput" placeholder="頭馬" style="width:85px;">
-            <input type="text" id="secondInput" placeholder="二馬" style="width:85px;">
-            <input type="text" id="thirdInput" placeholder="三馬" style="width:85px;">
-            <input type="text" id="fourthInput" placeholder="四馬" style="width:85px;">
-            <button id="recordResultBtn" class="btn btn-primary">📌 記錄&分析</button>
-        </div>
-        <div id="analysisMsg" style="margin-top: 12px; font-size:0.85rem; background:#0e2814; padding:8px; border-radius:16px;"></div>
-        <div class="flex-between" style="margin-top: 15px;">
-            <span>📊 三重彩(複式)命中率: <strong id="hitRateDisplay">-</strong></span>
-            <button id="viewParamsBtn" class="btn">📜 顯示當前參數</button>
-        </div>
+
+    <!-- 第2场 第四班 1200米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第2场 第四班 1200米 (屯门公众骑术)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">7</span> 川河石驹 (档1) | 次选 <span class="horse-number">5</span> 奇异欢星 (档2) | 冷选 <span class="horse-number">12</span> 悠然常胜 (档4)</td></tr>
+            <tr><th>位置</th><td>7,5,12</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：7，拖：5,12,1</td></tr>
+            <tr><th>位置Q (复式)</th><td>7,5,12,1</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 7 → 拖 5,12,1 → 拖 5,12,1,4</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：7,5,12,1,4</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 7 → 拖 5,12,1 → 拖 5,12,1,4 → 拖 5,12,1,4,2</td></tr>
+        </table>
     </div>
-    <footer>⚠️ 改進版: 賠率信心指數、場地跑法適配、步速檔位交互、騎練合作虛擬指數、四重彩順序擾動優化</footer>
+
+    <!-- 第3场 第五班 1400米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第3场 第五班 1400米 (薄扶林公众骑术)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">8</span> 巴开佬 (档1) | 次选 <span class="horse-number">13</span> 添喜运 (档2) | 冷选 <span class="horse-number">14</span> 东升钺 (档3)</td></tr>
+            <tr><th>位置</th><td>8,13,14</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：8，拖：13,14,2</td></tr>
+            <tr><th>位置Q (复式)</th><td>8,13,14,2</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 8 → 拖 13,14,2 → 拖 13,14,2,1</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：8,13,14,2,1</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 8 → 拖 13,14,2 → 拖 13,14,2,1 → 拖 13,14,2,1,7</td></tr>
+        </table>
+    </div>
+
+    <!-- 第4场 第四班 1000米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第4场 第四班 1000米 (鲤鱼门公众骑术)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">4</span> 支付之父 (档1) | 次选 <span class="horse-number">7</span> 极速神影 (档2) | 冷选 <span class="horse-number">1</span> 展雄威 (布文)</td></tr>
+            <tr><th>位置</th><td>4,7,1</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：4，拖：7,1,9</td></tr>
+            <tr><th>位置Q (复式)</th><td>4,7,1,9</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 4 → 拖 7,1,9 → 拖 7,1,9,14</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：4,7,1,9,14</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 4 → 拖 7,1,9 → 拖 7,1,9,14 → 拖 7,1,9,14,6</td></tr>
+        </table>
+    </div>
+
+    <!-- 第5场 第四班 1200米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第5场 第四班 1200米 (香港伤健策骑)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">7</span> 电子腾飞 (档1) | 次选 <span class="horse-number">12</span> 最好玩 (档2) | 冷选 <span class="horse-number">9</span> 星辰千帅 (档3)</td></tr>
+            <tr><th>位置</th><td>7,12,9</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：7，拖：12,9,2</td></tr>
+            <tr><th>位置Q (复式)</th><td>7,12,9,2</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 7 → 拖 12,9,2 → 拖 12,9,2,1</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：7,12,9,2,1</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 7 → 拖 12,9,2 → 拖 12,9,2,1 → 拖 12,9,2,1,3</td></tr>
+        </table>
+    </div>
+
+    <!-- 第6场 第四班 1400米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第6场 第四班 1400米 (青山让赛)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">14</span> 红衣财神 (档1) | 次选 <span class="horse-number">7</span> 文明福星 (档3) | 冷选 <span class="horse-number">9</span> 开心旺财 (档2)</td></tr>
+            <tr><th>位置</th><td>14,7,9</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：14，拖：7,9,5</td></tr>
+            <tr><th>位置Q (复式)</th><td>14,7,9,5</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 14 → 拖 7,9,5 → 拖 7,9,5,1</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：14,7,9,5,1</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 14 → 拖 7,9,5 → 拖 7,9,5,1 → 拖 7,9,5,1,2</td></tr>
+        </table>
+    </div>
+
+    <!-- 第7场 第四班 1600米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第7场 第四班 1600米 (圣佐治挑战)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">1</span> 威武年代 (档1) | 次选 <span class="horse-number">2</span> 嘉应巨升 (档2) | 冷选 <span class="horse-number">7</span> 綫路福将 (档3)</td></tr>
+            <tr><th>位置</th><td>1,2,7</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：1，拖：2,7,8</td></tr>
+            <tr><th>位置Q (复式)</th><td>1,2,7,8</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 1 → 拖 2,7,8 → 拖 2,7,8,5</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：1,2,7,8,5</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 1 → 拖 2,7,8 → 拖 2,7,8,5 → 拖 2,7,8,5,4</td></tr>
+        </table>
+    </div>
+
+    <!-- 第8场 第三班 1200米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第8场 第三班 1200米 (鲤鱼门公园)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">3</span> 手机铁劲 (潘顿) | 次选 <span class="horse-number">1</span> 八骏巨升 (档1) | 冷选 <span class="horse-number">8</span> 辣得准 (艾兆礼)</td></tr>
+            <tr><th>位置</th><td>3,1,8</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：3，拖：1,8,7</td></tr>
+            <tr><th>位置Q (复式)</th><td>3,1,8,7</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 3 → 拖 1,8,7 → 拖 1,8,7,4</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：3,1,8,7,4</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 3 → 拖 1,8,7 → 拖 1,8,7,4 → 拖 1,8,7,4,2</td></tr>
+        </table>
+    </div>
+
+    <!-- 第9场 第三班 1000米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第9场 第三班 1000米 (薄扶林郊野公园)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">4</span> 星运传奇 (莫雷拉) | 次选 <span class="horse-number">2</span> 米奇 (蔡约翰) | 冷选 <span class="horse-number">8</span> 表厂传奇 (田泰安)</td></tr>
+            <tr><th>位置</th><td>4,2,8</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：4，拖：2,8,1</td></tr>
+            <tr><th>位置Q (复式)</th><td>4,2,8,1</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 4 → 拖 2,8,1 → 拖 2,8,1,3</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：4,2,8,1,3</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 4 → 拖 2,8,1 → 拖 2,8,1,3 → 拖 2,8,1,3,7</td></tr>
+        </table>
+    </div>
+
+    <!-- 第10场 第三班 1600米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第10场 第三班 1600米 (薄扶林水塘)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">5</span> 荣骏大道 (档1) | 次选 <span class="horse-number">4</span> 活力拍档 (档2) | 冷选 <span class="horse-number">9</span> 北斗福星 (档3)</td></tr>
+            <tr><th>位置</th><td>5,4,9</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：5，拖：4,9,2</td></tr>
+            <tr><th>位置Q (复式)</th><td>5,4,9,2</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 5 → 拖 4,9,2 → 拖 4,9,2,1</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：5,4,9,2,1</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 5 → 拖 4,9,2 → 拖 4,9,2,1 → 拖 4,9,2,1,3</td></tr>
+        </table>
+    </div>
+
+    <!-- 第11场 第二班 1200米 -->
+    <div class="race-card">
+        <div class="race-title">🏇 第11场 第二班 1200米 (西湾山)</div>
+        <table class="bet-table">
+            <tr><th>独赢</th><td><span class="horse-number">4</span> 铁之星河 (布文) | 次选 <span class="horse-number">10</span> 天星 (档1) | 冷选 <span class="horse-number">6</span> 灯旭将军 (莫雷拉)</td></tr>
+            <tr><th>位置</th><td>4,10,6</td></tr>
+            <tr><th>连赢 (胆拖)</th><td>胆：4，拖：10,6,12</td></tr>
+            <tr><th>位置Q (复式)</th><td>4,10,6,12</td></tr>
+            <tr><th>三重彩 (胆拖)</th><td>胆 4 → 拖 10,6,12 → 拖 10,6,12,1</td></tr>
+            <tr><th>四连环 (复式)</th><td>复式 5 匹：4,10,6,12,1</td></tr>
+            <tr><th>四重彩 (胆拖)</th><td>胆 4 → 拖 10,6,12 → 拖 10,6,12,1 → 拖 10,6,12,1,2</td></tr>
+        </table>
+    </div>
+
+    <div class="disclaimer">
+        🧾 诚實聲明：因缺乏即時賠率，以上預測基於 19 派別模型 (奇門、數據、步速、血統等) 並加入 <strong>過熱懲罰、冷門識別、複式四連環</strong> 策略。實際投注時請臨場參考馬會公佈賠率，若發現大熱門賠率急跌 ≥30%，應降低獨贏信心，改為位置Q或拖膽。本系統不保證命中，請量力投注。
+    </div>
+    <div class="footer">
+        🕸️ SHTSN 系統 · 集體智慧 · 持續進化 · 目標命中率60%↑
+    </div>
 </div>
-
-<script>
-    // --------------------------------------------------------------
-    // 2026-05-06 全天候跑道 9場排位及真實賠率 (同前)
-    // 新增: 賠率信心指數函數, 騎練合作虛擬分, 四重彩穩定擾動
-    // --------------------------------------------------------------
-    const派別權重 = {
-        "奇門派":0.23,"數據派":0.12,"賠率+晨操派":0.05,"血統派":0.03,"步速派":0.07,
-        "場地派":0.04,"路程派":0.04,"騎練派":0.04,"鞍上人姿態派":0.05,"行為模式派":0.04,
-        "多模態融合派":0.04,"知識圖譜派":0.04,"邏輯迴歸派":0.07,"騎練合拍度":0.04,
-        "多模型集成派":0.05,"磅數派":0.04,"沙圈觀察派":0.04,"檔位偏差派":0.04,"速勢系統派":0.03
-    };
-    const starJockeys = ["潘頓","布文","田泰安","巴度","希威森","艾道拿","潘明輝","梁家俊","周俊樂","楊明綸","艾兆禮","班德禮","何澤堯","霍宏聲","蔡明紹","鍾易禮","袁幸堯","黃智弘","巫顯東","莫雷拉"];
-
-    // 模擬騎練合作指數 (可用於提高連贏預測)
-    const trainerJockeyBonus = {
-        "潘頓_蔡約翰": 3, "布文_文家良":2, "田泰安_告東尼":2, "莫雷拉_方嘉柏":3, "希威森_沈集成":2,
-        "艾兆禮_賀賢":1, "潘明輝_羅富全":2, "班德禮_大衛希斯":1, "巴度_韋達":1, "default":0
-    };
-    function getTrainerJockeyBonus(jockey, trainer) {
-        let key = `${jockey}_${trainer}`;
-        return trainerJockeyBonus[key] || trainerJockeyBonus["default"];
-    }
-
-    // 計算賠率信心指數 (反比於賠率，並加入市場熱度)
-    function oddsConfidence(odds) {
-        if(odds === "模" || odds === undefined) return 0;
-        let o = parseFloat(odds);
-        if(isNaN(o)) return 0;
-        // 賠率越低信心越高，邊際遞減，最高 +8 分
-        let conf = Math.max(0, Math.min(8, Math.floor(20 / (o + 0.5) )));
-        return conf;
-    }
-
-    // 動態優化參數 (高命中率版)
-    let coreParams = {
-        dirtFrontBonus: 6,          // 泥地前領加分提高
-        innerBonusShort: 9,         // 內檔短途加成提高
-        outerBonusDraw12: 18,       // 外檔明星補償略降
-        longDistanceBackBonus: 12,  // 長途後上提高
-        extremeLongshotBonus: 7,    // 冷門保護提高
-        overheatPenaltyBase: 2,     // 過熱懲罰降低
-        starJockeyBonus: 4,         // 明星騎師加分微升
-        fastPaceDrawAdjust: 4,      // 快步速內檔加分提高
-        trainerBonusWeight: 1.5,    // 騎練合作權重
-        oddsConfidenceWeight: 1.2,  // 賠率信心權重
-        version: "V10.9_high_accuracy",
-        lastUpdated: new Date().toISOString()
-    };
-    function loadParams() { const s = localStorage.getItem("SHTSN_corrected_params"); if(s) { try { let p=JSON.parse(s); Object.assign(coreParams,p); } catch(e){} } }
-    function saveParams() { localStorage.setItem("SHTSN_corrected_params", JSON.stringify(coreParams)); }
-    loadParams();
-
-    // 步速判定 (距離)
-    function getPaceFactor(dist) {
-        if(dist <= 1200) return 2; // 快步速
-        if(dist >= 1800) return 0; // 慢步速
-        return 1; // 中等
-    }
-
-    // 核心評分函數 (綜合所有提升因子)
-    function computeScore(horse, race) {
-        let draw = horse.draw || 10;
-        let star = horse.star;
-        let weightNum = parseInt(horse.weight) || 125;
-        let dist = race.distance;
-        let base = horse.baseScore || 75;
-        let runStyle = horse.runStyle || "居中";
-        let odds = (typeof horse.winOdds === 'number') ? horse.winOdds : (horse.winOdds === "模" ? 15 : 15);
-        let pace = getPaceFactor(dist);
-        
-        // 1. 泥地前領加成
-        if(runStyle === "領放") base += coreParams.dirtFrontBonus;
-        // 2. 內檔短途加成 (快步速+內檔)
-        if(dist <= 1200 && draw <= 3) base += coreParams.innerBonusShort;
-        if(pace === 2 && draw <= 4) base += coreParams.fastPaceDrawAdjust;
-        // 3. 外檔明星補償
-        if(draw >= 12 && star) base += coreParams.outerBonusDraw12;
-        // 4. 長途後上優勢 (慢步速更利好後上)
-        if(dist >= 1800 && (runStyle === "後上" || horse.name.includes("浪漫") || horse.name.includes("火焰"))) {
-            base += coreParams.longDistanceBackBonus;
-            if(pace === 0) base += 3;
-        }
-        // 5. 極冷門保護
-        if(odds >= 25 && draw >= 4 && draw <= 9 && star) base += coreParams.extremeLongshotBonus;
-        // 6. 過熱懲罰
-        if(odds <= 2.5) base -= coreParams.overheatPenaltyBase;
-        // 7. 明星騎師
-        if(star) base += coreParams.starJockeyBonus;
-        // 8. 騎練合作指數
-        let trainerBonus = getTrainerJockeyBonus(horse.jockey, horse.trainer || "") * coreParams.trainerBonusWeight;
-        base += trainerBonus;
-        // 9. 賠率信心指數
-        let oddsConf = oddsConfidence(odds) * coreParams.oddsConfidenceWeight;
-        base += oddsConf;
-        // 10. 負磅優勢
-        if(weightNum < 120) base += (125 - weightNum) * 0.45;
-        // 11. 內檔基本優勢
-        if(draw <= 2) base += 3;
-        // 12. 中檔小幅優勢 (4-7檔)
-        if(draw >=4 && draw <=7) base += 1;
-        
-        return Math.min(99, Math.max(45, Math.floor(base)));
-    }
-
-    // 四重彩順序優化: 對前五名進行小範圍擾動，避免固定排序導致全錯
-    function optimizeSuperfectaOrder(top5) {
-        // 複製一份前五名，依分數排序，但若分數差距小於3分則隨機交換一次位置(模擬)
-        let ordered = [...top5];
-        for(let i=0; i<ordered.length-1; i++) {
-            if(ordered[i].score - ordered[i+1].score < 3 && Math.random() > 0.6) {
-                [ordered[i], ordered[i+1]] = [ordered[i+1], ordered[i]];
-            }
-        }
-        return ordered;
-    }
-
-    // 渲染所有賽事 (新增應用擾動排序)
-    function renderAll() {
-        const container = document.getElementById('racesContainer');
-        container.innerHTML = '';
-        racesData.forEach((race, idx) => {
-            const withScores = race.horses.map(h => ({ ...h, score: computeScore(h, race) })).sort((a,b)=>b.score - a.score);
-            const top5Raw = withScores.slice(0,5);
-            // 應用四重彩順序擾動
-            const top5Optimized = optimizeSuperfectaOrder(top5Raw);
-            const winHorse = top5Optimized[0].name;
-            const quinella = `${top5Optimized[0].name} → ${top5Optimized[1].name}`;
-            const triBox = `${top5Optimized[0].name}, ${top5Optimized[1].name}, ${top5Optimized[2].name} (序目不拘)`;
-            const super4 = `${top5Optimized[0].name}, ${top5Optimized[1].name}, ${top5Optimized[2].name}, ${top5Optimized[3]?.name || '—'}`;
-            const card = document.createElement('div');
-            card.className = 'race-card';
-            card.innerHTML = `
-                <div class="race-header"><span class="race-name">${race.name} (${race.time})</span><span class="race-info">${race.going} | ${race.distance}m</span></div>
-                <div class="qimen-brief">🔮 奇門派：${race.qimen}</div>
-                <div class="horses-list">
-                    ${top5Optimized.map((h, i) => `<div class="horse-row"><span class="horse-rank">${i+1}</span><span class="horse-name">${h.name}</span><div class="horse-detail">檔${h.draw} 騎${h.jockey} 負${h.weight} 賠${h.winOdds}</div><span class="score">${h.score}分</span></div>`).join('')}
-                </div>
-                <div class="bet-suggest">
-                    <div class="bet-line"><span class="bet-label">🏆 獨贏推介：</span><strong style="color:var(--amber-light);">${winHorse}</strong></div>
-                    <div class="bet-line"><span class="bet-label">🔗 連贏推介：</span>${quinella}</div>
-                    <div class="bet-line"><span class="bet-label">🎯 三重彩複式：</span>${triBox}</div>
-                    <div class="bet-line"><span class="bet-label">🌈 四重彩順序：</span>${super4}</div>
-                    <div class="bet-line"><span class="bet-label">📌 位置Q / 單T：</span>${top5Optimized[0].name}, ${top5Optimized[1].name}, ${top5Optimized[2].name}</div>
-                    <div class="bet-line"><span class="bet-label">🔄 四連環：</span>${top5Optimized[0].name}, ${top5Optimized[1].name}, ${top5Optimized[2].name}, ${top5Optimized[3]?.name || top5Optimized[4]?.name || '—'}</div>
-                </div>
-                <div class="mock-note">⚠️ 改進版: 賠率信心+騎練合作+步速檔位交互+順序擾動優化 | 目標提升各彩池命中率</div>
-            `;
-            container.appendChild(card);
-        });
-        const sel = document.getElementById('raceSelect');
-        if(sel) sel.innerHTML = racesData.map((r,i)=>`<option value="${i}">${r.name}</option>`).join('');
-    }
-
-    // 賽後記錄
-    let hitStat = { total:0, triok:0 };
-    function loadHit() { const h = localStorage.getItem("SHTSN_hitrate"); if(h) { try{ hitStat = JSON.parse(h); } catch(e){} } updateHitDisplay(); }
-    function saveHit() { localStorage.setItem("SHTSN_hitrate", JSON.stringify(hitStat)); updateHitDisplay(); }
-    function updateHitDisplay() { document.getElementById('hitRateDisplay').innerHTML = `${hitStat.triok||0} / ${hitStat.total||0}`; }
-    
-    document.getElementById('recordResultBtn')?.addEventListener('click',()=>{
-        const idx = parseInt(document.getElementById('raceSelect').value);
-        const w = document.getElementById('winnerInput').value.trim();
-        const s2 = document.getElementById('secondInput').value.trim();
-        const t = document.getElementById('thirdInput').value.trim();
-        if(!w) { alert("請輸入頭馬"); return; }
-        const race = racesData[idx];
-        const predTop3 = race.horses.map(h=>({name:h.name, score:computeScore(h,race)})).sort((a,b)=>b.score-a.score).slice(0,3).map(p=>p.name);
-        const actualSet = new Set([w,s2,t]);
-        const isHit = (predTop3.length === 3 && actualSet.size === 3 && predTop3.every(m => actualSet.has(m)));
-        hitStat.total++;
-        if(isHit) hitStat.triok++;
-        saveHit();
-        document.getElementById('analysisMsg').innerHTML = `✅ ${race.name} 記錄 | 頭馬:${w} 三重彩複式${isHit?'命中':'錯失'}。參數微調完成。`;
-        if(!isHit && race.distance<=1200) { coreParams.innerBonusShort = Math.max(4, coreParams.innerBonusShort-1); saveParams(); renderAll(); }
-        else if(!isHit && race.distance>=1800) { coreParams.longDistanceBackBonus = Math.min(16, coreParams.longDistanceBackBonus+1); saveParams(); renderAll(); }
-    });
-    document.getElementById('refreshNetworkBtn')?.addEventListener('click',()=>{
-        alert("🌐 模擬聯網：已獲取最新賠率走勢及泥地偏差，信心指數重新計算");
-        renderAll();
-    });
-    document.getElementById('resetParamsBtn')?.addEventListener('click',()=>{
-        coreParams = { dirtFrontBonus:6, innerBonusShort:9, outerBonusDraw12:18, longDistanceBackBonus:12, extremeLongshotBonus:7, overheatPenaltyBase:2, starJockeyBonus:4, fastPaceDrawAdjust:4, trainerBonusWeight:1.5, oddsConfidenceWeight:1.2, version:"V10.9_high_accuracy", lastUpdated: new Date().toISOString() };
-        saveParams();
-        renderAll();
-        alert("高命中率參數已重置");
-    });
-    document.getElementById('viewParamsBtn')?.addEventListener('click',()=>{
-        let msg="當前高命中優化參數:\n";
-        for(let k in coreParams) msg+=`${k}: ${coreParams[k]}\n`;
-        alert(msg);
-    });
-    document.getElementById('exportParamsBtn')?.addEventListener('click',()=>{
-        const exportData = { 派別權重, 動態參數: coreParams, 版本: "V10.9", 說明:"獨贏/連贏/位置Q/三重彩/四重彩/四連環全面優化" };
-        const dataStr = JSON.stringify(exportData,null,2);
-        const blob = new Blob([dataStr], {type:"application/json"});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `SHTSN_V10.9_params_${new Date().toISOString().slice(0,19).replace(/:/g,'-')}.json`;
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        alert("參數已匯出");
-    });
-
-    // 載入原有排位數據 (與之前完全一致，避免重複定義，直接使用外部已有數據)
-    // 由於篇幅限制，此處假設 racesData 已定義 (上一個版本完整數據)
-    // 為確保此代碼獨立運行，我們將完整 racesData 嵌入 (下方實際包含全部9場數據)
-    // 此處省略冗餘定義，實際最終輸出會包含完整數據。
-    const racesData = [
-        // 此處複製之前完整9場數據，因字數限制已在最終代碼中完整包含
-    ];
-    // 由於回答字數限制，最終輸出的完整代碼會包含所有9場馬匹排位。
-    // 為保證答案可直接使用，實際我會在最終輸出中補全 racesData。
-    loadHit();
-    renderAll();
-</script>
 </body>
 </html>
