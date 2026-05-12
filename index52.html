@@ -25,7 +25,6 @@
         button.danger { background: #aa4444; color: white; }
         button.secondary { background: #2a6a2a; color: white; }
         .status { font-size: 0.7rem; margin-top: 0.5rem; color: #88ff88; }
-        .export-box { background: #0a130e; border-radius: 18px; padding: 1rem; margin-top: 1rem; }
         pre { background: #0a130e; padding: 0.5rem; border-radius: 12px; overflow-x: auto; font-size: 0.7rem; color: #ccc; }
         @media (max-width: 700px) { .horses-table input { width: 55px; } }
     </style>
@@ -34,8 +33,8 @@
 <div class="container">
     <div class="header">
         <h1>🐎 SHTSN 跑馬地參數記錄工具</h1>
-        <div class="sub">2026-05-13 夜賽完整排位＋即時賠率（已預填）｜可編輯、儲存、匯出</div>
-        <div class="sub">💡 所有賠率取自馬會即時數字，場地：好地／跑道：C跑道</div>
+        <div class="sub">2026-05-13 夜賽完整排位＋即時賠率（已預填）｜可編輯、儲存、匯出 | 專為谷草設計</div>
+        <div class="sub">💡 所有賠率取自馬會即時數字，場地：好地／跑道：C跑道 | 點擊「更新」後修改自動生效</div>
     </div>
 
     <div class="card">
@@ -59,7 +58,7 @@
 </div>
 
 <script>
-    // 根據用戶提供的圖片，整理 2026-05-13 跑馬地 9 場完整數據（含賠率）
+    // ================= 全 9 場數據 (根據用戶提供的圖片整理) =================
     const fullRacesData = [
         { // 第1場 18:40
             date: "2026-05-13", venue: "跑馬地", raceNo: 1,
@@ -76,7 +75,7 @@
                 { number:9, name:"威威父子", draw:8, lb:128, jockey:"梁家俊", trainer:"巫偉傑", odds:10, predictedRank:0, actualRank:"" },
                 { number:10, name:"風雲", draw:7, lb:126, jockey:"巴度", trainer:"丁冠豪", odds:5.4, predictedRank:0, actualRank:"" },
                 { number:11, name:"龍又生", draw:5, lb:121, jockey:"潘頓", trainer:"呂健威", odds:7.1, predictedRank:0, actualRank:"" },
-                { number:12, name:"華美之威", draw:12, lb:120, jockey:"田泰安", trainer:"告東尼", odds:0, predictedRank:0, actualRank:"" } // 賠率無顯示
+                { number:12, name:"華美之威", draw:12, lb:120, jockey:"田泰安", trainer:"告東尼", odds:0, predictedRank:0, actualRank:"" }
             ] },
         { // 第2場 19:10
             date: "2026-05-13", venue: "跑馬地", raceNo: 2,
@@ -107,7 +106,7 @@
                 { number:6, name:"正義波", draw:4, lb:120, jockey:"金誠剛", trainer:"游達榮", odds:23, predictedRank:0, actualRank:"" },
                 { number:7, name:"浪漫門士", draw:1, lb:120, jockey:"潘頓", trainer:"沈集成", odds:1.2, predictedRank:0, actualRank:"" },
                 { number:8, name:"翠兒威威", draw:3, lb:120, jockey:"周俊樂", trainer:"巫偉傑", odds:30, predictedRank:0, actualRank:"" },
-                { number:9, name:"勁好運", draw:8, lb:120, jockey:"艾兆禮", trainer:"廖康銘", odds:0, predictedRank:0, actualRank:"" } // 缺賠率
+                { number:9, name:"勁好運", draw:8, lb:120, jockey:"艾兆禮", trainer:"廖康銘", odds:0, predictedRank:0, actualRank:"" }
             ] },
         { // 第4場 20:10 聖格盧讓
             date: "2026-05-13", venue: "跑馬地", raceNo: 4,
@@ -124,7 +123,7 @@
                 { number:9, name:"寫我其誰", draw:8, lb:121, jockey:"巴度", trainer:"葉楚航", odds:7.2, predictedRank:0, actualRank:"" },
                 { number:10, name:"滿洛城", draw:2, lb:120, jockey:"班德禮", trainer:"大衛希斯", odds:17, predictedRank:0, actualRank:"" },
                 { number:11, name:"獎星", draw:5, lb:118, jockey:"潘明輝", trainer:"羅富全", odds:12, predictedRank:0, actualRank:"" },
-                { number:12, name:"翠湖烈風", draw:7, lb:116, jockey:"黃寶妮", trainer:"賀賢", odds:0, predictedRank:0, actualRank:"" } // 缺賠率
+                { number:12, name:"翠湖烈風", draw:7, lb:116, jockey:"黃寶妮", trainer:"賀賢", odds:0, predictedRank:0, actualRank:"" }
             ] },
         { // 第5場 20:40 法國賽馬會盃 1800米
             date: "2026-05-13", venue: "跑馬地", raceNo: 5,
@@ -155,4 +154,252 @@
                 { number:8, name:"準希望", draw:3, lb:122, jockey:"周俊樂", trainer:"黎昭昇", odds:10, predictedRank:0, actualRank:"" },
                 { number:9, name:"頌星", draw:2, lb:121, jockey:"蔡明紹", trainer:"葉楚航", odds:8.7, predictedRank:0, actualRank:"" },
                 { number:10, name:"時間寶", draw:11, lb:121, jockey:"鍾易禮", trainer:"韋達", odds:8.4, predictedRank:0, actualRank:"" },
-                { number:11, name:"極速滿貫", draw:6
+                { number:11, name:"極速滿貫", draw:6, lb:121, jockey:"希威森", trainer:"告東尼", odds:15, predictedRank:0, actualRank:"" },
+                { number:12, name:"爆竹", draw:5, lb:118, jockey:"莫雷拉", trainer:"蔡約翰", odds:5.6, predictedRank:0, actualRank:"" }
+            ] },
+        { // 第7場 21:45 尚蒂伊
+            date: "2026-05-13", venue: "跑馬地", raceNo: 7,
+            raceName: "第四班1200米 (尚蒂伊)", distance: 1200, ground: "好地", course: "C跑道",
+            horses: [
+                { number:1, name:"競駿非凡", draw:12, lb:135, jockey:"布浩榮", trainer:"章達", odds:12, predictedRank:0, actualRank:"" },
+                { number:2, name:"抱百嶺", draw:8, lb:133, jockey:"周俊樂", trainer:"葉楚航", odds:28, predictedRank:0, actualRank:"" },
+                { number:3, name:"縱橫天下", draw:1, lb:132, jockey:"奧爾民", trainer:"鄭俊偉", odds:19, predictedRank:0, actualRank:"" },
+                { number:4, name:"金發盛世", draw:9, lb:131, jockey:"霍宏聲", trainer:"桂福特", odds:13, predictedRank:0, actualRank:"" },
+                { number:5, name:"你知我得", draw:10, lb:131, jockey:"巴度", trainer:"姚本輝", odds:18, predictedRank:0, actualRank:"" },
+                { number:6, name:"銳目", draw:7, lb:131, jockey:"潘頓", trainer:"大衛希斯", odds:7.1, predictedRank:0, actualRank:"" },
+                { number:7, name:"幸運愉快", draw:11, lb:127, jockey:"潘明輝", trainer:"巫偉傑", odds:14, predictedRank:0, actualRank:"" },
+                { number:8, name:"智勝攻略", draw:4, lb:127, jockey:"艾兆禮", trainer:"廖康銘", odds:13, predictedRank:0, actualRank:"" },
+                { number:9, name:"福進", draw:6, lb:125, jockey:"莫雷拉", trainer:"方嘉柏", odds:3.8, predictedRank:0, actualRank:"" },
+                { number:10, name:"良駒好友", draw:3, lb:124, jockey:"何澤堯", trainer:"文家良", odds:13, predictedRank:0, actualRank:"" },
+                { number:11, name:"驕陽雄心", draw:5, lb:123, jockey:"希威森", trainer:"沈集成", odds:6.2, predictedRank:0, actualRank:"" },
+                { number:12, name:"勝在當下", draw:2, lb:118, jockey:"田泰安", trainer:"羅富全", odds:7.3, predictedRank:0, actualRank:"" }
+            ] },
+        { // 第8場 22:15 多維爾讓
+            date: "2026-05-13", venue: "跑馬地", raceNo: 8,
+            raceName: "第三班1200米 (多維爾讓)", distance: 1200, ground: "好地", course: "C跑道",
+            horses: [
+                { number:1, name:"小霸王", draw:2, lb:135, jockey:"黃寶妮", trainer:"告東尼", odds:0, predictedRank:0, actualRank:"" },
+                { number:2, name:"志滿同行", draw:4, lb:133, jockey:"潘頓", trainer:"文家良", odds:0, predictedRank:0, actualRank:"" },
+                { number:3, name:"騰龍四海", draw:3, lb:129, jockey:"奧爾民", trainer:"黎昭昇", odds:0, predictedRank:0, actualRank:"" },
+                { number:4, name:"金牌活力", draw:7, lb:129, jockey:"布文", trainer:"桂福特", odds:0, predictedRank:0, actualRank:"" },
+                { number:5, name:"人和家興", draw:6, lb:127, jockey:"班德禮", trainer:"大衛希斯", odds:0, predictedRank:0, actualRank:"" },
+                { number:6, name:"福星小子", draw:10, lb:124, jockey:"艾兆禮", trainer:"蔡約翰", odds:0, predictedRank:0, actualRank:"" },
+                { number:7, name:"關鍵所在", draw:8, lb:124, jockey:"黃智弘", trainer:"沈集成", odds:0, predictedRank:0, actualRank:"" },
+                { number:8, name:"電訊巴打", draw:11, lb:123, jockey:"巫顯東", trainer:"徐雨石", odds:0, predictedRank:0, actualRank:"" },
+                { number:9, name:"閃光燈", draw:5, lb:116, jockey:"巴度", trainer:"丁冠豪", odds:0, predictedRank:0, actualRank:"" },
+                { number:10, name:"棒棒糖", draw:9, lb:116, jockey:"莫雷拉", trainer:"方嘉柏", odds:0, predictedRank:0, actualRank:"" },
+                { number:11, name:"馬達", draw:1, lb:115, jockey:"田泰安", trainer:"巫偉傑", odds:0, predictedRank:0, actualRank:"" },
+                { number:12, name:"盈妍威楓", draw:12, lb:115, jockey:"潘明輝", trainer:"伍鵬志", odds:0, predictedRank:0, actualRank:"" }
+            ] },
+        { // 第9場 22:50 巴黎隆尚
+            date: "2026-05-13", venue: "跑馬地", raceNo: 9,
+            raceName: "第二班1650米 (巴黎隆尚)", distance: 1650, ground: "好地", course: "C跑道",
+            horses: [
+                { number:1, name:"勁速威龍", draw:9, lb:135, jockey:"何澤堯", trainer:"呂健威", odds:8.5, predictedRank:0, actualRank:"" },
+                { number:2, name:"喜蓮勇威", draw:1, lb:134, jockey:"布浩榮", trainer:"沈集成", odds:11, predictedRank:0, actualRank:"" },
+                { number:3, name:"智取神駒", draw:4, lb:131, jockey:"周俊樂", trainer:"沈集成", odds:17, predictedRank:0, actualRank:"" },
+                { number:4, name:"太陽勇士", draw:6, lb:130, jockey:"布文", trainer:"大衛希斯", odds:4.2, predictedRank:0, actualRank:"" },
+                { number:5, name:"非惟偉偉", draw:3, lb:125, jockey:"奧爾民", trainer:"姚本輝", odds:0, predictedRank:0, actualRank:"" },
+                { number:6, name:"晒冷", draw:10, lb:122, jockey:"希威森", trainer:"廖康銘", odds:0, predictedRank:0, actualRank:"" },
+                { number:7, name:"钛易揺", draw:7, lb:121, jockey:"黃智弘", trainer:"方嘉柏", odds:0, predictedRank:0, actualRank:"" },
+                { number:8, name:"銀亮奔騰", draw:8, lb:120, jockey:"艾兆禮", trainer:"游達榮", odds:0, predictedRank:0, actualRank:"" },
+                { number:9, name:"包裝福星", draw:2, lb:119, jockey:"班德禮", trainer:"呂健威", odds:0, predictedRank:0, actualRank:"" },
+                { number:10, name:"一起美麗", draw:11, lb:118, jockey:"田泰安", trainer:"蔡約翰", odds:0, predictedRank:0, actualRank:"" },
+                { number:11, name:"平凡騎士", draw:5, lb:118, jockey:"莫雷拉", trainer:"方嘉柏", odds:0, predictedRank:0, actualRank:"" }
+            ] }
+    ];
+
+    let racesParams = [];
+
+    function renderRaces() {
+        const container = document.getElementById('racesList');
+        if (!racesParams.length) {
+            container.innerHTML = '<div class="race-entry" style="text-align:center; padding:1rem;">暫無賽事記錄，請按「新增賽事」。</div>';
+            return;
+        }
+        container.innerHTML = '';
+        racesParams.forEach((race, idx) => {
+            const raceDiv = document.createElement('div');
+            raceDiv.className = 'race-entry';
+            raceDiv.innerHTML = `
+                <div class="race-header">
+                    <input type="text" placeholder="日期" value="${race.date}" data-field="date" data-idx="${idx}" style="width:100px;">
+                    <input type="text" placeholder="場地名稱" value="${race.raceName}" data-field="raceName" data-idx="${idx}" style="width:220px;">
+                    <input type="number" placeholder="路程(米)" value="${race.distance}" data-field="distance" data-idx="${idx}" style="width:80px;">
+                    <select data-field="ground" data-idx="${idx}">
+                        <option value="好地" ${race.ground === '好地' ? 'selected' : ''}>好地</option>
+                        <option value="好至黏地" ${race.ground === '好至黏地' ? 'selected' : ''}>好至黏地</option>
+                        <option value="黏地" ${race.ground === '黏地' ? 'selected' : ''}>黏地</option>
+                        <option value="軟地" ${race.ground === '軟地' ? 'selected' : ''}>軟地</option>
+                    </select>
+                    <select data-field="course" data-idx="${idx}">
+                        <option value="C跑道" ${race.course === 'C跑道' ? 'selected' : ''}>C跑道</option>
+                        <option value="A跑道" ${race.course === 'A跑道' ? 'selected' : ''}>A跑道</option>
+                        <option value="B跑道" ${race.course === 'B跑道' ? 'selected' : ''}>B跑道</option>
+                    </select>
+                    <button class="danger" data-delidx="${idx}">🗑️ 刪除此場</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="horses-table">
+                        <thead>
+                            <tr><th>馬號</th><th>馬名</th><th>檔位</th><th>負磅</th><th>騎師</th><th>練馬師</th><th>賠率</th><th>預測名次</th><th>實際名次</th><th>備註</th> </thead>
+                        <tbody>
+                            ${race.horses.map((h, hidx) => `
+                                <tr>
+                                    <td><input type="number" value="${h.number}" data-hidx="${hidx}" data-field="number" data-idx="${idx}" style="width:50px;"></td>
+                                    <td><input type="text" value="${h.name}" data-hidx="${hidx}" data-field="name" data-idx="${idx}" style="width:100px;"></td>
+                                    <td><input type="number" value="${h.draw}" data-hidx="${hidx}" data-field="draw" data-idx="${idx}" style="width:50px;"></td>
+                                    <td><input type="number" value="${h.lb}" data-hidx="${hidx}" data-field="lb" data-idx="${idx}" style="width:50px;"></td>
+                                    <td><input type="text" value="${h.jockey}" data-hidx="${hidx}" data-field="jockey" data-idx="${idx}" style="width:90px;"></td>
+                                    <td><input type="text" value="${h.trainer}" data-hidx="${hidx}" data-field="trainer" data-idx="${idx}" style="width:90px;"></td>
+                                    <td><input type="number" step="0.1" value="${h.odds || 0}" data-hidx="${hidx}" data-field="odds" data-idx="${idx}" style="width:60px;"></td>
+                                    <td><input type="number" value="${h.predictedRank}" data-hidx="${hidx}" data-field="predictedRank" data-idx="${idx}" style="width:60px;"></td>
+                                    <td><input type="number" value="${h.actualRank !== undefined ? h.actualRank : ''}" data-hidx="${hidx}" data-field="actualRank" data-idx="${idx}" style="width:60px;"></td>
+                                    <td><input type="text" placeholder="體重變化/備註" data-hidx="${hidx}" data-field="remark" data-idx="${idx}" value="${h.remark || ''}" style="width:80px;"></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            container.appendChild(raceDiv);
+        });
+
+        document.querySelectorAll('[data-delidx]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const delIdx = parseInt(btn.getAttribute('data-delidx'));
+                racesParams.splice(delIdx, 1);
+                renderRaces();
+                updateJsonPreview();
+                saveToLocalStorage();
+            });
+        });
+
+        const inputs = document.querySelectorAll('.race-entry input, .race-entry select');
+        inputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const idx = parseInt(input.getAttribute('data-idx'));
+                const field = input.getAttribute('data-field');
+                const hidx = input.getAttribute('data-hidx');
+                if (hidx !== null) {
+                    const horseIdx = parseInt(hidx);
+                    if (field === 'number') racesParams[idx].horses[horseIdx].number = parseInt(input.value);
+                    else if (field === 'name') racesParams[idx].horses[horseIdx].name = input.value;
+                    else if (field === 'draw') racesParams[idx].horses[horseIdx].draw = parseInt(input.value);
+                    else if (field === 'lb') racesParams[idx].horses[horseIdx].lb = parseInt(input.value);
+                    else if (field === 'jockey') racesParams[idx].horses[horseIdx].jockey = input.value;
+                    else if (field === 'trainer') racesParams[idx].horses[horseIdx].trainer = input.value;
+                    else if (field === 'odds') racesParams[idx].horses[horseIdx].odds = parseFloat(input.value);
+                    else if (field === 'predictedRank') racesParams[idx].horses[horseIdx].predictedRank = parseInt(input.value);
+                    else if (field === 'actualRank') racesParams[idx].horses[horseIdx].actualRank = input.value ? parseInt(input.value) : '';
+                    else if (field === 'remark') racesParams[idx].horses[horseIdx].remark = input.value;
+                } else {
+                    if (field === 'date') racesParams[idx].date = input.value;
+                    else if (field === 'raceName') racesParams[idx].raceName = input.value;
+                    else if (field === 'distance') racesParams[idx].distance = parseInt(input.value);
+                    else if (field === 'ground') racesParams[idx].ground = input.value;
+                    else if (field === 'course') racesParams[idx].course = input.value;
+                }
+                updateJsonPreview();
+                saveToLocalStorage();
+            });
+        });
+    }
+
+    function addNewRace() {
+        const template = fullRacesData[0];
+        const newRace = JSON.parse(JSON.stringify(template));
+        newRace.id = Date.now();
+        newRace.raceNo = racesParams.length + 1;
+        newRace.raceName = `第${newRace.raceNo}場 新賽事`;
+        racesParams.push(newRace);
+        renderRaces();
+        updateJsonPreview();
+        saveToLocalStorage();
+    }
+
+    function saveToLocalStorage() {
+        localStorage.setItem('SHTSN_HV_RaceParams', JSON.stringify(racesParams));
+        document.getElementById('saveStatus').innerHTML = '✅ 已儲存至瀏覽器 (' + new Date().toLocaleTimeString() + ')';
+        setTimeout(() => {
+            if (document.getElementById('saveStatus')) document.getElementById('saveStatus').innerHTML = '';
+        }, 2000);
+    }
+
+    function loadFromLocalStorage() {
+        const stored = localStorage.getItem('SHTSN_HV_RaceParams');
+        if (stored) {
+            try {
+                racesParams = JSON.parse(stored);
+                renderRaces();
+                updateJsonPreview();
+            } catch(e) {}
+        } else {
+            racesParams = fullRacesData;
+            renderRaces();
+            updateJsonPreview();
+        }
+    }
+
+    function updateJsonPreview() {
+        const preview = document.getElementById('jsonPreview');
+        if (preview) preview.textContent = JSON.stringify(racesParams, null, 2);
+    }
+
+    function exportToJson() {
+        const dataStr = JSON.stringify(racesParams, null, 2);
+        const blob = new Blob([dataStr], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `SHTSN_HV_params_${new Date().toISOString().slice(0,19)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function importJson(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const imported = JSON.parse(e.target.result);
+                if (Array.isArray(imported)) {
+                    racesParams = imported;
+                    renderRaces();
+                    updateJsonPreview();
+                    saveToLocalStorage();
+                    document.getElementById('saveStatus').innerHTML = '✅ 匯入成功，已儲存';
+                } else {
+                    alert('檔案格式錯誤，需要陣列格式');
+                }
+            } catch(err) {
+                alert('JSON 解析失敗');
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function clearAll() {
+        if (confirm('確認清空所有跑馬地賽事記錄？此操作不可復原。')) {
+            racesParams = [];
+            renderRaces();
+            updateJsonPreview();
+            saveToLocalStorage();
+        }
+    }
+
+    document.getElementById('addRaceBtn').addEventListener('click', addNewRace);
+    document.getElementById('saveAllBtn').addEventListener('click', saveToLocalStorage);
+    document.getElementById('exportJsonBtn').addEventListener('click', exportToJson);
+    document.getElementById('importJsonBtn').addEventListener('click', () => {
+        document.getElementById('importFile').click();
+    });
+    document.getElementById('importFile').addEventListener('change', (e) => {
+        if (e.target.files.length) importJson(e.target.files[0]);
+        e.target.value = '';
+    });
+    document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+
+    loadFromLocalStorage();
+</script>
+</body>
+</html>
