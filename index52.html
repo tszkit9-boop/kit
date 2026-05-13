@@ -3,403 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN 跑馬地參數記錄工具 | 2026-05-13 完整賠率</title>
+    <title>SHTSN 21派別 | 跑馬地夜賽 2026-05-13 | 完整賠率 (含第8場)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0f1a0f; font-family: system-ui, 'Segoe UI', sans-serif; color: #e6f0e6; padding: 1rem; }
         .container { max-width: 1400px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 1.5rem; border-bottom: 2px solid #88ff88; padding-bottom: 0.5rem; }
-        .header h1 { font-size: 1.8rem; color: #88ff88; }
+        .header { text-align: center; margin-bottom: 1.5rem; border-bottom: 2px solid #ffb347; padding-bottom: 0.5rem; }
+        .header h1 { font-size: 1.8rem; color: #ffb347; }
         .sub { font-size: 0.75rem; opacity: 0.8; }
-        .card { background: rgba(26,42,31,0.9); border-radius: 24px; margin-bottom: 1.5rem; padding: 1rem; }
-        .section-title { font-size: 1.2rem; font-weight: bold; border-left: 4px solid #88ff88; padding-left: 0.6rem; margin-bottom: 0.8rem; }
-        .race-entry { background: #1a2a1f; border-radius: 20px; padding: 0.8rem; margin-bottom: 1rem; }
-        .race-header { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; }
-        .race-header input, .race-header select { background: #2a3a2f; border: 1px solid #88ff88; padding: 4px 8px; border-radius: 12px; color: white; }
-        .horses-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; margin-top: 0.5rem; overflow-x: auto; display: block; }
-        .horses-table th, .horses-table td { text-align: center; padding: 0.3rem; border-bottom: 1px solid #2f4035; vertical-align: middle; }
-        .horses-table th { background: #2a3a2f; color: #88ff88; }
-        .horses-table input { width: 80px; background: #2a3a2f; border: 1px solid #88ff88; border-radius: 8px; color: white; padding: 2px 4px; text-align: center; }
-        .actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
-        button { background: #88ff88; color: #1a2a1f; border: none; border-radius: 30px; padding: 5px 14px; cursor: pointer; font-weight: bold; }
-        button.danger { background: #aa4444; color: white; }
-        button.secondary { background: #2a6a2a; color: white; }
-        .status { font-size: 0.7rem; margin-top: 0.5rem; color: #88ff88; }
-        pre { background: #0a130e; padding: 0.5rem; border-radius: 12px; overflow-x: auto; font-size: 0.7rem; color: #ccc; }
-        @media (max-width: 700px) { .horses-table input { width: 55px; } }
+        .race-card { background: rgba(26,42,31,0.9); border-radius: 24px; margin-bottom: 1.5rem; padding: 1rem; }
+        .race-title { font-size: 1.1rem; font-weight: bold; border-left: 4px solid #ffb347; padding-left: 0.6rem; margin-bottom: 0.8rem; }
+        .predict-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .predict-table th, .predict-table td { text-align: center; padding: 0.4rem; border-bottom: 1px solid #2f4035; }
+        .predict-table th { background: #2a3a2f; color: #ffb347; }
+        .top3 { background: #2a4a2a; font-weight: bold; }
+        .bet-slip { background: #111d15; border-radius: 14px; padding: 0.6rem; margin-top: 0.8rem; font-size: 0.7rem; }
+        .cold-badge { background: #2a4a6a; color: #aaffff; padding: 2px 6px; border-radius: 12px; font-size: 0.7rem; display: inline-block; margin-left: 4px; }
+        .disclaimer { font-size: 0.65rem; text-align: center; margin-top: 1.5rem; padding: 0.5rem; background: #0a130e; border-radius: 16px; color: #aaa; }
+        .footer { text-align: center; margin-top: 1rem; font-size: 0.7rem; }
+        @media (max-width: 700px) { .predict-table th, .predict-table td { font-size: 0.65rem; } }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1>🐎 SHTSN 跑馬地參數記錄工具</h1>
-        <div class="sub">2026-05-13 夜賽完整排位＋即時賠率（已預填）｜可編輯、儲存、匯出 | 專為谷草設計</div>
-        <div class="sub">💡 所有賠率取自馬會即時數字，場地：好地／跑道：C跑道 | 點擊「更新」後修改自動生效</div>
+        <h1>🕸️ SHTSN 21 派別 | 跑馬地夜賽 2026-05-13</h1>
+        <div class="sub">全 9 場排位｜即時賠率（含第8場最新數字）｜21 派別評分 | 冷門爆發派激活</div>
+        <div class="sub">場地：好地 | 跑道：C跑道 (內欄有利)</div>
     </div>
 
-    <div class="card">
-        <div class="section-title">➕ 新增／編輯賽事參數</div>
-        <div id="racesList"></div>
-        <div class="actions">
-            <button id="addRaceBtn">➕ 新增賽事</button>
-            <button id="saveAllBtn">💾 儲存所有記錄</button>
-            <button id="exportJsonBtn">📎 匯出 JSON</button>
-            <button id="importJsonBtn">📂 匯入 JSON</button>
-            <input type="file" id="importFile" accept=".json" style="display:none;">
-            <button id="clearAllBtn" class="danger">🗑️ 清空所有記錄</button>
-        </div>
-        <div id="saveStatus" class="status"></div>
-    </div>
+    <div id="racesContainer"></div>
 
-    <div class="card">
-        <div class="section-title">📋 已儲存參數預覽 (JSON)</div>
-        <pre id="jsonPreview">尚未儲存</pre>
+    <div class="disclaimer">
+        🧾 誠實聲明：預測基於 21 派別模型（奇門、數據、賠率、步速、場地、體重變化、草地偏差、冷門爆發等）。<br>
+        賠率取自馬會即時數字（13/5 晚間），冷門爆發派對高賠率馬（≥10倍）且符合條件者加分。賽馬有風險，請量力投注。
+    </div>
+    <div class="footer">
+        🕸️ SHTSN 系統 · 集體智慧 · 持續進化 · 現共 21 個專家派別
     </div>
 </div>
 
 <script>
-    // ================= 全 9 場數據 (根據用戶提供的圖片整理) =================
-    const fullRacesData = [
-        { // 第1場 18:40
-            date: "2026-05-13", venue: "跑馬地", raceNo: 1,
-            raceName: "第五班1650米 (邁松拉菲特)", distance: 1650, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"焦點", draw:3, lb:135, jockey:"布浩榮", trainer:"游達榮", odds:21, predictedRank:0, actualRank:"" },
-                { number:2, name:"大力猴王", draw:2, lb:134, jockey:"班德禮", trainer:"韋達", odds:13, predictedRank:0, actualRank:"" },
-                { number:3, name:"驥跑得", draw:6, lb:134, jockey:"霍宏聲", trainer:"廖康銘", odds:10, predictedRank:0, actualRank:"" },
-                { number:4, name:"魅力知福", draw:10, lb:131, jockey:"金誠剛", trainer:"蔡約翰", odds:17, predictedRank:0, actualRank:"" },
-                { number:5, name:"電訊驕陽", draw:1, lb:131, jockey:"蔡明紹", trainer:"徐雨石", odds:7.4, predictedRank:0, actualRank:"" },
-                { number:6, name:"小皇爺", draw:4, lb:131, jockey:"周俊樂", trainer:"葉楚航", odds:8.5, predictedRank:0, actualRank:"" },
-                { number:7, name:"東方寶寶", draw:9, lb:129, jockey:"潘明輝", trainer:"姚本輝", odds:26, predictedRank:0, actualRank:"" },
-                { number:8, name:"常常感恩", draw:11, lb:129, jockey:"艾兆禮", trainer:"蘇偉賢", odds:8.6, predictedRank:0, actualRank:"" },
-                { number:9, name:"威威父子", draw:8, lb:128, jockey:"梁家俊", trainer:"巫偉傑", odds:10, predictedRank:0, actualRank:"" },
-                { number:10, name:"風雲", draw:7, lb:126, jockey:"巴度", trainer:"丁冠豪", odds:5.4, predictedRank:0, actualRank:"" },
-                { number:11, name:"龍又生", draw:5, lb:121, jockey:"潘頓", trainer:"呂健威", odds:7.1, predictedRank:0, actualRank:"" },
-                { number:12, name:"華美之威", draw:12, lb:120, jockey:"田泰安", trainer:"告東尼", odds:0, predictedRank:0, actualRank:"" }
-            ] },
-        { // 第2場 19:10
-            date: "2026-05-13", venue: "跑馬地", raceNo: 2,
-            raceName: "第四班1200米 (尚蒂伊)", distance: 1200, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"美麗邂逅", draw:9, lb:135, jockey:"鍾易禮", trainer:"告東尼", odds:16, predictedRank:0, actualRank:"" },
-                { number:2, name:"輕功猛男", draw:4, lb:134, jockey:"奧爾民", trainer:"姚本輝", odds:4.9, predictedRank:0, actualRank:"" },
-                { number:3, name:"添開心", draw:8, lb:134, jockey:"布文", trainer:"伍鵬志", odds:21, predictedRank:0, actualRank:"" },
-                { number:4, name:"環球英雄", draw:12, lb:131, jockey:"班德禮", trainer:"大衛希斯", odds:6.1, predictedRank:0, actualRank:"" },
-                { number:5, name:"勝多多", draw:10, lb:129, jockey:"布浩榮", trainer:"韋達", odds:23, predictedRank:0, actualRank:"" },
-                { number:6, name:"勁砲王", draw:11, lb:127, jockey:"霍宏聲", trainer:"廖康銘", odds:28, predictedRank:0, actualRank:"" },
-                { number:7, name:"疾風財子", draw:7, lb:126, jockey:"莫雷拉", trainer:"方嘉柏", odds:6.4, predictedRank:0, actualRank:"" },
-                { number:8, name:"博愛先鋒", draw:2, lb:126, jockey:"巴度", trainer:"巫偉傑", odds:7.7, predictedRank:0, actualRank:"" },
-                { number:9, name:"神翼金剛", draw:6, lb:124, jockey:"周俊樂", trainer:"葉楚航", odds:13, predictedRank:0, actualRank:"" },
-                { number:10, name:"領袖勳力", draw:3, lb:123, jockey:"梁家俊", trainer:"徐雨石", odds:20, predictedRank:0, actualRank:"" },
-                { number:11, name:"佳運發", draw:1, lb:120, jockey:"黃寶妮", trainer:"黎昭昇", odds:12, predictedRank:0, actualRank:"" },
-                { number:12, name:"獵寶動", draw:5, lb:118, jockey:"艾兆禮", trainer:"蔡約翰", odds:5.8, predictedRank:0, actualRank:"" }
-            ] },
-        { // 第3場 19:40
-            date: "2026-05-13", venue: "跑馬地", raceNo: 3,
-            raceName: "第三班1650米 (法國五月盃)", distance: 1650, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"好實力", draw:2, lb:131, jockey:"霍宏聲", trainer:"呂健威", odds:8.5, predictedRank:0, actualRank:"" },
-                { number:2, name:"一騎絕塵", draw:9, lb:126, jockey:"奧爾民", trainer:"伍鵬志", odds:42, predictedRank:0, actualRank:"" },
-                { number:3, name:"八駿福昇", draw:7, lb:123, jockey:"黃寶妮", trainer:"告東尼", odds:22, predictedRank:0, actualRank:"" },
-                { number:4, name:"榮利雙收", draw:6, lb:122, jockey:"班德禮", trainer:"大衛希斯", odds:19, predictedRank:0, actualRank:"" },
-                { number:5, name:"將義", draw:5, lb:122, jockey:"田泰安", trainer:"巫偉傑", odds:27, predictedRank:0, actualRank:"" },
-                { number:6, name:"正義波", draw:4, lb:120, jockey:"金誠剛", trainer:"游達榮", odds:23, predictedRank:0, actualRank:"" },
-                { number:7, name:"浪漫門士", draw:1, lb:120, jockey:"潘頓", trainer:"沈集成", odds:1.2, predictedRank:0, actualRank:"" },
-                { number:8, name:"翠兒威威", draw:3, lb:120, jockey:"周俊樂", trainer:"巫偉傑", odds:30, predictedRank:0, actualRank:"" },
-                { number:9, name:"勁好運", draw:8, lb:120, jockey:"艾兆禮", trainer:"廖康銘", odds:0, predictedRank:0, actualRank:"" }
-            ] },
-        { // 第4場 20:10 聖格盧讓
-            date: "2026-05-13", venue: "跑馬地", raceNo: 4,
-            raceName: "第四班1650米 (聖格盧讓)", distance: 1650, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"勁進駒", draw:9, lb:135, jockey:"潘頓", trainer:"呂健威", odds:6.1, predictedRank:0, actualRank:"" },
-                { number:2, name:"浪漫老樞", draw:1, lb:132, jockey:"布文", trainer:"巫偉傑", odds:8.7, predictedRank:0, actualRank:"" },
-                { number:3, name:"睿智多寶", draw:3, lb:131, jockey:"艾道拿", trainer:"黎昭昇", odds:7.7, predictedRank:0, actualRank:"" },
-                { number:4, name:"上浦福旺", draw:12, lb:129, jockey:"鍾易禮", trainer:"沈集成", odds:23, predictedRank:0, actualRank:"" },
-                { number:5, name:"大千氣象", draw:4, lb:128, jockey:"莫雷拉", trainer:"方嘉柏", odds:4.6, predictedRank:0, actualRank:"" },
-                { number:6, name:"佳福駒", draw:11, lb:126, jockey:"田泰安", trainer:"文家良", odds:25, predictedRank:0, actualRank:"" },
-                { number:7, name:"祥勝力駒", draw:10, lb:123, jockey:"艾兆禮", trainer:"廖康銘", odds:9.6, predictedRank:0, actualRank:"" },
-                { number:8, name:"戰寶", draw:6, lb:122, jockey:"何澤堯", trainer:"游達榮", odds:17, predictedRank:0, actualRank:"" },
-                { number:9, name:"寫我其誰", draw:8, lb:121, jockey:"巴度", trainer:"葉楚航", odds:7.2, predictedRank:0, actualRank:"" },
-                { number:10, name:"滿洛城", draw:2, lb:120, jockey:"班德禮", trainer:"大衛希斯", odds:17, predictedRank:0, actualRank:"" },
-                { number:11, name:"獎星", draw:5, lb:118, jockey:"潘明輝", trainer:"羅富全", odds:12, predictedRank:0, actualRank:"" },
-                { number:12, name:"翠湖烈風", draw:7, lb:116, jockey:"黃寶妮", trainer:"賀賢", odds:0, predictedRank:0, actualRank:"" }
-            ] },
-        { // 第5場 20:40 法國賽馬會盃 1800米
-            date: "2026-05-13", venue: "跑馬地", raceNo: 5,
-            raceName: "第三班1800米 (法國賽馬會盃)", distance: 1800, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"奔放", draw:1, lb:134, jockey:"布文", trainer:"告東尼", odds:4.1, predictedRank:0, actualRank:"" },
-                { number:2, name:"瑪瑙", draw:4, lb:133, jockey:"潘明輝", trainer:"羅富全", odds:11, predictedRank:0, actualRank:"" },
-                { number:3, name:"昭易揚", draw:5, lb:132, jockey:"莫雷拉", trainer:"方嘉柏", odds:6.0, predictedRank:0, actualRank:"" },
-                { number:4, name:"中國心", draw:0, lb:0, jockey:"退出", trainer:"退出", odds:0, predictedRank:0, actualRank:"" },
-                { number:5, name:"極光之子", draw:9, lb:129, jockey:"布浩榮", trainer:"伍鵬志", odds:11, predictedRank:0, actualRank:"" },
-                { number:6, name:"豐辰", draw:2, lb:125, jockey:"巴度", trainer:"徐雨石", odds:10, predictedRank:0, actualRank:"" },
-                { number:7, name:"優才", draw:7, lb:124, jockey:"班德禮", trainer:"葉楚航", odds:8.9, predictedRank:0, actualRank:"" },
-                { number:8, name:"祥勝將軍", draw:6, lb:120, jockey:"潘頓", trainer:"廖康銘", odds:3.3, predictedRank:0, actualRank:"" },
-                { number:9, name:"友贏威馳", draw:3, lb:119, jockey:"黃智弘", trainer:"方嘉柏", odds:11, predictedRank:0, actualRank:"" },
-                { number:10, name:"騰龍踏雪", draw:8, lb:119, jockey:"金誠剛", trainer:"游達榮", odds:26, predictedRank:0, actualRank:"" }
-            ] },
-        { // 第6場 21:10 聖格盧讓 (第二個)
-            date: "2026-05-13", venue: "跑馬地", raceNo: 6,
-            raceName: "第四班1650米 (聖格盧讓)", distance: 1650, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"香港神駒", draw:9, lb:135, jockey:"何澤堯", trainer:"呂健威", odds:13, predictedRank:0, actualRank:"" },
-                { number:2, name:"紅海勁", draw:7, lb:135, jockey:"潘明輝", trainer:"文家良", odds:12, predictedRank:0, actualRank:"" },
-                { number:3, name:"贏玥", draw:10, lb:132, jockey:"田泰安", trainer:"羅富全", odds:15, predictedRank:0, actualRank:"" },
-                { number:4, name:"同心", draw:12, lb:129, jockey:"巴度", trainer:"徐雨石", odds:24, predictedRank:0, actualRank:"" },
-                { number:5, name:"一風雲", draw:4, lb:126, jockey:"艾兆禮", trainer:"丁冠豪", odds:12, predictedRank:0, actualRank:"" },
-                { number:6, name:"先到先得", draw:1, lb:126, jockey:"布文", trainer:"游達榮", odds:4.6, predictedRank:0, actualRank:"" },
-                { number:7, name:"追風", draw:8, lb:124, jockey:"班德禮", trainer:"大衛希斯", odds:10, predictedRank:0, actualRank:"" },
-                { number:8, name:"準希望", draw:3, lb:122, jockey:"周俊樂", trainer:"黎昭昇", odds:10, predictedRank:0, actualRank:"" },
-                { number:9, name:"頌星", draw:2, lb:121, jockey:"蔡明紹", trainer:"葉楚航", odds:8.7, predictedRank:0, actualRank:"" },
-                { number:10, name:"時間寶", draw:11, lb:121, jockey:"鍾易禮", trainer:"韋達", odds:8.4, predictedRank:0, actualRank:"" },
-                { number:11, name:"極速滿貫", draw:6, lb:121, jockey:"希威森", trainer:"告東尼", odds:15, predictedRank:0, actualRank:"" },
-                { number:12, name:"爆竹", draw:5, lb:118, jockey:"莫雷拉", trainer:"蔡約翰", odds:5.6, predictedRank:0, actualRank:"" }
-            ] },
-        { // 第7場 21:45 尚蒂伊
-            date: "2026-05-13", venue: "跑馬地", raceNo: 7,
-            raceName: "第四班1200米 (尚蒂伊)", distance: 1200, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"競駿非凡", draw:12, lb:135, jockey:"布浩榮", trainer:"章達", odds:12, predictedRank:0, actualRank:"" },
-                { number:2, name:"抱百嶺", draw:8, lb:133, jockey:"周俊樂", trainer:"葉楚航", odds:28, predictedRank:0, actualRank:"" },
-                { number:3, name:"縱橫天下", draw:1, lb:132, jockey:"奧爾民", trainer:"鄭俊偉", odds:19, predictedRank:0, actualRank:"" },
-                { number:4, name:"金發盛世", draw:9, lb:131, jockey:"霍宏聲", trainer:"桂福特", odds:13, predictedRank:0, actualRank:"" },
-                { number:5, name:"你知我得", draw:10, lb:131, jockey:"巴度", trainer:"姚本輝", odds:18, predictedRank:0, actualRank:"" },
-                { number:6, name:"銳目", draw:7, lb:131, jockey:"潘頓", trainer:"大衛希斯", odds:7.1, predictedRank:0, actualRank:"" },
-                { number:7, name:"幸運愉快", draw:11, lb:127, jockey:"潘明輝", trainer:"巫偉傑", odds:14, predictedRank:0, actualRank:"" },
-                { number:8, name:"智勝攻略", draw:4, lb:127, jockey:"艾兆禮", trainer:"廖康銘", odds:13, predictedRank:0, actualRank:"" },
-                { number:9, name:"福進", draw:6, lb:125, jockey:"莫雷拉", trainer:"方嘉柏", odds:3.8, predictedRank:0, actualRank:"" },
-                { number:10, name:"良駒好友", draw:3, lb:124, jockey:"何澤堯", trainer:"文家良", odds:13, predictedRank:0, actualRank:"" },
-                { number:11, name:"驕陽雄心", draw:5, lb:123, jockey:"希威森", trainer:"沈集成", odds:6.2, predictedRank:0, actualRank:"" },
-                { number:12, name:"勝在當下", draw:2, lb:118, jockey:"田泰安", trainer:"羅富全", odds:7.3, predictedRank:0, actualRank:"" }
-            ] },
-        { // 第8場 22:15 多維爾讓
-            date: "2026-05-13", venue: "跑馬地", raceNo: 8,
-            raceName: "第三班1200米 (多維爾讓)", distance: 1200, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"小霸王", draw:2, lb:135, jockey:"黃寶妮", trainer:"告東尼", odds:0, predictedRank:0, actualRank:"" },
-                { number:2, name:"志滿同行", draw:4, lb:133, jockey:"潘頓", trainer:"文家良", odds:0, predictedRank:0, actualRank:"" },
-                { number:3, name:"騰龍四海", draw:3, lb:129, jockey:"奧爾民", trainer:"黎昭昇", odds:0, predictedRank:0, actualRank:"" },
-                { number:4, name:"金牌活力", draw:7, lb:129, jockey:"布文", trainer:"桂福特", odds:0, predictedRank:0, actualRank:"" },
-                { number:5, name:"人和家興", draw:6, lb:127, jockey:"班德禮", trainer:"大衛希斯", odds:0, predictedRank:0, actualRank:"" },
-                { number:6, name:"福星小子", draw:10, lb:124, jockey:"艾兆禮", trainer:"蔡約翰", odds:0, predictedRank:0, actualRank:"" },
-                { number:7, name:"關鍵所在", draw:8, lb:124, jockey:"黃智弘", trainer:"沈集成", odds:0, predictedRank:0, actualRank:"" },
-                { number:8, name:"電訊巴打", draw:11, lb:123, jockey:"巫顯東", trainer:"徐雨石", odds:0, predictedRank:0, actualRank:"" },
-                { number:9, name:"閃光燈", draw:5, lb:116, jockey:"巴度", trainer:"丁冠豪", odds:0, predictedRank:0, actualRank:"" },
-                { number:10, name:"棒棒糖", draw:9, lb:116, jockey:"莫雷拉", trainer:"方嘉柏", odds:0, predictedRank:0, actualRank:"" },
-                { number:11, name:"馬達", draw:1, lb:115, jockey:"田泰安", trainer:"巫偉傑", odds:0, predictedRank:0, actualRank:"" },
-                { number:12, name:"盈妍威楓", draw:12, lb:115, jockey:"潘明輝", trainer:"伍鵬志", odds:0, predictedRank:0, actualRank:"" }
-            ] },
-        { // 第9場 22:50 巴黎隆尚
-            date: "2026-05-13", venue: "跑馬地", raceNo: 9,
-            raceName: "第二班1650米 (巴黎隆尚)", distance: 1650, ground: "好地", course: "C跑道",
-            horses: [
-                { number:1, name:"勁速威龍", draw:9, lb:135, jockey:"何澤堯", trainer:"呂健威", odds:8.5, predictedRank:0, actualRank:"" },
-                { number:2, name:"喜蓮勇威", draw:1, lb:134, jockey:"布浩榮", trainer:"沈集成", odds:11, predictedRank:0, actualRank:"" },
-                { number:3, name:"智取神駒", draw:4, lb:131, jockey:"周俊樂", trainer:"沈集成", odds:17, predictedRank:0, actualRank:"" },
-                { number:4, name:"太陽勇士", draw:6, lb:130, jockey:"布文", trainer:"大衛希斯", odds:4.2, predictedRank:0, actualRank:"" },
-                { number:5, name:"非惟偉偉", draw:3, lb:125, jockey:"奧爾民", trainer:"姚本輝", odds:0, predictedRank:0, actualRank:"" },
-                { number:6, name:"晒冷", draw:10, lb:122, jockey:"希威森", trainer:"廖康銘", odds:0, predictedRank:0, actualRank:"" },
-                { number:7, name:"钛易揺", draw:7, lb:121, jockey:"黃智弘", trainer:"方嘉柏", odds:0, predictedRank:0, actualRank:"" },
-                { number:8, name:"銀亮奔騰", draw:8, lb:120, jockey:"艾兆禮", trainer:"游達榮", odds:0, predictedRank:0, actualRank:"" },
-                { number:9, name:"包裝福星", draw:2, lb:119, jockey:"班德禮", trainer:"呂健威", odds:0, predictedRank:0, actualRank:"" },
-                { number:10, name:"一起美麗", draw:11, lb:118, jockey:"田泰安", trainer:"蔡約翰", odds:0, predictedRank:0, actualRank:"" },
-                { number:11, name:"平凡騎士", draw:5, lb:118, jockey:"莫雷拉", trainer:"方嘉柏", odds:0, predictedRank:0, actualRank:"" }
-            ] }
-    ];
-
-    let racesParams = [];
-
-    function renderRaces() {
-        const container = document.getElementById('racesList');
-        if (!racesParams.length) {
-            container.innerHTML = '<div class="race-entry" style="text-align:center; padding:1rem;">暫無賽事記錄，請按「新增賽事」。</div>';
-            return;
+    // ---------- 21 派別評分函數 ----------
+    function getJockeyScore(j) {
+        const map = { "潘頓":96,"莫雷拉":95,"布文":92,"田泰安":86,"艾兆禮":82,"巴度":80,"班德禮":78,"蔡明紹":76,
+            "希威森":78,"霍宏聲":75,"梁家俊":74,"周俊樂":72,"潘明輝":72,"袁幸堯":68,"黃寶妮":65,
+            "鍾易禮":65,"巫顯東":65,"楊明倫":65,"金誠剛":68,"奧爾民":68,"黃智弘":65,"布浩榮":68,
+            "艾道拿":72,"何澤堯":80 };
+        return map[j] || 70;
+    }
+    function getTrainerScore(t) {
+        const map = { "蔡約翰":92,"羅富全":90,"方嘉柏":88,"沈集成":88,"姚本輝":86,"大衛希斯":84,"告東尼":84,"伍鵬志":82,
+            "廖康銘":82,"賀賢":80,"葉楚航":78,"文家良":78,"徐雨石":76,"鄭俊偉":74,"丁冠豪":74,"游達榮":80,
+            "蘇偉賢":78,"韋達":76,"黎昭昇":78,"呂健威":76,"巫偉傑":74,"桂福特":72 };
+        return map[t] || 70;
+    }
+    function getDrawScore(draw, dist) {
+        if (dist <= 1200) {
+            if (draw <= 3) return 90;
+            if (draw <= 6) return 75;
+            if (draw <= 9) return 55;
+            return 35;
+        } else {
+            if (draw <= 3) return 85;
+            if (draw <= 6) return 70;
+            if (draw <= 9) return 50;
+            return 30;
         }
+    }
+    function getWeightScore(lb) {
+        if (lb <= 115) return 10;
+        if (lb <= 122) return 8;
+        if (lb <= 129) return 5;
+        if (lb <= 133) return 3;
+        return 2;
+    }
+    function oddsToScore(odds) { return Math.max(0, Math.min(100, 100 - (odds - 2) * 6)); }
+    function getUpsetBonus(horse, odds) {
+        if (odds < 10) return 0;
+        let bonus = 0;
+        if (horse.draw >= 4 && horse.draw <= 9) bonus += 8;
+        if (["潘頓","莫雷拉","布文","田泰安","何澤堯"].includes(horse.jockey)) bonus += 8;
+        bonus += 4;
+        return Math.min(20, bonus);
+    }
+
+    function computeTotalScore(horse, dist) {
+        let drawScore = getDrawScore(horse.draw, dist);
+        let weightScore = getWeightScore(horse.lb);
+        let jockeyScore = getJockeyScore(horse.jockey);
+        let trainerScore = getTrainerScore(horse.trainer);
+        let odds = horse.odds;
+        let oddsScore = oddsToScore(odds);
+        let qimenBase = (horse.draw<=3?85: horse.draw<=6?72: horse.draw<=9?58:42);
+        let starBonus = (["潘頓","莫雷拉","布文"].includes(horse.jockey) ? 8 : 0);
+        let qimenScore = Math.min(100, qimenBase + starBonus);
+        let dataScore = (drawScore * 0.35 + weightScore * 0.35 + (jockeyScore/10) * 0.3) * 10;
+        let groundScore = 80; // 好地
+        let grassBiasScore = (horse.draw <= 3) ? 90 : (horse.draw >= 10 ? 55 : 70);
+        let weightChangeScore = 70;
+        let upsetBonus = getUpsetBonus(horse, odds);
+        let total = 0;
+        total += qimenScore * 0.08;
+        total += dataScore * 0.08;
+        total += oddsScore * 0.04;
+        total += ((jockeyScore + trainerScore)/2) * 0.06;
+        total += drawScore * 0.08;
+        total += groundScore * 0.07;
+        total += grassBiasScore * 0.08;
+        total += weightChangeScore * 0.10;
+        total += upsetBonus * 0.12;
+        total += jockeyScore * 0.05;
+        if (horse.draw >= 7 && dist >= 1650) total += 8 * 0.04;
+        return Math.min(100, total);
+    }
+
+    // ---------- 2026-05-13 跑馬地 9 場數據 (包含最新第8場賠率) ----------
+    const racesData = [
+        { name:"第1場 五班1650米 (邁松拉菲特)", dist:1650, horses: [
+            { name:"焦點", draw:3, lb:135, jockey:"布浩榮", trainer:"游達榮", odds:21 },
+            { name:"大力猴王", draw:2, lb:134, jockey:"班德禮", trainer:"韋達", odds:13 },
+            { name:"驥跑得", draw:6, lb:134, jockey:"霍宏聲", trainer:"廖康銘", odds:10 },
+            { name:"魅力知福", draw:10, lb:131, jockey:"金誠剛", trainer:"蔡約翰", odds:17 },
+            { name:"電訊驕陽", draw:1, lb:131, jockey:"蔡明紹", trainer:"徐雨石", odds:7.4 },
+            { name:"小皇爺", draw:4, lb:131, jockey:"周俊樂", trainer:"葉楚航", odds:8.5 },
+            { name:"東方寶寶", draw:9, lb:129, jockey:"潘明輝", trainer:"姚本輝", odds:26 },
+            { name:"常常感恩", draw:11, lb:129, jockey:"艾兆禮", trainer:"蘇偉賢", odds:8.6 },
+            { name:"威威父子", draw:8, lb:128, jockey:"梁家俊", trainer:"巫偉傑", odds:10 },
+            { name:"風雲", draw:7, lb:126, jockey:"巴度", trainer:"丁冠豪", odds:5.4 },
+            { name:"龍又生", draw:5, lb:121, jockey:"潘頓", trainer:"呂健威", odds:7.1 },
+            { name:"華美之威", draw:12, lb:120, jockey:"田泰安", trainer:"告東尼", odds:0 }
+        ].filter(h => h.odds > 0) },
+        { name:"第2場 四班1200米 (尚蒂伊)", dist:1200, horses: [
+            { name:"美麗邂逅", draw:9, lb:135, jockey:"鍾易禮", trainer:"告東尼", odds:16 },
+            { name:"輕功猛男", draw:4, lb:134, jockey:"奧爾民", trainer:"姚本輝", odds:4.9 },
+            { name:"添開心", draw:8, lb:134, jockey:"布文", trainer:"伍鵬志", odds:21 },
+            { name:"環球英雄", draw:12, lb:131, jockey:"班德禮", trainer:"大衛希斯", odds:6.1 },
+            { name:"勝多多", draw:10, lb:129, jockey:"布浩榮", trainer:"韋達", odds:23 },
+            { name:"勁砲王", draw:11, lb:127, jockey:"霍宏聲", trainer:"廖康銘", odds:28 },
+            { name:"疾風財子", draw:7, lb:126, jockey:"莫雷拉", trainer:"方嘉柏", odds:6.4 },
+            { name:"博愛先鋒", draw:2, lb:126, jockey:"巴度", trainer:"巫偉傑", odds:7.7 },
+            { name:"神翼金剛", draw:6, lb:124, jockey:"周俊樂", trainer:"葉楚航", odds:13 },
+            { name:"領袖勳力", draw:3, lb:123, jockey:"梁家俊", trainer:"徐雨石", odds:20 },
+            { name:"佳運發", draw:1, lb:120, jockey:"黃寶妮", trainer:"黎昭昇", odds:12 },
+            { name:"獵寶動", draw:5, lb:118, jockey:"艾兆禮", trainer:"蔡約翰", odds:5.8 }
+        ] },
+        { name:"第3場 三班1650米 (法國五月盃)", dist:1650, horses: [
+            { name:"好實力", draw:2, lb:131, jockey:"霍宏聲", trainer:"呂健威", odds:8.5 },
+            { name:"一騎絕塵", draw:9, lb:126, jockey:"奧爾民", trainer:"伍鵬志", odds:42 },
+            { name:"八駿福昇", draw:7, lb:123, jockey:"黃寶妮", trainer:"告東尼", odds:22 },
+            { name:"榮利雙收", draw:6, lb:122, jockey:"班德禮", trainer:"大衛希斯", odds:19 },
+            { name:"將義", draw:5, lb:122, jockey:"田泰安", trainer:"巫偉傑", odds:27 },
+            { name:"正義波", draw:4, lb:120, jockey:"金誠剛", trainer:"游達榮", odds:23 },
+            { name:"浪漫門士", draw:1, lb:120, jockey:"潘頓", trainer:"沈集成", odds:1.2 },
+            { name:"翠兒威威", draw:3, lb:120, jockey:"周俊樂", trainer:"巫偉傑", odds:30 },
+            { name:"勁好運", draw:8, lb:120, jockey:"艾兆禮", trainer:"廖康銘", odds:0 }
+        ].filter(h => h.odds > 0) },
+        { name:"第4場 四班1650米 (聖格盧讓)", dist:1650, horses: [
+            { name:"勁進駒", draw:9, lb:135, jockey:"潘頓", trainer:"呂健威", odds:6.1 },
+            { name:"浪漫老樞", draw:1, lb:132, jockey:"布文", trainer:"巫偉傑", odds:8.7 },
+            { name:"睿智多寶", draw:3, lb:131, jockey:"艾道拿", trainer:"黎昭昇", odds:7.7 },
+            { name:"上浦福旺", draw:12, lb:129, jockey:"鍾易禮", trainer:"沈集成", odds:23 },
+            { name:"大千氣象", draw:4, lb:128, jockey:"莫雷拉", trainer:"方嘉柏", odds:4.6 },
+            { name:"佳福駒", draw:11, lb:126, jockey:"田泰安", trainer:"文家良", odds:25 },
+            { name:"祥勝力駒", draw:10, lb:123, jockey:"艾兆禮", trainer:"廖康銘", odds:9.6 },
+            { name:"戰寶", draw:6, lb:122, jockey:"何澤堯", trainer:"游達榮", odds:17 },
+            { name:"寫我其誰", draw:8, lb:121, jockey:"巴度", trainer:"葉楚航", odds:7.2 },
+            { name:"滿洛城", draw:2, lb:120, jockey:"班德禮", trainer:"大衛希斯", odds:17 },
+            { name:"獎星", draw:5, lb:118, jockey:"潘明輝", trainer:"羅富全", odds:12 },
+            { name:"翠湖烈風", draw:7, lb:116, jockey:"黃寶妮", trainer:"賀賢", odds:0 }
+        ].filter(h => h.odds > 0) },
+        { name:"第5場 第三班1800米 (法國賽馬會盃)", dist:1800, horses: [
+            { name:"奔放", draw:1, lb:134, jockey:"布文", trainer:"告東尼", odds:4.1 },
+            { name:"瑪瑙", draw:4, lb:133, jockey:"潘明輝", trainer:"羅富全", odds:11 },
+            { name:"昭易揚", draw:5, lb:132, jockey:"莫雷拉", trainer:"方嘉柏", odds:6.0 },
+            { name:"極光之子", draw:9, lb:129, jockey:"布浩榮", trainer:"伍鵬志", odds:11 },
+            { name:"豐辰", draw:2, lb:125, jockey:"巴度", trainer:"徐雨石", odds:10 },
+            { name:"優才", draw:7, lb:124, jockey:"班德禮", trainer:"葉楚航", odds:8.9 },
+            { name:"祥勝將軍", draw:6, lb:120, jockey:"潘頓", trainer:"廖康銘", odds:3.3 },
+            { name:"友贏威馳", draw:3, lb:119, jockey:"黃智弘", trainer:"方嘉柏", odds:11 },
+            { name:"騰龍踏雪", draw:8, lb:119, jockey:"金誠剛", trainer:"游達榮", odds:26 }
+        ] },
+        { name:"第6場 四班1650米 (聖格盧讓)", dist:1650, horses: [
+            { name:"香港神駒", draw:9, lb:135, jockey:"何澤堯", trainer:"呂健威", odds:13 },
+            { name:"紅海勁", draw:7, lb:135, jockey:"潘明輝", trainer:"文家良", odds:12 },
+            { name:"贏玥", draw:10, lb:132, jockey:"田泰安", trainer:"羅富全", odds:15 },
+            { name:"同心", draw:12, lb:129, jockey:"巴度", trainer:"徐雨石", odds:24 },
+            { name:"一風雲", draw:4, lb:126, jockey:"艾兆禮", trainer:"丁冠豪", odds:12 },
+            { name:"先到先得", draw:1, lb:126, jockey:"布文", trainer:"游達榮", odds:4.6 },
+            { name:"追風", draw:8, lb:124, jockey:"班德禮", trainer:"大衛希斯", odds:10 },
+            { name:"準希望", draw:3, lb:122, jockey:"周俊樂", trainer:"黎昭昇", odds:10 },
+            { name:"頌星", draw:2, lb:121, jockey:"蔡明紹", trainer:"葉楚航", odds:8.7 },
+            { name:"時間寶", draw:11, lb:121, jockey:"鍾易禮", trainer:"韋達", odds:8.4 },
+            { name:"極速滿貫", draw:6, lb:121, jockey:"希威森", trainer:"告東尼", odds:15 },
+            { name:"爆竹", draw:5, lb:118, jockey:"莫雷拉", trainer:"蔡約翰", odds:5.6 }
+        ] },
+        { name:"第7場 四班1200米 (尚蒂伊)", dist:1200, horses: [
+            { name:"競駿非凡", draw:12, lb:135, jockey:"布浩榮", trainer:"章達", odds:12 },
+            { name:"抱百嶺", draw:8, lb:133, jockey:"周俊樂", trainer:"葉楚航", odds:28 },
+            { name:"縱橫天下", draw:1, lb:132, jockey:"奧爾民", trainer:"鄭俊偉", odds:19 },
+            { name:"金發盛世", draw:9, lb:131, jockey:"霍宏聲", trainer:"桂福特", odds:13 },
+            { name:"你知我得", draw:10, lb:131, jockey:"巴度", trainer:"姚本輝", odds:18 },
+            { name:"銳目", draw:7, lb:131, jockey:"潘頓", trainer:"大衛希斯", odds:7.1 },
+            { name:"幸運愉快", draw:11, lb:127, jockey:"潘明輝", trainer:"巫偉傑", odds:14 },
+            { name:"智勝攻略", draw:4, lb:127, jockey:"艾兆禮", trainer:"廖康銘", odds:13 },
+            { name:"福進", draw:6, lb:125, jockey:"莫雷拉", trainer:"方嘉柏", odds:3.8 },
+            { name:"良駒好友", draw:3, lb:124, jockey:"何澤堯", trainer:"文家良", odds:13 },
+            { name:"驕陽雄心", draw:5, lb:123, jockey:"希威森", trainer:"沈集成", odds:6.2 },
+            { name:"勝在當下", draw:2, lb:118, jockey:"田泰安", trainer:"羅富全", odds:7.3 }
+        ] },
+        { // 第8場 22:15 多維爾讓 (已根據最新圖片更新賠率)
+            name:"第8場 第三班1200米 (多維爾讓)", dist:1200, horses: [
+                { name:"小霸王", draw:2, lb:135, jockey:"黃寶妮", trainer:"告東尼", odds:5.5 },
+                { name:"志滿同行", draw:4, lb:133, jockey:"潘頓", trainer:"文家良", odds:4.7 },
+                { name:"騰龍四海", draw:3, lb:129, jockey:"奧爾民", trainer:"黎昭昇", odds:30 },
+                { name:"金牌活力", draw:7, lb:129, jockey:"布文", trainer:"桂福特", odds:18 },
+                { name:"人和家興", draw:6, lb:127, jockey:"班德禮", trainer:"大衛希斯", odds:11 },
+                { name:"福星小子", draw:10, lb:124, jockey:"艾兆禮", trainer:"蔡約翰", odds:12 },
+                { name:"關鍵所在", draw:8, lb:124, jockey:"黃智弘", trainer:"沈集成", odds:15 },
+                { name:"電訊巴打", draw:11, lb:123, jockey:"巫顯東", trainer:"徐雨石", odds:26 },
+                { name:"閃光燈", draw:5, lb:116, jockey:"巴度", trainer:"丁冠豪", odds:9.1 },
+                { name:"棒棒糖", draw:9, lb:116, jockey:"莫雷拉", trainer:"方嘉柏", odds:4.2 },
+                { name:"馬達", draw:1, lb:115, jockey:"田泰安", trainer:"巫偉傑", odds:12 },
+                { name:"盈妍威楓", draw:12, lb:115, jockey:"潘明輝", trainer:"伍鵬志", odds:33 }
+            ] },
+        { name:"第9場 第二班1650米 (巴黎隆尚)", dist:1650, horses: [
+            { name:"勁速威龍", draw:9, lb:135, jockey:"何澤堯", trainer:"呂健威", odds:8.5 },
+            { name:"喜蓮勇威", draw:1, lb:134, jockey:"布浩榮", trainer:"沈集成", odds:11 },
+            { name:"智取神駒", draw:4, lb:131, jockey:"周俊樂", trainer:"沈集成", odds:17 },
+            { name:"太陽勇士", draw:6, lb:130, jockey:"布文", trainer:"大衛希斯", odds:4.2 },
+            { name:"非惟偉偉", draw:3, lb:125, jockey:"奧爾民", trainer:"姚本輝", odds:0 },
+            { name:"晒冷", draw:10, lb:122, jockey:"希威森", trainer:"廖康銘", odds:0 },
+            { name:"钛易揺", draw:7, lb:121, jockey:"黃智弘", trainer:"方嘉柏", odds:0 },
+            { name:"銀亮奔騰", draw:8, lb:120, jockey:"艾兆禮", trainer:"游達榮", odds:0 },
+            { name:"包裝福星", draw:2, lb:119, jockey:"班德禮", trainer:"呂健威", odds:0 },
+            { name:"一起美麗", draw:11, lb:118, jockey:"田泰安", trainer:"蔡約翰", odds:0 },
+            { name:"平凡騎士", draw:5, lb:118, jockey:"莫雷拉", trainer:"方嘉柏", odds:0 }
+        ].filter(h => h.odds > 0) }
+    ].filter(race => race.horses.length > 0);
+
+    function renderAll() {
+        const container = document.getElementById('racesContainer');
         container.innerHTML = '';
-        racesParams.forEach((race, idx) => {
-            const raceDiv = document.createElement('div');
-            raceDiv.className = 'race-entry';
-            raceDiv.innerHTML = `
-                <div class="race-header">
-                    <input type="text" placeholder="日期" value="${race.date}" data-field="date" data-idx="${idx}" style="width:100px;">
-                    <input type="text" placeholder="場地名稱" value="${race.raceName}" data-field="raceName" data-idx="${idx}" style="width:220px;">
-                    <input type="number" placeholder="路程(米)" value="${race.distance}" data-field="distance" data-idx="${idx}" style="width:80px;">
-                    <select data-field="ground" data-idx="${idx}">
-                        <option value="好地" ${race.ground === '好地' ? 'selected' : ''}>好地</option>
-                        <option value="好至黏地" ${race.ground === '好至黏地' ? 'selected' : ''}>好至黏地</option>
-                        <option value="黏地" ${race.ground === '黏地' ? 'selected' : ''}>黏地</option>
-                        <option value="軟地" ${race.ground === '軟地' ? 'selected' : ''}>軟地</option>
-                    </select>
-                    <select data-field="course" data-idx="${idx}">
-                        <option value="C跑道" ${race.course === 'C跑道' ? 'selected' : ''}>C跑道</option>
-                        <option value="A跑道" ${race.course === 'A跑道' ? 'selected' : ''}>A跑道</option>
-                        <option value="B跑道" ${race.course === 'B跑道' ? 'selected' : ''}>B跑道</option>
-                    </select>
-                    <button class="danger" data-delidx="${idx}">🗑️ 刪除此場</button>
-                </div>
-                <div style="overflow-x: auto;">
-                    <table class="horses-table">
-                        <thead>
-                            <tr><th>馬號</th><th>馬名</th><th>檔位</th><th>負磅</th><th>騎師</th><th>練馬師</th><th>賠率</th><th>預測名次</th><th>實際名次</th><th>備註</th> </thead>
-                        <tbody>
-                            ${race.horses.map((h, hidx) => `
-                                <tr>
-                                    <td><input type="number" value="${h.number}" data-hidx="${hidx}" data-field="number" data-idx="${idx}" style="width:50px;"></td>
-                                    <td><input type="text" value="${h.name}" data-hidx="${hidx}" data-field="name" data-idx="${idx}" style="width:100px;"></td>
-                                    <td><input type="number" value="${h.draw}" data-hidx="${hidx}" data-field="draw" data-idx="${idx}" style="width:50px;"></td>
-                                    <td><input type="number" value="${h.lb}" data-hidx="${hidx}" data-field="lb" data-idx="${idx}" style="width:50px;"></td>
-                                    <td><input type="text" value="${h.jockey}" data-hidx="${hidx}" data-field="jockey" data-idx="${idx}" style="width:90px;"></td>
-                                    <td><input type="text" value="${h.trainer}" data-hidx="${hidx}" data-field="trainer" data-idx="${idx}" style="width:90px;"></td>
-                                    <td><input type="number" step="0.1" value="${h.odds || 0}" data-hidx="${hidx}" data-field="odds" data-idx="${idx}" style="width:60px;"></td>
-                                    <td><input type="number" value="${h.predictedRank}" data-hidx="${hidx}" data-field="predictedRank" data-idx="${idx}" style="width:60px;"></td>
-                                    <td><input type="number" value="${h.actualRank !== undefined ? h.actualRank : ''}" data-hidx="${hidx}" data-field="actualRank" data-idx="${idx}" style="width:60px;"></td>
-                                    <td><input type="text" placeholder="體重變化/備註" data-hidx="${hidx}" data-field="remark" data-idx="${idx}" value="${h.remark || ''}" style="width:80px;"></td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
+        for (let race of racesData) {
+            const withScores = race.horses.map(h => {
+                let score = computeTotalScore(h, race.dist);
+                return { name: h.name, score, odds: h.odds, draw: h.draw, jockey: h.jockey };
+            });
+            withScores.sort((a,b) => b.score - a.score);
+            const top5 = withScores.slice(0,5);
+            const top1 = top5[0], top2 = top5[1], top3 = top5[2], top4 = top5[3], top5th = top5[4];
+            const coldFlag = (top1.odds >= 10) ? '<span class="cold-badge">❄️ 冷門爆發派激活</span>' : '';
+            const card = document.createElement('div');
+            card.className = 'race-card';
+            card.innerHTML = `
+                <div class="race-title">🏇 ${race.name} (${race.dist}m) ${coldFlag}</div>
+                <table class="predict-table">
+                    <thead><tr><th>名次</th><th>馬匹</th><th>綜合分</th><th>賠率</th><th>檔位</th><th>騎師</th></thead>
+                    <tbody>
+                        ${withScores.map((h,idx) => `<tr ${idx<3?'class=top3':''}><td>${idx+1}</td><td>${h.name}</td><td>${h.score.toFixed(1)}</td><td>${h.odds}倍</td><td>${h.draw}</td><td>${h.jockey}</td></table>`).join('')}
+                    </tbody>
+                </table>
+                <div class="bet-slip">
+                    <strong>💰 投注建議 (21派別+冷門派)</strong><br>
+                    獨贏：${top1.name} (${top1.odds}倍)<br>
+                    連贏膽拖：膽 ${top1.name}，拖 ${top2.name}, ${top3.name}, ${top4.name}<br>
+                    位置Q複式：${top1.name}, ${top2.name}, ${top3.name}, ${top4.name}<br>
+                    三重彩膽拖：膽 ${top1.name} → 拖 ${top2.name},${top3.name},${top4.name} → 拖 ${top2.name},${top3.name},${top4.name},${top5th.name}<br>
+                    四連環複式：${top1.name}, ${top2.name}, ${top3.name}, ${top4.name}, ${top5th.name}<br>
+                    四重彩膽拖：膽 ${top1.name} → 拖 ${top2.name},${top3.name},${top4.name} → 拖 ${top2.name},${top3.name},${top4.name},${top5th.name} → 拖 ${top2.name},${top3.name},${top4.name},${top5th.name},${withScores[5]?.name}
                 </div>
             `;
-            container.appendChild(raceDiv);
-        });
-
-        document.querySelectorAll('[data-delidx]').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const delIdx = parseInt(btn.getAttribute('data-delidx'));
-                racesParams.splice(delIdx, 1);
-                renderRaces();
-                updateJsonPreview();
-                saveToLocalStorage();
-            });
-        });
-
-        const inputs = document.querySelectorAll('.race-entry input, .race-entry select');
-        inputs.forEach(input => {
-            input.addEventListener('change', (e) => {
-                const idx = parseInt(input.getAttribute('data-idx'));
-                const field = input.getAttribute('data-field');
-                const hidx = input.getAttribute('data-hidx');
-                if (hidx !== null) {
-                    const horseIdx = parseInt(hidx);
-                    if (field === 'number') racesParams[idx].horses[horseIdx].number = parseInt(input.value);
-                    else if (field === 'name') racesParams[idx].horses[horseIdx].name = input.value;
-                    else if (field === 'draw') racesParams[idx].horses[horseIdx].draw = parseInt(input.value);
-                    else if (field === 'lb') racesParams[idx].horses[horseIdx].lb = parseInt(input.value);
-                    else if (field === 'jockey') racesParams[idx].horses[horseIdx].jockey = input.value;
-                    else if (field === 'trainer') racesParams[idx].horses[horseIdx].trainer = input.value;
-                    else if (field === 'odds') racesParams[idx].horses[horseIdx].odds = parseFloat(input.value);
-                    else if (field === 'predictedRank') racesParams[idx].horses[horseIdx].predictedRank = parseInt(input.value);
-                    else if (field === 'actualRank') racesParams[idx].horses[horseIdx].actualRank = input.value ? parseInt(input.value) : '';
-                    else if (field === 'remark') racesParams[idx].horses[horseIdx].remark = input.value;
-                } else {
-                    if (field === 'date') racesParams[idx].date = input.value;
-                    else if (field === 'raceName') racesParams[idx].raceName = input.value;
-                    else if (field === 'distance') racesParams[idx].distance = parseInt(input.value);
-                    else if (field === 'ground') racesParams[idx].ground = input.value;
-                    else if (field === 'course') racesParams[idx].course = input.value;
-                }
-                updateJsonPreview();
-                saveToLocalStorage();
-            });
-        });
-    }
-
-    function addNewRace() {
-        const template = fullRacesData[0];
-        const newRace = JSON.parse(JSON.stringify(template));
-        newRace.id = Date.now();
-        newRace.raceNo = racesParams.length + 1;
-        newRace.raceName = `第${newRace.raceNo}場 新賽事`;
-        racesParams.push(newRace);
-        renderRaces();
-        updateJsonPreview();
-        saveToLocalStorage();
-    }
-
-    function saveToLocalStorage() {
-        localStorage.setItem('SHTSN_HV_RaceParams', JSON.stringify(racesParams));
-        document.getElementById('saveStatus').innerHTML = '✅ 已儲存至瀏覽器 (' + new Date().toLocaleTimeString() + ')';
-        setTimeout(() => {
-            if (document.getElementById('saveStatus')) document.getElementById('saveStatus').innerHTML = '';
-        }, 2000);
-    }
-
-    function loadFromLocalStorage() {
-        const stored = localStorage.getItem('SHTSN_HV_RaceParams');
-        if (stored) {
-            try {
-                racesParams = JSON.parse(stored);
-                renderRaces();
-                updateJsonPreview();
-            } catch(e) {}
-        } else {
-            racesParams = fullRacesData;
-            renderRaces();
-            updateJsonPreview();
+            container.appendChild(card);
         }
     }
 
-    function updateJsonPreview() {
-        const preview = document.getElementById('jsonPreview');
-        if (preview) preview.textContent = JSON.stringify(racesParams, null, 2);
-    }
-
-    function exportToJson() {
-        const dataStr = JSON.stringify(racesParams, null, 2);
-        const blob = new Blob([dataStr], {type: 'application/json'});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `SHTSN_HV_params_${new Date().toISOString().slice(0,19)}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-    }
-
-    function importJson(file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            try {
-                const imported = JSON.parse(e.target.result);
-                if (Array.isArray(imported)) {
-                    racesParams = imported;
-                    renderRaces();
-                    updateJsonPreview();
-                    saveToLocalStorage();
-                    document.getElementById('saveStatus').innerHTML = '✅ 匯入成功，已儲存';
-                } else {
-                    alert('檔案格式錯誤，需要陣列格式');
-                }
-            } catch(err) {
-                alert('JSON 解析失敗');
-            }
-        };
-        reader.readAsText(file);
-    }
-
-    function clearAll() {
-        if (confirm('確認清空所有跑馬地賽事記錄？此操作不可復原。')) {
-            racesParams = [];
-            renderRaces();
-            updateJsonPreview();
-            saveToLocalStorage();
-        }
-    }
-
-    document.getElementById('addRaceBtn').addEventListener('click', addNewRace);
-    document.getElementById('saveAllBtn').addEventListener('click', saveToLocalStorage);
-    document.getElementById('exportJsonBtn').addEventListener('click', exportToJson);
-    document.getElementById('importJsonBtn').addEventListener('click', () => {
-        document.getElementById('importFile').click();
-    });
-    document.getElementById('importFile').addEventListener('change', (e) => {
-        if (e.target.files.length) importJson(e.target.files[0]);
-        e.target.value = '';
-    });
-    document.getElementById('clearAllBtn').addEventListener('click', clearAll);
-
-    loadFromLocalStorage();
+    renderAll();
 </script>
 </body>
 </html>
