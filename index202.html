@@ -3,440 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>🕸️ SHTSN 系統 | 跑馬地夜賽 27/05/2026</title>
+    <title>SHTSN System｜沙田日賽預測 2026-05-31</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            background-color: #1a2a1f;  /* 深森林綠 */
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background-color: #1a2a1f;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', sans-serif;
+            padding: 24px 16px;
             color: #eef4e6;
-            padding: 24px 20px 60px;
         }
-
-        /* 容器 */
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-
-        /* 頁首 */
         .header {
+            text-align: center;
             margin-bottom: 32px;
             border-bottom: 2px solid #ffb347;
             padding-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            gap: 12px;
         }
-        .title-section h1 {
+        .header h1 {
             font-size: 1.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             background: linear-gradient(135deg, #ffd966, #ffb347);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-        }
-        .title-section p {
-            color: #b0c4a2;
-            font-size: 0.85rem;
-            margin-top: 6px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .badge {
+            display: inline-block;
             background: #2b4b3a;
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: 40px;
             font-size: 0.8rem;
-            border: 1px solid #ffb347;
             color: #ffd966;
+            margin-top: 8px;
         }
-
-        /* 網格 */
-        .races-grid {
+        .sub {
+            color: #b0c4a2;
+            margin-top: 6px;
+            font-size: 0.9rem;
+        }
+        .race-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
             gap: 24px;
         }
-
-        /* 賽事卡片 */
         .race-card {
             background: #232f1f;
             border-radius: 28px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             transition: transform 0.2s, box-shadow 0.2s;
             border: 1px solid #3a4a2e;
         }
         .race-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 18px 30px rgba(0,0,0,0.4);
-            border-color: #ffb34780;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+            border-color: #ffb347;
         }
-
-        /* 卡片頭部 */
-        .card-header {
-            background: #1e2c1a;
-            padding: 16px 20px;
-            border-bottom: 2px solid #ffb347;
+        .race-header {
+            background: linear-gradient(135deg, #1f2e1a, #172312);
+            padding: 18px 20px;
+            border-bottom: 1px solid #ffb34740;
         }
         .race-name {
             font-size: 1.5rem;
             font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .race-number {
-            background: #ffb34720;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            color: #ffb347;
-        }
-        .race-info {
-            font-size: 0.75rem;
-            color: #b0c4a2;
-            margin-top: 8px;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        /* 內容區 */
-        .card-body {
-            padding: 18px 20px 22px;
-        }
-
-        /* 預測名次區 */
-        .predict-rank {
-            background: #2c3a24;
-            border-radius: 24px;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-        }
-        .rank-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
             color: #ffd966;
-            margin-bottom: 12px;
         }
-        .rank-horses {
+        .race-meta {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #c0dcb0;
         }
-        .horse-rank-item {
-            flex: 1;
-            min-width: 70px;
-            text-align: center;
-            background: #1a2a1f;
-            border-radius: 48px;
-            padding: 8px 4px;
+        .race-meta span {
+            background: #2b3b24;
+            padding: 2px 10px;
+            border-radius: 20px;
         }
-        .rank-number {
-            width: 36px;
-            height: 36px;
-            background: #2b4b3a;
-            border-radius: 60px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 8px;
+        .race-content {
+            padding: 20px;
         }
-        .rank-number.top1 { background: #d4af37; color: #1a2a1f; }
-        .rank-number.top2 { background: #b0b7bc; color: #1a2a1f; }
-        .rank-number.top3 { background: #cd7f4b; color: #1a2a1f; }
-        .rank-number.top4 { background: #5f7f5a; color: #eef4e6; }
-        .horse-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .qimen-tag {
-            font-size: 0.7rem;
-            color: #ffb347;
-            margin-top: 4px;
-        }
-
-        /* 投注組合 */
-        .bet-section {
-            margin-top: 16px;
-        }
-        .bet-item {
+        .rank-section {
             background: #1e2c1a;
             border-radius: 20px;
-            padding: 10px 14px;
-            margin-bottom: 10px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+        }
+        .rank-title {
+            font-size: 0.9rem;
+            color: #ffb347;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 8px;
+        }
+        .rank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .rank-item {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            font-size: 1rem;
+            border-left: 3px solid #ffb347;
+            padding-left: 12px;
+        }
+        .rank-number {
+            font-weight: 800;
+            font-size: 1.2rem;
+            min-width: 32px;
+            color: #ffd966;
+        }
+        .horse-name {
+            font-weight: 600;
+        }
+        .draw-record {
+            font-size: 0.75rem;
+            color: #b0c4a2;
+            margin-left: 8px;
+        }
+        .bet-section {
+            margin: 16px 0;
+            padding: 12px 0;
+            border-top: 1px dashed #3f5a35;
+        }
+        .bet-item {
+            display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
         .bet-label {
             font-weight: 600;
-            color: #ffd966;
-            background: #2b4b3a;
-            padding: 2px 12px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-        }
-        .bet-content {
-            font-family: monospace;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
-        .risk-amount {
-            font-size: 0.8rem;
             color: #ffb347;
+            min-width: 100px;
+        }
+        .bet-detail {
+            color: #eef4e6;
+            word-break: break-word;
+            text-align: right;
+            flex: 1;
+        }
+        .total-stake {
+            background: #2b4b3a;
+            border-radius: 20px;
+            padding: 10px 16px;
+            margin-top: 14px;
+            text-align: center;
             font-weight: bold;
+            font-size: 1.05rem;
+            border: 1px solid #ffb347;
         }
-
-        /* 派彩/信心進度條 (裝飾) */
-        .confidence {
-            margin: 12px 0 0;
-            height: 4px;
-            background: #3f5a35;
-            border-radius: 20px;
-            overflow: hidden;
+        .total-stake span {
+            color: #ffd966;
+            font-size: 1.2rem;
         }
-        .confidence-fill {
-            background: #ffb347;
-            width: 78%;
-            height: 100%;
-            border-radius: 20px;
-        }
-
-        /* 注釋小字 */
         .footer-note {
             text-align: center;
-            margin-top: 48px;
-            padding-top: 20px;
+            margin-top: 40px;
+            padding-top: 24px;
             border-top: 1px solid #2b4b3a;
-            font-size: 0.7rem;
-            color: #8aa07e;
+            font-size: 0.8rem;
+            color: #9ab87a;
         }
-
-        @media (max-width: 820px) {
-            .races-grid {
-                grid-template-columns: 1fr;
-            }
-            .rank-horses {
-                gap: 6px;
-            }
+        @media (max-width: 550px) {
+            .race-grid { grid-template-columns: 1fr; }
+            .bet-label { min-width: 80px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <div class="title-section">
-            <h1>🕸️ SHTSN 系統 · 決策網</h1>
-            <p>Super Horse to Spider Network | 跑馬地 B 賽道 · 好地 | 27/05/2026 (星期三)</p>
-        </div>
-        <div class="badge">版本 V7.24 | 跑道派已拆分 | 奇門·數據·賠率融合</div>
+        <h1>🕸️ SHTSN System</h1>
+        <div class="badge">Super Horse to Spider Network · 賽前預測</div>
+        <div class="sub">沙田草地 · B賽道 · 2026年5月31日 (星期日) · 版本 V7.26</div>
+        <div class="sub">賠率來源：香港馬會30/05/2026 14:05｜奇門0.26 + 賠率0.21 + 數據0.16 + 跑道0.16 + 路程0.10 + 騎練0.10 + 晨操0.01</div>
     </div>
 
-    <div class="races-grid" id="racesContainer"></div>
+    <div class="race-grid" id="raceContainer"></div>
+
     <div class="footer-note">
-        📊 預測依據：奇門派(0.26) + 賠率派(0.21) + 數據派(0.16) + 跑道派(0.16) + 路程/騎練/晨操。<br>
-        🧠 決策老大綜合加權 + 團體老大資金審批 | 賽後將批量驗證，動態調整專家權重。
+        📌 本預測由決策老大綜合8大專家加權產出，團體老大最終審批注碼。<br>
+        🧮 加權公式：奇門0.26 + 賠率0.21 + 數據0.16 + 跑道(沙田)0.16 + 路程0.10 + 騎練0.10 + 晨操0.01<br>
+        🔄 賽後將批量驗證並更新權重，版本迭代至 V7.27+
     </div>
 </div>
 
 <script>
-    // 場次資料（完全對應前面的分析結果）
     const racesData = [
-        {   // 第1場
-            number: 1, time: "18:40", class: "第五班", distance: "1200米", raceName: "多雨多湿河濱賽",
+        {
+            index: 1, time: "12:45", classDist: "新馬賽 · 1200米", raceName: "香港五華同鄉總會孟平磅賽",
             predictions: [
-                { rank: 1, horse: "2. 魅力星", qimen: "大吉·青龍返首" },
-                { rank: 2, horse: "9. 本能", qimen: "吉門景門" },
-                { rank: 3, horse: "10. 星之願", qimen: "中吉" },
-                { rank: 4, horse: "3. 洛河", qimen: "小吉" }
+                { rank: 1, name: "9號 永福", draw: "3檔：2戰1冠" },
+                { rank: 2, name: "6號 銳行星", draw: "13檔：1戰第2" },
+                { rank: 3, name: "1號 鵠橋飛昇", draw: "9檔：無紀錄" },
+                { rank: 4, name: "12號 共建世界", draw: "10檔：無紀錄" }
             ],
-            exacta: "2–9 (核心), 2–10",
-            quinella: "2,9,10,3 互串",
-            triple: "2 > 9 > 10 ($10)",
-            risk: "總風險 $100 (連贏 $60, 位置Q $40)"
+            win: "9號 永福（$80）",
+            quinella: "9–6（$30）、9–1（$20）",
+            placeQ: "9,6,1,12 互串 (6注×$8＝$48)",
+            tierce: "9 > 6 > 1（$10）",
+            singleT: "9,6,1（$10）",
+            first4: "9,6,1,12（$10）",
+            total: 208
         },
-        {   // 第2場
-            number: 2, time: "19:10", class: "第五班", distance: "2200米", raceName: "盧瓦爾河護賽",
+        {
+            index: 2, time: "13:15", classDist: "第四班 · 1000米", raceName: "香港梅州聯會籃球賽",
             predictions: [
-                { rank: 1, horse: "1. 管之友", qimen: "吉" },
-                { rank: 2, horse: "8. 幸運同行", qimen: "中" },
-                { rank: 3, horse: "7. 捷足奔", qimen: "小吉" },
-                { rank: 4, horse: "6. 開心三多", qimen: "平" }
+                { rank: 1, name: "10號 步風影", draw: "9檔：1戰第1" },
+                { rank: 2, name: "1號 路路勁", draw: "6檔：3戰1冠" },
+                { rank: 3, name: "5號 鴻圖新星", draw: "12檔：2戰1亞" },
+                { rank: 4, name: "3號 一鋪掂晒", draw: "13檔：1戰第1" }
             ],
-            exacta: "1–8 (重注)",
-            quinella: "1,8,7,6 互串",
-            triple: "1 > 8 > 7 ($10)",
-            risk: "總風險 $90 (連贏 $50, 位置Q $40)"
+            win: "10號 步風影（$60）",
+            quinella: "10–1（$30）、10–5（$20）",
+            placeQ: "10,1,5,3 互串 (6注×$8＝$48)",
+            tierce: "10 > 1 > 5（$10）",
+            singleT: "10,1,5（$10）",
+            first4: "10,1,5,3（$10）",
+            total: 188
         },
-        {   // 第3場
-            number: 3, time: "19:40", class: "第四班", distance: "1650米", raceName: "莱茵河镶賽",
+        {
+            index: 3, time: "13:45", classDist: "第四班 · 1200米", raceName: "香港奧羽同場綜合賽",
             predictions: [
-                { rank: 1, horse: "1. 魅力知耀", qimen: "吉" },
-                { rank: 2, horse: "8. 浪漫老趣", qimen: "大吉·開門" },
-                { rank: 3, horse: "3. 大千雄心", qimen: "中" },
-                { rank: 4, horse: "6. 紅衣醒目", qimen: "平" }
+                { rank: 1, name: "1號 禾道豐", draw: "4檔：3戰2冠" },
+                { rank: 2, name: "4號 天天要樂", draw: "1檔：2戰1季" },
+                { rank: 3, name: "2號 天福", draw: "8檔：3戰1亞" },
+                { rank: 4, name: "11號 杭至尊", draw: "10檔：2戰第4" }
             ],
-            exacta: "1–8 , 1–3",
-            quinella: "1,8,3,6 互串",
-            triple: "單T 1,8,3 ($20)",
-            risk: "總風險 $80 (位置Q為主)"
+            win: "1號 禾道豐（$100）",
+            quinella: "1–4（$30）、1–2（$20）",
+            placeQ: "1,4,2,11 互串 (6注×$10＝$60)",
+            tierce: "1 > 4 > 2（$10）",
+            singleT: "1,4,2（$10）",
+            first4: "1,4,2,11（$10）",
+            total: 240
         },
-        {   // 第4場
-            number: 4, time: "20:10", class: "第四班", distance: "1200米", raceName: "锡能河護養",
+        {
+            index: 4, time: "14:15", classDist: "第四班 · 1200米", raceName: "香港廣州社團總會盃",
             predictions: [
-                { rank: 1, horse: "5. 朗日自強", qimen: "吉" },
-                { rank: 2, horse: "2. 贏得自然", qimen: "中吉" },
-                { rank: 3, horse: "1. 紅愛舍", qimen: "平" },
-                { rank: 4, horse: "4. 鄉村威能", qimen: "小吉·外檔" }
+                { rank: 1, name: "5號 舞林盛宴", draw: "3檔：1戰第1" },
+                { rank: 2, name: "1號 伶俐鸚鵡", draw: "12檔：4戰2冠" },
+                { rank: 3, name: "7號 銘神", draw: "1檔：2戰第2" },
+                { rank: 4, name: "13號 全神貫注", draw: "8檔：5戰3冠" }
             ],
-            exacta: "5–2 (重注)",
-            quinella: "5,2,1,4 互串",
-            triple: "5 > 2 > 1 ($10)",
-            risk: "總風險 $90 (連贏 $50, 位置Q $40)"
+            win: "5號 舞林盛宴（$70）",
+            quinella: "5–1（$30）、5–7（$20）",
+            placeQ: "5,1,7,13 互串 (6注×$10＝$60)",
+            tierce: "5 > 1 > 7（$10）",
+            singleT: "5,1,7（$10）",
+            first4: "5,1,7,13（$10）",
+            total: 210
         },
-        {   // 第5場
-            number: 5, time: "20:40", class: "第三班", distance: "1650米", raceName: "蘇特恩盃",
+        {
+            index: 5, time: "15:05", classDist: "第三班 · 1400米", raceName: "客家盃（讓賽）",
             predictions: [
-                { rank: 1, horse: "2. 穿甲金鷹", qimen: "大吉" },
-                { rank: 2, horse: "8. 凡凡有餘", qimen: "吉" },
-                { rank: 3, horse: "5. 納百川", qimen: "中" },
-                { rank: 4, horse: "9. 榮利雙收", qimen: "平" }
+                { rank: 1, name: "5號 綫路英雄", draw: "8檔：3戰2冠" },
+                { rank: 2, name: "10號 紅蓮光輝", draw: "12檔：2戰1冠" },
+                { rank: 3, name: "13號 勁勇皇駒", draw: "7檔：6戰4冠" },
+                { rank: 4, name: "8號 友瑩仁", draw: "3檔：6戰3冠" }
             ],
-            exacta: "2–8",
-            quinella: "2,8,5,9 互串",
-            triple: "2 > 8 > 5 ($10)",
-            risk: "總風險 $100 (連贏 $60, 位置Q $40)"
+            win: "5號 綫路英雄（$80）",
+            quinella: "5–10（$40）、5–13（$30）",
+            placeQ: "5,10,13,8 互串 (6注×$10＝$60)",
+            tierce: "5 > 10 > 13（$10）",
+            singleT: "5,10,13（$20）",
+            first4: "5,10,13,8（$10）",
+            total: 250
         },
-        {   // 第6場
-            number: 6, time: "21:10", class: "第四班", distance: "1200米", raceName: "錫能河護養",
+        {
+            index: 6, time: "15:35", classDist: "第四班 · 2000米", raceName: "香港惠州社團聯合總會籃球賽",
             predictions: [
-                { rank: 1, horse: "8. 花好月盈", qimen: "吉" },
-                { rank: 2, horse: "6. 彩虹七色", qimen: "大吉" },
-                { rank: 3, horse: "9. 風采人生", qimen: "小吉" },
-                { rank: 4, horse: "2. 團結巴打", qimen: "中" }
+                { rank: 1, name: "3號 安可", draw: "8檔：6戰1季" },
+                { rank: 2, name: "6號 佰勝金龍", draw: "5檔：1戰第1" },
+                { rank: 3, name: "12號 夢照發", draw: "11檔：7戰4亞" },
+                { rank: 4, name: "4號 雙贏", draw: "2檔：1戰第2" }
             ],
-            exacta: "8–6",
-            quinella: "8,6,9,2 互串",
-            triple: "8 > 6 > 9 ($10)",
-            risk: "總風險 $90 (連贏 $40, 位置Q $50)"
+            win: "3號 安可（$50）",
+            quinella: "3–6（$30）、3–12（$20）",
+            placeQ: "3,6,12,4 互串 (6注×$8＝$48)",
+            tierce: "3 > 6 > 12（$10）",
+            singleT: "3,6,12（$10）",
+            first4: "3,6,12,4（$10）",
+            total: 178
         },
-        {   // 第7場
-            number: 7, time: "21:45", class: "第四班", distance: "1200米", raceName: "锡能河赛",
+        {
+            index: 7, time: "16:05", classDist: "三級賽 · 1600米", raceName: "獅子山錦標",
             predictions: [
-                { rank: 1, horse: "3. 千杯敬典", qimen: "大吉·1檔" },
-                { rank: 2, horse: "11. 良駒好友", qimen: "吉" },
-                { rank: 3, horse: "1. 泰泰精神", qimen: "平·外檔" },
-                { rank: 4, horse: "7. 加州勇勝", qimen: "中" }
+                { rank: 1, name: "7號 首飾天空", draw: "7檔：6戰全冠" },
+                { rank: 2, name: "6號 時時歡聲", draw: "3檔：6戰5冠" },
+                { rank: 3, name: "4號 美麗同享", draw: "9檔：6戰1季" },
+                { rank: 4, name: "9號 鐵之宇宙", draw: "6檔：6戰2冠" }
             ],
-            exacta: "3–11",
-            quinella: "3,11,1,7 互串",
-            triple: "3 > 11 > 1 ($10)",
-            risk: "總風險 $80 (連贏 $30, 位置Q $50)"
+            win: "7號 首飾天空（$120）",
+            quinella: "7–6（$60）、7–4（$30）",
+            placeQ: "7,6,4,9 互串 (6注×$10＝$60)",
+            tierce: "7 > 6 > 4（$20）",
+            singleT: "7,6,4（$30）",
+            first4: "7,6,4,9（$20）",
+            total: 340
         },
-        {   // 第8場 (1000米內欄壟斷)
-            number: 8, time: "22:15", class: "第三班", distance: "1000米", raceName: "加能河護養",
+        {
+            index: 8, time: "16:40", classDist: "第四班 · 1400米", raceName: "香港灣港社團金鷹賽",
             predictions: [
-                { rank: 1, horse: "2. 燭光晚餐", qimen: "大吉·1檔" },
-                { rank: 2, horse: "10. 飛龍在天", qimen: "吉" },
-                { rank: 3, horse: "12. 友駿同心", qimen: "中" },
-                { rank: 4, horse: "9. 長勝金剛", qimen: "小吉" }
+                { rank: 1, name: "2號 龍傲縹緲", draw: "5檔：5戰3冠" },
+                { rank: 2, name: "6號 創寶駒", draw: "1檔：5戰2季" },
+                { rank: 3, name: "14號 華麗再贏", draw: "7檔：6戰1季" },
+                { rank: 4, name: "1號 綫路萬里", draw: "11檔：5戰3冠" }
             ],
-            exacta: "2–10 (小注)",
-            quinella: "2拖10,12,9 (位置Q)",
-            triple: "2 > 10 > 12 ($10)",
-            risk: "總風險 $60 (位置Q膽拖)"
+            win: "2號 龍傲縹緲（$60）",
+            quinella: "2–6（$30）、2–14（$20）",
+            placeQ: "2,6,14,1 互串 (6注×$8＝$48)",
+            tierce: "2 > 6 > 14（$10）",
+            singleT: "2,6,14（$10）",
+            first4: "2,6,14,1（$10）",
+            total: 188
         },
-        {   // 第9場
-            number: 9, time: "22:50", class: "第三班", distance: "1200米", raceName: "塞納河賽",
+        {
+            index: 9, time: "17:10", classDist: "三級賽 · 1200米", raceName: "沙田銀瓶（讓賽）",
             predictions: [
-                { rank: 1, horse: "9. 可靠大師", qimen: "大吉·潘頓" },
-                { rank: 2, horse: "11. 官金驥", qimen: "吉·1檔" },
-                { rank: 3, horse: "7. 富心星", qimen: "中吉" },
-                { rank: 4, horse: "8. 香港仔", qimen: "小吉" }
+                { rank: 1, name: "8號 翠紅", draw: "9檔：6戰4冠" },
+                { rank: 2, name: "7號 鐵之星河", draw: "1檔：6戰4冠" },
+                { rank: 3, name: "1號 精算暴雪", draw: "7檔：6戰1季" },
+                { rank: 4, name: "6號 笑傲江湖", draw: "5檔：6戰1冠" }
             ],
-            exacta: "9–11",
-            quinella: "9,11,7,8 互串",
-            triple: "9 > 11 > 7 ($10)",
-            risk: "總風險 $100 (連贏 $50, 位置Q $50)"
+            win: "8號 翠紅（$100）",
+            quinella: "8–7（$50）、8–1（$30）",
+            placeQ: "8,7,1,6 互串 (6注×$10＝$60)",
+            tierce: "8 > 7 > 1（$20）",
+            singleT: "8,7,1（$30）",
+            first4: "8,7,1,6（$20）",
+            total: 310
+        },
+        {
+            index: 10, time: "17:45", classDist: "第三班 · 1600米", raceName: "香港河源社團總會籃球賽",
+            predictions: [
+                { rank: 1, name: "5號 活力拍檔", draw: "12檔：6戰4冠" },
+                { rank: 2, name: "11號 三寶進財", draw: "9檔：2戰第4" },
+                { rank: 3, name: "3號 安都", draw: "10檔：6戰1冠2亞" },
+                { rank: 4, name: "14號 都靈冠星", draw: "7檔：2戰第3" }
+            ],
+            win: "5號 活力拍檔（$80）",
+            quinella: "5–11（$30）、5–3（$20）",
+            placeQ: "5,11,3,14 互串 (6注×$10＝$60)",
+            tierce: "5 > 11 > 3（$10）",
+            singleT: "5,11,3（$10）",
+            first4: "5,11,3,14（$10）",
+            total: 220
+        },
+        {
+            index: 11, time: "18:20", classDist: "第三班 · 1200米", raceName: "香港嘉德（梅州）德商富云證券",
+            predictions: [
+                { rank: 1, name: "3號 定風波", draw: "7檔：4戰3冠" },
+                { rank: 2, name: "13號 智勝策略", draw: "1檔：2戰第10" },
+                { rank: 3, name: "2號 醒目高球", draw: "11檔：6戰3冠" },
+                { rank: 4, name: "1號 跨境寶馬", draw: "6檔：6戰2冠" }
+            ],
+            win: "3號 定風波（$60）",
+            quinella: "3–13（$30）、3–2（$30）",
+            placeQ: "3,13,2,1 互串 (6注×$10＝$60)",
+            tierce: "3 > 13 > 2（$10）",
+            singleT: "3,13,2（$10）",
+            first4: "3,13,2,1（$10）",
+            total: 210
         }
     ];
 
-    function renderRaces() {
-        const container = document.getElementById('racesContainer');
-        if (!container) return;
-        container.innerHTML = '';
-        racesData.forEach(race => {
-            const card = document.createElement('div');
-            card.className = 'race-card';
-            // Header
-            card.innerHTML = `
-                <div class="card-header">
-                    <div class="race-name">
-                        <span>🏇 第${race.number}場 · ${race.raceName}</span>
-                        <span class="race-number">${race.class} ${race.distance}</span>
-                    </div>
-                    <div class="race-info">
-                        <span>⏱️ ${race.time}</span>
-                        <span>🏟️ 跑馬地 B 賽道 · 好地</span>
-                        <span>🎯 跑道派 : 內檔優勢顯著</span>
+    const container = document.getElementById('raceContainer');
+
+    function renderRace(race) {
+        const rankHtml = race.predictions.map(p => `
+            <div class="rank-item">
+                <div class="rank-number">${p.rank}</div>
+                <div class="horse-name">${p.name}</div>
+                <div class="draw-record">${p.draw}</div>
+            </div>
+        `).join('');
+
+        return `
+            <div class="race-card">
+                <div class="race-header">
+                    <div class="race-name">🏇 第${race.index}場 · ${race.time}</div>
+                    <div class="race-meta">
+                        <span>${race.classDist}</span>
+                        <span>${race.raceName}</span>
+                        <span>B賽道</span>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="predict-rank">
-                        <div class="rank-title">🕸️ 蛛網名次預測 (決策老大)</div>
-                        <div class="rank-horses">
-                            ${race.predictions.map(p => `
-                                <div class="horse-rank-item">
-                                    <div class="rank-number ${p.rank === 1 ? 'top1' : (p.rank === 2 ? 'top2' : (p.rank === 3 ? 'top3' : 'top4'))}">${p.rank}</div>
-                                    <div class="horse-name">${p.horse}</div>
-                                    <div class="qimen-tag">${p.qimen}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="confidence"><div class="confidence-fill" style="width: 82%"></div></div>
+                <div class="race-content">
+                    <div class="rank-section">
+                        <div class="rank-title">📋 名次預測 (含前季至今檔位成績)</div>
+                        <div class="rank-list">${rankHtml}</div>
                     </div>
                     <div class="bet-section">
-                        <div class="bet-item">
-                            <span class="bet-label">🔗 連贏推介</span>
-                            <span class="bet-content">${race.exacta}</span>
-                        </div>
-                        <div class="bet-item">
-                            <span class="bet-label">📍 位置Q組合</span>
-                            <span class="bet-content">${race.quinella}</span>
-                        </div>
-                        ${race.triple ? `<div class="bet-item">
-                            <span class="bet-label">🎯 三重彩/單T</span>
-                            <span class="bet-content">${race.triple}</span>
-                        </div>` : ''}
-                        <div class="bet-item">
-                            <span class="bet-label">💰 團體老大審批</span>
-                            <span class="risk-amount">${race.risk}</span>
-                        </div>
+                        <div class="bet-item"><div class="bet-label">🎯 獨贏推介</div><div class="bet-detail">${race.win}</div></div>
+                        <div class="bet-item"><div class="bet-label">🔗 連贏推介</div><div class="bet-detail">${race.quinella}</div></div>
+                        <div class="bet-item"><div class="bet-label">📍 位置Q推介</div><div class="bet-detail">${race.placeQ}</div></div>
+                        <div class="bet-item"><div class="bet-label">🎲 三重彩 (順序)</div><div class="bet-detail">${race.tierce}</div></div>
+                        <div class="bet-item"><div class="bet-label">🃏 單T推介</div><div class="bet-detail">${race.singleT}</div></div>
+                        <div class="bet-item"><div class="bet-label">🕸️ 四連環</div><div class="bet-detail">${race.first4}</div></div>
                     </div>
-                    <div style="font-size: 0.7rem; text-align: right; margin-top: 12px; color:#b0c4a2;">⚡ 奇門+跑道加權決策 | 賽後校準</div>
+                    <div class="total-stake">💰 團體老大總注碼：<span>$${race.total}</span></div>
                 </div>
-            `;
-            container.appendChild(card);
-        });
+            </div>
+        `;
     }
 
-    renderRaces();
+    racesData.forEach(race => {
+        container.innerHTML += renderRace(race);
+    });
+
+    const totalAll = racesData.reduce((sum, r) => sum + r.total, 0);
+    const footerTotal = document.createElement('div');
+    footerTotal.style.textAlign = 'center';
+    footerTotal.style.marginTop = '20px';
+    footerTotal.style.fontSize = '1.1rem';
+    footerTotal.style.background = '#1e2c1a';
+    footerTotal.style.padding = '12px';
+    footerTotal.style.borderRadius = '40px';
+    footerTotal.style.border = '1px solid #ffb347';
+    footerTotal.innerHTML = `📊 全場總投注額：<strong style="color:#ffd966">$${totalAll}</strong> (經團體老大審批，由季度盈餘撥備)`;
+    document.querySelector('.footer-note').before(footerTotal);
 </script>
 </body>
 </html>
