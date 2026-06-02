@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN System｜沙田日賽預測 2026-05-31</title>
+    <title>SHTSN System｜跑馬地夜賽預測 2026-06-03</title>
     <style>
         * {
             margin: 0;
@@ -51,7 +51,7 @@
         }
         .race-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
             gap: 24px;
         }
         .race-card {
@@ -191,196 +191,164 @@
     <div class="header">
         <h1>🕸️ SHTSN System</h1>
         <div class="badge">Super Horse to Spider Network · 賽前預測</div>
-        <div class="sub">沙田草地 · B賽道 · 2026年5月31日 (星期日) · 版本 V7.26</div>
-        <div class="sub">賠率來源：香港馬會30/05/2026 14:05｜奇門0.26 + 賠率0.21 + 數據0.16 + 跑道0.16 + 路程0.10 + 騎練0.10 + 晨操0.01</div>
+        <div class="sub">跑馬地草地 · C賽道（好地） · 2026年6月3日 (星期三) · 版本 V7.27</div>
+        <div class="sub">賠率來源：香港馬會02/06/2026 13:45｜奇門0.27 + 賠率0.18 + 數據0.18 + 跑道(好地C)0.14 + 路程0.14 + 騎練0.08 + 晨操0.01</div>
     </div>
 
     <div class="race-grid" id="raceContainer"></div>
 
     <div class="footer-note">
-        📌 本預測由決策老大綜合8大專家加權產出，團體老大最終審批注碼。<br>
-        🧮 加權公式：奇門0.26 + 賠率0.21 + 數據0.16 + 跑道(沙田)0.16 + 路程0.10 + 騎練0.10 + 晨操0.01<br>
-        🔄 賽後將批量驗證並更新權重，版本迭代至 V7.27+
+        📌 本預測由決策老大綜合7大專家加權產出，團體老大最終審批注碼。<br>
+        🧮 加權公式：奇門0.27 + 賠率0.18 + 數據0.18 + 跑道(好地C)0.14 + 路程0.14 + 騎練0.08 + 晨操0.01<br>
+        🔄 賽後將批量驗證並更新權重，版本迭代至 V7.28
     </div>
 </div>
 
 <script>
     const racesData = [
         {
-            index: 1, time: "12:45", classDist: "新馬賽 · 1200米", raceName: "香港五華同鄉總會孟平磅賽",
+            index: 1, time: "18:40", classDist: "第五班 · 1650米", raceName: "單拿山讓賽",
             predictions: [
-                { rank: 1, name: "9號 永福", draw: "3檔：2戰1冠" },
-                { rank: 2, name: "6號 銳行星", draw: "13檔：1戰第2" },
-                { rank: 3, name: "1號 鵠橋飛昇", draw: "9檔：無紀錄" },
-                { rank: 4, name: "12號 共建世界", draw: "10檔：無紀錄" }
+                { rank: 1, name: "3號 富裕君子", draw: "1檔：2戰1冠 (賠率3.2)" },
+                { rank: 2, name: "1號 幽默大師", draw: "4檔：4戰1亞 (賠率29)" },
+                { rank: 3, name: "9號 華美之威", draw: "2檔：3戰1季 (賠率3.4)" },
+                { rank: 4, name: "2號 驍跑得", draw: "9檔：2戰第4 (賠率5.2)" }
             ],
-            win: "9號 永福（$80）",
-            quinella: "9–6（$30）、9–1（$20）",
-            placeQ: "9,6,1,12 互串 (6注×$8＝$48)",
-            tierce: "9 > 6 > 1（$10）",
-            singleT: "9,6,1（$10）",
-            first4: "9,6,1,12（$10）",
+            win: "3號 富裕君子（$80）",
+            quinella: "3–1（$30）、3–9（$20）",
+            placeQ: "3,1,9,2 互串 (6注×$8＝$48)",
+            tierce: "3 > 1 > 9（$10）",
+            singleT: "3,1,9（$10）",
+            first4: "3,1,9,2（$10）",
             total: 208
         },
         {
-            index: 2, time: "13:15", classDist: "第四班 · 1000米", raceName: "香港梅州聯會籃球賽",
+            index: 2, time: "19:10", classDist: "第五班 · 1200米", raceName: "最高信山讓賽",
             predictions: [
-                { rank: 1, name: "10號 步風影", draw: "9檔：1戰第1" },
-                { rank: 2, name: "1號 路路勁", draw: "6檔：3戰1冠" },
-                { rank: 3, name: "5號 鴻圖新星", draw: "12檔：2戰1亞" },
-                { rank: 4, name: "3號 一鋪掂晒", draw: "13檔：1戰第1" }
+                { rank: 1, name: "2號 喆喆友福", draw: "3檔：3戰1冠 (賠率4.3)" },
+                { rank: 2, name: "4號 首發", draw: "4檔：2戰1冠 (賠率12)" },
+                { rank: 3, name: "6號 八里旺", draw: "5檔：4戰1亞 (賠率6.6)" },
+                { rank: 4, name: "12號 快馬加鞭", draw: "8檔：2戰第3 (賠率12)" }
             ],
-            win: "10號 步風影（$60）",
-            quinella: "10–1（$30）、10–5（$20）",
-            placeQ: "10,1,5,3 互串 (6注×$8＝$48)",
-            tierce: "10 > 1 > 5（$10）",
-            singleT: "10,1,5（$10）",
-            first4: "10,1,5,3（$10）",
+            win: "2號 喆喆友福（$70）",
+            quinella: "2–4（$30）、2–6（$20）",
+            placeQ: "2,4,6,12 互串 (6注×$8＝$48)",
+            tierce: "2 > 4 > 6（$10）",
+            singleT: "2,4,6（$10）",
+            first4: "2,4,6,12（$10）",
             total: 188
         },
         {
-            index: 3, time: "13:45", classDist: "第四班 · 1200米", raceName: "香港奧羽同場綜合賽",
+            index: 3, time: "19:40", classDist: "第四班 · 1200米", raceName: "黄泥涌峽讓賽",
             predictions: [
-                { rank: 1, name: "1號 禾道豐", draw: "4檔：3戰2冠" },
-                { rank: 2, name: "4號 天天要樂", draw: "1檔：2戰1季" },
-                { rank: 3, name: "2號 天福", draw: "8檔：3戰1亞" },
-                { rank: 4, name: "11號 杭至尊", draw: "10檔：2戰第4" }
+                { rank: 1, name: "3號 團長好", draw: "2檔：4戰1亞 (賠率3.7)" },
+                { rank: 2, name: "4號 驕陽雄心", draw: "9檔：3戰1冠 (賠率9.4)" },
+                { rank: 3, name: "8號 三強", draw: "1檔：2戰第3 (賠率7.7)" },
+                { rank: 4, name: "1號 競駿非凡", draw: "6檔：3戰第3 (賠率7.8)" }
             ],
-            win: "1號 禾道豐（$100）",
-            quinella: "1–4（$30）、1–2（$20）",
-            placeQ: "1,4,2,11 互串 (6注×$10＝$60)",
-            tierce: "1 > 4 > 2（$10）",
-            singleT: "1,4,2（$10）",
-            first4: "1,4,2,11（$10）",
-            total: 240
-        },
-        {
-            index: 4, time: "14:15", classDist: "第四班 · 1200米", raceName: "香港廣州社團總會盃",
-            predictions: [
-                { rank: 1, name: "5號 舞林盛宴", draw: "3檔：1戰第1" },
-                { rank: 2, name: "1號 伶俐鸚鵡", draw: "12檔：4戰2冠" },
-                { rank: 3, name: "7號 銘神", draw: "1檔：2戰第2" },
-                { rank: 4, name: "13號 全神貫注", draw: "8檔：5戰3冠" }
-            ],
-            win: "5號 舞林盛宴（$70）",
-            quinella: "5–1（$30）、5–7（$20）",
-            placeQ: "5,1,7,13 互串 (6注×$10＝$60)",
-            tierce: "5 > 1 > 7（$10）",
-            singleT: "5,1,7（$10）",
-            first4: "5,1,7,13（$10）",
-            total: 210
-        },
-        {
-            index: 5, time: "15:05", classDist: "第三班 · 1400米", raceName: "客家盃（讓賽）",
-            predictions: [
-                { rank: 1, name: "5號 綫路英雄", draw: "8檔：3戰2冠" },
-                { rank: 2, name: "10號 紅蓮光輝", draw: "12檔：2戰1冠" },
-                { rank: 3, name: "13號 勁勇皇駒", draw: "7檔：6戰4冠" },
-                { rank: 4, name: "8號 友瑩仁", draw: "3檔：6戰3冠" }
-            ],
-            win: "5號 綫路英雄（$80）",
-            quinella: "5–10（$40）、5–13（$30）",
-            placeQ: "5,10,13,8 互串 (6注×$10＝$60)",
-            tierce: "5 > 10 > 13（$10）",
-            singleT: "5,10,13（$20）",
-            first4: "5,10,13,8（$10）",
-            total: 250
-        },
-        {
-            index: 6, time: "15:35", classDist: "第四班 · 2000米", raceName: "香港惠州社團聯合總會籃球賽",
-            predictions: [
-                { rank: 1, name: "3號 安可", draw: "8檔：6戰1季" },
-                { rank: 2, name: "6號 佰勝金龍", draw: "5檔：1戰第1" },
-                { rank: 3, name: "12號 夢照發", draw: "11檔：7戰4亞" },
-                { rank: 4, name: "4號 雙贏", draw: "2檔：1戰第2" }
-            ],
-            win: "3號 安可（$50）",
-            quinella: "3–6（$30）、3–12（$20）",
-            placeQ: "3,6,12,4 互串 (6注×$8＝$48)",
-            tierce: "3 > 6 > 12（$10）",
-            singleT: "3,6,12（$10）",
-            first4: "3,6,12,4（$10）",
-            total: 178
-        },
-        {
-            index: 7, time: "16:05", classDist: "三級賽 · 1600米", raceName: "獅子山錦標",
-            predictions: [
-                { rank: 1, name: "7號 首飾天空", draw: "7檔：6戰全冠" },
-                { rank: 2, name: "6號 時時歡聲", draw: "3檔：6戰5冠" },
-                { rank: 3, name: "4號 美麗同享", draw: "9檔：6戰1季" },
-                { rank: 4, name: "9號 鐵之宇宙", draw: "6檔：6戰2冠" }
-            ],
-            win: "7號 首飾天空（$120）",
-            quinella: "7–6（$60）、7–4（$30）",
-            placeQ: "7,6,4,9 互串 (6注×$10＝$60)",
-            tierce: "7 > 6 > 4（$20）",
-            singleT: "7,6,4（$30）",
-            first4: "7,6,4,9（$20）",
-            total: 340
-        },
-        {
-            index: 8, time: "16:40", classDist: "第四班 · 1400米", raceName: "香港灣港社團金鷹賽",
-            predictions: [
-                { rank: 1, name: "2號 龍傲縹緲", draw: "5檔：5戰3冠" },
-                { rank: 2, name: "6號 創寶駒", draw: "1檔：5戰2季" },
-                { rank: 3, name: "14號 華麗再贏", draw: "7檔：6戰1季" },
-                { rank: 4, name: "1號 綫路萬里", draw: "11檔：5戰3冠" }
-            ],
-            win: "2號 龍傲縹緲（$60）",
-            quinella: "2–6（$30）、2–14（$20）",
-            placeQ: "2,6,14,1 互串 (6注×$8＝$48)",
-            tierce: "2 > 6 > 14（$10）",
-            singleT: "2,6,14（$10）",
-            first4: "2,6,14,1（$10）",
-            total: 188
-        },
-        {
-            index: 9, time: "17:10", classDist: "三級賽 · 1200米", raceName: "沙田銀瓶（讓賽）",
-            predictions: [
-                { rank: 1, name: "8號 翠紅", draw: "9檔：6戰4冠" },
-                { rank: 2, name: "7號 鐵之星河", draw: "1檔：6戰4冠" },
-                { rank: 3, name: "1號 精算暴雪", draw: "7檔：6戰1季" },
-                { rank: 4, name: "6號 笑傲江湖", draw: "5檔：6戰1冠" }
-            ],
-            win: "8號 翠紅（$100）",
-            quinella: "8–7（$50）、8–1（$30）",
-            placeQ: "8,7,1,6 互串 (6注×$10＝$60)",
-            tierce: "8 > 7 > 1（$20）",
-            singleT: "8,7,1（$30）",
-            first4: "8,7,1,6（$20）",
-            total: 310
-        },
-        {
-            index: 10, time: "17:45", classDist: "第三班 · 1600米", raceName: "香港河源社團總會籃球賽",
-            predictions: [
-                { rank: 1, name: "5號 活力拍檔", draw: "12檔：6戰4冠" },
-                { rank: 2, name: "11號 三寶進財", draw: "9檔：2戰第4" },
-                { rank: 3, name: "3號 安都", draw: "10檔：6戰1冠2亞" },
-                { rank: 4, name: "14號 都靈冠星", draw: "7檔：2戰第3" }
-            ],
-            win: "5號 活力拍檔（$80）",
-            quinella: "5–11（$30）、5–3（$20）",
-            placeQ: "5,11,3,14 互串 (6注×$10＝$60)",
-            tierce: "5 > 11 > 3（$10）",
-            singleT: "5,11,3（$10）",
-            first4: "5,11,3,14（$10）",
+            win: "3號 團長好（$80）",
+            quinella: "3–4（$30）、3–8（$20）",
+            placeQ: "3,4,8,1 互串 (6注×$10＝$60)",
+            tierce: "3 > 4 > 8（$10）",
+            singleT: "3,4,8（$10）",
+            first4: "3,4,8,1（$10）",
             total: 220
         },
         {
-            index: 11, time: "18:20", classDist: "第三班 · 1200米", raceName: "香港嘉德（梅州）德商富云證券",
+            index: 4, time: "20:10", classDist: "第四班 · 1650米", raceName: "中峽讓賽",
             predictions: [
-                { rank: 1, name: "3號 定風波", draw: "7檔：4戰3冠" },
-                { rank: 2, name: "13號 智勝策略", draw: "1檔：2戰第10" },
-                { rank: 3, name: "2號 醒目高球", draw: "11檔：6戰3冠" },
-                { rank: 4, name: "1號 跨境寶馬", draw: "6檔：6戰2冠" }
+                { rank: 1, name: "10號 時間寶", draw: "1檔：4戰2冠1亞 (賠率2.9)" },
+                { rank: 2, name: "5號 先到先得", draw: "10檔：4戰2亞 (賠率6.4)" },
+                { rank: 3, name: "6號 滿洛城", draw: "6檔：3戰1冠 (賠率8.2)" },
+                { rank: 4, name: "1號 星願無限", draw: "5檔：3戰第5 (賠率27)" }
             ],
-            win: "3號 定風波（$60）",
-            quinella: "3–13（$30）、3–2（$30）",
-            placeQ: "3,13,2,1 互串 (6注×$10＝$60)",
-            tierce: "3 > 13 > 2（$10）",
-            singleT: "3,13,2（$10）",
-            first4: "3,13,2,1（$10）",
-            total: 210
+            win: "10號 時間寶（$90）",
+            quinella: "10–5（$40）、10–6（$20）",
+            placeQ: "10,5,6,1 互串 (6注×$10＝$60)",
+            tierce: "10 > 5 > 6（$10）",
+            singleT: "10,5,6（$10）",
+            first4: "10,5,6,1（$10）",
+            total: 240
+        },
+        {
+            index: 5, time: "20:40", classDist: "第四班 · 1200米", raceName: "木球會錦標",
+            predictions: [
+                { rank: 1, name: "11號 天下寵兒", draw: "1檔：2戰第2 (賠率2.8)" },
+                { rank: 2, name: "7號 星辰千帥", draw: "3檔：5戰1冠2亞 (賠率3.8)" },
+                { rank: 3, name: "5號 佐治傳奇", draw: "4檔：2戰第2 (賠率5.8)" },
+                { rank: 4, name: "10號 焦點", draw: "6檔：3戰2冠 (賠率25)" }
+            ],
+            win: "11號 天下寵兒（$80）",
+            quinella: "11–7（$30）、11–5（$20）",
+            placeQ: "11,7,5,10 互串 (6注×$10＝$60)",
+            tierce: "11 > 7 > 5（$10）",
+            singleT: "11,7,5（$10）",
+            first4: "11,7,5,10（$10）",
+            total: 220
+        },
+        {
+            index: 6, time: "21:10", classDist: "第四班 · 1200米", raceName: "黃泥涌峽讓賽",
+            predictions: [
+                { rank: 1, name: "7號 獵寶勤", draw: "4檔：1戰第1 (賠率3.5)" },
+                { rank: 2, name: "1號 星運少爵", draw: "2檔：3戰1亞 (賠率4.7)" },
+                { rank: 3, name: "5號 銳目", draw: "1檔：2戰第1 (賠率10)" },
+                { rank: 4, name: "8號 至合拍", draw: "11檔：2戰第4 (賠率13)" }
+            ],
+            win: "7號 獵寶勤（$80）",
+            quinella: "7–1（$30）、7–5（$20）",
+            placeQ: "7,1,5,8 互串 (6注×$10＝$60)",
+            tierce: "7 > 1 > 5（$10）",
+            singleT: "7,1,5（$10）",
+            first4: "7,1,5,8（$10）",
+            total: 220
+        },
+        {
+            index: 7, time: "21:45", classDist: "第三班 · 1200米", raceName: "番臣山讓賽",
+            predictions: [
+                { rank: 1, name: "5號 福星小子", draw: "5檔：4戰2冠 (賠率6.3)" },
+                { rank: 2, name: "8號 舞林寶典", draw: "8檔：3戰1冠 (賠率5.8)" },
+                { rank: 3, name: "7號 皇者有利", draw: "7檔：4戰1冠2亞 (賠率6.9)" },
+                { rank: 4, name: "2號 乘數表", draw: "4檔：5戰1冠 (賠率14)" }
+            ],
+            win: "5號 福星小子（$80）",
+            quinella: "5–8（$30）、5–7（$30）",
+            placeQ: "5,8,7,2 互串 (6注×$10＝$60)",
+            tierce: "5 > 8 > 7（$10）",
+            singleT: "5,8,7（$10）",
+            first4: "5,8,7,2（$10）",
+            total: 240
+        },
+        {
+            index: 8, time: "22:15", classDist: "第二班 · 1800米", raceName: "大潭峽讓賽",
+            predictions: [
+                { rank: 1, name: "6號 銀亮奔騰", draw: "1檔：5戰3冠 (賠率3.1)" },
+                { rank: 2, name: "2號 太陽勇士", draw: "3檔：5戰1冠2亞 (賠率10)" },
+                { rank: 3, name: "9號 穿甲金鷹", draw: "6檔：5戰3冠 (賠率5.8)" },
+                { rank: 4, name: "7號 一起美麗", draw: "2檔：5戰1冠2亞 (賠率7.5)" }
+            ],
+            win: "6號 銀亮奔騰（$100）",
+            quinella: "6–2（$40）、6–9（$30）",
+            placeQ: "6,2,9,7 互串 (6注×$10＝$60)",
+            tierce: "6 > 2 > 9（$20）",
+            singleT: "6,2,9（$20）",
+            first4: "6,2,9,7（$20）",
+            total: 290
+        },
+        {
+            index: 9, time: "22:50", classDist: "第三班 · 1650米", raceName: "紫羅蘭山讓賽",
+            predictions: [
+                { rank: 1, name: "1號 榮駿大道", draw: "5檔：5戰2冠 (賠率5.8)" },
+                { rank: 2, name: "4號 凌登", draw: "11檔：5戰2冠 (賠率7.2)" },
+                { rank: 3, name: "6號 榮利雙收", draw: "8檔：3戰1冠 (賠率16)" },
+                { rank: 4, name: "10號 翠兒威威", draw: "1檔：3戰1冠 (賠率12)" }
+            ],
+            win: "1號 榮駿大道（$80）",
+            quinella: "1–4（$30）、1–6（$20）",
+            placeQ: "1,4,6,10 互串 (6注×$10＝$60)",
+            tierce: "1 > 4 > 6（$10）",
+            singleT: "1,4,6（$10）",
+            first4: "1,4,6,10（$10）",
+            total: 220
         }
     ];
 
@@ -402,12 +370,12 @@
                     <div class="race-meta">
                         <span>${race.classDist}</span>
                         <span>${race.raceName}</span>
-                        <span>B賽道</span>
+                        <span>C賽道・好地</span>
                     </div>
                 </div>
                 <div class="race-content">
                     <div class="rank-section">
-                        <div class="rank-title">📋 名次預測 (含前季至今檔位成績)</div>
+                        <div class="rank-title">📋 名次預測 (含前季至今檔位成績・即場賠率)</div>
                         <div class="rank-list">${rankHtml}</div>
                     </div>
                     <div class="bet-section">
@@ -437,7 +405,7 @@
     footerTotal.style.padding = '12px';
     footerTotal.style.borderRadius = '40px';
     footerTotal.style.border = '1px solid #ffb347';
-    footerTotal.innerHTML = `📊 全場總投注額：<strong style="color:#ffd966">$${totalAll}</strong> (經團體老大審批，由季度盈餘撥備)`;
+    footerTotal.innerHTML = `📊 全場總投注額：<strong style="color:#ffd966">$${totalAll}</strong> (經團體老大審批，輕微超標由季度盈餘撥備)`;
     document.querySelector('.footer-note').before(footerTotal);
 </script>
 </body>
