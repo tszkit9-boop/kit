@@ -3,192 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN 投注建議 | 2026-05-09 沙田草地11場 | 19派別預測</title>
+    <title>🏇 雅士谷賽馬日｜第1-7場預測策略</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0f1a0f; font-family: system-ui, 'Segoe UI', sans-serif; color: #e6f0e6; padding: 1rem; }
-        .container { max-width: 1300px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 1.5rem; border-bottom: 2px solid #ffb347; padding-bottom: 0.5rem; }
-        .header h1 { font-size: 1.8rem; color: #ffb347; }
-        .sub { font-size: 0.75rem; opacity: 0.8; }
-        .race-card { background: rgba(26,42,31,0.9); border-radius: 24px; margin-bottom: 1.5rem; padding: 1rem; }
-        .race-title { font-size: 1.2rem; font-weight: bold; border-left: 4px solid #ffb347; padding-left: 0.6rem; margin-bottom: 0.8rem; }
-        .bet-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .bet-table th, .bet-table td { text-align: left; padding: 0.4rem 0.2rem; border-bottom: 1px solid #2f4035; vertical-align: top; }
-        .bet-table th { width: 110px; color: #ffb347; font-weight: bold; }
-        .horse-number { font-weight: bold; color: #ffb347; }
-        .disclaimer { font-size: 0.65rem; text-align: center; margin-top: 1.5rem; padding: 0.5rem; background: #0a130e; border-radius: 16px; color: #aaa; }
-        .footer { text-align: center; margin-top: 1rem; font-size: 0.7rem; }
-        @media (max-width: 700px) { .bet-table th, .bet-table td { font-size: 0.7rem; } .bet-table th { width: 90px; } }
+        body {
+            background: #0b1f1a;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+            padding: 1.5rem 1rem;
+            color: #ecf9f0;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #d9aa4b;
+            padding-bottom: 0.6rem;
+        }
+        .header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F7E5B0, #cf9733);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .sub {
+            font-size: 0.8rem;
+            color: #bcddce;
+            margin-top: 0.3rem;
+        }
+        .races-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+        .race-card {
+            background: #0f2f26;
+            border-radius: 1.4rem;
+            border: 1px solid #3a7760;
+            overflow: hidden;
+        }
+        .card-header {
+            background: #0a2b23;
+            padding: 0.7rem 1.2rem;
+            border-bottom: 1px solid #2f745b;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        .race-title {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .race-title small {
+            font-size: 0.65rem;
+            background: #2d6a53;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            margin-left: 0.5rem;
+        }
+        .race-meta {
+            font-size: 0.7rem;
+            background: #00000055;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+        }
+        .race-content {
+            padding: 0.8rem 1.2rem;
+        }
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.7rem;
+            border-left: 3px solid #d9aa4b;
+            padding-left: 0.8rem;
+        }
+        .label {
+            font-weight: 600;
+            min-width: 100px;
+            color: #ffdf9c;
+        }
+        .value {
+            flex: 1;
+        }
+        .horse-highlight {
+            color: #f5d47a;
+            font-weight: 600;
+        }
+        .chip-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .chip {
+            background: #1c4d3e;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+        }
+        .footnote {
+            margin-top: 2rem;
+            background: #03241f;
+            border-radius: 1rem;
+            padding: 1rem;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+        hr { border-color: #307f63; margin: 0.5rem 0; }
+        @media (max-width: 650px) {
+            .flex-row { flex-direction: column; gap: 0.2rem; }
+            .label { min-width: auto; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1>🕸️ SHTSN 投注建議 | 19派別集成</h1>
-        <div class="sub">2026-05-09 沙田草地 (日賽) 第1-11場｜缺即時賠率，以騎練檔位估算</div>
-        <div class="sub">⚠️ 預測僅供參考，請臨場留意賠率變化</div>
+        <h1>🐎 雅士谷賽馬日 · 全7場投注策略</h1>
+        <div class="sub">好地至快地 | 獨贏 + 位置 + 連贏/Q + 三重彩/單T/四重彩 | 內檔優勢＋賠率區間＋近績評分</div>
     </div>
 
-    <!-- 第1場 新馬賽 1000米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第1場 新馬賽 1000米 (蝴蝶灣平磅)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">7</span> 極歡欣 (檔1) | 次選 <span class="horse-number">4</span> 銀騎士 (檔2) | 冷選 <span class="horse-number">1</span> 全能勇士 (檔3)</td></tr>
-            <tr><th>位置</th><td>7, 4, 1</td></tr>
-            <tr><th>連贏</th><td>7 + 4</td></tr>
-            <tr><th>位置Q</th><td>7 + 4 + 1</td></tr>
-            <tr><th>三重彩</th><td>7 > 4 > 1</td></tr>
-            <tr><th>四連環</th><td>7, 4, 1, 2 (銳行星 檔5)</td></tr>
-            <tr><th>四重彩</th><td>7 > 4 > 1 > 2</td></tr>
-        </table>
+    <div class="races-grid">
+
+        <!-- 第1場 女皇安妮錦標 -->
+        <div class="race-card">
+            <div class="card-header"><div class="race-title">第1場 女皇安妮錦標 <small>一級賽 1600米</small></div><div class="race-meta">21:30 | 雅士谷</div></div>
+            <div class="race-content">
+                <div class="flex-row"><span class="label">🎯 獨贏膽</span><span class="value"><span class="horse-highlight">6號「名演說」(2.1倍)</span> – 內檔1，評分最高，近績冠亞，頂級</span></div>
+                <div class="flex-row"><span class="label">📌 位置/連贏Q</span><span class="value">膽6拖7,9,5,2,3；位置跟7號(4.9倍)</span></div>
+                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽6,7 拖9,5,2；單T組合：6+7+9, 6+7+5</span></div>
+                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">6,7,9,5,2 (5匹)</span></div>
+                <div class="chip-list"><span class="chip">⚠️ 7號近三場全勝，最大威脅，連贏必拖</span></div>
+            </div>
+        </div>
+
+        <!-- 第2場 高雲地利錦標 -->
+        <div class="race-card">
+            <div class="card-header"><div class="race-title">第2場 高雲地利錦標 <small>二級賽 1200米</small></div><div class="race-meta">22:05 | 雅士谷</div></div>
+            <div class="race-content">
+                <div class="flex-row"><span class="label">🎯 獨贏膽</span><span class="value"><span class="horse-highlight">10號「巨堡礁」(6.0倍)</span> – 內檔3，兩戰全勝，岳伯仁馬房</span></div>
+                <div class="flex-row"><span class="label">📌 位置/連贏Q</span><span class="value">膽10拖9,14,5,17；放棄5號大熱作獨贏膽(檔位20)</span></div>
+                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽10,9 拖14,5,17；單T：10+9+14, 10+9+5</span></div>
+                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">10,9,14,5,17</span></div>
+                <div class="chip-list"><span class="chip">⚠️ 5號大熱但外檔20，只宜配腳</span></div>
+            </div>
+        </div>
+
+        <!-- 第3場 英皇查理斯三世錦標 -->
+        <div class="race-card">
+            <div class="card-header"><div class="race-title">第3場 英皇查理斯三世錦標 <small>一級賽 1000米</small></div><div class="race-meta">22:40 | 雅士谷</div></div>
+            <div class="race-content">
+                <div class="flex-row"><span class="label">🎯 獨贏膽</span><span class="value"><span class="horse-highlight">9號「登天橋」(5.9倍)</span> – 評分最高，近三場全入前四，最穩</span></div>
+                <div class="flex-row"><span class="label">📌 位置/連贏Q</span><span class="value">膽9拖22,25,8,26；位置跟22號(17倍)</span></div>
+                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽9,22 拖25,8,26；單T：9+22+25, 9+22+8</span></div>
+                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">9,22,25,8,26</span></div>
+                <div class="chip-list"><span class="chip">⚠️ 22號近三場兩冠一亞，17倍值博</span></div>
+            </div>
+        </div>
+
+        <!-- 第4場 聖詹姆士皇宮錦標 -->
+        <div class="race-card">
+            <div class="card-header"><div class="race-title">第4場 聖詹姆士皇宮錦標 <small>一級賽 1600米</small></div><div class="race-meta">23:20 | 雅士谷</div></div>
+            <div class="race-content">
+                <div class="flex-row"><span class="label">🎯 獨贏膽</span><span class="value"><span class="horse-highlight">1號「劇烈氣象」(1.4倍)</span> – 四連勝，評分最高，內檔2，超級穩膽</span></div>
+                <div class="flex-row"><span class="label">📌 位置/連贏Q</span><span class="value">膽1拖2,6,5；位置1號無價值(1.0倍)，買2號位置(1.7倍)</span></div>
+                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">三重彩固定1→2→6 / 1→2→5；單T以1,2,6,5複式</span></div>
+                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">1,2,6,5 (4匹) 固定1號第一名排列</span></div>
+                <div class="chip-list"><span class="chip">⚠️ 1號位置派彩1.0倍，不值得買位置，只買獨贏及連贏</span></div>
+            </div>
+        </div>
+
+        <!-- 第5場 雅士谷錦標 -->
+        <div class="race-card">
+            <div class="card-header"><div class="race-title">第5場 雅士谷錦標 <small>4004米長途</small></div><div class="race-meta">00:00 | 雅士谷</div></div>
+            <div class="race-content">
+                <div class="flex-row"><span class="label">🎯 獨贏膽</span><span class="value"><span class="horse-highlight">15號「御峻谷」(16倍)</span> – 內檔1，近兩場連勝，長途內檔優勢大</span></div>
+                <div class="flex-row"><span class="label">📌 位置/連贏Q</span><span class="value">膽15拖14,12,19,6；放棄4號大熱(3.8倍)因近績大敗</span></div>
+                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽15,14 拖12,19,6；單T：15+14+12, 15+14+19</span></div>
+                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">15,14,12,19,6</span></div>
+                <div class="chip-list"><span class="chip">⚠️ 4號大熱但近仗15名，只宜位置保險</span></div>
+            </div>
+        </div>
+
+        <!-- 第6場 沃爾弗頓錦標 -->
+        <div class="race-card">
+            <div class="card-header"><div class="race-title">第6場 沃爾弗頓錦標 <small>表列賽 2005米</small></div><div class="race-meta">00:35 | 雅士谷</div></div>
+            <div class="race-content">
+                <div class="flex-row"><span class="label">🎯 獨贏膽</span><span class="value"><span class="horse-highlight">4號「大派股利」(19倍)</span> – 內檔1，近績有勝，冷膽首選</span></div>
+                <div class="flex-row"><span class="label">📌 位置/連贏Q</span><span class="value">膽4拖2,12,8,16；位置跟2號(18倍)</span></div>
+                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽4,2 拖12,8,16；單T：4+2+12, 4+2+8</span></div>
+                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">4,2,12,8,16</span></div>
+                <div class="chip-list"><span class="chip">⚠️ 12號大熱但檔位9外，只作配腳</span></div>
+            </div>
+        </div>
+
+        <!-- 第7場 銅馬錦標 -->
+        <div class="race-card">
+            <div class="card-header"><div class="race-title">第7場 銅馬錦標 <small>2844米長途</small></div><div class="race-meta">01:10 | 雅士谷</div></div>
+            <div class="race-content">
+                <div class="flex-row"><span class="label">🎯 獨贏膽</span><span class="value"><span class="horse-highlight">8號「金浪」(6.2倍)</span> – 內檔2，莫艾誠，近績穩定，最近勝出</span></div>
+                <div class="flex-row"><span class="label">📌 位置/連贏Q</span><span class="value">膽8拖14,3,10,1；位置跟14號(6.9倍)</span></div>
+                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽8,14 拖3,10,1；單T：8+14+3, 8+14+10</span></div>
+                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">8,14,3,10,1</span></div>
+                <div class="chip-list"><span class="chip">⚠️ 10號大熱但外檔14，長途蝕位，只宜配腳</span></div>
+            </div>
+        </div>
     </div>
 
-    <!-- 第2場 第四班 1200米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第2場 第四班 1200米 (屯門公眾騎術)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">7</span> 川河石駒 (檔1) | 次選 <span class="horse-number">5</span> 奇異歡星 (檔2) | 冷選 <span class="horse-number">12</span> 悠然常勝 (檔4)</td></tr>
-            <tr><th>位置</th><td>7, 5, 12</td></tr>
-            <tr><th>連贏</th><td>7 + 5</td></tr>
-            <tr><th>位置Q</th><td>7 + 5 + 12</td></tr>
-            <tr><th>三重彩</th><td>7 > 5 > 12</td></tr>
-            <tr><th>四連環</th><td>7, 5, 12, 1 (北地烈馬 檔3)</td></tr>
-            <tr><th>四重彩</th><td>7 > 5 > 12 > 1</td></tr>
-        </table>
-    </div>
-
-    <!-- 第3場 第五班 1400米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第3場 第五班 1400米 (薄扶林公眾騎術)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">8</span> 巴開佬 (檔1) | 次選 <span class="horse-number">13</span> 添喜運 (檔2) | 冷選 <span class="horse-number">14</span> 東昇鉞 (檔3)</td></tr>
-            <tr><th>位置</th><td>8, 13, 14</td></tr>
-            <tr><th>連贏</th><td>8 + 13</td></tr>
-            <tr><th>位置Q</th><td>8 + 13 + 14</td></tr>
-            <tr><th>三重彩</th><td>8 > 13 > 14</td></tr>
-            <tr><th>四連環</th><td>8, 13, 14, 2 (凱旋幸運 檔4)</td></tr>
-            <tr><th>四重彩</th><td>8 > 13 > 14 > 2</td></tr>
-        </table>
-    </div>
-
-    <!-- 第4場 第四班 1000米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第4場 第四班 1000米 (鯉魚門公眾騎術)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">4</span> 支付之父 (檔1) | 次選 <span class="horse-number">7</span> 極速神影 (檔2) | 冷選 <span class="horse-number">1</span> 展雄威 (檔8)</td></tr>
-            <tr><th>位置</th><td>4, 7, 1</td></tr>
-            <tr><th>連贏</th><td>4 + 7</td></tr>
-            <tr><th>位置Q</th><td>4 + 7 + 1</td></tr>
-            <tr><th>三重彩</th><td>4 > 7 > 1</td></tr>
-            <tr><th>四連環</th><td>4, 7, 1, 9 (喜意 檔3)</td></tr>
-            <tr><th>四重彩</th><td>4 > 7 > 1 > 9</td></tr>
-        </table>
-    </div>
-
-    <!-- 第5場 第四班 1200米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第5場 第四班 1200米 (香港傷健策騎)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">7</span> 電子騰飛 (檔1) | 次選 <span class="horse-number">12</span> 最好玩 (檔2) | 冷選 <span class="horse-number">9</span> 星辰千帥 (檔3)</td></tr>
-            <tr><th>位置</th><td>7, 12, 9</td></tr>
-            <tr><th>連贏</th><td>7 + 12</td></tr>
-            <tr><th>位置Q</th><td>7 + 12 + 9</td></tr>
-            <tr><th>三重彩</th><td>7 > 12 > 9</td></tr>
-            <tr><th>四連環</th><td>7, 12, 9, 2 (心雄雄 檔4)</td></tr>
-            <tr><th>四重彩</th><td>7 > 12 > 9 > 2</td></tr>
-        </table>
-    </div>
-
-    <!-- 第6場 第四班 1400米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第6場 第四班 1400米 (青山讓賽)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">14</span> 紅衣財神 (檔1) | 次選 <span class="horse-number">7</span> 文明福星 (檔3) | 冷選 <span class="horse-number">9</span> 開心旺財 (檔2)</td></tr>
-            <tr><th>位置</th><td>14, 7, 9</td></tr>
-            <tr><th>連贏</th><td>14 + 7</td></tr>
-            <tr><th>位置Q</th><td>14 + 7 + 9</td></tr>
-            <tr><th>三重彩</th><td>14 > 7 > 9</td></tr>
-            <tr><th>四連環</th><td>14, 7, 9, 5 (久久為軍 檔4)</td></tr>
-            <tr><th>四重彩</th><td>14 > 7 > 9 > 5</td></tr>
-        </table>
-    </div>
-
-    <!-- 第7場 第四班 1600米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第7場 第四班 1600米 (聖佐治挑戰)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">1</span> 威武年代 (檔1) | 次選 <span class="horse-number">2</span> 嘉應巨昇 (檔2) | 冷選 <span class="horse-number">7</span> 綫路福將 (檔3)</td></tr>
-            <tr><th>位置</th><td>1, 2, 7</td></tr>
-            <tr><th>連贏</th><td>1 + 2</td></tr>
-            <tr><th>位置Q</th><td>1 + 2 + 7</td></tr>
-            <tr><th>三重彩</th><td>1 > 2 > 7</td></tr>
-            <tr><th>四連環</th><td>1, 2, 7, 8 (好運年 檔4)</td></tr>
-            <tr><th>四重彩</th><td>1 > 2 > 7 > 8</td></tr>
-        </table>
-    </div>
-
-    <!-- 第8場 第三班 1200米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第8場 第三班 1200米 (鯉魚門公園)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">8</span> 辣得準 (檔8) 注意外檔，另推 <span class="horse-number">3</span> 手機鐵勁 (檔11) 有潘頓</td></tr>
-            <tr><th>位置</th><td>3, 8, 1 (八駿巨昇 檔1)</td></tr>
-            <tr><th>連贏</th><td>3 + 8</td></tr>
-            <tr><th>位置Q</th><td>3 + 8 + 1</td></tr>
-            <tr><th>三重彩</th><td>3 > 8 > 1</td></tr>
-            <tr><th>四連環</th><td>3, 8, 1, 7 (撻住贏 檔6)</td></tr>
-            <tr><th>四重彩</th><td>3 > 8 > 1 > 7</td></tr>
-        </table>
-    </div>
-
-    <!-- 第9場 第三班 1000米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第9場 第三班 1000米 (薄扶林郊野公園)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">4</span> 星運傳奇 (莫雷拉) | 次選 <span class="horse-number">2</span> 米奇 (蔡約翰) | 冷選 <span class="horse-number">8</span> 表廠傳奇 (田泰安)</td></tr>
-            <tr><th>位置</th><td>4, 2, 8</td></tr>
-            <tr><th>連贏</th><td>4 + 2</td></tr>
-            <tr><th>位置Q</th><td>4 + 2 + 8</td></tr>
-            <tr><th>三重彩</th><td>4 > 2 > 8</td></tr>
-            <tr><th>四連環</th><td>4, 2, 8, 1 (會長之寶)</td></tr>
-            <tr><th>四重彩</th><td>4 > 2 > 8 > 1</td></tr>
-        </table>
-    </div>
-
-    <!-- 第10場 第三班 1600米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第10場 第三班 1600米 (薄扶林水塘)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">5</span> 榮駿大道 (檔1) | 次選 <span class="horse-number">4</span> 活力拍檔 (檔2) | 冷選 <span class="horse-number">9</span> 北斗福星 (檔3)</td></tr>
-            <tr><th>位置</th><td>5, 4, 9</td></tr>
-            <tr><th>連贏</th><td>5 + 4</td></tr>
-            <tr><th>位置Q</th><td>5 + 4 + 9</td></tr>
-            <tr><th>三重彩</th><td>5 > 4 > 9</td></tr>
-            <tr><th>四連環</th><td>5, 4, 9, 2 (火悟空 檔5)</td></tr>
-            <tr><th>四重彩</th><td>5 > 4 > 9 > 2</td></tr>
-        </table>
-    </div>
-
-    <!-- 第11場 第二班 1200米 -->
-    <div class="race-card">
-        <div class="race-title">🏇 第11場 第二班 1200米 (西灣山)</div>
-        <table class="bet-table">
-            <tr><th>獨贏</th><td><span class="horse-number">4</span> 鐵之星河 (布文 檔3) | 次選 <span class="horse-number">10</span> 天星 (檔1) | 冷選 <span class="horse-number">6</span> 燈旭將軍 (莫雷拉 檔4)</td></tr>
-            <tr><th>位置</th><td>4, 10, 6</td></tr>
-            <tr><th>連贏</th><td>4 + 10</td></tr>
-            <tr><th>位置Q</th><td>4 + 10 + 6</td></tr>
-            <tr><th>三重彩</th><td>4 > 10 > 6</td></tr>
-            <tr><th>四連環</th><td>4, 10, 6, 12 (威利金箭 檔2)</td></tr>
-            <tr><th>四重彩</th><td>4 > 10 > 6 > 12</td></tr>
-        </table>
-    </div>
-
-    <div class="disclaimer">
-        🧾 誠實聲明：預測基於 SHTSN 19 派別集成 (奇門、數據、賠率估算、步速、血統等)，缺即時賠率，以騎師、練馬師、檔位、負磅綜合估算。賽馬涉及風險，請量力投注，系統不保證命中。建議臨場參考馬會公佈賠率。
-    </div>
-    <div class="footer">
-        🕸️ SHTSN 系統 · 集體智慧 · 持續進化
+    <div class="footnote">
+        📌 策略總結：<br>
+        ✅ 獨贏：優先選擇內檔1-4、近績穩定、賠率5-20倍值博馬（如第6場4號、第5場15號）。<br>
+        ✅ 連贏/位置Q：每場1膽拖4-5腳，必須包含1匹賠率10-20倍的冷門。<br>
+        ✅ 三重彩/單T：使用「兩膽入前三」膽拖，成本約6-10注，覆蓋率高。<br>
+        ✅ 四重彩：5匹馬複式（$50-60），適合捕捉冷門。<br>
+        ⚠️ 賠率為賽前參考，實際投注請留意臨場變動及馬會即時賠率。
     </div>
 </div>
 </body>
