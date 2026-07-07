@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN System｜沙田日賽預測 2026-07-04 (C+3賽道・改善版)</title>
+    <title>SHTSN System｜跑馬地夜賽預測 2026-07-08 (B賽道・即場賠率版)</title>
     <style>
         * {
             margin: 0;
@@ -51,7 +51,7 @@
         }
         .race-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(540px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(520px, 1fr));
             gap: 24px;
         }
         .race-card {
@@ -73,7 +73,7 @@
             border-bottom: 1px solid #ffb34740;
         }
         .race-name {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #ffd966;
         }
@@ -190,208 +190,175 @@
 <div class="container">
     <div class="header">
         <h1>🕸️ SHTSN System</h1>
-        <div class="badge">Super Horse to Spider Network · 賽前預測 (改善版)</div>
-        <div class="sub">沙田草地／全天候 · C+3賽道 · 2026年7月4日 (星期六) · 版本 V7.32</div>
-        <div class="sub">賠率來源：香港馬會即場賠率 (03/07/2026) · 5膽・連贏4組・位置Q 5匹互串</div>
+        <div class="badge">Super Horse to Spider Network · 賽前預測 (即場賠率版)</div>
+        <div class="sub">跑馬地草地 · B賽道 · 黏地 · 2026年7月8日 (星期三) · 版本 V7.34</div>
+        <div class="sub">賠率來源：香港馬會即場賠率 · 加權公式：奇門0.25 + 賠率0.15 + 數據0.13 + 跑道0.12 + 路程0.10 + ML(待啟用)0.10 + 騎練0.06 + 近績0.05 + 晨操0.04</div>
     </div>
 
     <div class="race-grid" id="raceContainer"></div>
 
     <div class="footer-note">
-        📌 本預測採用改善方案（每場5匹膽馬、連贏4組、位置Q 5匹互串），團體老大最終審批注碼。<br>
+        📌 本預測根據即場賠率及跑道偏差綜合產出，團體老大最終審批注碼。<br>
         🧮 注碼為模擬建議，實際投注請以香港馬會即場賠率為準。<br>
+        ⚙️ 機器學習派 (ML) 模型訓練已完成，待正式整合後將自動納入加權計算。<br>
         🔄 賽後將批量驗證並更新權重。
     </div>
 </div>
 
 <script>
     const racesData = [
-        { // 第1場 新馬賽 1200米 草地
-            index: 1, time: "16:00", classDist: "新馬賽 · 1200米", surface: "草地C+3", raceName: "蒲偉士碟（平磅賽）",
+        {
+            index: 1, time: "18:30", classDist: "第五班 · 1000米", surface: "草地B賽道", raceName: "開球讓賽",
             predictions: [
-                { rank: 1, name: "1號 星球勇士", draw: "1檔 (賠1.6)" },
-                { rank: 2, name: "9號 量子猴王", draw: "5檔 (賠8.4)" },
-                { rank: 3, name: "8號 永福", draw: "7檔 (賠9.1)" },
-                { rank: 4, name: "2號 全能勇士", draw: "2檔 (賠8.6)" }
+                { rank: 1, name: "8號 千杯", draw: "2檔 (賠6.3)" },
+                { rank: 2, name: "10號 辣得金", draw: "7檔 (賠6.1)" },
+                { rank: 3, name: "3號 萬眾開心", draw: "1檔 (賠4.5)" },
+                { rank: 4, name: "2號 喆喆友福", draw: "9檔 (賠5.3)" }
             ],
-            win: "1號 星球勇士（$150）",
-            quinella: "1–9（$50）、1–8（$30）、1–2（$20）、9–8（$20）",
-            placeQ: "1,9,8,2,6 互串 (10注×$10＝$100)",
-            tierce: "1 > 9 > 8（$10）",
-            singleT: "1,9,8（$10）",
-            first4: "1,9,8,2（$10）",
-            quartets: "1 > 9 > 8 > 2（$10）",
-            total: 410
+            win: "8號 千杯（$120）",
+            quinella: "8–10（$40）、8–3（$30）",
+            placeQ: "8,10,3,2 互串 (6注×$10＝$60)",
+            tierce: "8 > 10 > 3（$10）",
+            singleT: "8,10,3（$10）",
+            first4: "8,10,3,2（$10）",
+            quartets: "8 > 10 > 3 > 2（$10）",
+            total: 290
         },
-        { // 第2場 第五班 1200米 草地
-            index: 2, time: "16:30", classDist: "第五班 · 1200米", surface: "草地C+3", raceName: "施偉賢盃（讓賽）",
+        {
+            index: 2, time: "19:00", classDist: "第四班 · 1650米", surface: "草地B賽道", raceName: "自由球讓賽",
             predictions: [
-                { rank: 1, name: "5號 朗日雪峰", draw: "1檔 (賠2.1)" },
-                { rank: 2, name: "7號 藍爵爺", draw: "2檔 (賠8.6)" },
-                { rank: 3, name: "9號 魅力知福", draw: "4檔 (賠13)" },
-                { rank: 4, name: "11號 駿先生", draw: "3檔 (賠27)" }
+                { rank: 1, name: "2號 川河帥駒", draw: "1檔 (賠3.0)" },
+                { rank: 2, name: "1號 暴風之子", draw: "7檔 (賠6.4)" },
+                { rank: 3, name: "4號 領航天子", draw: "4檔 (賠7.9)" },
+                { rank: 4, name: "9號 得意佳作", draw: "3檔 (賠7.6)" }
             ],
-            win: "5號 朗日雪峰（$150）",
-            quinella: "5–7（$50）、5–9（$30）、5–11（$20）、7–9（$20）",
-            placeQ: "5,7,9,11,4 互串 (10注×$10＝$100)",
-            tierce: "5 > 7 > 9（$10）",
-            singleT: "5,7,9（$10）",
-            first4: "5,7,9,11（$10）",
-            quartets: "5 > 7 > 9 > 11（$10）",
-            total: 410
+            win: "2號 川河帥駒（$150）",
+            quinella: "2–1（$40）、2–4（$30）",
+            placeQ: "2,1,4,9 互串 (6注×$10＝$60)",
+            tierce: "2 > 1 > 4（$10）",
+            singleT: "2,1,4（$10）",
+            first4: "2,1,4,9（$10）",
+            quartets: "2 > 1 > 4 > 9（$10）",
+            total: 310
         },
-        { // 第3場 第五班 1200米 全天候
-            index: 3, time: "17:00", classDist: "第五班 · 1200米", surface: "全天候跑道", raceName: "黃頌顯盃（讓賽）",
+        {
+            index: 3, time: "19:30", classDist: "第四班 · 1000米", surface: "草地B賽道", raceName: "凌空抽射讓賽",
             predictions: [
-                { rank: 1, name: "1號 日日獎", draw: "1檔 (賠3.5)" },
-                { rank: 2, name: "12號 爆熱", draw: "5檔 (賠5.4)" },
-                { rank: 3, name: "11號 銀亮濠俠", draw: "9檔 (賠9.2)" },
-                { rank: 4, name: "4號 機械騎士", draw: "10檔 (賠9.1)" }
+                { rank: 1, name: "4號 美麗登場", draw: "9檔 (賠2.1)" },
+                { rank: 2, name: "3號 巨靈神", draw: "1檔 (賠15)" },
+                { rank: 3, name: "10號 飛來霸", draw: "2檔 (賠18)" },
+                { rank: 4, name: "8號 天火同人", draw: "7檔 (賠6.9)" }
             ],
-            win: "1號 日日獎（$150）",
-            quinella: "1–12（$50）、1–11（$30）、1–4（$20）、12–11（$20）",
-            placeQ: "1,12,11,4,3 互串 (10注×$10＝$100)",
-            tierce: "1 > 12 > 11（$10）",
-            singleT: "1,12,11（$10）",
-            first4: "1,12,11,4（$10）",
-            quartets: "1 > 12 > 11 > 4（$10）",
-            total: 410
+            win: "4號 美麗登場（$150）",
+            quinella: "4–3（$40）、4–10（$30）",
+            placeQ: "4,3,10,8 互串 (6注×$10＝$60)",
+            tierce: "4 > 3 > 10（$10）",
+            singleT: "4,3,10（$10）",
+            first4: "4,3,10,8（$10）",
+            quartets: "4 > 3 > 10 > 8（$10）",
+            total: 320
         },
-        { // 第4場 第二班 1200米 草地
-            index: 4, time: "17:40", classDist: "第二班 · 1200米", surface: "草地C+3", raceName: "李福深盃（讓賽）",
+        {
+            index: 4, time: "20:10", classDist: "第四班 · 1650米", surface: "草地B賽道", raceName: "Lenovo 呈獻：八戰百勝",
             predictions: [
-                { rank: 1, name: "5號 興馳千里", draw: "2檔 (賠2.9)" },
-                { rank: 2, name: "4號 扶搖勢勁", draw: "5檔 (賠3.0)" },
-                { rank: 3, name: "1號 信心星", draw: "1檔 (賠5.3)" },
-                { rank: 4, name: "6號 巴基之勝", draw: "4檔 (賠14)" }
+                { rank: 1, name: "1號 哥倫布", draw: "1檔 (賠3.2)" },
+                { rank: 2, name: "5號 好運年", draw: "2檔 (賠4.1)" },
+                { rank: 3, name: "7號 焦點", draw: "3檔 (賠11)" },
+                { rank: 4, name: "2號 紅海勁", draw: "5檔 (賠5.4)" }
             ],
-            win: "5號 興馳千里（$150）",
-            quinella: "5–4（$50）、5–1（$30）、5–6（$20）、4–1（$20）",
-            placeQ: "5,4,1,6,3 互串 (10注×$10＝$100)",
-            tierce: "5 > 4 > 1（$10）",
-            singleT: "5,4,1（$10）",
-            first4: "5,4,1,6（$10）",
-            quartets: "5 > 4 > 1 > 6（$10）",
-            total: 410
+            win: "1號 哥倫布（$120）",
+            quinella: "1–5（$40）、1–7（$30）",
+            placeQ: "1,5,7,2 互串 (6注×$10＝$60)",
+            tierce: "1 > 5 > 7（$10）",
+            singleT: "1,5,7（$10）",
+            first4: "1,5,7,2（$10）",
+            quartets: "1 > 5 > 7 > 2（$10）",
+            total: 290
         },
-        { // 第5場 第四班 1400米 草地
-            index: 5, time: "18:10", classDist: "第四班 · 1400米", surface: "草地C+3", raceName: "夏佳理錦標（讓賽）",
+        {
+            index: 5, time: "20:45", classDist: "第四班 · 1200米", surface: "草地B賽道", raceName: "入球讓賽",
             predictions: [
-                { rank: 1, name: "13號 飛躍成就", draw: "12檔 (賠5.1)" },
-                { rank: 2, name: "2號 和光同塵", draw: "1檔 (賠5.4)" },
-                { rank: 3, name: "12號 共創歡欣", draw: "8檔 (賠5.5)" },
-                { rank: 4, name: "8號 有情有義", draw: "10檔 (賠8.0)" }
+                { rank: 1, name: "9號 至合拍", draw: "1檔 (賠3.6)" },
+                { rank: 2, name: "11號 川河石駒", draw: "2檔 (賠12)" },
+                { rank: 3, name: "3號 巴閉王", draw: "9檔 (賠8.5)" },
+                { rank: 4, name: "4號 寶成智好", draw: "8檔 (賠7.5)" }
             ],
-            win: "13號 飛躍成就（$150）",
-            quinella: "13–2（$50）、13–12（$30）、13–8（$20）、2–12（$20）",
-            placeQ: "13,2,12,8,1 互串 (10注×$10＝$100)",
-            tierce: "13 > 2 > 12（$10）",
-            singleT: "13,2,12（$10）",
-            first4: "13,2,12,8（$10）",
-            quartets: "13 > 2 > 12 > 8（$10）",
-            total: 410
+            win: "9號 至合拍（$150）",
+            quinella: "9–11（$40）、9–3（$30）",
+            placeQ: "9,11,3,4 互串 (6注×$10＝$60)",
+            tierce: "9 > 11 > 3（$10）",
+            singleT: "9,11,3（$10）",
+            first4: "9,11,3,4（$10）",
+            quartets: "9 > 11 > 3 > 4（$10）",
+            total: 320
         },
-        { // 第6場 第四班 1200米 全天候
-            index: 6, time: "18:40", classDist: "第四班 · 1200米", surface: "全天候跑道", raceName: "陳祖澤錦標（讓賽）",
+        {
+            index: 6, time: "21:15", classDist: "第四班 · 1200米", surface: "草地B賽道", raceName: "頭槌讓賽",
             predictions: [
-                { rank: 1, name: "1號 葳莉非凡", draw: "8檔 (賠3.7)" },
-                { rank: 2, name: "2號 伶俐驫駒", draw: "10檔 (賠7.9)" },
-                { rank: 3, name: "7號 致力之城", draw: "4檔 (賠7.0)" },
-                { rank: 4, name: "8號 共同享樂", draw: "1檔 (賠12)" }
+                { rank: 1, name: "4號 驕陽雄心", draw: "3檔 (賠2.5)" },
+                { rank: 2, name: "10號 豪邁先登", draw: "4檔 (賠4.8)" },
+                { rank: 3, name: "11號 友得盈", draw: "9檔 (賠8.8)" },
+                { rank: 4, name: "3號 博愛先鋒", draw: "2檔 (賠14)" }
             ],
-            win: "1號 葳莉非凡（$150）",
-            quinella: "1–2（$50）、1–7（$30）、1–8（$20）、2–7（$20）",
-            placeQ: "1,2,7,8,5 互串 (10注×$10＝$100)",
-            tierce: "1 > 2 > 7（$10）",
-            singleT: "1,2,7（$10）",
-            first4: "1,2,7,8（$10）",
-            quartets: "1 > 2 > 7 > 8（$10）",
-            total: 410
+            win: "4號 驕陽雄心（$150）",
+            quinella: "4–10（$40）、4–11（$30）",
+            placeQ: "4,10,11,3 互串 (6注×$10＝$60)",
+            tierce: "4 > 10 > 11（$10）",
+            singleT: "4,10,11（$10）",
+            first4: "4,10,11,3（$10）",
+            quartets: "4 > 10 > 11 > 3（$10）",
+            total: 320
         },
-        { // 第7場 第四班 1200米 草地
-            index: 7, time: "19:10", classDist: "第四班 · 1200米", surface: "草地C+3", raceName: "施文信盃（讓賽）",
+        {
+            index: 7, time: "21:45", classDist: "第三班 · 1000米", surface: "草地B賽道", raceName: "單刀讓賽",
             predictions: [
-                { rank: 1, name: "6號 老鼠斑", draw: "8檔 (賠2.6)" },
-                { rank: 2, name: "10號 鋁主角", draw: "7檔 (賠5.7)" },
-                { rank: 3, name: "12號 同喜", draw: "1檔 (賠8.9)" },
-                { rank: 4, name: "5號 添開心", draw: "2檔 (賠13)" }
+                { rank: 1, name: "11號 官金騏", draw: "3檔 (賠6.3)" },
+                { rank: 2, name: "2號 連連幸運", draw: "1檔 (賠5.0)" },
+                { rank: 3, name: "1號 燭光晚餐", draw: "7檔 (賠7.3)" },
+                { rank: 4, name: "5號 加州本事", draw: "2檔 (賠10)" }
             ],
-            win: "6號 老鼠斑（$150）",
-            quinella: "6–10（$50）、6–12（$30）、6–5（$20）、10–12（$20）",
-            placeQ: "6,10,12,5,4 互串 (10注×$10＝$100)",
-            tierce: "6 > 10 > 12（$10）",
-            singleT: "6,10,12（$10）",
-            first4: "6,10,12,5（$10）",
-            quartets: "6 > 10 > 12 > 5（$10）",
-            total: 410
+            win: "11號 官金騏（$150）",
+            quinella: "11–2（$40）、11–1（$30）",
+            placeQ: "11,2,1,5 互串 (6注×$10＝$60)",
+            tierce: "11 > 2 > 1（$10）",
+            singleT: "11,2,1（$10）",
+            first4: "11,2,1,5（$10）",
+            quartets: "11 > 2 > 1 > 5（$10）",
+            total: 320
         },
-        { // 第8場 第四班 1800米 草地
-            index: 8, time: "19:40", classDist: "第四班 · 1800米", surface: "草地C+3", raceName: "葉錫安瓶（讓賽）",
+        {
+            index: 8, time: "22:15", classDist: "第二班 · 1800米", surface: "草地B賽道", raceName: "帽子戲法讓賽",
             predictions: [
-                { rank: 1, name: "6號 捷威", draw: "4檔 (賠5.4)" },
-                { rank: 2, name: "2號 紅衣醒目", draw: "10檔 (賠7.0)" },
-                { rank: 3, name: "9號 風起雲湧", draw: "12檔 (賠12)" },
-                { rank: 4, name: "12號 鴻圖大展", draw: "1檔 (賠13)" }
+                { rank: 1, name: "3號 奔放", draw: "5檔 (賠4.3)" },
+                { rank: 2, name: "12號 將義", draw: "2檔 (賠8.1)" },
+                { rank: 3, name: "11號 幸運派彩", draw: "3檔 (賠10)" },
+                { rank: 4, name: "4號 友瑩光", draw: "1檔 (賠11)" }
             ],
-            win: "6號 捷威（$150）",
-            quinella: "6–2（$50）、6–9（$30）、6–12（$20）、2–9（$20）",
-            placeQ: "6,2,9,12,4 互串 (10注×$10＝$100)",
-            tierce: "6 > 2 > 9（$10）",
-            singleT: "6,2,9（$10）",
-            first4: "6,2,9,12（$10）",
-            quartets: "6 > 2 > 9 > 12（$10）",
-            total: 410
+            win: "3號 奔放（$120）",
+            quinella: "3–12（$40）、3–11（$30）",
+            placeQ: "3,12,11,4 互串 (6注×$10＝$60)",
+            tierce: "3 > 12 > 11（$10）",
+            singleT: "3,12,11（$10）",
+            first4: "3,12,11,4（$10）",
+            quartets: "3 > 12 > 11 > 4（$10）",
+            total: 290
         },
-        { // 第9場 第四班 1200米 草地
-            index: 9, time: "20:10", classDist: "第四班 · 1200米", surface: "草地C+3", raceName: "周永健銀碟（讓賽）",
+        {
+            index: 9, time: "22:50", classDist: "第三班 · 1200米", surface: "草地B賽道", raceName: "十二碼決勝讓賽",
             predictions: [
-                { rank: 1, name: "3號 利高八斗", draw: "1檔 (賠1.8)" },
-                { rank: 2, name: "4號 馬寶寶", draw: "2檔 (賠22)" },
-                { rank: 3, name: "5號 應龍飛影", draw: "5檔 (賠8.2)" },
-                { rank: 4, name: "2號 巧眼光", draw: "6檔 (賠13)" }
+                { rank: 1, name: "7號 皇者有利", draw: "6檔 (賠4.6)" },
+                { rank: 2, name: "1號 志滿同行", draw: "3檔 (賠7.6)" },
+                { rank: 3, name: "4號 觀眾之力", draw: "5檔 (賠7.1)" },
+                { rank: 4, name: "11號 撼天鐵翼", draw: "1檔 (賠9.4)" }
             ],
-            win: "3號 利高八斗（$150）",
-            quinella: "3–4（$50）、3–5（$30）、3–2（$20）、4–5（$20）",
-            placeQ: "3,4,5,2,12 互串 (10注×$10＝$100)",
-            tierce: "3 > 4 > 5（$10）",
-            singleT: "3,4,5（$10）",
-            first4: "3,4,5,2（$10）",
-            quartets: "3 > 4 > 5 > 2（$10）",
-            total: 410
-        },
-        { // 第10場 第三班 1200米 草地
-            index: 10, time: "20:45", classDist: "第三班 · 1200米", surface: "草地C+3", raceName: "陳南祿錦標（讓賽）",
-            predictions: [
-                { rank: 1, name: "6號 巴閉精", draw: "4檔 (賠3.3)" },
-                { rank: 2, name: "1號 精彩駿將", draw: "1檔 (賠7.8)" },
-                { rank: 3, name: "7號 實力股", draw: "2檔 (賠9.0)" },
-                { rank: 4, name: "4號 人和家興", draw: "6檔 (賠6.9)" }
-            ],
-            win: "6號 巴閉精（$150）",
-            quinella: "6–1（$50）、6–7（$30）、6–4（$20）、1–7（$20）",
-            placeQ: "6,1,7,4,12 互串 (10注×$10＝$100)",
-            tierce: "6 > 1 > 7（$10）",
-            singleT: "6,1,7（$10）",
-            first4: "6,1,7,4（$10）",
-            quartets: "6 > 1 > 7 > 4（$10）",
-            total: 410
-        },
-        { // 第11場 第三班 1400米 草地
-            index: 11, time: "21:20", classDist: "第三班 · 1400米", surface: "草地C+3", raceName: "利子厚彝（讓賽）",
-            predictions: [
-                { rank: 1, name: "8號 亨驥", draw: "2檔 (賠9.5)" },
-                { rank: 2, name: "10號 捷駿", draw: "9檔 (賠3.0)" },
-                { rank: 3, name: "11號 正本唐心", draw: "3檔 (賠6.3)" },
-                { rank: 4, name: "3號 粵港資駒", draw: "1檔 (賠9.9)" }
-            ],
-            win: "8號 亨驥（$150）",
-            quinella: "8–10（$50）、8–11（$30）、8–3（$20）、10–11（$20）",
-            placeQ: "8,10,11,3,1 互串 (10注×$10＝$100)",
-            tierce: "8 > 10 > 11（$10）",
-            singleT: "8,10,11（$10）",
-            first4: "8,10,11,3（$10）",
-            quartets: "8 > 10 > 11 > 3（$10）",
-            total: 410
+            win: "7號 皇者有利（$120）",
+            quinella: "7–1（$40）、7–4（$30）",
+            placeQ: "7,1,4,11 互串 (6注×$10＝$60)",
+            tierce: "7 > 1 > 4（$10）",
+            singleT: "7,1,4（$10）",
+            first4: "7,1,4,11（$10）",
+            quartets: "7 > 1 > 4 > 11（$10）",
+            total: 290
         }
     ];
 
