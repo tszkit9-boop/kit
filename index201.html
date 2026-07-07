@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026.07.08 跑馬地夜賽 · 黏地預測</title>
+    <!-- 使用 Tailwind CSS 精簡排版 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 自訂微調 */
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .badge-win { background: #dc2626; color: white; }
+        .badge-place { background: #2563eb; color: white; }
+        .badge-cold { background: #f59e0b; color: black; }
+        .badge-trap { background: #6b7280; color: white; }
+        .badge-neutral { background: #e5e7eb; color: #374151; }
+        .bg-sticky { background: #f8fafc; }
+        .sticky-header th { position: sticky; top: 0; background: white; z-index: 10; }
+        .row-highlight-win { background: #fef2f2; }
+        .row-highlight-place { background: #eff6ff; }
+        .row-highlight-cold { background: #fffbeb; }
+        .row-highlight-trap { background: #f3f4f6; opacity: 0.7; }
+        .tooltip { position: relative; cursor: help; }
+        .tooltip:hover::after {
+            content: attr(data-tip);
+            position: absolute;
+            background: #1e293b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+        @media (max-width: 640px) {
+            .table-wrap { overflow-x: auto; }
+            .text-xs-mobile { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans antialiased p-4 md:p-6">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- 標題區 -->
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 tracking-tight">
+                    🐎 跑馬地夜賽 · 黏地預測
+                </h1>
+                <p class="text-sm text-gray-500 mt-1">2026年7月8日（星期三）｜ 全9場 ｜ 系統整合 XGBoost + Random Forest + 場地修正</p>
+            </div>
+            <div class="mt-2 sm:mt-0 flex gap-2 flex-wrap">
+                <span class="inline-flex items-center gap-1 bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-medium"><span class="w-2 h-2 bg-red-600 rounded-full"></span>首選</span>
+                <span class="inline-flex items-center gap-1 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium"><span class="w-2 h-2 bg-blue-600 rounded-full"></span>次選</span>
+                <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-medium"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>冷門</span>
+                <span class="inline-flex items-center gap-1 bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-medium"><span class="w-2 h-2 bg-gray-500 rounded-full"></span>陷阱</span>
+            </div>
+        </div>
+
+        <!-- 快速跳轉 -->
+        <div class="flex flex-wrap gap-2 mb-6 bg-white p-3 rounded-xl card-shadow">
+            <span class="text-sm font-medium text-gray-600 mr-1">跳轉：</span>
+            <a href="#race1" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第1場</a>
+            <a href="#race2" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第2場</a>
+            <a href="#race3" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第3場</a>
+            <a href="#race4" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第4場</a>
+            <a href="#race5" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第5場</a>
+            <a href="#race6" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第6場</a>
+            <a href="#race7" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第7場</a>
+            <a href="#race8" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第8場</a>
+            <a href="#race9" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full text-gray-700">第9場</a>
+        </div>
+
+        <!-- 容器：動態生成 -->
+        <div id="races-container"></div>
+
+        <!-- 注腳 -->
+        <div class="mt-10 text-center text-xs text-gray-400 border-t border-gray-200 pt-6">
+            <p>數據基於 2026-07-08 賽日公佈之排位及賠率，系統已考慮場地「黏地」修正。僅供參考，投注請理性。</p>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 數據：全9場 (黏地版本)
+        // 每場物件：場次, 路程班次, 時間, 重點提示, 馬匹陣列
+        // 馬匹屬性：號, 名, 檔, 磅, 騎, 獨贏, 位置, 定位 (win/place/cold/trap/neutral)
+        // ============================================================
+        const raceData = [
+            {
+                id: 1,
+                title: "第1場 18:30 五班1000米 開球讓賽",
+                note: "黏地 · 內檔優勢擴大，1號、6號外檔陷阱",
+                horses: [
+                    { no: "1", name: "鄉村樂韻", draw: 10, weight: "135", jockey: "艾兆禮", winOdds: "11", placeOdds: "3.3", tag: "trap", tip: "外檔蝕位，上仗贏馬排2檔，今仗難複製" },
+                    { no: "2", name: "喆喆友福", draw: 9, weight: "134", jockey: "布文", winOdds: "5.3", placeOdds: "2.6", tag: "neutral", tip: "布文黏地王，但9檔重磅，僅邊線" },
+                    { no: "3", name: "萬眾開心", draw: 1, weight: "134", jockey: "潘頓", winOdds: "4.5", placeOdds: "2.0", tag: "win", tip: "1檔+潘頓，降班作賽，黏地留放首選" },
+                    { no: "4", name: "運籌帷幄", draw: 5, weight: "132", jockey: "希威森", winOdds: "36", placeOdds: "9.3", tag: "neutral", tip: "近績差，不考慮" },
+                    { no: "5", name: "洛河", draw: 8, weight: "132", jockey: "霍宏聲", winOdds: "13", placeOdds: "4.3", tag: "neutral", tip: "外檔，僅邊線" },
+                    { no: "6", name: "飛雲", draw: 11, weight: "131", jockey: "莫雷拉", winOdds: "13", placeOdds: "4.6", tag: "trap", tip: "11檔+黏地，莫雷拉也難救" },
+                    { no: "7", name: "喜行", draw: 4, weight: "131", jockey: "楊明綸", winOdds: "21", placeOdds: "6.2", tag: "neutral", tip: "內檔但近績不穩" },
+                    { no: "8", name: "千杯", draw: 2, weight: "130", jockey: "鍾易禮", winOdds: "6.3", placeOdds: "1.8", tag: "place", tip: "2檔輕磅，回師五班，位置穩" },
+                    { no: "9", name: "飛越晨曦", draw: 12, weight: "129", jockey: "梁家俊", winOdds: "43", placeOdds: "11", tag: "trap", tip: "12檔，純陪跑" },
+                    { no: "10", name: "辣得金", draw: 7, weight: "129", jockey: "何澤堯", winOdds: "6.1", placeOdds: "1.6", tag: "cold", tip: "近績穩定，何澤堯谷草專家，位置Q必選" },
+                    { no: "11", name: "八里旺", draw: 6, weight: "128", jockey: "周俊樂", winOdds: "26", placeOdds: "5.5", tag: "neutral", tip: "欠競爭力" },
+                    { no: "12", name: "天火同德", draw: 3, weight: "115", jockey: "田泰安", winOdds: "9.0", placeOdds: "3.0", tag: "place", tip: "超輕磅+3檔+田泰安，黏地升級，位置穩" }
+                ]
+            },
+            {
+                id: 2,
+                title: "第2場 19:00 四班1650米 自由球讓賽",
+                note: "黏地 · 1650米氣量考驗，重磅馬劣勢",
+                horses: [
+                    { no: "1", name: "暴風之子", draw: 7, weight: "135", jockey: "黃寶妮", winOdds: "6.4", placeOdds: "2.3", tag: "neutral", tip: "減磅有利，但升班排7檔" },
+                    { no: "2", name: "川河帥駒", draw: 1, weight: "135", jockey: "莫雷拉", winOdds: "3.0", placeOdds: "1.1", tag: "win", tip: "1檔+莫雷拉，黏地留放，首選" },
+                    { no: "3", name: "精巧時計", draw: 9, weight: "135", jockey: "奧爾民", winOdds: "49", placeOdds: "10", tag: "trap", tip: "近績極差，外檔" },
+                    { no: "4", name: "領航天子", draw: 4, weight: "133", jockey: "布文", winOdds: "7.9", placeOdds: "3.1", tag: "place", tip: "布文+4檔，後上變速，次選" },
+                    { no: "5", name: "驍將", draw: 6, weight: "130", jockey: "鍾易禮", winOdds: "13", placeOdds: "3.7", tag: "neutral", tip: "邊線" },
+                    { no: "6", name: "贏玥", draw: 12, weight: "130", jockey: "潘頓", winOdds: "13", placeOdds: "4.2", tag: "trap", tip: "12檔+黏地，最大陷阱" },
+                    { no: "7", name: "蹺妙", draw: 10, weight: "127", jockey: "周俊樂", winOdds: "22", placeOdds: "8.5", tag: "trap", tip: "近績差，外檔" },
+                    { no: "8", name: "越駿聯歡", draw: 2, weight: "123", jockey: "巴度", winOdds: "10", placeOdds: "4.1", tag: "neutral", tip: "內檔輕磅，可作四重彩配腳" },
+                    { no: "9", name: "得意佳作", draw: 3, weight: "121", jockey: "潘明輝", winOdds: "7.6", placeOdds: "2.4", tag: "cold", tip: "3檔輕磅，曾同程入Q，冷門尋寶" },
+                    { no: "10", name: "森林之王", draw: 8, weight: "120", jockey: "艾兆禮", winOdds: "16", placeOdds: "3.8", tag: "neutral", tip: "邊線" },
+                    { no: "11", name: "萬里鵬躍", draw: 5, weight: "116", jockey: "楊明綸", winOdds: "51", placeOdds: "10", tag: "trap", tip: "不具競爭力" },
+                    { no: "12", name: "怪獸波士", draw: 11, weight: "115", jockey: "蔡明紹", winOdds: "12", placeOdds: "4.2", tag: "cold", tip: "全場最輕磅，外檔但可大外疊衝刺，冷門" }
+                ]
+            },
+            {
+                id: 3,
+                title: "第3場 19:30 四班1000米 凌空抽射讓賽",
+                note: "黏地 · 1000米檔位極度敏感，4號美麗登場9檔陷阱",
+                horses: [
+                    { no: "1", name: "鴻圖新星", draw: 6, weight: "133", jockey: "艾道拿", winOdds: "11", placeOdds: "2.7", tag: "neutral", tip: "實力高但重磅6檔" },
+                    { no: "2", name: "團結巴打", draw: 4, weight: "131", jockey: "梁家俊", winOdds: "20", placeOdds: "5.3", tag: "neutral", tip: "邊線" },
+                    { no: "3", name: "巨靈神", draw: 1, weight: "129", jockey: "巫顯東", winOdds: "15", placeOdds: "2.6", tag: "win", tip: "1檔+降班，黏地慢放，首選" },
+                    { no: "4", name: "美麗登場", draw: 9, weight: "127", jockey: "潘頓", winOdds: "2.1", placeOdds: "1.0", tag: "trap", tip: "9檔+黏地，歷史勝率0%，最大陷阱" },
+                    { no: "5", name: "乾坤圈", draw: 3, weight: "126", jockey: "楊明綸", winOdds: "36", placeOdds: "7.2", tag: "cold", tip: "初出+3檔，冷門試探" },
+                    { no: "6", name: "贏得自在", draw: 11, weight: "126", jockey: "蔡明紹", winOdds: "26", placeOdds: "7.2", tag: "trap", tip: "11檔，不考慮" },
+                    { no: "7", name: "幸運二十", draw: 5, weight: "125", jockey: "奧爾民", winOdds: "12", placeOdds: "3.4", tag: "neutral", tip: "邊線" },
+                    { no: "8", name: "天火同人", draw: 7, weight: "124", jockey: "黃寶妮", winOdds: "6.9", placeOdds: "2.3", tag: "place", tip: "超輕磅（117實重），近績準，位置Q膽" },
+                    { no: "9", name: "杰遜仔", draw: 12, weight: "124", jockey: "巴度", winOdds: "35", placeOdds: "8.1", tag: "trap", tip: "12檔" },
+                    { no: "10", name: "飛來霸", draw: 2, weight: "123", jockey: "艾兆禮", winOdds: "18", placeOdds: "4.4", tag: "place", tip: "2檔+首本，次選" },
+                    { no: "11", name: "福進", draw: 8, weight: "120", jockey: "莫雷拉", winOdds: "7.5", placeOdds: "3.5", tag: "neutral", tip: "莫雷拉但8檔" },
+                    { no: "12", name: "馬運高", draw: 10, weight: "120", jockey: "田泰安", winOdds: "28", placeOdds: "7.0", tag: "trap", tip: "10檔" }
+                ]
+            },
+            {
+                id: 4,
+                title: "第4場 20:10 四班1650米 Lenovo八戰百勝",
+                note: "黏地 · 主題賽事，綵衣因素影響，4號追風陷阱",
+                horses: [
+                    { no: "1", name: "哥倫布", draw: 1, weight: "133", jockey: "莫雷拉", winOdds: "3.2", placeOdds: "1.8", tag: "win", tip: "1檔+莫雷拉，首選" },
+                    { no: "2", name: "紅海勁", draw: 5, weight: "133", jockey: "何澤堯", winOdds: "5.4", placeOdds: "1.5", tag: "neutral", tip: "近績不穩" },
+                    { no: "3", name: "巴閉仔", draw: 6, weight: "129", jockey: "周俊樂", winOdds: "13", placeOdds: "3.2", tag: "trap", tip: "近績差" },
+                    { no: "4", name: "追風", draw: 7, weight: "127", jockey: "潘頓", winOdds: "13", placeOdds: "3.1", tag: "trap", tip: "7檔+黏地，上仗贏馬排2檔，陷阱" },
+                    { no: "5", name: "好運年", draw: 2, weight: "126", jockey: "艾兆禮", winOdds: "4.1", placeOdds: "1.4", tag: "place", tip: "2檔輕磅，極穩" },
+                    { no: "6", name: "準希望", draw: 8, weight: "121", jockey: "巴度", winOdds: "6.7", placeOdds: "2.0", tag: "neutral", tip: "8檔，邊線" },
+                    { no: "7", name: "焦點", draw: 3, weight: "119", jockey: "潘明輝", winOdds: "11", placeOdds: "2.9", tag: "cold", tip: "超輕磅+3檔，冷門尋寶" },
+                    { no: "8", name: "八心之星", draw: 4, weight: "119", jockey: "希威森", winOdds: "10", placeOdds: "3.6", tag: "cold", tip: "輕磅內檔，上仗同程第二，可配" }
+                ]
+            },
+            {
+                id: 5,
+                title: "第5場 20:45 四班1200米 入球讓賽",
+                note: "黏地 · 內檔優勢顯著，3號巴閉王外檔陷阱",
+                horses: [
+                    { no: "1", name: "馬馳登", draw: 10, weight: "135", jockey: "奧爾民", winOdds: "20", placeOdds: "7.2", tag: "trap", tip: "外檔頂磅" },
+                    { no: "2", name: "路路勁", draw: 7, weight: "134", jockey: "田泰安", winOdds: "14", placeOdds: "5.8", tag: "neutral", tip: "田泰安但重磅" },
+                    { no: "3", name: "巴閉王", draw: 9, weight: "134", jockey: "布文", winOdds: "8.5", placeOdds: "2.6", tag: "trap", tip: "9檔+黏地，近績全內檔，陷阱" },
+                    { no: "4", name: "寶成智好", draw: 8, weight: "131", jockey: "鍾易禮", winOdds: "7.5", placeOdds: "2.8", tag: "neutral", tip: "外檔但近穩" },
+                    { no: "5", name: "電子紅心", draw: 3, weight: "128", jockey: "霍宏聲", winOdds: "17", placeOdds: "5.7", tag: "neutral", tip: "初出3檔" },
+                    { no: "6", name: "勝多多", draw: 6, weight: "127", jockey: "潘頓", winOdds: "8.7", placeOdds: "2.8", tag: "neutral", tip: "潘頓但6檔" },
+                    { no: "7", name: "奇異歡星", draw: 12, weight: "126", jockey: "希威森", winOdds: "25", placeOdds: "6.8", tag: "trap", tip: "12檔" },
+                    { no: "8", name: "閃電奇駿", draw: 11, weight: "124", jockey: "巴度", winOdds: "30", placeOdds: "8.6", tag: "trap", tip: "11檔" },
+                    { no: "9", name: "至合拍", draw: 1, weight: "124", jockey: "周俊樂", winOdds: "3.6", placeOdds: "1.4", tag: "win", tip: "1檔輕磅，首選" },
+                    { no: "10", name: "祥勝力駒", draw: 4, weight: "122", jockey: "艾兆禮", winOdds: "10", placeOdds: "3.8", tag: "cold", tip: "4檔輕磅，冷門" },
+                    { no: "11", name: "川河石駒", draw: 2, weight: "122", jockey: "莫雷拉", winOdds: "12", placeOdds: "4.6", tag: "place", tip: "2檔+莫雷拉，次選" },
+                    { no: "12", name: "頑童", draw: 5, weight: "119", jockey: "楊明綸", winOdds: "7.2", placeOdds: "1.6", tag: "place", tip: "超輕磅+5檔，位置必選" }
+                ]
+            },
+            {
+                id: 6,
+                title: "第6場 21:15 四班1200米 頭槌讓賽",
+                note: "黏地 · 4號驕陽雄心與10號豪邁先登雙雄，8號彩虹七色陷阱",
+                horses: [
+                    { no: "1", name: "朗日自強", draw: 7, weight: "135", jockey: "梁家俊", winOdds: "21", placeOdds: "7.1", tag: "trap", tip: "頂磅外檔" },
+                    { no: "2", name: "競駿非凡", draw: 12, weight: "135", jockey: "霍宏聲", winOdds: "19", placeOdds: "6.3", tag: "trap", tip: "12檔" },
+                    { no: "3", name: "博愛先鋒", draw: 2, weight: "133", jockey: "巴度", winOdds: "14", placeOdds: "3.8", tag: "neutral", tip: "內檔但重磅" },
+                    { no: "4", name: "驕陽雄心", draw: 3, weight: "133", jockey: "潘頓", winOdds: "2.5", placeOdds: "1.2", tag: "win", tip: "3檔+潘頓，首選" },
+                    { no: "5", name: "銳目", draw: 6, weight: "133", jockey: "艾道拿", winOdds: "26", placeOdds: "7.4", tag: "trap", tip: "重磅" },
+                    { no: "6", name: "維港激流", draw: 10, weight: "132", jockey: "何澤堯", winOdds: "21", placeOdds: "5.8", tag: "trap", tip: "10檔" },
+                    { no: "7", name: "快搏", draw: 5, weight: "131", jockey: "布文", winOdds: "11", placeOdds: "3.7", tag: "cold", tip: "布文+5檔，冷門尋寶" },
+                    { no: "8", name: "彩虹七色", draw: 11, weight: "131", jockey: "周俊樂", winOdds: "13", placeOdds: "7.1", tag: "trap", tip: "11檔，最大陷阱" },
+                    { no: "9", name: "雷神太保", draw: 1, weight: "127", jockey: "奧爾民", winOdds: "22", placeOdds: "5.5", tag: "neutral", tip: "1檔但近績不穩" },
+                    { no: "10", name: "豪邁先登", draw: 4, weight: "123", jockey: "田泰安", winOdds: "4.8", placeOdds: "1.1", tag: "place", tip: "4檔+輕磅+田泰安，次選" },
+                    { no: "11", name: "友得盈", draw: 9, weight: "119", jockey: "巫顯東", winOdds: "8.8", placeOdds: "3.1", tag: "cold", tip: "超輕磅，外檔可衝" },
+                    { no: "12", name: "首駿", draw: 8, weight: "119", jockey: "希威森", winOdds: "26", placeOdds: "6.2", tag: "trap", tip: "8檔" }
+                ]
+            },
+            {
+                id: 7,
+                title: "第7場 21:45 三班1000米 單刀讓賽",
+                note: "黏地 · 5號加州本事大幅降級，2號連連幸運升首選",
+                horses: [
+                    { no: "1", name: "燭光晚餐", draw: 7, weight: "135", jockey: "周俊樂", winOdds: "7.3", placeOdds: "2.7", tag: "neutral", tip: "重磅外檔" },
+                    { no: "2", name: "連連幸運", draw: 1, weight: "131", jockey: "布文", winOdds: "5.0", placeOdds: "2.0", tag: "win", tip: "1檔+布文，黏地王，首選" },
+                    { no: "3", name: "品德寶寶", draw: 12, weight: "129", jockey: "潘頓", winOdds: "6.8", placeOdds: "2.8", tag: "trap", tip: "12檔+氣管傷患，陷阱" },
+                    { no: "4", name: "領航君子", draw: 4, weight: "125", jockey: "潘明輝", winOdds: "20", placeOdds: "5.4", tag: "cold", tip: "4檔，上仗贏馬，冷門" },
+                    { no: "5", name: "加州本事", draw: 2, weight: "123", jockey: "蔡明紹", winOdds: "10", placeOdds: "2.8", tag: "neutral", tip: "好地Banker，黏地大幅降級，邊線" },
+                    { no: "6", name: "騰昇瀧駒", draw: 8, weight: "123", jockey: "希威森", winOdds: "29", placeOdds: "6.4", tag: "trap", tip: "初出8檔" },
+                    { no: "7", name: "騰龍四海", draw: 9, weight: "122", jockey: "梁家俊", winOdds: "13", placeOdds: "3.7", tag: "trap", tip: "近績差" },
+                    { no: "8", name: "舞林寶典", draw: 10, weight: "121", jockey: "莫雷拉", winOdds: "8.7", placeOdds: "2.5", tag: "trap", tip: "10檔" },
+                    { no: "9", name: "勝萬金", draw: 5, weight: "120", jockey: "黃寶妮", winOdds: "8.1", placeOdds: "3.2", tag: "place", tip: "超輕磅（113實重），位置Q膽" },
+                    { no: "10", name: "友駿同心", draw: 11, weight: "119", jockey: "楊明綸", winOdds: "41", placeOdds: "13", tag: "trap", tip: "11檔" },
+                    { no: "11", name: "官金騏", draw: 3, weight: "119", jockey: "鍾易禮", winOdds: "6.3", placeOdds: "2.1", tag: "place", tip: "3檔+超輕磅，次選" },
+                    { no: "12", name: "藍地球", draw: 6, weight: "118", jockey: "金誠剛", winOdds: "17", placeOdds: "5.3", tag: "neutral", tip: "騎師成疑" }
+                ]
+            },
+            {
+                id: 8,
+                title: "第8場 22:15 二班1800米 帽子戲法讓賽",
+                note: "黏地 · 長途，輕磅馬優勢巨大，12號將義躍升首選",
+                horses: [
+                    { no: "1", name: "非惟僥倖", draw: 4, weight: "135", jockey: "黃寶妮", winOdds: "17", placeOdds: "4.0", tag: "neutral", tip: "傷患復出，邊線" },
+                    { no: "2", name: "一起美麗", draw: 12, weight: "133", jockey: "潘頓", winOdds: "13", placeOdds: "4.0", tag: "trap", tip: "12檔+頂磅，最大陷阱" },
+                    { no: "3", name: "奔放", draw: 5, weight: "130", jockey: "布文", winOdds: "4.3", placeOdds: "1.7", tag: "place", tip: "布文+近績佳，次選，但心律風險" },
+                    { no: "4", name: "友瑩光", draw: 1, weight: "129", jockey: "艾兆禮", winOdds: "11", placeOdds: "2.7", tag: "cold", tip: "1檔+曾同程贏馬，冷門" },
+                    { no: "5", name: "春風萬里", draw: 8, weight: "127", jockey: "莫雷拉", winOdds: "9.7", placeOdds: "5.5", tag: "trap", tip: "8檔" },
+                    { no: "6", name: "浪漫戰神", draw: 6, weight: "134", jockey: "周俊樂", winOdds: "5.4", placeOdds: "2.3", tag: "neutral", tip: "重磅，邊線" },
+                    { no: "7", name: "展雄志", draw: 7, weight: "126", jockey: "艾道拿", winOdds: "25", placeOdds: "6.6", tag: "trap", tip: "近績差" },
+                    { no: "8", name: "知足常樂", draw: 9, weight: "123", jockey: "梁家俊", winOdds: "13", placeOdds: "3.8", tag: "trap", tip: "9檔" },
+                    { no: "9", name: "極光之子", draw: 10, weight: "122", jockey: "何澤堯", winOdds: "11", placeOdds: "3.9", tag: "trap", tip: "10檔" },
+                    { no: "10", name: "川河耀駒", draw: 11, weight: "121", jockey: "鍾易禮", winOdds: "17", placeOdds: "3.0", tag: "trap", tip: "11檔" },
+                    { no: "11", name: "幸運派彩", draw: 3, weight: "118", jockey: "巴度", winOdds: "10", placeOdds: "3.4", tag: "cold", tip: "3檔輕磅，冷門" },
+                    { no: "12", name: "將義", draw: 2, weight: "115", jockey: "田泰安", winOdds: "8.1", placeOdds: "3.4", tag: "win", tip: "2檔+全場最輕磅+田泰安，首選" }
+                ]
+            },
+            {
+                id: 9,
+                title: "第9場 22:50 三班1200米 十二碼決勝讓賽",
+                note: "黏地 · 內檔輕磅馬主導，7號皇者有利過熱",
+                horses: [
+                    { no: "1", name: "志滿同行", draw: 3, weight: "135", jockey: "布文", winOdds: "7.6", placeOdds: "2.4", tag: "neutral", tip: "頂磅，黏地降級" },
+                    { no: "2", name: "快活英雄", draw: 4, weight: "133", jockey: "艾兆禮", winOdds: "13", placeOdds: "5.7", tag: "neutral", tip: "重磅" },
+                    { no: "3", name: "嘉應勇將", draw: 8, weight: "129", jockey: "鍾易禮", winOdds: "16", placeOdds: "5.6", tag: "trap", tip: "8檔" },
+                    { no: "4", name: "觀眾之力", draw: 5, weight: "128", jockey: "莫雷拉", winOdds: "7.1", placeOdds: "2.4", tag: "place", tip: "莫雷拉，次選" },
+                    { no: "5", name: "北地烈馬", draw: 2, weight: "125", jockey: "梁家俊", winOdds: "14", placeOdds: "4.3", tag: "place", tip: "2檔輕磅，次選" },
+                    { no: "6", name: "電源之駒", draw: 7, weight: "125", jockey: "巴度", winOdds: "15", placeOdds: "4.5", tag: "trap", tip: "7檔" },
+                    { no: "7", name: "皇者有利", draw: 6, weight: "124", jockey: "潘頓", winOdds: "4.6", placeOdds: "2.4", tag: "trap", tip: "過熱，6檔黏地蝕位" },
+                    { no: "8", name: "可靠大師", draw: 9, weight: "121", jockey: "黃寶妮", winOdds: "12", placeOdds: "4.2", tag: "trap", tip: "9檔" },
+                    { no: "9", name: "長勝金剛", draw: 11, weight: "121", jockey: "何澤堯", winOdds: "25", placeOdds: "6.8", tag: "trap", tip: "11檔" },
+                    { no: "10", name: "沙井之友", draw: 10, weight: "120", jockey: "周俊樂", winOdds: "5.6", placeOdds: "1.7", tag: "neutral", tip: "輕磅但外檔，邊線" },
+                    { no: "11", name: "撼天鐵翼", draw: 1, weight: "120", jockey: "田泰安", winOdds: "9.4", placeOdds: "2.2", tag: "win", tip: "1檔+輕磅+田泰安，首選" },
+                    { no: "12", name: "怡傲錢莊", draw: 12, weight: "119", jockey: "希威森", winOdds: "18", placeOdds: "—", tag: "trap", tip: "12檔+極輕身，不考慮" }
+                ]
+            }
+        ];
+
+        // ============================================================
+        // 渲染函數
+        // ============================================================
+        function renderRaces() {
+            const container = document.getElementById('races-container');
+            let html = '';
+
+            raceData.forEach((race, idx) => {
+                const raceId = `race${race.id}`;
+                // 過濾出有標籤的馬匹以顯示重點提示
+                const tagged = race.horses.filter(h => h.tag !== 'neutral');
+                const winHorse = tagged.find(h => h.tag === 'win');
+                const placeHorse = tagged.find(h => h.tag === 'place');
+                const coldHorse = tagged.find(h => h.tag === 'cold');
+                const trapHorse = tagged.find(h => h.tag === 'trap');
+
+                html += `
+                <div id="${raceId}" class="mt-8 bg-white rounded-2xl card-shadow overflow-hidden border border-gray-100">
+                    <!-- 場次標題 -->
+                    <div class="bg-gradient-to-r from-indigo-50 to-blue-50 px-5 py-4 border-b border-gray-200 flex flex-wrap items-center justify-between">
+                        <div>
+                            <h2 class="text-lg font-bold text-gray-800">${race.title}</h2>
+                            <p class="text-xs text-gray-500 mt-0.5">${race.note}</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-1 sm:mt-0">
+                            ${winHorse ? `<span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full font-medium">🏆 首選 ${winHorse.no} ${winHorse.name}</span>` : ''}
+                            ${placeHorse ? `<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-medium">🥈 次選 ${placeHorse.no} ${placeHorse.name}</span>` : ''}
+                            ${coldHorse ? `<span class="bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-medium">💎 冷門 ${coldHorse.no} ${coldHorse.name}</span>` : ''}
+                            ${trapHorse ? `<span class="bg-gray-200 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">⛔ 陷阱 ${trapHorse.no} ${trapHorse.name}</span>` : ''}
+                        </div>
+                    </div>
+
+                    <!-- 表格 -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-50 text-gray-600 text-xs uppercase tracking-wider border-b">
+                                <tr>
+                                    <th class="px-3 py-2">馬號</th>
+                                    <th class="px-3 py-2">馬名</th>
+                                    <th class="px-3 py-2">檔</th>
+                                    <th class="px-3 py-2">磅</th>
+                                    <th class="px-3 py-2">騎師</th>
+                                    <th class="px-3 py-2">獨贏</th>
+                                    <th class="px-3 py-2">位置</th>
+                                    <th class="px-3 py-2">系統定位</th>
+                                    <th class="px-3 py-2 hidden md:table-cell">簡評</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${race.horses.map(h => {
+                                    let tagClass = '';
+                                    let tagText = '';
+                                    let rowClass = '';
+                                    switch(h.tag) {
+                                        case 'win': tagClass = 'badge-win'; tagText = '首選'; rowClass = 'row-highlight-win'; break;
+                                        case 'place': tagClass = 'badge-place'; tagText = '次選'; rowClass = 'row-highlight-place'; break;
+                                        case 'cold': tagClass = 'badge-cold'; tagText = '冷門'; rowClass = 'row-highlight-cold'; break;
+                                        case 'trap': tagClass = 'badge-trap'; tagText = '陷阱'; rowClass = 'row-highlight-trap'; break;
+                                        default: tagClass = 'badge-neutral'; tagText = '—'; rowClass = '';
+                                    }
+                                    return `
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition ${rowClass}">
+                                        <td class="px-3 py-2.5 font-mono font-medium">${h.no}</td>
+                                        <td class="px-3 py-2.5 font-medium text-gray-800">${h.name}</td>
+                                        <td class="px-3 py-2.5 text-center">${h.draw}</td>
+                                        <td class="px-3 py-2.5 text-center">${h.weight}</td>
+                                        <td class="px-3 py-2.5">${h.jockey}</td>
+                                        <td class="px-3 py-2.5 font-mono ${parseFloat(h.winOdds) < 5 ? 'text-red-600 font-bold' : ''}">${h.winOdds}</td>
+                                        <td class="px-3 py-2.5 font-mono ${parseFloat(h.placeOdds) < 2 ? 'text-blue-600 font-bold' : ''}">${h.placeOdds}</td>
+                                        <td class="px-3 py-2.5"><span class="inline-block px-2 py-0.5 rounded-full text-xs font-medium ${tagClass}">${tagText}</span></td>
+                                        <td class="px-3 py-2.5 text-xs text-gray-600 hidden md:table-cell max-w-xs">${h.tip || ''}</td>
+                                    </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-50 px-5 py-2 text-xs text-gray-400 border-t border-gray-100 flex justify-between">
+                        <span>💡 點按馬名可查看詳情（桌面版懸停顯示簡評）</span>
+                        <span class="hidden sm:inline">黏地修正 · 賠率截至開跑前</span>
+                    </div>
+                </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // 頁面載入後執行
+        document.addEventListener('DOMContentLoaded', renderRaces);
+    </script>
+
+</body>
+</html>
