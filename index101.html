@@ -2,133 +2,94 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚽ 足球玄學預測儀表板 (v5.0)</title>
-    <!-- Chart.js CDN -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⚽ 玄學預測</title>
+    <!-- PWA 支援 -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="theme-color" content="#2c3e50">
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
+        /* 全域設定 */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: #f4f6f9;
-            padding: 20px;
+            padding: 12px;
             color: #333;
+            padding-bottom: 40px;
         }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .container { max-width: 500px; margin: 0 auto; }
+        
+        /* 標頭 */
         .header {
             background: linear-gradient(135deg, #2c3e50, #1a252f);
             color: white;
-            padding: 20px 30px;
-            border-radius: 12px;
-            margin-bottom: 25px;
+            padding: 16px 20px;
+            border-radius: 16px;
+            margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
         }
-        .header h1 {
-            font-weight: 400;
-            font-size: 28px;
-        }
-        .header .badge {
-            background: #27ae60;
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .header .badge span { color: #fff; }
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
+        .header h1 { font-size: 20px; font-weight: 600; }
+        .badge { background: #27ae60; padding: 4px 12px; border-radius: 30px; font-size: 11px; font-weight: 600; }
+        
+        /* 卡片 */
         .card {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: 0.2s;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
         .card h3 {
-            font-size: 16px;
+            font-size: 15px;
             color: #555;
             border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
             font-weight: 600;
         }
-        .card-full {
-            grid-column: 1 / -1;
-        }
-        .table-wrap {
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        th, td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        th {
-            background: #f8f9fa;
-            color: #555;
-            font-weight: 600;
-        }
-        .prob-bar {
-            display: inline-block;
-            height: 8px;
-            border-radius: 4px;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
-        .prob-text {
-            font-weight: 500;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 3px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-        }
+        
+        /* 表格 */
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+        th { background: #f8f9fa; color: #555; font-weight: 600; }
+        .prob-bar { display: inline-block; height: 6px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
+        
+        /* 標籤 */
+        .status-badge { display: inline-block; padding: 2px 10px; border-radius: 30px; font-size: 11px; font-weight: 600; }
         .status-badge.green { background: #d4edda; color: #155724; }
         .status-badge.yellow { background: #fff3cd; color: #856404; }
         .status-badge.red { background: #f8d7da; color: #721c24; }
-
-        .chart-container {
-            height: 220px;
-            margin-top: 5px;
+        
+        /* 圖表 */
+        .chart-container { height: 180px; margin-top: 5px; }
+        
+        /* 輸入框與按鈕 */
+        .flex-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        input[type="text"] {
+            flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
+            min-width: 120px;
         }
-
-        .flex-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+        button {
+            padding: 8px 16px; background: #2c3e50; color: white; border: none; border-radius: 8px;
+            font-weight: 600; cursor: pointer; font-size: 14px;
         }
-
-        .footer {
-            text-align: center;
-            font-size: 13px;
-            color: #999;
-            margin-top: 30px;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
+        .log-area {
+            background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px;
+            font-family: monospace; font-size: 11px; max-height: 150px; overflow-y: auto;
+            white-space: pre-wrap; word-break: break-all;
         }
-
-        @media (max-width: 800px) {
-            .grid { grid-template-columns: 1fr; }
-            .header { flex-direction: column; align-items: start; gap: 10px; }
+        .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
+        
+        /* 動態特徵結果區 */
+        .dynamic-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 13px;
+            background: #f8f9fa; padding: 12px; border-radius: 8px;
         }
     </style>
 </head>
@@ -136,198 +97,168 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <div>
-            <h1>⚽ 即時預測儀表板</h1>
-            <div style="font-size: 14px; opacity: 0.8; margin-top: 4px;">v5.0 · 模型準確率 76.3% · 特徵數 43</div>
-        </div>
-        <div class="badge"><span>✅ 即時處理器運行中</span></div>
+        <h1>⚽ 玄學預測</h1>
+        <div class="badge">v5.2 · 86%</div>
     </div>
 
-    <!-- Grid -->
-    <div class="grid">
-        <!-- 最近預測 -->
-        <div class="card card-full">
-            <h3>🔮 最近即時預測</h3>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>比賽編號</th>
-                            <th>時間</th>
-                            <th>預測結果</th>
-                            <th>主勝機率</th>
-                            <th>和局機率</th>
-                            <th>客勝機率</th>
-                        </tr>
-                    </thead>
-                    <tbody id="liveTable">
-                        <!-- 由 JavaScript 動態填入 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- 歷史命中率 -->
-        <div class="card">
-            <h3>📊 歷史命中率</h3>
-            <div class="chart-container">
-                <canvas id="rateChart"></canvas>
-            </div>
-        </div>
-
-        <!-- 動態特徵查詢 (模擬) -->
-        <div class="card">
-            <h3>📈 動態特徵 (模擬)</h3>
-            <div style="font-size: 14px; margin-bottom: 12px;">
-                <label for="teamInput">輸入球隊 (英文):</label>
-                <input type="text" id="teamInput" value="Brazil" style="padding:5px 10px; border:1px solid #ccc; border-radius:6px; width:140px; margin-left:8px;">
-                <button onclick="fetchDynamic()" style="padding:5px 16px; background:#2c3e50; color:white; border:none; border-radius:6px; cursor:pointer;">查詢</button>
-            </div>
-            <div id="dynamicResult" style="font-size:14px; background:#f8f9fa; padding:12px; border-radius:8px; min-height:80px;">
-                點擊「查詢」顯示該隊最新動態特徵
-            </div>
-        </div>
-    </div>
-
-    <!-- 事件日誌 (模擬) -->
+    <!-- 1. 即時預測 -->
     <div class="card">
-        <h3>📨 即時事件日誌</h3>
-        <div style="background:#1e1e1e; color:#d4d4d4; padding:14px; border-radius:8px; font-family: monospace; font-size:13px; max-height:180px; overflow-y:auto;" id="logArea">
-            [07/07 18:30] 📡 已連線 Kafka，開始監聽即時事件...<br>
-            [07/07 18:31] 📨 收到事件: injury (Brazil)<br>
-            [07/07 18:31] 🏥 傷停更新：Brazil 影響分數變更為 1.0<br>
-            [07/07 18:32] 📨 收到事件: goal (Spain, 15')<br>
-            [07/07 18:32] ⚽ 入球更新：Spain 得分，淨勝球變動 -1<br>
-            [07/07 18:33] 🔮 即時預測 for FB3021: 2 (機率: 0.25/0.30/0.45)
+        <h3>🔮 最近預測</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>比賽</th><th>預測</th><th>主</th><th>和</th><th>客</th></tr></thead>
+                <tbody id="liveTable"><tr><td colspan="5" style="text-align:center; color:#999;">載入中...</td></tr></tbody>
+            </table>
         </div>
     </div>
 
-    <div class="footer">
-        系統版本 v5.0 · 資料來源：StatsBomb + 動態特徵 · 儀表板更新時間 <span id="updateTime"></span>
+    <!-- 2. 命中率圖表 -->
+    <div class="card">
+        <h3>📊 歷史命中率</h3>
+        <div class="chart-container"><canvas id="rateChart"></canvas></div>
     </div>
+
+    <!-- 3. 動態特徵查詢 -->
+    <div class="card">
+        <h3>📈 動態特徵</h3>
+        <div class="flex-row">
+            <input type="text" id="teamInput" value="Brazil" placeholder="輸入隊伍名稱">
+            <button onclick="fetchDynamic()">查詢</button>
+        </div>
+        <div id="dynamicResult" class="dynamic-grid" style="margin-top:12px;">
+            <div><strong>隊伍</strong> <span id="d_team">-</span></div>
+            <div><strong>傷停影響</strong> <span id="d_injury">-</span></div>
+            <div><strong>近5主場 xG</strong> <span id="d_homexg">-</span></div>
+            <div><strong>近5客場 xG</strong> <span id="d_awayxg">-</span></div>
+            <div><strong>狀態動量</strong> <span id="d_momentum">-</span></div>
+            <div><strong>場地濕度</strong> <span id="d_wetness">-</span></div>
+        </div>
+    </div>
+
+    <!-- 4. 事件日誌 -->
+    <div class="card">
+        <h3>📨 即時日誌</h3>
+        <div class="log-area" id="logArea">
+📡 已連線，等待事件...
+        </div>
+    </div>
+
+    <div class="footer">📱 手機版 PWA · 數據來自 Flask API</div>
 </div>
 
 <script>
-    // ============================================================
-    // 1. 模擬數據（實際使用時可替換為 API 請求）
-    // ============================================================
-    const samplePredictions = [
-        { match_id: 'FB3023', time: '2026-07-08 00:30', result: '主勝', home: 0.68, draw: 0.22, away: 0.10 },
-        { match_id: 'FB3021', time: '2026-07-07 22:15', result: '客勝', home: 0.25, draw: 0.30, away: 0.45 },
-        { match_id: 'FB1248', time: '2026-07-07 21:00', result: '和局', home: 0.33, draw: 0.40, away: 0.27 },
-        { match_id: 'FB1251', time: '2026-07-07 19:30', result: '客勝', home: 0.15, draw: 0.20, away: 0.65 },
-        { match_id: 'FB1240', time: '2026-07-07 17:45', result: '主勝', home: 0.58, draw: 0.25, away: 0.17 },
-    ];
+    // =============================================
+    // 設定 API 網址（請修改為你的實際 IP）
+    // =============================================
+    const API_BASE = 'http://192.168.1.100:5001';  // ⚠️ 請改成你的電腦內網 IP + 連接埠
 
-    const rateData = [
-        { label: '主客和', value: 44.6 },
-        { label: '入球大細', value: 57.8 },
-        { label: '讓球', value: 43.4 },
-        { label: '波膽', value: 19.5 },
-        { label: '半場角球', value: 53.8 },
-        { label: '全場角球', value: 46.2 },
-    ];
-
-    // ============================================================
-    // 2. 渲染表格
-    // ============================================================
-    function renderTable() {
-        const tbody = document.getElementById('liveTable');
-        tbody.innerHTML = '';
-        samplePredictions.forEach(p => {
-            const row = `<tr>
-                <td><strong>${p.match_id}</strong></td>
-                <td>${p.time}</td>
-                <td><span class="status-badge ${p.result==='主勝'?'green':p.result==='和局'?'yellow':'red'}">${p.result}</span></td>
-                <td>${(p.home*100).toFixed(1)}%</td>
-                <td>${(p.draw*100).toFixed(1)}%</td>
-                <td>${(p.away*100).toFixed(1)}%</td>
-            </tr>`;
-            tbody.innerHTML += row;
-        });
-    }
-    renderTable();
-
-    // ============================================================
-    // 3. 繪製命中率條形圖
-    // ============================================================
-    const ctx = document.getElementById('rateChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: rateData.map(d => d.label),
-            datasets: [{
-                label: '命中率 (%)',
-                data: rateData.map(d => d.value),
-                backgroundColor: rateData.map(d => d.value >= 55 ? '#27ae60' : d.value >= 40 ? '#f39c12' : '#e74c3c'),
-                borderRadius: 6,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-            },
-            scales: {
-                y: {
-                    min: 0,
-                    max: 70,
-                    ticks: { callback: v => v + '%' }
-                }
+    // =============================================
+    // 1. 載入即時預測
+    // =============================================
+    async function loadPredictions() {
+        try {
+            const res = await fetch(`${API_BASE}/api/live_predictions`);
+            const data = await res.json();
+            const tbody = document.getElementById('liveTable');
+            tbody.innerHTML = '';
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5">暫無預測記錄</td></tr>';
+                return;
             }
+            data.slice(0, 5).forEach(p => {
+                const map = {0:'主勝',1:'和局',2:'客勝'};
+                const text = map[p.result] || '未知';
+                const cls = text==='主勝'?'green':text==='和局'?'yellow':'red';
+                const row = `<tr>
+                    <td><strong>${p.match_id || 'N/A'}</strong></td>
+                    <td><span class="status-badge ${cls}">${text}</span></td>
+                    <td>${(p.home*100).toFixed(0)}%</td>
+                    <td>${(p.draw*100).toFixed(0)}%</td>
+                    <td>${(p.away*100).toFixed(0)}%</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        } catch(e) {
+            document.getElementById('liveTable').innerHTML = '<tr><td colspan="5">⚠️ 無法連線 API</td></tr>';
         }
-    });
-
-    // ============================================================
-    // 4. 動態特徵查詢（模擬）
-    // ============================================================
-    function fetchDynamic() {
-        const team = document.getElementById('teamInput').value.trim() || 'Brazil';
-        // 模擬數據
-        const mock = {
-            team: team,
-            feature_date: '2026-07-07',
-            last_5_home_xg: 1.8,
-            last_5_away_xg: 1.2,
-            injury_impact_score: 1.0,
-            live_goal_diff: -1,
-            pitch_wetness: 0.5,
-            form_momentum: 3,
-        };
-        document.getElementById('dynamicResult').innerHTML = `
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 20px;">
-                <div><strong>球隊</strong> ${mock.team}</div>
-                <div><strong>日期</strong> ${mock.feature_date}</div>
-                <div><strong>近5主場 xG</strong> ${mock.last_5_home_xg}</div>
-                <div><strong>近5客場 xG</strong> ${mock.last_5_away_xg}</div>
-                <div><strong>傷停影響</strong> ${mock.injury_impact_score}</div>
-                <div><strong>即時淨勝球</strong> ${mock.live_goal_diff}</div>
-                <div><strong>場地濕度</strong> ${mock.pitch_wetness}</div>
-                <div><strong>狀態動量</strong> ${mock.form_momentum}</div>
-            </div>
-        `;
     }
-    // 初始查詢一次
+
+    // =============================================
+    // 2. 命中率圖表
+    // =============================================
+    async function loadHitRate() {
+        try {
+            const res = await fetch(`${API_BASE}/api/hit_rate`);
+            const data = await res.json();
+            const ctx = document.getElementById('rateChart').getContext('2d');
+            if (window.rateChart) window.rateChart.destroy();
+            window.rateChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(d => d.label),
+                    datasets: [{
+                        label: '命中率 (%)',
+                        data: data.map(d => d.value),
+                        backgroundColor: data.map(d => d.value >= 55 ? '#27ae60' : d.value >= 40 ? '#f39c12' : '#e74c3c'),
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { min: 0, max: 70, ticks: { callback: v => v + '%' } } }
+                }
+            });
+        } catch(e) { console.error('載入命中率失敗', e); }
+    }
+
+    // =============================================
+    // 3. 動態特徵查詢
+    // =============================================
+    async function fetchDynamic() {
+        const team = document.getElementById('teamInput').value.trim() || 'Brazil';
+        try {
+            const res = await fetch(`${API_BASE}/api/dynamic_features?team=${team}`);
+            const data = await res.json();
+            if (data.error) {
+                document.getElementById('d_team').innerText = '找不到';
+                return;
+            }
+            document.getElementById('d_team').innerText = data.team || '-';
+            document.getElementById('d_injury').innerText = data.injury_impact_score || 0;
+            document.getElementById('d_homexg').innerText = data.last_5_home_xg || 0;
+            document.getElementById('d_awayxg').innerText = data.last_5_away_xg || 0;
+            document.getElementById('d_momentum').innerText = data.form_momentum || 0;
+            document.getElementById('d_wetness').innerText = data.pitch_wetness || 0;
+        } catch(e) {
+            document.getElementById('d_team').innerText = 'API 錯誤';
+        }
+    }
+
+    // =============================================
+    // 4. 更新時間 & 定時刷新
+    // =============================================
+    function updateTime() {
+        document.getElementById('updateTime').textContent = new Date().toLocaleString('zh-HK');
+    }
+
+    // =============================================
+    // 5. 註冊 Service Worker (PWA)
+    // =============================================
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(() => console.log('✅ SW 註冊成功'))
+            .catch(err => console.error('❌ SW 註冊失敗', err));
+    }
+
+    // =============================================
+    // 6. 初始載入
+    // =============================================
+    loadPredictions();
+    loadHitRate();
     fetchDynamic();
-
-    // ============================================================
-    // 5. 更新時間
-    // ============================================================
-    document.getElementById('updateTime').textContent = new Date().toLocaleString('zh-HK', { timeZone: 'Asia/Hong_Kong' });
-
-    // ============================================================
-    // 6. (可選) 真實 API 串接範例（註解）
-    // ============================================================
-    /*
-    // 若要從後端 API 取得真實數據，可取消註解並修改 URL
-    fetch('/api/live_predictions')
-        .then(res => res.json())
-        .then(data => {
-            // 更新表格
-        })
-        .catch(err => console.error(err));
-    */
+    setInterval(loadPredictions, 30000); // 每30秒更新
 </script>
 </body>
 </html>
