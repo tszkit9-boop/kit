@@ -34,7 +34,14 @@
             align-items: center;
         }
         .header h1 { font-size: 20px; font-weight: 600; }
-        .badge { background: #27ae60; padding: 4px 12px; border-radius: 30px; font-size: 11px; font-weight: 600; }
+        .badge { 
+            background: #27ae60; 
+            padding: 4px 12px; 
+            border-radius: 30px; 
+            font-size: 11px; 
+            font-weight: 600;
+            white-space: nowrap;
+        }
         
         /* 卡片 */
         .card {
@@ -58,10 +65,15 @@
         table { width: 100%; border-collapse: collapse; font-size: 12px; }
         th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid #f0f0f0; }
         th { background: #f8f9fa; color: #555; font-weight: 600; }
-        .prob-bar { display: inline-block; height: 6px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
         
         /* 標籤 */
-        .status-badge { display: inline-block; padding: 2px 10px; border-radius: 30px; font-size: 11px; font-weight: 600; }
+        .status-badge { 
+            display: inline-block; 
+            padding: 2px 10px; 
+            border-radius: 30px; 
+            font-size: 11px; 
+            font-weight: 600; 
+        }
         .status-badge.green { background: #d4edda; color: #155724; }
         .status-badge.yellow { background: #fff3cd; color: #856404; }
         .status-badge.red { background: #f8d7da; color: #721c24; }
@@ -69,7 +81,7 @@
         /* 圖表 */
         .chart-container { height: 180px; margin-top: 5px; }
         
-        /* 輸入框與按鈕 */
+        /* 輸入與按鈕 */
         .flex-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         input[type="text"] {
             flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
@@ -86,7 +98,7 @@
         }
         .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
         
-        /* 動態特徵結果區 */
+        /* 動態特徵結果 */
         .dynamic-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 13px;
             background: #f8f9fa; padding: 12px; border-radius: 8px;
@@ -95,10 +107,10 @@
 </head>
 <body>
 <div class="container">
-    <!-- Header -->
+    <!-- 標頭 -->
     <div class="header">
         <h1>⚽ 玄學預測</h1>
-        <div class="badge">v5.2 · 86%</div>
+        <div class="badge">v5.3 · 87%</div>
     </div>
 
     <!-- 1. 即時預測 -->
@@ -150,7 +162,7 @@
     // =============================================
     // 設定 API 網址（請修改為你的實際 IP）
     // =============================================
-    const API_BASE = 'http://192.168.31.203:5001/api/live_predictions';  // ⚠️ 請改成你的電腦內網 IP + 連接埠
+    const API_BASE = 'http://192.168.1.100:5001';  // ⚠️ 請改成你的電腦內網 IP + 連接埠
 
     // =============================================
     // 1. 載入即時預測
@@ -237,11 +249,9 @@
     }
 
     // =============================================
-    // 4. 更新時間 & 定時刷新
+    // 4. 定時刷新
     // =============================================
-    function updateTime() {
-        document.getElementById('updateTime').textContent = new Date().toLocaleString('zh-HK');
-    }
+    setInterval(loadPredictions, 30000); // 每30秒更新
 
     // =============================================
     // 5. 註冊 Service Worker (PWA)
@@ -258,7 +268,6 @@
     loadPredictions();
     loadHitRate();
     fetchDynamic();
-    setInterval(loadPredictions, 30000); // 每30秒更新
 </script>
 </body>
 </html>
