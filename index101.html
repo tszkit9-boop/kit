@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>⚽ 玄學預測</title>
+
     <!-- PWA 支援 -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icon-192.png">
-    <meta name="theme-color" content="#2c3e50">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <meta name="theme-color" content="#2c3e50" />
+
     <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+
     <style>
-        /* 全域設定 */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* ===== 全域 ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: #f4f6f9;
-            padding: 12px;
-            color: #333;
-            padding-bottom: 40px;
+            padding: 12px 12px 40px;
+            color: #1e2a3a;
         }
-        .container { max-width: 500px; margin: 0 auto; }
-        
-        /* 標頭 */
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ===== 標頭 ===== */
         .header {
-            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            background: linear-gradient(135deg, #1e2a3a, #2c3e50);
             color: white;
             padding: 16px 20px;
             border-radius: 16px;
@@ -32,242 +44,450 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        .header h1 { font-size: 20px; font-weight: 600; }
-        .badge { 
-            background: #27ae60; 
-            padding: 4px 12px; 
-            border-radius: 30px; 
-            font-size: 11px; 
+
+        .header h1 {
+            font-size: 20px;
             font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .badge {
+            background: #27ae60;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
             white-space: nowrap;
         }
-        
-        /* 卡片 */
+
+        /* ===== 卡片 ===== */
         .card {
-            background: white;
+            background: #ffffff;
             border-radius: 16px;
             padding: 16px;
             margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
+
         .card h3 {
             font-size: 15px;
-            color: #555;
-            border-bottom: 2px solid #eee;
+            color: #2c3e50;
+            border-bottom: 2px solid #f0f2f5;
             padding-bottom: 8px;
             margin-bottom: 12px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        
-        /* 表格 */
-        .table-wrap { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; font-size: 12px; }
-        th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid #f0f0f0; }
-        th { background: #f8f9fa; color: #555; font-weight: 600; }
-        
-        /* 標籤 */
-        .status-badge { 
-            display: inline-block; 
-            padding: 2px 10px; 
-            border-radius: 30px; 
-            font-size: 11px; 
-            font-weight: 600; 
+
+        /* ===== 表格 ===== */
+        .table-wrap {
+            overflow-x: auto;
         }
-        .status-badge.green { background: #d4edda; color: #155724; }
-        .status-badge.yellow { background: #fff3cd; color: #856404; }
-        .status-badge.red { background: #f8d7da; color: #721c24; }
-        
-        /* 圖表 */
-        .chart-container { height: 180px; margin-top: 5px; }
-        
-        /* 輸入與按鈕 */
-        .flex-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-        input[type="text"] {
-            flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            padding: 8px 4px;
+            text-align: left;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        th {
+            background: #f8f9fa;
+            color: #555;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-badge.green {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-badge.yellow {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-badge.red {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* ===== 圖表 ===== */
+        .chart-container {
+            height: 170px;
+            margin-top: 4px;
+        }
+
+        /* ===== 動態特徵查詢 ===== */
+        .flex-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .flex-row input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
             min-width: 120px;
+            background: #fafbfc;
         }
-        button {
-            padding: 8px 16px; background: #2c3e50; color: white; border: none; border-radius: 8px;
-            font-weight: 600; cursor: pointer; font-size: 14px;
+
+        .flex-row button {
+            padding: 8px 16px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
         }
-        .log-area {
-            background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px;
-            font-family: monospace; font-size: 11px; max-height: 150px; overflow-y: auto;
-            white-space: pre-wrap; word-break: break-all;
+
+        .flex-row button:hover {
+            background: #1a252f;
         }
-        .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
-        
-        /* 動態特徵結果 */
+
         .dynamic-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 13px;
-            background: #f8f9fa; padding: 12px; border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 16px;
+            font-size: 13px;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        .dynamic-grid strong {
+            color: #2c3e50;
+        }
+
+        /* ===== 日誌區 ===== */
+        .log-area {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            max-height: 140px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+
+        .log-area .time {
+            color: #888;
+        }
+
+        /* ===== 頁尾 ===== */
+        .footer {
+            text-align: center;
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer span {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        /* ===== 狀態提示 ===== */
+        .loading {
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+            padding: 12px 0;
+        }
+
+        /* ===== 小型調整 ===== */
+        @media (max-width: 420px) {
+            .header h1 {
+                font-size: 17px;
+            }
+            .badge {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
+            table {
+                font-size: 11px;
+            }
+            th,
+            td {
+                padding: 6px 3px;
+            }
         }
     </style>
 </head>
+
 <body>
-<div class="container">
-    <!-- 標頭 -->
-    <div class="header">
-        <h1>⚽ 玄學預測</h1>
-        <div class="badge">v5.3 · 87%</div>
-    </div>
+    <div class="container">
 
-    <!-- 1. 即時預測 -->
-    <div class="card">
-        <h3>🔮 最近預測</h3>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>比賽</th><th>預測</th><th>主</th><th>和</th><th>客</th></tr></thead>
-                <tbody id="liveTable"><tr><td colspan="5" style="text-align:center; color:#999;">載入中...</td></tr></tbody>
-            </table>
+        <!-- 標頭 -->
+        <div class="header">
+            <h1>⚽ 玄學預測</h1>
+            <div class="badge" id="versionBadge">v5.3 · 87%</div>
+        </div>
+
+        <!-- 1. 即時預測 -->
+        <div class="card">
+            <h3>🔮 最近預測</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>比賽</th>
+                            <th>預測</th>
+                            <th>主</th>
+                            <th>和</th>
+                            <th>客</th>
+                        </tr>
+                    </thead>
+                    <tbody id="liveTable">
+                        <tr>
+                            <td colspan="5" class="loading">載入中⋯</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. 命中率圖表 -->
+        <div class="card">
+            <h3>📊 歷史命中率</h3>
+            <div class="chart-container">
+                <canvas id="rateChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 3. 動態特徵查詢 -->
+        <div class="card">
+            <h3>📈 動態特徵</h3>
+            <div class="flex-row">
+                <input type="text" id="teamInput" value="Brazil" placeholder="隊伍名稱 (英文)" />
+                <button onclick="fetchDynamic()">查詢</button>
+            </div>
+            <div id="dynamicResult" class="dynamic-grid">
+                <div><strong>隊伍</strong> <span id="d_team">-</span></div>
+                <div><strong>傷停影響</strong> <span id="d_injury">-</span></div>
+                <div><strong>近5主場 xG</strong> <span id="d_homexg">-</span></div>
+                <div><strong>近5客場 xG</strong> <span id="d_awayxg">-</span></div>
+                <div><strong>狀態動量</strong> <span id="d_momentum">-</span></div>
+                <div><strong>場地濕度</strong> <span id="d_wetness">-</span></div>
+            </div>
+        </div>
+
+        <!-- 4. 事件日誌 -->
+        <div class="card">
+            <h3>📨 即時日誌</h3>
+            <div class="log-area" id="logArea">📡 已連線，等待事件⋯</div>
+        </div>
+
+        <div class="footer">
+            📱 PWA 手機版 · 數據來自 <span>Flask API</span>
         </div>
     </div>
 
-    <!-- 2. 命中率圖表 -->
-    <div class="card">
-        <h3>📊 歷史命中率</h3>
-        <div class="chart-container"><canvas id="rateChart"></canvas></div>
-    </div>
+    <script>
+        // ============================================================
+        // 設定 API 網址（請修改為你的實際 IP）
+        // ============================================================
+        const API_BASE = 'http://192.168.1.100:5001'; // ⚠️ 請改成你的電腦內網 IP + 連接埠
 
-    <!-- 3. 動態特徵查詢 -->
-    <div class="card">
-        <h3>📈 動態特徵</h3>
-        <div class="flex-row">
-            <input type="text" id="teamInput" value="Brazil" placeholder="輸入隊伍名稱">
-            <button onclick="fetchDynamic()">查詢</button>
-        </div>
-        <div id="dynamicResult" class="dynamic-grid" style="margin-top:12px;">
-            <div><strong>隊伍</strong> <span id="d_team">-</span></div>
-            <div><strong>傷停影響</strong> <span id="d_injury">-</span></div>
-            <div><strong>近5主場 xG</strong> <span id="d_homexg">-</span></div>
-            <div><strong>近5客場 xG</strong> <span id="d_awayxg">-</span></div>
-            <div><strong>狀態動量</strong> <span id="d_momentum">-</span></div>
-            <div><strong>場地濕度</strong> <span id="d_wetness">-</span></div>
-        </div>
-    </div>
-
-    <!-- 4. 事件日誌 -->
-    <div class="card">
-        <h3>📨 即時日誌</h3>
-        <div class="log-area" id="logArea">
-📡 已連線，等待事件...
-        </div>
-    </div>
-
-    <div class="footer">📱 手機版 PWA · 數據來自 Flask API</div>
-</div>
-
-<script>
-    // =============================================
-    // 設定 API 網址（請修改為你的實際 IP）
-    // =============================================
-    const API_BASE = 'http://192.168.1.100:5001';  // ⚠️ 請改成你的電腦內網 IP + 連接埠
-
-    // =============================================
-    // 1. 載入即時預測
-    // =============================================
-    async function loadPredictions() {
-        try {
-            const res = await fetch(`${API_BASE}/api/live_predictions`);
-            const data = await res.json();
+        // ============================================================
+        // 1. 載入即時預測
+        // ============================================================
+        async function loadPredictions() {
             const tbody = document.getElementById('liveTable');
-            tbody.innerHTML = '';
-            if (!data || data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5">暫無預測記錄</td></tr>';
-                return;
-            }
-            data.slice(0, 5).forEach(p => {
-                const map = {0:'主勝',1:'和局',2:'客勝'};
-                const text = map[p.result] || '未知';
-                const cls = text==='主勝'?'green':text==='和局'?'yellow':'red';
-                const row = `<tr>
-                    <td><strong>${p.match_id || 'N/A'}</strong></td>
-                    <td><span class="status-badge ${cls}">${text}</span></td>
-                    <td>${(p.home*100).toFixed(0)}%</td>
-                    <td>${(p.draw*100).toFixed(0)}%</td>
-                    <td>${(p.away*100).toFixed(0)}%</td>
-                </tr>`;
-                tbody.innerHTML += row;
-            });
-        } catch(e) {
-            document.getElementById('liveTable').innerHTML = '<tr><td colspan="5">⚠️ 無法連線 API</td></tr>';
-        }
-    }
+            try {
+                const res = await fetch(`${API_BASE}/api/live_predictions`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
 
-    // =============================================
-    // 2. 命中率圖表
-    // =============================================
-    async function loadHitRate() {
-        try {
-            const res = await fetch(`${API_BASE}/api/hit_rate`);
-            const data = await res.json();
-            const ctx = document.getElementById('rateChart').getContext('2d');
-            if (window.rateChart) window.rateChart.destroy();
-            window.rateChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: data.map(d => d.label),
-                    datasets: [{
-                        label: '命中率 (%)',
-                        data: data.map(d => d.value),
-                        backgroundColor: data.map(d => d.value >= 55 ? '#27ae60' : d.value >= 40 ? '#f39c12' : '#e74c3c'),
-                        borderRadius: 6,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { min: 0, max: 70, ticks: { callback: v => v + '%' } } }
+                tbody.innerHTML = '';
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#999;">暫無預測記錄</td></tr>';
+                    return;
                 }
-            });
-        } catch(e) { console.error('載入命中率失敗', e); }
-    }
 
-    // =============================================
-    // 3. 動態特徵查詢
-    // =============================================
-    async function fetchDynamic() {
-        const team = document.getElementById('teamInput').value.trim() || 'Brazil';
-        try {
-            const res = await fetch(`${API_BASE}/api/dynamic_features?team=${team}`);
-            const data = await res.json();
-            if (data.error) {
-                document.getElementById('d_team').innerText = '找不到';
-                return;
+                const map = { 0: '主勝', 1: '和局', 2: '客勝' };
+                data.slice(0, 5).forEach(p => {
+                    const text = map[p.result] || '未知';
+                    const cls = text === '主勝' ? 'green' : text === '和局' ? 'yellow' : 'red';
+                    const row = `
+                                <tr>
+                                    <td><strong>${p.match_id || 'N/A'}</strong></td>
+                                    <td><span class="status-badge ${cls}">${text}</span></td>
+                                    <td>${(p.home * 100).toFixed(0)}%</td>
+                                    <td>${(p.draw * 100).toFixed(0)}%</td>
+                                    <td>${(p.away * 100).toFixed(0)}%</td>
+                                </tr>`;
+                    tbody.innerHTML += row;
+                });
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:#c0392b;">⚠️ 無法連線 API</td></tr>`;
+                console.warn('loadPredictions error:', e);
             }
-            document.getElementById('d_team').innerText = data.team || '-';
-            document.getElementById('d_injury').innerText = data.injury_impact_score || 0;
-            document.getElementById('d_homexg').innerText = data.last_5_home_xg || 0;
-            document.getElementById('d_awayxg').innerText = data.last_5_away_xg || 0;
-            document.getElementById('d_momentum').innerText = data.form_momentum || 0;
-            document.getElementById('d_wetness').innerText = data.pitch_wetness || 0;
-        } catch(e) {
-            document.getElementById('d_team').innerText = 'API 錯誤';
         }
-    }
 
-    // =============================================
-    // 4. 定時刷新
-    // =============================================
-    setInterval(loadPredictions, 30000); // 每30秒更新
+        // ============================================================
+        // 2. 命中率圖表
+        // ============================================================
+        async function loadHitRate() {
+            try {
+                const res = await fetch(`${API_BASE}/api/hit_rate`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
 
-    // =============================================
-    // 5. 註冊 Service Worker (PWA)
-    // =============================================
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js')
-            .then(() => console.log('✅ SW 註冊成功'))
-            .catch(err => console.error('❌ SW 註冊失敗', err));
-    }
+                const ctx = document.getElementById('rateChart').getContext('2d');
+                if (window.rateChart) window.rateChart.destroy();
 
-    // =============================================
-    // 6. 初始載入
-    // =============================================
-    loadPredictions();
-    loadHitRate();
-    fetchDynamic();
-</script>
+                window.rateChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(d => d.label),
+                        datasets: [{
+                            label: '命中率 (%)',
+                            data: data.map(d => d.value),
+                            backgroundColor: data.map(d => d.value >= 55 ? '#27ae60' : d.value >= 40 ?
+                                '#f39c12' : '#e74c3c'),
+                            borderRadius: 6,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                min: 0,
+                                max: 70,
+                                ticks: { callback: v => v + '%' }
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+                console.warn('loadHitRate error:', e);
+            }
+        }
+
+        // ============================================================
+        // 3. 動態特徵查詢
+        // ============================================================
+        async function fetchDynamic() {
+            const team = document.getElementById('teamInput').value.trim() || 'Brazil';
+            const fields = {
+                d_team: 'team',
+                d_injury: 'injury_impact_score',
+                d_homexg: 'last_5_home_xg',
+                d_awayxg: 'last_5_away_xg',
+                d_momentum: 'form_momentum',
+                d_wetness: 'pitch_wetness'
+            };
+
+            try {
+                const res = await fetch(`${API_BASE}/api/dynamic_features?team=${encodeURIComponent(team)}`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+
+                if (data.error) {
+                    document.getElementById('d_team').innerText = '❌ 找不到';
+                    return;
+                }
+
+                Object.keys(fields).forEach(id => {
+                    const key = fields[id];
+                    const val = data[key] !== undefined ? data[key] : '-';
+                    document.getElementById(id).innerText = typeof val === 'number' ? val : val;
+                });
+            } catch (e) {
+                document.getElementById('d_team').innerText = '⚠️ API 錯誤';
+                console.warn('fetchDynamic error:', e);
+            }
+        }
+
+        // ============================================================
+        // 4. 模擬事件日誌（可替換為真實 WebSocket）
+        // ============================================================
+        function updateLog(message) {
+            const area = document.getElementById('logArea');
+            const time = new Date().toLocaleTimeString('zh-HK');
+            area.innerHTML = `<span class="time">[${time}]</span> ${message}\n` + area.innerHTML;
+            if (area.children.length > 50) area.lastChild.remove();
+        }
+
+        // 模擬日誌（實際可接 WebSocket）
+        function simulateLog() {
+            const msgs = [
+                '📡 已連線 Kafka，開始監聽即時事件...',
+                '📨 收到事件: injury (Brazil)',
+                '🏥 傷停更新：Brazil 影響分數變更為 1.0',
+                '🔮 即時預測 for FB3025: 主勝 (68.5%)',
+            ];
+            let idx = 0;
+            const interval = setInterval(() => {
+                if (idx < msgs.length) {
+                    updateLog(msgs[idx]);
+                    idx++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 2000);
+        }
+
+        // ============================================================
+        // 5. 註冊 Service Worker (PWA)
+        // ============================================================
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log('✅ SW 註冊成功'))
+                .catch(err => console.warn('❌ SW 註冊失敗', err));
+        }
+
+        // ============================================================
+        // 6. 初始載入 & 定時更新
+        // ============================================================
+        loadPredictions();
+        loadHitRate();
+        fetchDynamic();
+        simulateLog();
+
+        // 每 30 秒自動更新預測
+        setInterval(loadPredictions, 30000);
+
+        // 版本號（可從 API 取得，此處寫死）
+        document.getElementById('versionBadge').textContent = 'v5.3 · 87%';
+    </script>
+
 </body>
 </html>
