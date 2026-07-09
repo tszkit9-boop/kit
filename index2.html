@@ -2,504 +2,418 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>SHTSN V10.8 | 全天候泥地賽事 2026-05-06 (完整赔率整合)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⚽ 玄學預測儀表板</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="theme-color" content="#2c3e50">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: #0a1f0e;
-            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
-            color: #e6e2c3;
-            padding: 20px 16px 60px;
-            line-height: 1.4;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f4f6f9;
+            padding: 12px;
+            color: #333;
+            padding-bottom: 40px;
         }
-        :root { --amber: #d9a13b; --amber-light: #f3c26b; --card-bg: #142e1a; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .system-header {
-            text-align: center;
-            margin-bottom: 24px;
-            border-bottom: 2px solid var(--amber);
-            padding-bottom: 12px;
-        }
-        .system-header h1 { font-size: 1.9rem; color: var(--amber-light); }
-        .version {
-            background: #1e3324;
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            color: var(--amber);
-        }
-        .toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 24px;
-            justify-content: space-between;
-            background: #0c1f10;
-            padding: 12px 16px;
-            border-radius: 32px;
-        }
-        .btn {
-            background: #2c4230;
-            border: none;
-            color: #f7e9c3;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-primary {
-            background: var(--amber);
-            color: #1e2a1a;
-        }
-        .btn-primary:hover {
-            background: #c28a2c;
+        .container { max-width: 600px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
             color: white;
-        }
-        .badge {
-            background: #1f3a23;
-            border-radius: 20px;
-            padding: 5px 12px;
-            font-size: 0.75rem;
-        }
-        .races-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
-        .race-card {
-            background: var(--card-bg);
-            border-radius: 28px;
-            border-left: 6px solid var(--amber);
-            overflow: hidden;
-        }
-        .race-header {
-            background: #0e2614;
-            padding: 14px 18px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        .race-name {
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
-        .race-info {
-            font-size: 0.7rem;
-            color: #c7bd8c;
-        }
-        .qimen-brief {
-            background: #1a2a1b;
-            padding: 8px 18px;
-            font-size: 0.8rem;
-            color: #e2dbaa;
-            border-left: 3px solid var(--amber);
-            margin: 8px 12px 0 12px;
+            padding: 16px 20px;
             border-radius: 16px;
-        }
-        .horses-list {
-            padding: 12px 16px 8px;
-        }
-        .horse-row {
+            margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #2a462a;
-            padding: 8px 5px;
-            flex-wrap: wrap;
-            gap: 8px;
         }
-        .horse-rank {
-            background: #2a442c;
-            width: 32px;
-            text-align: center;
-            border-radius: 20px;
-            color: var(--amber-light);
-            font-weight: bold;
-        }
-        .horse-name {
-            flex: 2;
+        .header h1 { font-size: 20px; font-weight: 600; }
+        .badge {
+            background: #27ae60;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
             font-weight: 600;
-            min-width: 100px;
+            white-space: nowrap;
         }
-        .horse-detail {
-            font-size: 0.7rem;
-            color: #c2c2a2;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
-        .score {
-            color: var(--amber);
-            font-weight: bold;
+        .card h3 {
+            font-size: 15px;
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
-        .bet-suggest {
-            background: #09200e;
-            margin: 8px 16px 16px;
-            padding: 12px;
-            border-radius: 20px;
-            border: 1px dashed #b57c2c;
-            font-size: 0.8rem;
+        .table-wrap {
+            max-height: 400px;
+            overflow-y: auto;
         }
-        .bet-line {
-            margin: 6px 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: baseline;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
         }
-        .bet-label {
-            color: var(--amber-light);
-            font-weight: bold;
-            min-width: 95px;
+        th, td {
+            padding: 6px 4px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
         }
-        .mock-note {
-            font-size: 0.7rem;
-            color: #b3a66a;
+        th {
+            background: #f8f9fa;
+            color: #555;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        .status-badge.green { background: #d4edda; color: #155724; }
+        .status-badge.yellow { background: #fff3cd; color: #856404; }
+        .status-badge.red { background: #f8d7da; color: #721c24; }
+        .status-badge.gray { background: #e2e3e5; color: #6c757d; }
+        .chart-container { height: 180px; margin-top: 5px; }
+        .flex-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        input[type="text"] {
+            flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
+            min-width: 120px;
+        }
+        button {
+            padding: 8px 16px; background: #2c3e50; color: white; border: none; border-radius: 8px;
+            font-weight: 600; cursor: pointer; font-size: 14px;
+        }
+        .log-area {
+            background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px;
+            font-family: monospace; font-size: 11px; max-height: 150px; overflow-y: auto;
+            white-space: pre-wrap; word-break: break-all;
+        }
+        .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
+        .dynamic-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 13px;
+            background: #f8f9fa; padding: 12px; border-radius: 8px;
+        }
+        .prediction-result {
+            background: #e8f5e9; padding: 12px; border-radius: 8px; margin-top: 10px;
+            font-weight: 500; text-align: center;
+        }
+        .scroll-hint {
+            font-size: 11px;
+            color: #999;
             text-align: right;
-            padding: 4px 16px 12px;
-        }
-        .section-panel {
-            background: #0d2412;
-            border-radius: 28px;
-            margin-top: 36px;
-            padding: 18px;
-            border: 1px solid #365e3a;
-        }
-        .flex-between {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: space-between;
-        }
-        input, select {
-            background: #1f3522;
-            border: 1px solid #5f794b;
-            color: #fceeca;
-            padding: 8px 12px;
-            border-radius: 24px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-        @media (max-width: 700px) {
-            .bet-label {
-                min-width: 85px;
-            }
+            margin-top: 4px;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="system-header">
-        <h1>🕸️ SHTSN · 賽馬預測系統</h1>
-        <div class="version">V10.8 泥地特化版 | 全天候跑道 2026-05-06 (完整賠率)</div>
-        <div class="sub">團隊分工 · 決策融合 · 9場泥地賽事 · 真實獨贏賠率已載入</div>
+    <!-- 標頭 -->
+    <div class="header">
+        <h1>⚽ 玄學預測</h1>
+        <div class="badge">v5.3 · 87%</div>
     </div>
-    <div class="toolbar">
-        <div class="badge">🗂️ 19派別加權 | 奇門派權重0.23 | 泥地偏差因子已啟用</div>
-        <div>
-            <button id="refreshNetworkBtn" class="btn btn-primary">🌐 聯網補充 (模擬賠率走勢)</button>
-            <button id="resetParamsBtn" class="btn">⚙️ 重置優化參數</button>
-        </div>
-    </div>
-    <div id="racesContainer" class="races-grid"></div>
 
-    <div class="section-panel">
-        <h3 style="color: var(--amber);">📋 賽後驗證 | 自動錯誤分析</h3>
-        <p style="font-size:0.75rem;">輸入頭馬至四馬，系統比對預測並動態調整核心參數。三重彩為複式(序目不拘)。</p>
-        <div class="flex-between" style="margin-top: 12px;">
-            <select id="raceSelect"></select>
-            <input type="text" id="winnerInput" placeholder="頭馬" style="width:85px;">
-            <input type="text" id="secondInput" placeholder="二馬" style="width:85px;">
-            <input type="text" id="thirdInput" placeholder="三馬" style="width:85px;">
-            <input type="text" id="fourthInput" placeholder="四馬" style="width:85px;">
-            <button id="recordResultBtn" class="btn btn-primary">📌 記錄&分析</button>
+    <!-- 新增：所有預測與賽果 -->
+    <div class="card">
+        <h3>📋 所有預測與賽果</h3>
+        <div class="table-wrap" id="allPredictionsTable">
+            <!-- 由 JavaScript 動態生成 -->
         </div>
-        <div id="analysisMsg" style="margin-top: 12px; font-size:0.85rem; background:#0e2814; padding:8px; border-radius:16px;"></div>
-        <div class="flex-between" style="margin-top: 15px;">
-            <span>📊 三重彩(複式)命中率: <strong id="hitRateDisplay">-</strong></span>
-            <button id="viewParamsBtn" class="btn">📜 顯示目前參數</button>
+        <div class="scroll-hint">⬇️ 滾動查看更多</div>
+    </div>
+
+    <!-- 最近預測（保留） -->
+    <div class="card">
+        <h3>🔮 最近預測</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>比賽</th><th>預測</th><th>主</th><th>和</th><th>客</th></tr></thead>
+                <tbody id="liveTable">
+                    <tr><td>FB3025</td><td><span class="status-badge green">主勝</span></td><td>68%</td><td>22%</td><td>10%</td></tr>
+                    <tr><td>FB3019</td><td><span class="status-badge yellow">和局</span></td><td>32%</td><td>41%</td><td>27%</td></tr>
+                    <tr><td>FB3006</td><td><span class="status-badge green">主勝</span></td><td>71%</td><td>18%</td><td>11%</td></tr>
+                    <tr><td>FB1247</td><td><span class="status-badge green">主勝</span></td><td>55%</td><td>30%</td><td>15%</td></tr>
+                    <tr><td>FB1250</td><td><span class="status-badge red">客勝</span></td><td>23%</td><td>28%</td><td>49%</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <footer>⚠️ 缺賠率標「模」｜泥地特化：前領馬加分、內檔優勢、長途後上調整｜三重彩複式｜真實獨贏賠率基於即場賠率</footer>
+
+    <!-- 命中率圖表 -->
+    <div class="card">
+        <h3>📊 歷史命中率</h3>
+        <div class="chart-container"><canvas id="rateChart"></canvas></div>
+    </div>
+
+    <!-- 動態特徵查詢 -->
+    <div class="card">
+        <h3>📈 動態特徵</h3>
+        <div class="flex-row">
+            <input type="text" id="teamInput" value="Brazil" placeholder="輸入隊伍名稱">
+            <button onclick="fetchDynamic()">查詢</button>
+        </div>
+        <div id="dynamicResult" class="dynamic-grid" style="margin-top:12px;">
+            <div><strong>隊伍</strong> <span id="d_team">Brazil</span></div>
+            <div><strong>傷停影響</strong> <span id="d_injury">1.0</span></div>
+            <div><strong>近5主場 xG</strong> <span id="d_homexg">2.1</span></div>
+            <div><strong>近5客場 xG</strong> <span id="d_awayxg">1.5</span></div>
+            <div><strong>狀態動量</strong> <span id="d_momentum">+3</span></div>
+            <div><strong>場地濕度</strong> <span id="d_wetness">0.5</span></div>
+        </div>
+    </div>
+
+    <!-- 手動預測測試 -->
+    <div class="card">
+        <h3>🧪 手動預測測試</h3>
+        <div class="flex-row">
+            <input type="text" id="predictMatchId" value="FB3025" placeholder="比賽編號">
+            <button onclick="manualPredict()">預測</button>
+        </div>
+        <div id="predictResult" class="prediction-result" style="display:none;">
+            <div id="predictOutput">等待預測...</div>
+        </div>
+    </div>
+
+    <!-- 事件日誌 -->
+    <div class="card">
+        <h3>📨 即時日誌</h3>
+        <div class="log-area" id="logArea">
+📡 系統初始化完成（靜態模式）<br>
+📨 模擬事件：injury (Brazil)<br>
+🏥 傷停更新：Brazil 影響分數變更為 1.0<br>
+🔮 即時預測 for FB3025: 主勝 (機率: 0.68/0.22/0.10)
+        </div>
+    </div>
+
+    <div class="footer">📱 手機版 PWA · 靜態模式（無 API）</div>
 </div>
 
 <script>
-    // --------------------------------------------------------------
-    // 2026-05-06 全天候跑道 9場完整排位及賠率 (從IMG_7012-7020提取)
-    // 每場馬匹順序、騎師、練馬師、獨贏賠率均按圖片輸入
-    // 跑法(runStyle)基於馬名特徵及泥地慣性設定，不影響公平性
-    // --------------------------------------------------------------
-    const starJockeys = ["潘頓","布文","田泰安","巴度","希威森","艾道拿","潘明輝","梁家俊","周俊樂","楊明綸","艾兆禮","班德禮","何澤堯","霍宏聲","蔡明紹","鍾易禮","袁幸堯","黃智弘","巫顯東","莫雷拉"];
-
-    const racesData = [
-        { id:0, name:"R1 第五班 1650米", time:"18:45", distance:1650, class:"5", going:"全天候(好泥)", qimen:"酉時陰盤，泥地1650米利內檔前領。",
-          horses: [
-            {name:"光輝歲月", draw:7, weight:135, jockey:"霍宏聲", trainer:"游達榮", winOdds:"模", runStyle:"居中"},
-            {name:"君智盛", draw:6, weight:134, jockey:"潘頓", trainer:"姚本輝", winOdds:"模", runStyle:"跟前"},
-            {name:"歡樂老撾", draw:11, weight:131, jockey:"艾兆禮", trainer:"桂福特", winOdds:"模", runStyle:"後上"},
-            {name:"十力", draw:3, weight:131, jockey:"奧爾民", trainer:"伍鵬志", winOdds:"模", runStyle:"領放"},
-            {name:"閃耀威龍", draw:10, weight:131, jockey:"袁幸堯", trainer:"文家良", winOdds:"模", runStyle:"居中"},
-            {name:"幸運傳承", draw:12, weight:130, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:"模", runStyle:"後上"},
-            {name:"歷險大將", draw:9, weight:129, jockey:"布浩榮", trainer:"徐雨石", winOdds:"模", runStyle:"居中"},
-            {name:"運來勇士", draw:5, weight:129, jockey:"黃智弘", trainer:"葉楚航", winOdds:"模", runStyle:"領放"},
-            {name:"大利好運", draw:2, weight:128, jockey:"布文", trainer:"蔡約翰", winOdds:"模", runStyle:"跟前"},
-            {name:"一鹿歡騰", draw:1, weight:125, jockey:"鍾易禮", trainer:"告東尼", winOdds:"模", runStyle:"領放"},
-            {name:"上市魅力", draw:4, weight:121, jockey:"田泰安", trainer:"蘇偉賢", winOdds:"模", runStyle:"居中"},
-            {name:"幻影旋風", draw:8, weight:119, jockey:"巴度", trainer:"丁冠豪", winOdds:"模", runStyle:"後上"},
-            {name:"東方魅影", draw:13, weight:118, jockey:"黃寶妮", trainer:"大衛希斯", winOdds:"模", runStyle:"後上"},
-            {name:"樂曬心機", draw:14, weight:115, jockey:"楊明倫", trainer:"鄭俊偉", winOdds:"模", runStyle:"後上"}
-          ]},
-        { id:1, name:"R2 第五班 1200米", time:"19:15", distance:1200, class:"5", going:"全天候(好泥)", qimen:"戌時短途，泥地利內檔快放。",
-          horses: [
-            {name:"魅力星", draw:11, weight:135, jockey:"巴度", trainer:"蔡約翰", winOdds:19, runStyle:"後上"},
-            {name:"喜行", draw:1, weight:134, jockey:"班德禮", trainer:"大衛希斯", winOdds:15, runStyle:"領放"},
-            {name:"後無來者", draw:10, weight:134, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:3.5, runStyle:"居中"},
-            {name:"攀友心得", draw:7, weight:134, jockey:"田泰安", trainer:"桂福特", winOdds:27, runStyle:"跟前"},
-            {name:"建測精英", draw:9, weight:132, jockey:"艾道拿", trainer:"黎昭昇", winOdds:42, runStyle:"居中"},
-            {name:"辣得金", draw:4, weight:130, jockey:"布文", trainer:"巫偉傑", winOdds:18, runStyle:"領放"},
-            {name:"天比高", draw:12, weight:129, jockey:"袁幸堯", trainer:"葉楚航", winOdds:14, runStyle:"後上"},
-            {name:"銀亮濠俠", draw:5, weight:128, jockey:"布浩榮", trainer:"徐雨石", winOdds:7.2, runStyle:"跟前"},
-            {name:"機械騎士", draw:3, weight:128, jockey:"黃寶妮", trainer:"文家良", winOdds:3.4, runStyle:"領放"},
-            {name:"爆熱", draw:6, weight:126, jockey:"艾兆禮", trainer:"告東尼", winOdds:7.0, runStyle:"居中"},
-            {name:"天火同德", draw:2, weight:116, jockey:"黃智弘", trainer:"韋達", winOdds:42, runStyle:"跟前"},
-            {name:"東方福寶", draw:8, weight:115, jockey:"潘明輝", trainer:"姚本輝", winOdds:24, runStyle:"後上"}
-          ]},
-        { id:2, name:"R3 第四班 1200米", time:"19:45", distance:1200, class:"4", going:"全天候(好泥)", qimen:"亥時短途，泥地內檔搶前。",
-          horses: [
-            {name:"贏得威楓", draw:4, weight:135, jockey:"希威森", trainer:"桂福特", winOdds:35, runStyle:"領放"},
-            {name:"星火燎原", draw:10, weight:134, jockey:"袁幸堯", trainer:"徐雨石", winOdds:5.7, runStyle:"後上"},
-            {name:"巧眼光", draw:9, weight:131, jockey:"田泰安", trainer:"蔡約翰", winOdds:14, runStyle:"居中"},
-            {name:"快樂神駒", draw:12, weight:128, jockey:"霍宏聲", trainer:"廖康銘", winOdds:5.8, runStyle:"後上"},
-            {name:"銘主角", draw:7, weight:127, jockey:"楊明倫", trainer:"大衛希斯", winOdds:21, runStyle:"跟前"},
-            {name:"文明戰士", draw:6, weight:127, jockey:"布文", trainer:"葉楚航", winOdds:6.7, runStyle:"居中"},
-            {name:"起舞美奐", draw:5, weight:126, jockey:"艾兆禮", trainer:"文家良", winOdds:3.6, runStyle:"領放"},
-            {name:"精彩勇將", draw:8, weight:124, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:9.3, runStyle:"居中"},
-            {name:"尚旋", draw:1, weight:123, jockey:"何澤堯", trainer:"呂健威", winOdds:32, runStyle:"領放"},
-            {name:"喜樂之星", draw:11, weight:121, jockey:"巫顯東", trainer:"沈集成", winOdds:19, runStyle:"後上"},
-            {name:"精算突然", draw:3, weight:121, jockey:"周俊樂", trainer:"鄭俊偉", winOdds:37, runStyle:"跟前"},
-            {name:"翠湖烈風", draw:2, weight:117, jockey:"潘明輝", trainer:"賀賢", winOdds:11, runStyle:"領放"}
-          ]},
-        { id:3, name:"R4 第四班 1800米", time:"20:15", distance:1800, class:"4", going:"全天候(好泥)", qimen:"子時中距離，泥地後上有利。",
-          horses: [
-            {name:"開心宇宙", draw:10, weight:135, jockey:"梁家俊", trainer:"丁冠豪", winOdds:13, runStyle:"後上"},
-            {name:"安可", draw:9, weight:134, jockey:"潘頓", trainer:"蔡約翰", winOdds:7.8, runStyle:"居中"},
-            {name:"年年友福", draw:6, weight:133, jockey:"鍾易禮", trainer:"沈集成", winOdds:10, runStyle:"跟前"},
-            {name:"精彩動力", draw:5, weight:132, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:4.1, runStyle:"領放"},
-            {name:"本領輝煌", draw:2, weight:130, jockey:"周俊樂", trainer:"游達榮", winOdds:19, runStyle:"領放"},
-            {name:"艾莉奧", draw:1, weight:125, jockey:"班德禮", trainer:"大衛希斯", winOdds:17, runStyle:"領放"},
-            {name:"森林之王", draw:7, weight:123, jockey:"奧爾民", trainer:"羅富全", winOdds:13, runStyle:"居中"},
-            {name:"保羅輝煌", draw:11, weight:122, jockey:"潘明輝", trainer:"羅富全", winOdds:35, runStyle:"後上"},
-            {name:"精明選擇", draw:3, weight:122, jockey:"袁幸堯", trainer:"伍鵬志", winOdds:4.9, runStyle:"跟前"},
-            {name:"風起雲湧", draw:4, weight:116, jockey:"田泰安", trainer:"蘇偉賢", winOdds:9.2, runStyle:"後上"},
-            {name:"怪獸叉燒", draw:8, weight:115, jockey:"巫顯東", trainer:"丁冠豪", winOdds:6.5, runStyle:"後上"}
-          ]},
-        { id:4, name:"R5 第四班 1200米", time:"20:45", distance:1200, class:"4", going:"全天候(好泥)", qimen:"丑時短途快放優勢。",
-          horses: [
-            {name:"飛輪霸", draw:1, weight:135, jockey:"袁幸堯", trainer:"姚本輝", winOdds:4.9, runStyle:"領放"},
-            {name:"光年程祥", draw:5, weight:132, jockey:"布文", trainer:"巫偉傑", winOdds:6.2, runStyle:"跟前"},
-            {name:"顯勝高昇", draw:11, weight:130, jockey:"黃寶妮", trainer:"羅富全", winOdds:21, runStyle:"後上"},
-            {name:"鎖師閃耀", draw:8, weight:128, jockey:"霍宏聲", trainer:"廖康銘", winOdds:17, runStyle:"居中"},
-            {name:"棉棉日上", draw:9, weight:128, jockey:"潘頓", trainer:"大衛希斯", winOdds:8.5, runStyle:"跟前"},
-            {name:"良言一句", draw:12, weight:128, jockey:"鍾易禮", trainer:"沈集成", winOdds:10, runStyle:"後上"},
-            {name:"杭至尊", draw:6, weight:127, jockey:"艾道拿", trainer:"葉楚航", winOdds:9.4, runStyle:"領放"},
-            {name:"勤德皆備", draw:7, weight:124, jockey:"潘明輝", trainer:"賀賢", winOdds:12, runStyle:"居中"},
-            {name:"一路精彩", draw:3, weight:124, jockey:"何澤堯", trainer:"呂健威", winOdds:9.9, runStyle:"跟前"},
-            {name:"加州勇勝", draw:2, weight:122, jockey:"田泰安", trainer:"告東尼", winOdds:8.7, runStyle:"領放"},
-            {name:"駿皇逸", draw:4, weight:121, jockey:"巫顯東", trainer:"徐雨石", winOdds:18, runStyle:"領放"},
-            {name:"活得健康", draw:10, weight:118, jockey:"楊明倫", trainer:"黎昭昇", winOdds:27, runStyle:"後上"}
-          ]},
-        { id:5, name:"R6 第四班 1650米", time:"21:15", distance:1650, class:"4", going:"全天候(好泥)", qimen:"寅時中距離，泥地內檔前領較佳。",
-          horses: [
-            {name:"凱明神駒", draw:13, weight:135, jockey:"布文", trainer:"沈集成", winOdds:14, runStyle:"居中"},
-            {name:"超加加", draw:6, weight:134, jockey:"袁幸堯", trainer:"姚本輝", winOdds:12, runStyle:"跟前"},
-            {name:"加州星馳", draw:2, weight:133, jockey:"鍾易禮", trainer:"告東尼", winOdds:21, runStyle:"領放"},
-            {name:"金駒永騰", draw:1, weight:132, jockey:"奧爾民", trainer:"伍鵬志", winOdds:19, runStyle:"領放"},
-            {name:"花開", draw:7, weight:131, jockey:"艾兆禮", trainer:"文家良", winOdds:7.0, runStyle:"居中"},
-            {name:"天威", draw:4, weight:131, jockey:"潘頓", trainer:"羅富全", winOdds:6.0, runStyle:"領放"},
-            {name:"火神神樂", draw:8, weight:127, jockey:"蔡明紹", trainer:"蘇偉賢", winOdds:13, runStyle:"後上"},
-            {name:"盛勢威楓", draw:12, weight:127, jockey:"黃寶妮", trainer:"賀賢", winOdds:16, runStyle:"後上"},
-            {name:"日日獎", draw:11, weight:124, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:8.2, runStyle:"跟前"},
-            {name:"飛躍星伴", draw:9, weight:124, jockey:"黃智弘", trainer:"大衛希斯", winOdds:55, runStyle:"後上"},
-            {name:"林寶精神", draw:3, weight:123, jockey:"希威森", trainer:"廖康銘", winOdds:4.4, runStyle:"居中"},
-            {name:"川河型駒", draw:5, weight:121, jockey:"金誠剛", trainer:"游達榮", winOdds:10, runStyle:"跟前"},
-            {name:"午夜快車", draw:10, weight:118, jockey:"田泰安", trainer:"徐雨石", winOdds:18, runStyle:"後上"}
-          ]},
-        { id:6, name:"R7 第四班 1200米", time:"21:45", distance:1200, class:"4", going:"全天候(好泥)", qimen:"卯時短途，泥地內檔搶前。",
-          horses: [
-            {name:"大番薯", draw:6, weight:135, jockey:"霍宏聲", trainer:"廖康銘", winOdds:6.2, runStyle:"後上"},
-            {name:"贏得自然", draw:1, weight:134, jockey:"周俊樂", trainer:"葉楚航", winOdds:8.0, runStyle:"領放"},
-            {name:"天天要樂", draw:8, weight:133, jockey:"潘頓", trainer:"羅富全", winOdds:9.2, runStyle:"居中"},
-            {name:"金玉良言", draw:7, weight:132, jockey:"艾兆禮", trainer:"賀賢", winOdds:7.3, runStyle:"跟前"},
-            {name:"逍遙人生", draw:3, weight:132, jockey:"希威森", trainer:"沈集成", winOdds:9.7, runStyle:"領放"},
-            {name:"開心五月", draw:10, weight:130, jockey:"布文", trainer:"告東尼", winOdds:12, runStyle:"後上"},
-            {name:"仁者荃承", draw:2, weight:128, jockey:"袁幸堯", trainer:"姚本輝", winOdds:8.7, runStyle:"領放"},
-            {name:"馬運高", draw:5, weight:126, jockey:"黃寶妮", trainer:"文家良", winOdds:8.9, runStyle:"跟前"},
-            {name:"鳳翼天翔", draw:11, weight:124, jockey:"田泰安", trainer:"桂福特", winOdds:38, runStyle:"後上"},
-            {name:"銀刺勇士", draw:9, weight:123, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:11, runStyle:"居中"},
-            {name:"勇者無敵", draw:4, weight:120, jockey:"巴度", trainer:"韋達", winOdds:8.2, runStyle:"領放"},
-            {name:"多多開心", draw:12, weight:120, jockey:"金誠剛", trainer:"鄭俊偉", winOdds:25, runStyle:"後上"}
-          ]},
-        { id:7, name:"R8 第三班 1650米", time:"22:15", distance:1650, class:"3", going:"全天候(好泥)", qimen:"辰時中距離，泥地內檔前領稍優。",
-          horses: [
-            {name:"精英雄心", draw:11, weight:135, jockey:"潘頓", trainer:"廖康銘", winOdds:6.0, runStyle:"後上"},
-            {name:"遙遙領先", draw:8, weight:134, jockey:"希威森", trainer:"呂健威", winOdds:26, runStyle:"領放"},
-            {name:"知足常樂", draw:6, weight:133, jockey:"梁家俊", trainer:"羅富全", winOdds:6.3, runStyle:"跟前"},
-            {name:"又龍串鳳", draw:7, weight:132, jockey:"鍾易禮", trainer:"告東尼", winOdds:20, runStyle:"居中"},
-            {name:"皇龍飛將", draw:5, weight:130, jockey:"袁幸堯", trainer:"姚本輝", winOdds:11, runStyle:"領放"},
-            {name:"將睿", draw:12, weight:128, jockey:"金誠剛", trainer:"游達榮", winOdds:19, runStyle:"後上"},
-            {name:"滿心星", draw:10, weight:124, jockey:"莫雷拉", trainer:"方嘉柏", winOdds:5.6, runStyle:"居中"},
-            {name:"川河耀駒", draw:3, weight:123, jockey:"周俊樂", trainer:"游達榮", winOdds:14, runStyle:"跟前"},
-            {name:"安泰", draw:2, weight:120, jockey:"艾兆禮", trainer:"蔡約翰", winOdds:7.8, runStyle:"領放"},
-            {name:"優才", draw:13, weight:118, jockey:"班德禮", trainer:"葉楚航", winOdds:19, runStyle:"後上"},
-            {name:"哪吒", draw:4, weight:116, jockey:"潘明輝", trainer:"賀賢", winOdds:9.4, runStyle:"居中"},
-            {name:"將義", draw:9, weight:115, jockey:"田泰安", trainer:"巫偉傑", winOdds:39, runStyle:"後上"},
-            {name:"都靈福星", draw:1, weight:115, jockey:"楊明倫", trainer:"丁冠豪", winOdds:22, runStyle:"領放"},
-            {name:"奮鬥心", draw:14, weight:115, jockey:"巴度", trainer:"伍鵬志", winOdds:18, runStyle:"後上"}
-          ]},
-        { id:8, name:"R9 第三班 1200米", time:"22:50", distance:1200, class:"3", going:"全天候(好泥)", qimen:"巳時短途，泥地快放馬佔優。",
-          horses: [
-            {name:"友愛心得", draw:6, weight:135, jockey:"班德禮", trainer:"大衛希斯", winOdds:15, runStyle:"居中"},
-            {name:"樂勝天下", draw:3, weight:135, jockey:"袁幸堯", trainer:"姚本輝", winOdds:4.5, runStyle:"跟前"},
-            {name:"閃耀天河", draw:5, weight:131, jockey:"周俊樂", trainer:"呂健威", winOdds:10, runStyle:"領放"},
-            {name:"錬之極光", draw:10, weight:130, jockey:"布文", trainer:"文家良", winOdds:12, runStyle:"後上"},
-            {name:"乘數表", draw:7, weight:128, jockey:"霍宏聲", trainer:"羅富全", winOdds:16, runStyle:"居中"},
-            {name:"國千金", draw:9, weight:123, jockey:"奧爾民", trainer:"黎昭昇", winOdds:23, runStyle:"後上"},
-            {name:"熾烈神駒", draw:2, weight:122, jockey:"潘頓", trainer:"沈集成", winOdds:4.8, runStyle:"領放"},
-            {name:"德心知遇", draw:4, weight:120, jockey:"艾兆禮", trainer:"蔡約翰", winOdds:10, runStyle:"跟前"},
-            {name:"時尚風趣", draw:8, weight:116, jockey:"巴度", trainer:"鄭俊偉", winOdds:9.7, runStyle:"居中"},
-            {name:"高度評價", draw:11, weight:115, jockey:"蔡明紹", trainer:"巫偉傑", winOdds:13, runStyle:"後上"},
-            {name:"觀眾之力", draw:1, weight:115, jockey:"楊明倫", trainer:"方嘉柏", winOdds:8.4, runStyle:"領放"},
-            {name:"巨靈神", draw:12, weight:115, jockey:"巫顯東", trainer:"徐雨石", winOdds:18, runStyle:"後上"}
-          ]}
+    // ============================================================
+    // 1. 所有預測與賽果數據（從歷史記錄提取，共95場）
+    // ============================================================
+    const allMatches = [
+        // 格式：{ id, home, away, score (或 '待回測'), status ('已回測' 或 '待回測') }
+        { id: "FB0468", home: "山度士", away: "維多利亞", score: "3:1", status: "已回測" },
+        { id: "FB0533", home: "白禮頓女足", away: "曼城女足", score: "0:4", status: "已回測" },
+        { id: "FB0543", home: "德國", away: "芬蘭", score: "4:0", status: "已回測" },
+        { id: "FB0462", home: "雷莫", away: "聖保羅", score: "1:0", status: "已回測" },
+        { id: "FB0466", home: "高士路", away: "富明尼斯", score: "1:1", status: "已回測" },
+        { id: "FB0554", home: "保加利亞", away: "黑山", score: "0:1", status: "已回測" },
+        { id: "FB0555", home: "挪威", away: "瑞典", score: "3:1", status: "已回測" },
+        { id: "FB0556", home: "土耳其", away: "北馬其頓", score: "4:0", status: "已回測" },
+        { id: "FB0500", home: "彭拿路", away: "西班牙人中央", score: "0:1", status: "已回測" },
+        { id: "FB0558", home: "哥倫比亞", away: "哥斯達黎加", score: "3:1", status: "已回測" },
+        { id: "FB0559", home: "加拿大", away: "烏茲別克", score: "2:0", status: "已回測" },
+        { id: "FB0561", home: "溫納姆狼隊", away: "布里斯班獅吼B隊", score: "2:1", status: "已回測" },
+        { id: "FB0567", home: "北鷹陽光", away: "艾雲達爾", score: "3:2", status: "已回測" },
+        { id: "FB0557", home: "奧地利", away: "突尼西亞", score: "1:0", status: "已回測" },
+        { id: "FB0562", home: "克羅地亞", away: "比利時", score: "0:2", status: "已回測" },
+        { id: "FB0565", home: "摩洛哥", away: "馬達加斯加", score: "4:0", status: "已回測" },
+        { id: "FB0566", home: "海地", away: "新西蘭", score: "4:0", status: "已回測" },
+        { id: "FB0574", home: "阿爾巴尼亞", away: "以色列", score: "0:1", status: "已回測" },
+        { id: "FB0571", home: "波蘭", away: "尼日利亞", score: "2:2", status: "已回測" },
+        { id: "FB0572", home: "荷蘭", away: "阿爾及利亞", score: "0:1", status: "已回測" },
+        { id: "FB0586", home: "中國女足", away: "俄羅斯女足", score: "1:2", status: "已回測" },
+        { id: "FB0745", home: "摩洛哥", away: "挪威", score: "1:1", status: "已回測" },
+        { id: "FB0756", home: "挪威U21", away: "芬蘭U21", score: "0:2", status: "已回測" },
+        { id: "FB0877", home: "青年人", away: "邦迪比達", score: "3:0", status: "已回測" },
+        { id: "FB0018", home: "伊拉克", away: "挪威", score: "1:4", status: "已回測" },
+        { id: "FB0014", home: "比利時", away: "埃及", score: "1:1", status: "已回測" },
+        { id: "FB0013", home: "西班牙", away: "佛得角", score: "0:0", status: "已回測" },
+        { id: "FB0015", home: "沙特阿拉伯", away: "烏拉圭", score: "1:1", status: "已回測" },
+        { id: "FB0907", home: "康津天鵝女足", away: "水原FC女足", score: "1:6", status: "已回測" },
+        { id: "FB0910", home: "慶州FC女足", away: "華川FC女足", score: "0:1", status: "已回測" },
+        { id: "FB0908", home: "世宗FC女足", away: "仁川制鐵女足", score: "0:0", status: "已回測" },
+        { id: "FB0940", home: "摩頓城精英隊", away: "溫納姆狼隊", score: "2:2", status: "已回測" },
+        { id: "FB0946", home: "漢福斯女足", away: "利恩女足", score: "1:0", status: "已回測" },
+        { id: "FB0945", home: "莫迪女足", away: "侯格辛特女足", score: "3:3", status: "已回測" },
+        { id: "FB0993", home: "小保加女足", away: "聖達菲聯女足", score: "3:0", status: "已回測" },
+        { id: "FB0988", home: "魯賓卡山女足", away: "莫斯科中央陸軍女足", score: "2:3", status: "已回測" },
+        { id: "FB0972", home: "哥甘保", away: "伊基克", score: "3:0", status: "已回測" },
+        { id: "FB0033", home: "荷蘭", away: "瑞典", score: "5:1", status: "已回測" },
+        { id: "FB0034", home: "德國", away: "科特迪瓦", score: "2:1", status: "已回測" },
+        { id: "FB0964", home: "卡羅琳泉佐治十字", away: "丹德農城", score: "3:2", status: "已回測" },
+        { id: "FB0939", home: "布里斯班東區", away: "布里斯班城", score: "3:1", status: "已回測" },
+        { id: "FB0986", home: "柏利斯天奴", away: "馬加蘭斯", score: "4:1", status: "已回測" },
+        { id: "FB0990", home: "羅斯托夫女足", away: "恩尼些爾女足", score: "1:0", status: "已回測" },
+        { id: "FB0101", home: "加拿大", away: "瑞士", score: "1:2", status: "已回測" },
+        { id: "FB0107", home: "厄瓜多爾", away: "德國", score: "2:1", status: "已回測" },
+        { id: "FB0108", home: "庫拉索", away: "科特迪瓦", score: "0:2", status: "已回測" },
+        { id: "FB0109", home: "日本", away: "瑞典", score: "1:1", status: "已回測" },
+        { id: "FB1043", home: "FC悉尼B隊", away: "悉尼聯", score: "1:0", status: "已回測" },
+        { id: "FB1039", home: "羅奇代爾流浪", away: "黃金海岸騎士", score: "4:1", status: "已回測" },
+        { id: "FB0120", home: "克羅地亞", away: "加納", score: "2:1", status: "已回測" },
+        { id: "FB0121", home: "哥倫比亞", away: "葡萄牙", score: "0:0", status: "已回測" },
+        { id: "FB1069", home: "競技體育會", away: "艾華爾", score: "1:0", status: "已回測" },
+        { id: "FB3001", home: "南非", away: "加拿大", score: "0:1", status: "已回測" },
+        { id: "FB3002", home: "巴西", away: "日本", score: "2:1", status: "已回測" },
+        { id: "FB3003", home: "德國", away: "巴拉圭", score: "1:1", status: "已回測" },
+        { id: "FB3004", home: "荷蘭", away: "摩洛哥", score: "1:1", status: "已回測" },
+        { id: "FB3006", home: "法國", away: "瑞典", score: "3:0", status: "已回測" },
+        { id: "FB3008", home: "英格蘭", away: "剛果民主共和國", score: "2:1", status: "已回測" },
+        { id: "FB3011", home: "西班牙", away: "奧地利", score: "3:0", status: "已回測" },
+        { id: "FB3012", home: "葡萄牙", away: "克羅地亞", score: "2:1", status: "已回測" },
+        { id: "FB1197", home: "白蘭恩", away: "基斯迪辛德", score: "1:2", status: "已回測" },
+        { id: "FB1133", home: "天狼星", away: "米贊比", score: "4:4", status: "已回測" },
+        { id: "FB3014", home: "澳洲", away: "埃及", score: "1:1", status: "已回測" },
+        { id: "FB3015", home: "阿根廷", away: "佛得角", score: "1:1", status: "已回測" },
+        { id: "FB3017", home: "加拿大", away: "摩洛哥", score: "0:3", status: "已回測" },
+        { id: "FB3019", home: "巴西", away: "挪威", score: "1:2", status: "已回測" },
+        { id: "FB3020", home: "墨西哥", away: "英格蘭", score: "2:3", status: "已回測" },
+        { id: "FB0583", home: "巴拿馬", away: "多明尼加共和國", score: "4:2", status: "已回測" },
+        { id: "FB0609", home: "新加坡", away: "中國", score: "1:2", status: "已回測" },
+        { id: "FB3021", home: "葡萄牙", away: "西班牙", score: "0:1", status: "已回測" },
+        { id: "FB1204", home: "保地花高SP", away: "艾華爾", score: "3:1", status: "已回測" },
+        { id: "FB1205", home: "維拉諾瓦", away: "聖貝拿度", score: "2:1", status: "已回測" },
+        { id: "FB1237", home: "康塞普森體育", away: "迪莫高體育會", score: "2:0", status: "已回測" },
+        { id: "FB1238", home: "高路高路", away: "列高列達", score: "2:2", status: "已回測" },
+        { id: "FB3022", home: "美國", away: "比利時", score: "1:4", status: "已回測" },
+        { id: "FB1139", home: "赫根", away: "佐加頓斯", score: "2:4", status: "已回測" },
+        { id: "FB1142", home: "布洛馬波卡納", away: "加爾斯", score: "1:1", status: "已回測" },
+        { id: "FB1240", home: "黃金海岸騎士", away: "FC獅子", score: "2:1", status: "已回測" },
+        { id: "FB1239", home: "華川FC女足", away: "水原FC女足", score: "1:2", status: "已回測" },
+        { id: "FB3023", home: "阿根廷", away: "埃及", score: "3:2", status: "已回測" },
+        { id: "FB1246", home: "沙巴FC", away: "新聖徒", score: "2:0", status: "已回測" },
+        { id: "FB1249", home: "PAOK", away: "AEK拉亞拿卡", score: "3:2", status: "已回測" },
+        { id: "FB1251", home: "舒爾本", away: "些路迪", score: "1:1", status: "已回測" },
+        { id: "FB1245", home: "基卡拉斯域卡", away: "阿特比森", score: "2:1", status: "已回測" },
+        { id: "FB1248", home: "維京古", away: "ETO FC", score: "1:0", status: "已回測" },
+        { id: "FB1179", home: "波特蘭荊棘女足", away: "路易斯維爾競賽女足", score: "4:0", status: "已回測" },
+        { id: "FB1233", home: "利馬切", away: "聖馬高斯", score: "4:1", status: "已回測" },
+        { id: "FB1209", home: "紐迪高", away: "青年人", score: "0:0", status: "已回測" },
+        { id: "FB3024", home: "瑞士", away: "哥倫比亞", score: "0:0", status: "已回測" },
+        { id: "FB1241", home: "競技體育會", away: "奧柏拉里奧", score: "0:1", status: "已回測" },
+        { id: "FB1243", home: "施特拉森", away: "拉科奧里塔", score: "1:0", status: "已回測" },
+        { id: "FB1247", home: "卡拉特", away: "蘇積斯卡", score: "2:1", status: "已回測" },
+        // 以下為待回測場次（無比分）
+        { id: "FB0427", home: "清水心跳", away: "橫濱水手", score: "待回測", status: "待回測" },
+        { id: "FB0546", home: "巴西", away: "巴拿馬", score: "待回測", status: "待回測" },
+        { id: "FB1260", home: "SAT女足", away: "小保加女足", score: "待回測", status: "待回測" },
+        { id: "FB1259", home: "颶風隊女足", away: "紐維爾舊生女足", score: "待回測", status: "待回測" },
+        { id: "FB1261", home: "拉魯斯女足", away: "費羅卡利女足", score: "待回測", status: "待回測" },
+        { id: "FB1258", home: "河床女足", away: "班菲特女足", score: "待回測", status: "待回測" },
+        { id: "FB1257", home: "貝格拉諾女足", away: "甘拿斯亞女足", score: "待回測", status: "待回測" },
+        { id: "FB1252", home: "哈特福體育", away: "SC奧蘭治郡", score: "待回測", status: "待回測" },
+        { id: "FB1250", home: "卡拉雷聯", away: "哥甘保", score: "待回測", status: "待回測" },
+        { id: "FB1242", home: "邦迪比達", away: "基斯奧馬", score: "待回測", status: "待回測" },
+        // 可繼續添加所有場次...
     ];
 
-    // 補充明星騎師標記、基礎分
-    racesData.forEach(race => {
-        race.horses.forEach(h => {
-            if (!h.jockey) h.jockey = "模";
-            if (!h.weight) h.weight = "模";
-            if (h.jockey !== "模" && starJockeys.some(s => h.jockey.includes(s))) h.star = true;
-            else h.star = false;
-            if (!h.runStyle) h.runStyle = "居中";
-            if (!h.baseScore) h.baseScore = 70 + (16 - (h.draw||10)) * 0.7;
+    // ============================================================
+    // 渲染所有預測與賽果表格
+    // ============================================================
+    function renderAllPredictions() {
+        const container = document.getElementById('allPredictionsTable');
+        let html = '<table><thead><tr><th>編號</th><th>主隊</th><th>客隊</th><th>賽果</th><th>狀態</th></tr></thead><tbody>';
+        allMatches.forEach(m => {
+            const statusClass = m.status === '已回測' ? 'green' : 'gray';
+            const scoreDisplay = m.score === '待回測' ? '—' : m.score;
+            html += `<tr>
+                <td><strong>${m.id}</strong></td>
+                <td>${m.home}</td>
+                <td>${m.away}</td>
+                <td>${scoreDisplay}</td>
+                <td><span class="status-badge ${statusClass}">${m.status}</span></td>
+            </tr>`;
         });
-    });
-
-    // 泥地優化參數 (V10.8)
-    let coreParams = {
-        dirtFrontBonus: 5,
-        innerBonusShort: 8,
-        outerBonusDraw12: 20,
-        longDistanceBackBonus: 10,
-        extremeLongshotBonus: 6,
-        overheatPenaltyBase: 3,
-        starJockeyBonus: 3,
-        fastPaceDrawAdjust: 3
-    };
-    function loadParams() { const s = localStorage.getItem("SHTSN_corrected_params"); if(s) { try { Object.assign(coreParams, JSON.parse(s)); } catch(e){} } }
-    function saveParams() { localStorage.setItem("SHTSN_corrected_params", JSON.stringify(coreParams)); }
-    loadParams();
-
-    function computeScore(horse, race) {
-        let draw = horse.draw || 10;
-        let star = horse.star;
-        let weightNum = parseInt(horse.weight) || 125;
-        let dist = race.distance;
-        let base = horse.baseScore || 75;
-        let runStyle = horse.runStyle || "居中";
-        let odds = (typeof horse.winOdds === 'number') ? horse.winOdds : 15;
-        if (runStyle === "領放") base += coreParams.dirtFrontBonus;
-        if (dist <= 1200 && draw <= 3) base += coreParams.innerBonusShort;
-        if (draw >= 12 && star) base += coreParams.outerBonusDraw12;
-        if (dist >= 1800 && (runStyle === "後上" || horse.name.includes("浪漫") || horse.name.includes("火焰"))) base += coreParams.longDistanceBackBonus;
-        if (odds >= 25 && draw >= 4 && draw <= 9 && star) base += coreParams.extremeLongshotBonus;
-        if (odds <= 2.5) base -= coreParams.overheatPenaltyBase;
-        if (star) base += coreParams.starJockeyBonus;
-        if (weightNum < 120) base += (125 - weightNum) * 0.4;
-        if (dist <= 1200 && draw <= 4) base += coreParams.fastPaceDrawAdjust;
-        if (draw <= 2) base += 2;
-        return Math.min(99, Math.max(45, Math.floor(base)));
+        html += '</tbody></table>';
+        container.innerHTML = html;
     }
 
-    function renderAll() {
-        const container = document.getElementById('racesContainer');
-        container.innerHTML = '';
-        racesData.forEach((race, idx) => {
-            const withScores = race.horses.map(h => ({ ...h, score: computeScore(h, race) })).sort((a,b)=>b.score - a.score);
-            const top5 = withScores.slice(0,5);
-            const winHorse = top5[0].name;
-            const quinella = `${top5[0].name} → ${top5[1].name}`;
-            const triBox = `${top5[0].name}, ${top5[1].name}, ${top5[2].name} (序目不拘)`;
-            const super4 = `${top5[0].name}, ${top5[1].name}, ${top5[2].name}, ${top5[3]?.name || '—'}`;
-            const card = document.createElement('div');
-            card.className = 'race-card';
-            card.innerHTML = `
-                <div class="race-header"><span class="race-name">${race.name} (${race.time})</span><span class="race-info">${race.going} | ${race.distance}m</span></div>
-                <div class="qimen-brief">🔮 奇門派：${race.qimen}</div>
-                <div class="horses-list">
-                    ${top5.map((h, i) => `<div class="horse-row"><span class="horse-rank">${i+1}</span><span class="horse-name">${h.name}</span><div class="horse-detail">檔${h.draw} 騎${h.jockey} 負${h.weight} 賠${h.winOdds}</div><span class="score">${h.score}分</span></div>`).join('')}
-                </div>
-                <div class="bet-suggest">
-                    <div class="bet-line"><span class="bet-label">🏆 獨贏推介：</span><strong style="color:var(--amber-light);">${winHorse}</strong></div>
-                    <div class="bet-line"><span class="bet-label">🔗 連贏推介：</span>${quinella}</div>
-                    <div class="bet-line"><span class="bet-label">🎯 三重彩複式：</span>${triBox}</div>
-                    <div class="bet-line"><span class="bet-label">🌈 四重彩順序：</span>${super4}</div>
-                    <div class="bet-line"><span class="bet-label">📌 位置Q / 單T：</span>${top5[0].name}, ${top5[1].name}, ${top5[2].name}</div>
-                    <div class="bet-line"><span class="bet-label">🔄 四連環：</span>${top5[0].name}, ${top5[1].name}, ${top5[2].name}, ${top5[3]?.name || top5[4]?.name || '—'}</div>
-                </div>
-                <div class="mock-note">⚠️ 賠率「模」表缺即場數據｜泥地特化：前領馬+${coreParams.dirtFrontBonus}分，內檔短途+${coreParams.innerBonusShort}</div>
-            `;
-            container.appendChild(card);
-        });
-        const sel = document.getElementById('raceSelect');
-        if(sel) sel.innerHTML = racesData.map((r,i)=>`<option value="${i}">${r.name}</option>`).join('');
+    // ============================================================
+    // 動態特徵查詢（模擬）
+    // ============================================================
+    function fetchDynamic() {
+        const team = document.getElementById('teamInput').value.trim() || 'Brazil';
+        const mockData = {
+            'Brazil': { team: 'Brazil', injury: 1.0, homexg: 2.1, awayxg: 1.5, momentum: 3, wetness: 0.5 },
+            'Argentina': { team: 'Argentina', injury: 0.5, homexg: 1.8, awayxg: 1.2, momentum: 2, wetness: 0.3 },
+            'England': { team: 'England', injury: 0.0, homexg: 2.4, awayxg: 1.9, momentum: 4, wetness: 0.6 },
+            'France': { team: 'France', injury: 0.2, homexg: 2.2, awayxg: 1.7, momentum: 3, wetness: 0.4 },
+        };
+        const data = mockData[team] || { team: team, injury: 0.0, homexg: 0.0, awayxg: 0.0, momentum: 0, wetness: 0.0 };
+        document.getElementById('d_team').innerText = data.team;
+        document.getElementById('d_injury').innerText = data.injury;
+        document.getElementById('d_homexg').innerText = data.homexg;
+        document.getElementById('d_awayxg').innerText = data.awayxg;
+        document.getElementById('d_momentum').innerText = data.momentum > 0 ? '+' + data.momentum : data.momentum;
+        document.getElementById('d_wetness').innerText = data.wetness;
     }
 
-    let hitStat = { total:0, triok:0 };
-    function loadHit() { const h = localStorage.getItem("SHTSN_hitrate"); if(h) { try{ hitStat = JSON.parse(h); } catch(e){} } updateHitDisplay(); }
-    function saveHit() { localStorage.setItem("SHTSN_hitrate", JSON.stringify(hitStat)); updateHitDisplay(); }
-    function updateHitDisplay() { document.getElementById('hitRateDisplay').innerHTML = `${hitStat.triok||0} / ${hitStat.total||0}`; }
+    // ============================================================
+    // 手動預測測試（模擬）
+    // ============================================================
+    function manualPredict() {
+        const matchId = document.getElementById('predictMatchId').value.trim() || 'FB3025';
+        const resultDiv = document.getElementById('predictResult');
+        const output = document.getElementById('predictOutput');
+        resultDiv.style.display = 'block';
+        output.textContent = '模擬預測中...';
+        setTimeout(() => {
+            const outcomes = ['主勝', '和局', '客勝'];
+            const idx = Math.floor(Math.random() * 3);
+            const probs = [
+                (Math.random() * 0.4 + 0.4).toFixed(2),
+                (Math.random() * 0.2 + 0.2).toFixed(2),
+                (Math.random() * 0.2 + 0.1).toFixed(2)
+            ];
+            const sum = probs.reduce((a,b) => parseFloat(a)+parseFloat(b), 0);
+            const norm = probs.map(p => (parseFloat(p)/sum * 100).toFixed(0));
+            output.innerHTML = `預測結果：<strong>${outcomes[idx]}</strong> (主 ${norm[0]}% / 和 ${norm[1]}% / 客 ${norm[2]}%)`;
+        }, 800);
+    }
 
-    document.getElementById('recordResultBtn')?.addEventListener('click',()=>{
-        const idx = parseInt(document.getElementById('raceSelect').value);
-        const w = document.getElementById('winnerInput').value.trim();
-        const s = document.getElementById('secondInput').value.trim();
-        const t = document.getElementById('thirdInput').value.trim();
-        if(!w) { alert("請輸入頭馬"); return; }
-        const race = racesData[idx];
-        const predTop3 = race.horses.map(h=>({name:h.name, score:computeScore(h,race)})).sort((a,b)=>b.score-a.score).slice(0,3).map(p=>p.name);
-        const actualSet = new Set([w,s,t]);
-        const isHit = (predTop3.length === 3 && actualSet.size === 3 && predTop3.every(m => actualSet.has(m)));
-        hitStat.total++;
-        if(isHit) hitStat.triok++;
-        saveHit();
-        document.getElementById('analysisMsg').innerHTML = `✅ ${race.name} 記錄 | 頭馬:${w} 三重彩複式${isHit?'命中':'錯失'}。參數微調完成。`;
-        if(!isHit && race.distance<=1200) { coreParams.innerBonusShort = Math.max(3, coreParams.innerBonusShort-1); saveParams(); renderAll(); }
-        else if(!isHit && race.distance>=1650) { coreParams.longDistanceBackBonus = Math.min(15, coreParams.longDistanceBackBonus+1); saveParams(); renderAll(); }
+    // ============================================================
+    // 命中率圖表
+    // ============================================================
+    const ctx = document.getElementById('rateChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['主客和', '入球大細', '讓球', '波膽', '半場角球', '全場角球'],
+            datasets: [{
+                label: '命中率 (%)',
+                data: [44.7, 58.3, 41.7, 19.6, 51.3, 52.6],
+                backgroundColor: ['#27ae60', '#27ae60', '#f39c12', '#e74c3c', '#f39c12', '#f39c12'],
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { min: 0, max: 70, ticks: { callback: v => v + '%' } } }
+        }
     });
-    document.getElementById('refreshNetworkBtn')?.addEventListener('click',()=>{
-        alert("🌐 模擬聯網：已獲取最新泥地跑道狀況及賠率走勢，評分重新計算。");
-        renderAll();
-    });
-    document.getElementById('resetParamsBtn')?.addEventListener('click',()=>{
-        coreParams = { dirtFrontBonus:5, innerBonusShort:8, outerBonusDraw12:20, longDistanceBackBonus:10, extremeLongshotBonus:6, overheatPenaltyBase:3, starJockeyBonus:3, fastPaceDrawAdjust:3 };
-        saveParams();
-        renderAll();
-        alert("泥地優化參數已重置為預設值");
-    });
-    document.getElementById('viewParamsBtn')?.addEventListener('click',()=>{
-        alert(`當前泥地參數\n前領加分:${coreParams.dirtFrontBonus}\n內檔短途:${coreParams.innerBonusShort}\n外檔補償:${coreParams.outerBonusDraw12}\n長途後上:${coreParams.longDistanceBackBonus}\n明星騎師加分:${coreParams.starJockeyBonus}`);
-    });
-    
-    loadHit();
-    renderAll();
+
+    // ============================================================
+    // PWA Service Worker
+    // ============================================================
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(() => console.log('✅ SW 註冊成功'))
+            .catch(err => console.error('❌ SW 註冊失敗', err));
+    }
+
+    // ============================================================
+    // 初始化
+    // ============================================================
+    renderAllPredictions();
+    fetchDynamic();
+    console.log('📱 靜態儀表板已載入 (v5.3 · 87%)');
 </script>
 </body>
 </html>
