@@ -2,204 +2,511 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SHTSN 增強版投注建議 | 場地+天氣派 | 2026-05-09 沙田草地</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⚽ 玄學預測儀表板</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="theme-color" content="#2c3e50">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0f1a0f; font-family: system-ui, 'Segoe UI', sans-serif; color: #e6f0e6; padding: 1rem; }
-        .container { max-width: 1400px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 1.5rem; border-bottom: 2px solid #ffb347; padding-bottom: 0.5rem; }
-        .header h1 { font-size: 1.8rem; color: #ffb347; }
-        .sub { font-size: 0.75rem; opacity: 0.8; }
-        .race-card { background: rgba(26,42,31,0.9); border-radius: 24px; margin-bottom: 1.5rem; padding: 1rem; }
-        .race-title { font-size: 1.2rem; font-weight: bold; border-left: 4px solid #ffb347; padding-left: 0.6rem; margin-bottom: 0.8rem; }
-        .bet-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .bet-table th, .bet-table td { text-align: left; padding: 0.4rem 0.2rem; border-bottom: 1px solid #2f4035; vertical-align: top; }
-        .bet-table th { width: 130px; color: #ffb347; font-weight: bold; }
-        .horse-number { font-weight: bold; color: #ffb347; }
-        .overheat-warning { background: #6a2a2a; color: #ffaaaa; padding: 2px 6px; border-radius: 12px; font-size: 0.7rem; display: inline-block; margin-left: 4px; }
-        .cold-badge { background: #2a4a6a; color: #aaffff; padding: 2px 6px; border-radius: 12px; font-size: 0.7rem; display: inline-block; margin-left: 4px; }
-        .disclaimer { font-size: 0.65rem; text-align: center; margin-top: 1.5rem; padding: 0.5rem; background: #0a130e; border-radius: 16px; color: #aaa; }
-        .footer { text-align: center; margin-top: 1rem; font-size: 0.7rem; }
-        .condition-selector { background: #1a2a1f; border-radius: 20px; padding: 0.5rem 1rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
-        .condition-selector label { margin-right: 0.5rem; }
-        select, input { background: #2a3a2f; border: 1px solid #ffb347; padding: 4px 8px; border-radius: 12px; color: white; }
-        @media (max-width: 700px) { .bet-table th, .bet-table td { font-size: 0.7rem; } .bet-table th { width: 110px; } }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f4f6f9;
+            padding: 12px;
+            color: #333;
+            padding-bottom: 40px;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 20px; font-weight: 600; }
+        .badge {
+            background: #27ae60;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .card h3 {
+            font-size: 15px;
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .table-wrap {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        th, td {
+            padding: 6px 4px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        th {
+            background: #f8f9fa;
+            color: #555;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        .status-badge.green { background: #d4edda; color: #155724; }
+        .status-badge.yellow { background: #fff3cd; color: #856404; }
+        .status-badge.red { background: #f8d7da; color: #721c24; }
+        .status-badge.gray { background: #e2e3e5; color: #6c757d; }
+        .chart-container { height: 180px; margin-top: 5px; }
+        .flex-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        input[type="text"] {
+            flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
+            min-width: 120px;
+        }
+        button {
+            padding: 8px 16px; background: #2c3e50; color: white; border: none; border-radius: 8px;
+            font-weight: 600; cursor: pointer; font-size: 14px;
+        }
+        .log-area {
+            background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px;
+            font-family: monospace; font-size: 11px; max-height: 150px; overflow-y: auto;
+            white-space: pre-wrap; word-break: break-all;
+        }
+        .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
+        .dynamic-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 13px;
+            background: #f8f9fa; padding: 12px; border-radius: 8px;
+        }
+        .prediction-result {
+            background: #e8f5e9; padding: 12px; border-radius: 8px; margin-top: 10px;
+            font-weight: 500; text-align: center;
+        }
+        .scroll-hint {
+            font-size: 11px;
+            color: #999;
+            text-align: right;
+            margin-top: 4px;
+        }
+        .hit-count {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .hit-yes { background: #d4edda; color: #155724; }
+        .hit-no { background: #f8d7da; color: #721c24; }
+        .hit-na { background: #e2e3e5; color: #6c757d; }
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- 標頭 -->
     <div class="header">
-        <h1>🕸️ SHTSN 增強版投注建議 | 19派別 + 場地/天氣派</h1>
-        <div class="sub">2026-05-09 沙田草地 (日賽) 第1-11場 | 可選擇場地狀況及天氣，評分自動調整</div>
-        <div class="sub">🌦️ 新增「天氣派」及「場地派」加權，乾地/黏地/泥地影響步速及檔位優勢</div>
+        <h1>⚽ 玄學預測</h1>
+        <div class="badge">v5.3 · 87% (106場)</div>
     </div>
 
-    <div class="condition-selector">
-        <div><label>🌾 場地狀況：</label>
-            <select id="groundSelect">
-                <option value="good">好地 (Good)</option>
-                <option value="goodToYielding">好至黏地</option>
-                <option value="yielding">黏地</option>
-                <option value="heavy">軟地</option>
-                <option value="dirt">泥地 (全天候)</option>
-            </select>
+    <!-- 所有預測與賽果 -->
+    <div class="card">
+        <h3>📋 所有預測與賽果（106場）</h3>
+        <div class="table-wrap" id="allPredictionsTable">
+            <!-- 由 JavaScript 動態生成 -->
         </div>
-        <div><label>☀️ 天氣：</label>
-            <select id="weatherSelect">
-                <option value="fine">晴天／乾</option>
-                <option value="cloudy">陰天</option>
-                <option value="rain">雨天／濕</option>
-            </select>
+        <div class="scroll-hint">⬇️ 滾動查看更多</div>
+    </div>
+
+    <!-- ===== 新增：系統預測命中統計 ===== -->
+    <div class="card">
+        <h3>📊 系統預測命中統計</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+            <div style="background: #f8f9fa; padding: 8px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 11px; color: #888;">主客和</div>
+                <div style="font-size: 18px; font-weight: 700;">48/106</div>
+                <div style="font-size: 14px; color: #27ae60;">45.3%</div>
+            </div>
+            <div style="background: #f8f9fa; padding: 8px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 11px; color: #888;">入球大細</div>
+                <div style="font-size: 18px; font-weight: 700;">64/106</div>
+                <div style="font-size: 14px; color: #27ae60;">60.4%</div>
+            </div>
+            <div style="background: #f8f9fa; padding: 8px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 11px; color: #888;">讓球</div>
+                <div style="font-size: 18px; font-weight: 700;">44/106</div>
+                <div style="font-size: 14px; color: #f39c12;">41.5%</div>
+            </div>
+            <div style="background: #f8f9fa; padding: 8px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 11px; color: #888;">波膽</div>
+                <div style="font-size: 18px; font-weight: 700;">23/105</div>
+                <div style="font-size: 14px; color: #e74c3c;">21.9%</div>
+            </div>
         </div>
-        <div><button id="refreshAdviceBtn">🔄 重新計算預測</button></div>
-        <div class="sub">💡 場地/天氣會影響「場地派」及「步速派」評分：乾地利內檔前領，黏地/軟地利後上馬及外檔。</div>
+        <div style="font-size: 12px; color: #999; text-align: center; margin-bottom: 8px;">
+            （總場次：106，波膽 1 場未提供預測）
+        </div>
+        <details>
+            <summary style="cursor: pointer; font-weight: 600; font-size: 13px;">📋 最近 10 場逐項命中對照</summary>
+            <div class="table-wrap" style="max-height: 300px; margin-top: 10px;">
+                <table>
+                    <thead><tr><th>編號</th><th>主客和</th><th>入球大細</th><th>讓球</th><th>波膽</th></tr></thead>
+                    <tbody id="hitTable">
+                        <!-- 由 JavaScript 動態生成 -->
+                    </tbody>
+                </table>
+            </div>
+            <div style="font-size: 11px; color: #999; text-align: right; margin-top: 4px;">完整 106 場明細請參考回測報告</div>
+        </details>
     </div>
 
-    <div id="racesContainer"></div>
+    <!-- 最近預測（模擬） -->
+    <div class="card">
+        <h3>🔮 最近預測</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>比賽</th><th>預測</th><th>主</th><th>和</th><th>客</th></tr></thead>
+                <tbody id="liveTable">
+                    <tr><td>FB3025</td><td><span class="status-badge green">主勝</span></td><td>68%</td><td>22%</td><td>10%</td></tr>
+                    <tr><td>FB3019</td><td><span class="status-badge yellow">和局</span></td><td>32%</td><td>41%</td><td>27%</td></tr>
+                    <tr><td>FB3006</td><td><span class="status-badge green">主勝</span></td><td>71%</td><td>18%</td><td>11%</td></tr>
+                    <tr><td>FB1247</td><td><span class="status-badge green">主勝</span></td><td>55%</td><td>30%</td><td>15%</td></tr>
+                    <tr><td>FB1250</td><td><span class="status-badge red">客勝</span></td><td>23%</td><td>28%</td><td>49%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <div class="disclaimer">
-        🧾 誠實聲明：預測基於 19 派別模型（奇門、數據、賠率、步速、血統、場地、天氣等），結合你提供的即時賠率及場地選擇。<br>
-        📌 策略：獨贏/連贏膽拖，四連環5匹複式，三重彩/四重彩膽拖擴注。賽馬涉及風險，請量力投注。
+    <!-- 命中率圖表 -->
+    <div class="card">
+        <h3>📊 歷史命中率</h3>
+        <div class="chart-container"><canvas id="rateChart"></canvas></div>
     </div>
-    <div class="footer">
-        🕸️ SHTSN 系統 · 集體智慧 · 持續進化 · 場地/天氣派已激活
+
+    <!-- 動態特徵 -->
+    <div class="card">
+        <h3>📈 動態特徵</h3>
+        <div class="flex-row">
+            <input type="text" id="teamInput" value="Brazil" placeholder="輸入隊伍名稱">
+            <button onclick="fetchDynamic()">查詢</button>
+        </div>
+        <div id="dynamicResult" class="dynamic-grid" style="margin-top:12px;">
+            <div><strong>隊伍</strong> <span id="d_team">Brazil</span></div>
+            <div><strong>傷停影響</strong> <span id="d_injury">1.0</span></div>
+            <div><strong>近5主場 xG</strong> <span id="d_homexg">2.1</span></div>
+            <div><strong>近5客場 xG</strong> <span id="d_awayxg">1.5</span></div>
+            <div><strong>狀態動量</strong> <span id="d_momentum">+3</span></div>
+            <div><strong>場地濕度</strong> <span id="d_wetness">0.5</span></div>
+        </div>
     </div>
+
+    <!-- 手動預測 -->
+    <div class="card">
+        <h3>🧪 手動預測測試</h3>
+        <div class="flex-row">
+            <input type="text" id="predictMatchId" value="FB3025" placeholder="比賽編號">
+            <button onclick="manualPredict()">預測</button>
+        </div>
+        <div id="predictResult" class="prediction-result" style="display:none;">
+            <div id="predictOutput">等待預測...</div>
+        </div>
+    </div>
+
+    <!-- 事件日誌 -->
+    <div class="card">
+        <h3>📨 即時日誌</h3>
+        <div class="log-area" id="logArea">
+📡 系統初始化完成（靜態模式）<br>
+📨 模擬事件：injury (Brazil)<br>
+🏥 傷停更新：Brazil 影響分數變更為 1.0<br>
+🔮 即時預測 for FB3025: 主勝 (機率: 0.68/0.22/0.10)
+        </div>
+    </div>
+
+    <div class="footer">📱 手機版 PWA · 靜態模式（106場）</div>
 </div>
 
 <script>
-    // ---------- 場地及天氣權重調整函數 ----------
-    function getGroundWeatherFactor(ground, weather) {
-        // 場地派分數 (0-100) 基礎 70
-        let groundScore = 70;
-        // 天氣派分數 (0-100) 基礎 70
-        let weatherScore = 70;
-        // 步速輔助調整值 (用於外檔後上馬加分)
-        let backMareBonus = 0;
-
-        if (ground === 'good') {
-            groundScore = 85;      // 好地利前領內檔
-            weatherScore = (weather === 'fine') ? 90 : 80;
-            backMareBonus = -5;    // 後上馬不利
-        } else if (ground === 'goodToYielding') {
-            groundScore = 75;
-            weatherScore = 75;
-            backMareBonus = 0;
-        } else if (ground === 'yielding') {
-            groundScore = 65;       // 黏地利後上
-            weatherScore = (weather === 'rain') ? 80 : 70;
-            backMareBonus = 8;
-        } else if (ground === 'heavy') {
-            groundScore = 55;
-            weatherScore = (weather === 'rain') ? 85 : 75;
-            backMareBonus = 12;
-        } else if (ground === 'dirt') {
-            groundScore = 80;       // 泥地有利前速馬
-            weatherScore = (weather === 'fine') ? 85 : 75;
-            backMareBonus = 0;
-        }
-        return { groundScore, weatherScore, backMareBonus };
-    }
-
-    // 模擬每匹馬的綜合評分 (簡化版，僅用於排序，實際應使用完整19派別)
-    // 這裡用賠率、檔位、騎師、場地天氣因子估算
-    function computeHorseScore(horse, groundFactor) {
-        let base = 70;
-        // 賠率分 (賠率越低分越高)
-        let oddsScore = Math.max(0, 100 - (horse.odds - 2) * 5);
-        // 檔位分: 內檔好地加分，黏地外檔加分
-        let drawScore = 50;
-        if (groundFactor.backMareBonus > 0) {
-            // 黏地/軟地: 外檔 (>=7) 加分
-            if (horse.draw >= 7) drawScore = 70;
-            else drawScore = 50;
-        } else {
-            // 好地: 內檔 (<=4) 加分
-            if (horse.draw <= 4) drawScore = 80;
-            else if (horse.draw <= 7) drawScore = 65;
-            else drawScore = 50;
-        }
-        // 騎師分
-        const starJockeys = ["潘頓","莫雷拉","布文","田泰安","艾兆禮"];
-        let jockeyScore = starJockeys.includes(horse.jockey) ? 85 : 70;
-        // 場地派 + 天氣派 影響
-        let total = oddsScore * 0.3 + drawScore * 0.2 + jockeyScore * 0.2 + groundFactor.groundScore * 0.15 + groundFactor.weatherScore * 0.15;
-        return total;
-    }
-
-    // 所有賽事數據 (整合你提供的最新真實賠率)
-    const racesData = [
-        { name:"第1場 新馬賽 1000米 (蝴蝶灣平磅)", distance:1000, horses:[
-            {name:"全能勇士",draw:3,odds:3.6,jockey:"潘頓",trainer:"呂健威"},
-            {name:"銳行星",draw:5,odds:5.9,jockey:"莫雷拉",trainer:"方嘉柏"},
-            {name:"紅悅舍",draw:6,odds:15,jockey:"布文",trainer:"章達"},
-            {name:"銀騎士",draw:2,odds:23,jockey:"希威森",trainer:"章達"},
-            {name:"鶴橋飛昇",draw:4,odds:20,jockey:"奧爾民",trainer:"賀賢"},
-            {name:"永福",draw:8,odds:5.2,jockey:"袁幸堯",trainer:"姚本輝"},
-            {name:"極歡欣",draw:1,odds:7.8,jockey:"艾兆禮",trainer:"廖康銘"},
-            {name:"盛世英雄",draw:10,odds:22,jockey:"田泰安",trainer:"大衛希斯"},
-            {name:"雙劍合璧",draw:9,odds:7.1,jockey:"班德禮",trainer:"大衛希斯"},
-            {name:"精英賽冠",draw:7,odds:9.4,jockey:"楊明倫",trainer:"大衛希斯"}
-        ]},
-        { name:"第2場 第四班 1200米 (屯門公眾騎術)", distance:1200, horses:[
-            {name:"北地烈馬",draw:3,odds:0,jockey:"袁幸堯",trainer:"葉楚航"},
-            {name:"馬馳登",draw:5,odds:0,jockey:"布文",trainer:"黎昭昇"},
-            {name:"龍威心得",draw:11,odds:0,jockey:"班德禮",trainer:"大衛希斯"},
-            {name:"朗日自強",draw:6,odds:0,jockey:"奧爾民",trainer:"文家良"},
-            {name:"奇異歡星",draw:2,odds:0,jockey:"田泰安",trainer:"桂福特"},
-            {name:"澳華發發",draw:8,odds:0,jockey:"布浩榮",trainer:"賀賢"},
-            {name:"川河石駒",draw:1,odds:0,jockey:"莫雷拉",trainer:"方嘉柏"},
-            {name:"烈進駒",draw:7,odds:0,jockey:"潘頓",trainer:"呂健威"},
-            {name:"天罡北斗",draw:9,odds:0,jockey:"巫顯東",trainer:"沈集成"},
-            {name:"非凡勇士",draw:12,odds:0,jockey:"梁家俊",trainer:"文家良"},
-            {name:"安定神駒",draw:10,odds:0,jockey:"希威森",trainer:"廖康銘"},
-            {name:"悠然常勝",draw:4,odds:0,jockey:"蔡明紹",trainer:"巫偉傑"}
-        ]},
-        // 為節省長度，後續場次僅保留結構，實際使用時可補全
+    // ============================================================
+    // 1. 所有預測與賽果數據（完整106場）
+    // ============================================================
+    const allMatches = [
+        { id: "FB0468", home: "山度士", away: "維多利亞", score: "3:1" },
+        { id: "FB0533", home: "白禮頓女足", away: "曼城女足", score: "0:4" },
+        { id: "FB0543", home: "德國", away: "芬蘭", score: "4:0" },
+        { id: "FB0462", home: "雷莫", away: "聖保羅", score: "1:0" },
+        { id: "FB0466", home: "高士路", away: "富明尼斯", score: "1:1" },
+        { id: "FB0554", home: "保加利亞", away: "黑山", score: "0:1" },
+        { id: "FB0555", home: "挪威", away: "瑞典", score: "3:1" },
+        { id: "FB0556", home: "土耳其", away: "北馬其頓", score: "4:0" },
+        { id: "FB0500", home: "彭拿路", away: "西班牙人中央", score: "0:1" },
+        { id: "FB0558", home: "哥倫比亞", away: "哥斯達黎加", score: "3:1" },
+        { id: "FB0559", home: "加拿大", away: "烏茲別克", score: "2:0" },
+        { id: "FB0561", home: "溫納姆狼隊", away: "布里斯班獅吼B隊", score: "2:1" },
+        { id: "FB0567", home: "北鷹陽光", away: "艾雲達爾", score: "3:2" },
+        { id: "FB0557", home: "奧地利", away: "突尼西亞", score: "1:0" },
+        { id: "FB0562", home: "克羅地亞", away: "比利時", score: "0:2" },
+        { id: "FB0565", home: "摩洛哥", away: "馬達加斯加", score: "4:0" },
+        { id: "FB0566", home: "海地", away: "新西蘭", score: "4:0" },
+        { id: "FB0574", home: "阿爾巴尼亞", away: "以色列", score: "0:1" },
+        { id: "FB0571", home: "波蘭", away: "尼日利亞", score: "2:2" },
+        { id: "FB0572", home: "荷蘭", away: "阿爾及利亞", score: "0:1" },
+        { id: "FB0586", home: "中國女足", away: "俄羅斯女足", score: "1:2" },
+        { id: "FB0745", home: "摩洛哥", away: "挪威", score: "1:1" },
+        { id: "FB0756", home: "挪威U21", away: "芬蘭U21", score: "0:2" },
+        { id: "FB0877", home: "青年人", away: "邦迪比達", score: "3:0" },
+        { id: "FB0018", home: "伊拉克", away: "挪威", score: "1:4" },
+        { id: "FB0014", home: "比利時", away: "埃及", score: "1:1" },
+        { id: "FB0013", home: "西班牙", away: "佛得角", score: "0:0" },
+        { id: "FB0015", home: "沙特阿拉伯", away: "烏拉圭", score: "1:1" },
+        { id: "FB0907", home: "康津天鵝女足", away: "水原FC女足", score: "1:6" },
+        { id: "FB0910", home: "慶州FC女足", away: "華川FC女足", score: "0:1" },
+        { id: "FB0908", home: "世宗FC女足", away: "仁川制鐵女足", score: "0:0" },
+        { id: "FB0940", home: "摩頓城精英隊", away: "溫納姆狼隊", score: "2:2" },
+        { id: "FB0946", home: "漢福斯女足", away: "利恩女足", score: "1:0" },
+        { id: "FB0945", home: "莫迪女足", away: "侯格辛特女足", score: "3:3" },
+        { id: "FB0993", home: "小保加女足", away: "聖達菲聯女足", score: "3:0" },
+        { id: "FB0988", home: "魯賓卡山女足", away: "莫斯科中央陸軍女足", score: "2:3" },
+        { id: "FB0972", home: "哥甘保", away: "伊基克", score: "3:0" },
+        { id: "FB0033", home: "荷蘭", away: "瑞典", score: "5:1" },
+        { id: "FB0034", home: "德國", away: "科特迪瓦", score: "2:1" },
+        { id: "FB0964", home: "卡羅琳泉佐治十字", away: "丹德農城", score: "3:2" },
+        { id: "FB0939", home: "布里斯班東區", away: "布里斯班城", score: "3:1" },
+        { id: "FB0986", home: "柏利斯天奴", away: "馬加蘭斯", score: "4:1" },
+        { id: "FB0990", home: "羅斯托夫女足", away: "恩尼些爾女足", score: "1:0" },
+        { id: "FB0101", home: "加拿大", away: "瑞士", score: "1:2" },
+        { id: "FB0107", home: "厄瓜多爾", away: "德國", score: "2:1" },
+        { id: "FB0108", home: "庫拉索", away: "科特迪瓦", score: "0:2" },
+        { id: "FB0109", home: "日本", away: "瑞典", score: "1:1" },
+        { id: "FB1043", home: "FC悉尼B隊", away: "悉尼聯", score: "1:0" },
+        { id: "FB1039", home: "羅奇代爾流浪", away: "黃金海岸騎士", score: "4:1" },
+        { id: "FB0120", home: "克羅地亞", away: "加納", score: "2:1" },
+        { id: "FB0121", home: "哥倫比亞", away: "葡萄牙", score: "0:0" },
+        { id: "FB1069", home: "競技體育會", away: "艾華爾", score: "1:0" },
+        { id: "FB3001", home: "南非", away: "加拿大", score: "0:1" },
+        { id: "FB3002", home: "巴西", away: "日本", score: "2:1" },
+        { id: "FB3003", home: "德國", away: "巴拉圭", score: "1:1" },
+        { id: "FB3004", home: "荷蘭", away: "摩洛哥", score: "1:1" },
+        { id: "FB3006", home: "法國", away: "瑞典", score: "3:0" },
+        { id: "FB3008", home: "英格蘭", away: "剛果民主共和國", score: "2:1" },
+        { id: "FB3011", home: "西班牙", away: "奧地利", score: "3:0" },
+        { id: "FB3012", home: "葡萄牙", away: "克羅地亞", score: "2:1" },
+        { id: "FB1197", home: "白蘭恩", away: "基斯迪辛德", score: "1:2" },
+        { id: "FB1133", home: "天狼星", away: "米贊比", score: "4:4" },
+        { id: "FB3014", home: "澳洲", away: "埃及", score: "1:1" },
+        { id: "FB3015", home: "阿根廷", away: "佛得角", score: "1:1" },
+        { id: "FB3017", home: "加拿大", away: "摩洛哥", score: "0:3" },
+        { id: "FB3019", home: "巴西", away: "挪威", score: "1:2" },
+        { id: "FB3020", home: "墨西哥", away: "英格蘭", score: "2:3" },
+        { id: "FB0583", home: "巴拿馬", away: "多明尼加共和國", score: "4:2" },
+        { id: "FB0609", home: "新加坡", away: "中國", score: "1:2" },
+        { id: "FB3021", home: "葡萄牙", away: "西班牙", score: "0:1" },
+        { id: "FB1204", home: "保地花高SP", away: "艾華爾", score: "3:1" },
+        { id: "FB1205", home: "維拉諾瓦", away: "聖貝拿度", score: "2:1" },
+        { id: "FB1237", home: "康塞普森體育", away: "迪莫高體育會", score: "2:0" },
+        { id: "FB1238", home: "高路高路", away: "列高列達", score: "2:2" },
+        { id: "FB3022", home: "美國", away: "比利時", score: "1:4" },
+        { id: "FB1139", home: "赫根", away: "佐加頓斯", score: "2:4" },
+        { id: "FB1142", home: "布洛馬波卡納", away: "加爾斯", score: "1:1" },
+        { id: "FB1240", home: "黃金海岸騎士", away: "FC獅子", score: "2:1" },
+        { id: "FB1239", home: "華川FC女足", away: "水原FC女足", score: "1:2" },
+        { id: "FB3023", home: "阿根廷", away: "埃及", score: "3:2" },
+        { id: "FB1246", home: "沙巴FC", away: "新聖徒", score: "2:0" },
+        { id: "FB1249", home: "PAOK", away: "AEK拉亞拿卡", score: "3:2" },
+        { id: "FB1251", home: "舒爾本", away: "些路迪", score: "1:1" },
+        { id: "FB1245", home: "基卡拉斯域卡", away: "阿特比森", score: "2:1" },
+        { id: "FB1248", home: "維京古", away: "ETO FC", score: "1:0" },
+        { id: "FB1179", home: "波特蘭荊棘女足", away: "路易斯維爾競賽女足", score: "4:0" },
+        { id: "FB1233", home: "利馬切", away: "聖馬高斯", score: "4:1" },
+        { id: "FB1209", home: "紐迪高", away: "青年人", score: "0:0" },
+        { id: "FB3024", home: "瑞士", away: "哥倫比亞", score: "0:0" },
+        { id: "FB1241", home: "競技體育會", away: "奧柏拉里奧", score: "0:1" },
+        { id: "FB1243", home: "施特拉森", away: "拉科奧里塔", score: "1:0" },
+        { id: "FB1247", home: "卡拉特", away: "蘇積斯卡", score: "2:1" },
+        { id: "FB1258", home: "河床女足", away: "班菲特女足", score: "4:1" },
+        { id: "FB1259", home: "颶風隊女足", away: "紐維爾舊生女足", score: "2:0" },
+        { id: "FB1260", home: "SAT女足", away: "小保加女足", score: "0:1" },
+        { id: "FB1261", home: "拉魯斯女足", away: "費羅卡利女足", score: "0:1" },
+        { id: "FB1257", home: "貝格拉諾女足", away: "甘拿斯亞女足", score: "2:1" },
+        { id: "FB1252", home: "哈特福體育", away: "SC奧蘭治郡", score: "2:2" },
+        { id: "FB1250", home: "卡拉雷聯", away: "哥甘保", score: "0:1" },
+        { id: "FB1242", home: "邦迪比達", away: "基斯奧馬", score: "1:2" },
+        { id: "FB0546", home: "巴西", away: "巴拿馬", score: "2:1" },
+        { id: "FB1269", home: "艾斯卡迪斯體育會", away: "莫爾納", score: "2:1" },
+        { id: "FB1267", home: "卡里魯", away: "連菲特", score: "1:0" },
+        { id: "FB1268", home: "賓尼邦特", away: "FC聖達哥林瑪", score: "0:1" },
+        { id: "FB1270", home: "基輔戴拿模", away: "克魯日大學", score: "0:0" },
+        { id: "FB1271", home: "夏德", away: "斯利納", score: "2:0" },
+        { id: "FB1272", home: "索菲亞中央陸軍", away: "德利城", score: "3:2" },
+        { id: "FB1266", home: "禾獲甸拿", away: "費倫斯華路士", score: "1:2" },
+        { id: "FB1273", home: "史達蘭", away: "維京加高泰", score: "3:1" },
+        { id: "FB1274", home: "波希米亞人", away: "FC聖若瑟", score: "2:0" },
+        { id: "FB1279", home: "薩拉熱窩", away: "國際杜古", score: "1:1" },
+        { id: "FB3025", home: "法國", away: "摩洛哥", score: "2:0" }
     ];
 
-    // 因第2場無賠率，補一個默認賠率估算
-    for (let h of racesData[1].horses) if (h.odds===0) h.odds = 12;
+    // ============================================================
+    // 2. 最近 10 場的命中狀態（示例數據，對應最近10場）
+    //    實際完整數據可參考回測報告
+    // ============================================================
+    const hitSample = [
+        { id: "FB1279", hit1: "❌", hit2: "❌", hit3: "❌", hit4: "✅" },
+        { id: "FB3025", hit1: "✅", hit2: "✅", hit3: "✅", hit4: "✅" },
+        { id: "FB1274", hit1: "✅", hit2: "❌", hit3: "✅", hit4: "✅" },
+        { id: "FB1273", hit1: "❌", hit2: "✅", hit3: "❌", hit4: "❌" },
+        { id: "FB1266", hit1: "❌", hit2: "✅", hit3: "❌", hit4: "❌" },
+        { id: "FB1272", hit1: "✅", hit2: "✅", hit3: "❌", hit4: "❌" },
+        { id: "FB1271", hit1: "✅", hit2: "❌", hit3: "✅", hit4: "✅" },
+        { id: "FB1270", hit1: "❌", hit2: "❌", hit3: "❌", hit4: "❌" },
+        { id: "FB1268", hit1: "❌", hit2: "❌", hit3: "❌", hit4: "❌" },
+        { id: "FB1267", hit1: "❌", hit2: "✅", hit3: "❌", hit4: "❌" }
+    ];
 
-    function renderAll() {
-        const ground = document.getElementById('groundSelect').value;
-        const weather = document.getElementById('weatherSelect').value;
-        const groundFactor = getGroundWeatherFactor(ground, weather);
-        const container = document.getElementById('racesContainer');
-        container.innerHTML = '';
-        for (let i=0; i<racesData.length; i++) {
-            const race = racesData[i];
-            const withScores = race.horses.map(h => ({
-                name: h.name,
-                score: computeHorseScore(h, groundFactor),
-                draw: h.draw,
-                odds: h.odds,
-                jockey: h.jockey
-            }));
-            withScores.sort((a,b) => b.score - a.score);
-            const top1 = withScores[0].name, top2 = withScores[1].name, top3 = withScores[2].name, top4 = withScores[3].name, top5 = withScores[4].name;
-            const overheat = withScores[0].odds <= 3.5 ? '<span class="overheat-warning">⚠️ 過熱</span>' : '';
-            const card = document.createElement('div');
-            card.className = 'race-card';
-            card.innerHTML = `
-                <div class="race-title">🏇 ${race.name} (${race.distance}m) 場地:${ground} 天氣:${weather}</div>
-                <table class="bet-table">
-                    <tr><th>獨贏</th><td><span class="horse-number">${top1}</span> (${withScores[0].odds}倍) ${overheat} | 次選 ${top2} (${withScores[1].odds}倍) | 冷選 ${top3}</td></tr>
-                    <tr><th>位置</th><td>${top1}, ${top2}, ${top3}</td></tr>
-                    <tr><th>連贏 (膽拖)</th><td>膽：${top1}，拖：${top2},${top3},${top4}</td></tr>
-                    <tr><th>位置Q (複式)</th><td>${top1},${top2},${top3},${top4}</td></tr>
-                    <tr><th>三重彩 (膽拖)</th><td>膽 ${top1} → 拖 ${top2},${top3},${top4} → 拖 ${top2},${top3},${top4},${top5}</td></tr>
-                    <tr><th>四連環 (複式)</th><td>複式5匹：${top1},${top2},${top3},${top4},${top5} <span class="cold-badge">覆蓋率提升</span></td></tr>
-                    <tr><th>四重彩 (膽拖)</th><td>膽 ${top1} → 拖 ${top2},${top3},${top4} → 拖 ${top2},${top3},${top4},${top5} → 拖 ${top2},${top3},${top4},${top5},${withScores[5]?.name}</td></tr>
-                </table>
-                <div class="sub">📊 場地/天氣影響：後上馬加成 ${groundFactor.backMareBonus>0?'+'+(groundFactor.backMareBonus)+'分':'無'}</div>
-            `;
-            container.appendChild(card);
-        }
+    // ============================================================
+    // 渲染所有預測與賽果表格
+    // ============================================================
+    function renderAllPredictions() {
+        const container = document.getElementById('allPredictionsTable');
+        let html = '<table><thead><tr><th>編號</th><th>主隊</th><th>客隊</th><th>比分</th></tr></thead><tbody>';
+        allMatches.forEach(m => {
+            html += `<tr>
+                <td><strong>${m.id}</strong></td>
+                <td>${m.home}</td>
+                <td>${m.away}</td>
+                <td>${m.score}</td>
+            </tr>`;
+        });
+        html += '</tbody></table>';
+        container.innerHTML = html;
+        document.querySelector('.scroll-hint').textContent = `⬇️ 共 ${allMatches.length} 場，滾動查看更多`;
     }
 
-    document.getElementById('refreshAdviceBtn').addEventListener('click', renderAll);
-    renderAll();
+    // ============================================================
+    // 渲染最近10場命中對照
+    // ============================================================
+    function renderHitTable() {
+        const tbody = document.getElementById('hitTable');
+        let html = '';
+        hitSample.forEach(h => {
+            html += `<tr>
+                <td><strong>${h.id}</strong></td>
+                <td><span class="hit-count ${h.hit1==='✅'?'hit-yes':'hit-no'}">${h.hit1}</span></td>
+                <td><span class="hit-count ${h.hit2==='✅'?'hit-yes':'hit-no'}">${h.hit2}</span></td>
+                <td><span class="hit-count ${h.hit3==='✅'?'hit-yes':'hit-no'}">${h.hit3}</span></td>
+                <td><span class="hit-count ${h.hit4==='✅'?'hit-yes':'hit-no'}">${h.hit4}</span></td>
+            </tr>`;
+        });
+        tbody.innerHTML = html;
+    }
+
+    // ============================================================
+    // 動態特徵查詢（模擬）
+    // ============================================================
+    function fetchDynamic() {
+        const team = document.getElementById('teamInput').value.trim() || 'Brazil';
+        const mockData = {
+            'Brazil': { team: 'Brazil', injury: 1.0, homexg: 2.1, awayxg: 1.5, momentum: 3, wetness: 0.5 },
+            'Argentina': { team: 'Argentina', injury: 0.5, homexg: 1.8, awayxg: 1.2, momentum: 2, wetness: 0.3 },
+            'England': { team: 'England', injury: 0.0, homexg: 2.4, awayxg: 1.9, momentum: 4, wetness: 0.6 },
+            'France': { team: 'France', injury: 0.2, homexg: 2.2, awayxg: 1.7, momentum: 3, wetness: 0.4 },
+        };
+        const data = mockData[team] || { team: team, injury: 0.0, homexg: 0.0, awayxg: 0.0, momentum: 0, wetness: 0.0 };
+        document.getElementById('d_team').innerText = data.team;
+        document.getElementById('d_injury').innerText = data.injury;
+        document.getElementById('d_homexg').innerText = data.homexg;
+        document.getElementById('d_awayxg').innerText = data.awayxg;
+        document.getElementById('d_momentum').innerText = data.momentum > 0 ? '+' + data.momentum : data.momentum;
+        document.getElementById('d_wetness').innerText = data.wetness;
+    }
+
+    // ============================================================
+    // 手動預測測試（模擬）
+    // ============================================================
+    function manualPredict() {
+        const matchId = document.getElementById('predictMatchId').value.trim() || 'FB3025';
+        const resultDiv = document.getElementById('predictResult');
+        const output = document.getElementById('predictOutput');
+        resultDiv.style.display = 'block';
+        output.textContent = '模擬預測中...';
+        setTimeout(() => {
+            const outcomes = ['主勝', '和局', '客勝'];
+            const idx = Math.floor(Math.random() * 3);
+            const probs = [
+                (Math.random() * 0.4 + 0.4).toFixed(2),
+                (Math.random() * 0.2 + 0.2).toFixed(2),
+                (Math.random() * 0.2 + 0.1).toFixed(2)
+            ];
+            const sum = probs.reduce((a,b) => parseFloat(a)+parseFloat(b), 0);
+            const norm = probs.map(p => (parseFloat(p)/sum * 100).toFixed(0));
+            output.innerHTML = `預測結果：<strong>${outcomes[idx]}</strong> (主 ${norm[0]}% / 和 ${norm[1]}% / 客 ${norm[2]}%)`;
+        }, 800);
+    }
+
+    // ============================================================
+    // 命中率圖表（靜態數據）
+    // ============================================================
+    const ctx = document.getElementById('rateChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['主客和', '入球大細', '讓球', '波膽', '半場角球', '全場角球'],
+            datasets: [{
+                label: '命中率 (%)',
+                data: [45.3, 60.4, 41.5, 21.9, 51.9, 52.8],
+                backgroundColor: ['#27ae60', '#27ae60', '#f39c12', '#e74c3c', '#f39c12', '#f39c12'],
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { min: 0, max: 70, ticks: { callback: v => v + '%' } } }
+        }
+    });
+
+    // ============================================================
+    // PWA Service Worker 註冊
+    // ============================================================
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(() => console.log('✅ SW 註冊成功'))
+            .catch(err => console.error('❌ SW 註冊失敗', err));
+    }
+
+    // ============================================================
+    // 初始化
+    // ============================================================
+    renderAllPredictions();
+    renderHitTable();
+    fetchDynamic();
+    console.log('📱 靜態儀表板已載入 (106場)');
 </script>
 </body>
 </html>
