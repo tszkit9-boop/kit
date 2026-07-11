@@ -2,8 +2,8 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>🏇 08/07 沙田B跑道｜全9場投注策略</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026.07.12 沙田日賽 投注指南</title>
     <style>
         * {
             margin: 0;
@@ -11,316 +11,528 @@
             box-sizing: border-box;
         }
         body {
-            background: #0b1f1a;
-            font-family: system-ui, -apple-system, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
-            padding: 1.5rem 1rem;
-            color: #ecf9f0;
+            font-family: 'Segoe UI', 'PingFang HK', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #1e293b;
+            padding: 20px;
         }
         .container {
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            padding: 30px 25px;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #d9aa4b;
-            padding-bottom: 0.6rem;
-        }
-        .header h1 {
-            font-size: 1.7rem;
+        h1 {
+            font-size: 28px;
             font-weight: 700;
-            background: linear-gradient(135deg, #F7E5B0, #cf9733);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #0b2b4a;
+            border-left: 6px solid #e11d48;
+            padding-left: 16px;
+            margin-bottom: 8px;
         }
-        .sub {
-            font-size: 0.8rem;
-            color: #bcddce;
-            margin-top: 0.3rem;
+        .subhead {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            color: #475569;
+            font-size: 15px;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 12px;
         }
-        .badge {
-            background: #1a3d33;
-            padding: 0.2rem 0.7rem;
+        .subhead span {
+            background: #f1f5f9;
+            padding: 4px 14px;
             border-radius: 30px;
-            font-size: 0.65rem;
-            display: inline-block;
-            margin: 0 0.2rem;
+            font-weight: 500;
         }
-        .races-grid {
+        .race-grid {
             display: flex;
             flex-direction: column;
-            gap: 1.6rem;
+            gap: 24px;
         }
         .race-card {
-            background: #0f2f26;
-            border-radius: 1.4rem;
-            border: 1px solid #3a7760;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid #eef2f6;
             overflow: hidden;
+            transition: box-shadow 0.2s;
         }
         .race-card:hover {
-            border-color: #d9aa4b;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
         }
-        .card-header {
-            background: #0a2b23;
-            padding: 0.7rem 1.2rem;
-            border-bottom: 1px solid #2f745b;
+        .race-header {
+            background: #f8fafc;
+            padding: 14px 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            align-items: baseline;
-            gap: 0.5rem;
+            align-items: center;
+            border-bottom: 1px solid #e9edf2;
         }
-        .race-title {
+        .race-header .race-no {
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 18px;
+            color: #0b2b4a;
         }
-        .race-title small {
-            font-size: 0.65rem;
-            background: #2d6a53;
-            padding: 0.2rem 0.6rem;
-            border-radius: 30px;
-            margin-left: 0.5rem;
+        .race-header .race-meta {
+            font-size: 14px;
+            color: #475569;
         }
-        .race-meta {
-            font-size: 0.7rem;
-            background: #00000055;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
+        .race-header .race-meta strong {
+            color: #1e293b;
         }
-        .race-content {
-            padding: 0.8rem 1.2rem;
+        .race-body {
+            padding: 16px 20px 20px;
         }
-        .flex-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 0.6rem;
-            border-left: 3px solid #d9aa4b;
-            padding-left: 0.8rem;
+        .race-body table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
         }
-        .label {
+        .race-body th {
+            text-align: left;
+            padding: 6px 8px 6px 0;
             font-weight: 600;
-            min-width: 100px;
-            color: #ffdf9c;
+            color: #334155;
+            border-bottom: 1px dashed #dce1e8;
         }
-        .value {
-            flex: 1;
+        .race-body td {
+            padding: 8px 8px 8px 0;
+            border-bottom: 1px solid #f1f4f8;
+            vertical-align: top;
         }
-        .horse-highlight {
-            color: #f5d47a;
-            font-weight: 600;
+        .race-body tr:last-child td {
+            border-bottom: none;
         }
-        .chip-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-top: 0.3rem;
-        }
-        .chip {
-            background: #1c4d3e;
-            border-radius: 30px;
-            padding: 0.2rem 0.7rem;
-            font-size: 0.7rem;
-        }
-        .chip.win {
-            background: #bd822d;
-            color: #fff1cf;
-        }
-        .chip.place {
-            background: #267a5d;
-        }
-        .risk-note {
-            font-size: 0.65rem;
-            margin-top: 0.3rem;
-            color: #d1efdf;
-        }
-        .footnote {
-            margin-top: 2rem;
-            background: #03241f;
-            border-radius: 1rem;
-            padding: 1rem;
-            font-size: 0.7rem;
-            text-align: center;
-        }
-        hr {
-            border-color: #307f63;
-            margin: 0.5rem 0;
-        }
-        .odds-tag {
+        .badge {
             display: inline-block;
-            background: #0f3129;
-            padding: 0.1rem 0.5rem;
+            padding: 2px 12px;
             border-radius: 30px;
-            font-size: 0.6rem;
-            color: #e6cd87;
-            margin-left: 0.3rem;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
-        @media (max-width: 650px) {
-            .flex-row {
-                flex-direction: column;
-                gap: 0.2rem;
-            }
-            .label {
-                min-width: auto;
-            }
+        .badge-win {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+        .badge-place {
+            background: #d1fae5;
+            color: #047857;
+        }
+        .badge-cold {
+            background: #fef3c7;
+            color: #b45309;
+        }
+        .badge-trap {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        .badge-neutral {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        .horse-name {
+            font-weight: 600;
+        }
+        .detail-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 18px;
+            font-size: 13px;
+            color: #475569;
+        }
+        .detail-row .item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .detail-row .item .label {
+            color: #94a3b8;
+        }
+        .odds {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .trap-warning {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 6px 14px;
+            border-radius: 6px;
+            margin-top: 6px;
+            font-size: 13px;
+            color: #991b1b;
+        }
+        .strategy-box {
+            background: #f1f5f9;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-top: 12px;
+            font-size: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 30px;
+        }
+        .strategy-box .label {
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .strategy-box .tag {
+            background: #ffffff;
+            padding: 2px 12px;
+            border-radius: 30px;
+            border: 1px solid #d1d9e6;
+        }
+        .summary-section {
+            margin-top: 40px;
+            border-top: 2px solid #e9edf2;
+            padding-top: 28px;
+        }
+        .summary-section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b2b4a;
+            margin-bottom: 16px;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+        .summary-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px 20px;
+            border: 1px solid #e9edf2;
+        }
+        .summary-card .title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+        .summary-card .content {
+            font-size: 15px;
+        }
+        .banker-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 24px;
+            background: #eef2ff;
+            padding: 14px 20px;
+            border-radius: 16px;
+        }
+        .banker-list .item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .banker-list .item .num {
+            font-weight: 700;
+            color: #4338ca;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #94a3b8;
+            text-align: center;
+            border-top: 1px solid #e9edf2;
+            padding-top: 18px;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 16px; }
+            .race-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+            .race-body table { font-size: 13px; }
+            .race-body td { padding: 6px 4px 6px 0; }
+            .detail-row { gap: 4px 12px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h1>🐎 沙田草地 B 賽道 · 08/07 全9場預測</h1>
-        <div class="sub">黏地 | 獨贏 + 位置 + 連贏/Q + 三重彩/單T/四重彩 | <span class="badge">6-10倍最佳膽區</span><span class="badge">大熱只作位置</span><span class="badge">外檔冷門必拖</span></div>
+    <h1>🐎 2026年7月12日 沙田日賽</h1>
+    <div class="subhead">
+        <span>🏟️ A賽道 · 好地至快地</span>
+        <span>📅 全11場 ｜ 投注指南</span>
     </div>
 
-    <div class="races-grid">
-
+    <div class="race-grid">
         <!-- 第1場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第1場 開球讓賽 <small>五班 1000米直路</small></div>
-                <div class="race-meta">18:30 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第1場 16:00</span>
+                <span class="race-meta"><strong>第五班</strong> 1800米 · 叫關領讓賽</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">10號「辣得金」</span> <span class="odds-tag">6.1倍</span> — 近績2/6/3，6-10倍最佳膽區；次選2號「喆喆友福」<span class="odds-tag">5.3倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽10拖2,1,8,12,6</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽10,2 拖1,8,12；單T：10+2+1, 10+2+8</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">10,2,1,8,12,11 (6匹) — 強制包含11號26倍</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 3號潘頓大熱4.5倍只作位置</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th style="width:60px;">定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">11 龍又生</span></td><td>5</td><td>118</td><td>希威森</td><td class="odds">6.1</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>4 連連好運</td><td>8</td><td>130</td><td>布文</td><td class="odds">4.8</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>10 風雲</td><td>1</td><td>119</td><td>楊明綸</td><td class="odds">10</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>1 特別美麗</td><td>14</td><td>135</td><td>巴度</td><td class="odds">19</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(11) · 連贏(11+4) · 位置Q(11+10+14)</span>
+                </div>
+                <div class="trap-warning">⚠️ 1號 14檔+頂磅，直路必弱，切勿重注。</div>
             </div>
         </div>
 
         <!-- 第2場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第2場 自由球讓賽 <small>四班 1650米彎道</small></div>
-                <div class="race-meta">19:00 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第2場 16:30</span>
+                <span class="race-meta"><strong>第五班</strong> 1400米 · 叻先生讓賽</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">4號「領航天子」</span> <span class="odds-tag">7.9倍</span> — 布文內檔4，近三場6/6/5；次選9號「得意佳作」<span class="odds-tag">7.6倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽4拖9,1,2,6,8</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽4,9 拖1,2,6；單T：4+9+1, 4+9+2</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">4,9,1,2,6,3 (6匹) — 強制包含3號49倍</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 2號莫雷拉大熱3.0倍只作位置</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">11 海洋帝君</span></td><td>3</td><td>122</td><td>田泰安</td><td class="odds">4.4</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>7 東方寶寶</td><td>6</td><td>128</td><td>潘頓</td><td class="odds">3.8</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>14 華美之威</td><td>5</td><td>115</td><td>巴度</td><td class="odds">18</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>1 趣盈</td><td>12</td><td>135</td><td>潘明輝</td><td class="odds">67</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(11) · 連贏(11+7) · 位置Q(11+14+7)</span>
+                </div>
+                <div class="trap-warning">⚠️ 1號 外檔+頂磅，三重死刑，棄投。</div>
             </div>
         </div>
 
         <!-- 第3場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第3場 凌空抽射讓賽 <small>四班 1000米直路</small></div>
-                <div class="race-meta">19:30 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第3場 17:00</span>
+                <span class="race-meta"><strong>第四班</strong> 1400米 · 平湖之星讓賽</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">8號「天火同人」</span> <span class="odds-tag">6.9倍</span> — 近三場3/6/3，黃寶妮減7磅；次選11號「福進」<span class="odds-tag">7.5倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽8拖11,1,4,10,7</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽8,11 拖1,4,10；單T：8+11+1, 8+11+4</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">8,11,1,4,10,12 (6匹) — 強制包含12號28倍</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 4號潘頓大熱2.1倍只作位置</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">10 遨遊波士</span></td><td>1</td><td>124</td><td>袁幸堯(-10)</td><td class="odds">3.8</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>13 勤德皆備</td><td>4</td><td>120</td><td>潘頓</td><td class="odds">7.3</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>6 手機錶能</td><td>2</td><td>127</td><td>何澤堯</td><td class="odds">7.1</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>7 熱氣球</td><td>14</td><td>127</td><td>艾道拿</td><td class="odds">42</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(10) · 連贏(10+13) · 位置Q(10+13+6)</span>
+                </div>
+                <div class="trap-warning">⚠️ 7號 14檔起步，早段耗力過多，不考慮。</div>
             </div>
         </div>
 
         <!-- 第4場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第4場 Lenovo 八戰百勝 <small>四班 1650米彎道</small></div>
-                <div class="race-meta">20:10 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第4場 17:30</span>
+                <span class="race-meta"><strong>第四班</strong> 1400米 · 無敵王者讓賽</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">2號「紅海勁」</span> <span class="odds-tag">5.4倍</span> — 近一場第二，何澤堯；次選6號「準希望」<span class="odds-tag">6.7倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽2拖6,7,1,5,4</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽2,6 拖7,1,5；單T：2+6+7, 2+6+1</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">2,6,7,1,5 (5匹)</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 1號莫雷拉大熱3.2倍只作位置</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">13 暴風一族</span></td><td>4</td><td>120</td><td>希威森</td><td class="odds">18</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>11 豐功偉績</td><td>7</td><td>123</td><td>巴度</td><td class="odds">13</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>5 文明福星</td><td>1</td><td>128</td><td>霍宏聲</td><td class="odds">9.4</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>2 金滙千帥</td><td>3</td><td>135</td><td>潘頓</td><td class="odds">3.0</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(13) · 連贏(13+11) · 位置Q(13+5+11)</span>
+                </div>
+                <div class="trap-warning">⚠️ 2號 頂磅，直路加速受影響，不宜重注。</div>
             </div>
         </div>
 
         <!-- 第5場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第5場 入球讓賽 <small>四班 1200米彎道</small></div>
-                <div class="race-meta">20:45 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第5場 18:00</span>
+                <span class="race-meta"><strong>第四班</strong> 1200米 · 大有利讓賽</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">3號「巴閉王」</span> <span class="odds-tag">8.5倍</span> — 布文，近三場4/2/2；次選6號「勝多多」<span class="odds-tag">8.7倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽3拖6,4,12,9,10</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽3,6 拖4,12,9；單T：3+6+4, 3+6+12</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">3,6,4,12,9,7 (6匹) — 強制包含7號25倍</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 9號大熱3.6倍只作位置</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">12 快樂高球</span></td><td>8</td><td>120</td><td>黃寶妮(-7)</td><td class="odds">7.7</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>2 千杯敬典</td><td>5</td><td>130</td><td>袁幸堯(-10)</td><td class="odds">4.8</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>3 嘉應駿馬</td><td>7</td><td>129</td><td>田泰安</td><td class="odds">3.6</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>11 領航多福</td><td>14</td><td>120</td><td>金誠剛</td><td class="odds">15</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(12) · 連贏(12+2) · 位置Q(12+3+2)</span>
+                </div>
+                <div class="trap-warning">⚠️ 11號 14檔，蝕位過多，不考慮。</div>
             </div>
         </div>
 
         <!-- 第6場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第6場 頭槌讓賽 <small>四班 1200米彎道</small></div>
-                <div class="race-meta">21:15 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第6場 18:30</span>
+                <span class="race-meta"><strong>第四班</strong> 1200米 · 勝利名星讓賽</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">11號「友得盈」</span> <span class="odds-tag">8.8倍</span> — 近三場2/6/2，巫顯東減2磅；次選3號「博愛先鋒」<span class="odds-tag">14倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽11拖3,7,4,10,2</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽11,3 拖7,4,10；單T：11+3+7, 11+3+4</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">11,3,7,4,10,2 (6匹)</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 4號潘頓大熱2.5倍只作位置</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">14 旭能精英</span></td><td>2</td><td>116</td><td>田泰安</td><td class="odds">13</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>2 盈妍威楓</td><td>5</td><td>132</td><td>袁幸堯(-10)</td><td class="odds">6.7</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>8 實力加</td><td>9</td><td>127</td><td>奧爾民</td><td class="odds">7.7</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>1 鋁神</td><td>11</td><td>133</td><td>潘頓</td><td class="odds">3.9</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(14) · 連贏(14+2) · 位置Q(14+8+2)</span>
+                </div>
+                <div class="trap-warning">⚠️ 1號 外檔+頂磅，潘頓難救，熱門陷阱。</div>
             </div>
         </div>
 
         <!-- 第7場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第7場 單刀讓賽 <small>三班 1000米直路</small></div>
-                <div class="race-meta">21:45 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第7場 19:00</span>
+                <span class="race-meta"><strong>第四班</strong> 1600米 · 太陽喜喜讓賽</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">2號「連連幸運」</span> <span class="odds-tag">5.0倍</span> — 布文內檔1，近兩場2/3；次選11號「官金騏」<span class="odds-tag">6.3倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽2拖11,1,5,9,3</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽2,11 拖1,5,9；單T：2+11+1, 2+11+5</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">2,11,1,5,9,10 (6匹) — 強制包含10號41倍</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 3號潘頓外檔12只作配腳</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">10 天蓬貓</span></td><td>4</td><td>121</td><td>巴度</td><td class="odds">4.0</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>12 彭玥</td><td>2</td><td>120</td><td>黃寶妮(-7)</td><td class="odds">24</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>3 包裝戰仕</td><td>13</td><td>134</td><td>潘頓</td><td class="odds">3.8</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>2 友贏威馳</td><td>10</td><td>135</td><td>莫雷拉</td><td class="odds">8.7</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(10) · 連贏(10+12) · 位置Q(10+12+3)</span>
+                </div>
+                <div class="trap-warning">⚠️ 2號 重磅外檔，莫雷拉難救。</div>
             </div>
         </div>
 
         <!-- 第8場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第8場 帽子戲法讓賽 <small>二班 1800米長途</small></div>
-                <div class="race-meta">22:15 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第8場 19:35</span>
+                <span class="race-meta"><strong>第一班</strong> 1600米 · 香港馬主協會錦標</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">3號「奔放」</span> <span class="odds-tag">4.3倍</span> — 布文，近三場2/1/3；次選6號「浪漫戰神」<span class="odds-tag">5.4倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽3拖6,5,4,12,2</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽3,6 拖5,4,12；單T：3+6+5, 3+6+4</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">3,6,5,4,12,2 (6匹) — 強制包含2號潘頓13倍</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 長途外檔影響較小，外檔馬可放寬</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">9 銀亮奔騰</span></td><td>1</td><td>115</td><td>潘明輝</td><td class="odds">7.9</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>5 睿盛人生</td><td>2</td><td>120</td><td>莫雷拉</td><td class="odds">2.7</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>10 桃花開</td><td>4</td><td>115</td><td>鍾易禮(-2)</td><td class="odds">18</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>2 美麗同享</td><td>5</td><td>130</td><td>布文</td><td class="odds">13</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(9) · 連贏(9+5) · 位置Q(9+10+5)</span>
+                </div>
+                <div class="trap-warning">⚠️ 2號 重磅，直路加速受影響，不宜追捧。</div>
             </div>
         </div>
 
-        <!-- 第9場 更新賠率版 -->
+        <!-- 第9場 -->
         <div class="race-card">
-            <div class="card-header">
-                <div class="race-title">第9場 十二碼決勝讓賽 <small>三班 1200米彎道</small></div>
-                <div class="race-meta">22:50 | 黏地</div>
+            <div class="race-header">
+                <span class="race-no">第9場 20:10</span>
+                <span class="race-meta"><strong>第三班</strong> 1200米 · 時尚風采讓賽</span>
             </div>
-            <div class="race-content">
-                <div class="flex-row"><span class="label">🏆 獨贏</span><span class="value"><span class="horse-highlight">7號「皇者有利」</span> <span class="odds-tag">3.9倍</span> — 潘頓近三場2/1/2，輕注膽；次選10號「沙井之友」<span class="odds-tag">6.1倍</span></span></div>
-                <div class="flex-row"><span class="label">📌 連贏/Q</span><span class="value">膽7拖10,4,1,11,8</span></div>
-                <div class="flex-row"><span class="label">🎲 三重彩/單T</span><span class="value">膽7,10 拖4,1,11；單T：7+10+4, 7+10+1</span></div>
-                <div class="flex-row"><span class="label">🏅 四重彩複式</span><span class="value">7,10,4,1,11,12 (6匹) — 強制包含12號19倍</span></div>
-                <div class="chip-list"><span class="chip">⚠️ 7號3.9倍稍熱，輕注；12號初出外檔冷腳</span></div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">8 包裝天王</span></td><td>8</td><td>117</td><td>艾兆禮</td><td class="odds">9.8</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>10 威威傳奇</td><td>3</td><td>119</td><td>黃寶妮(-7)</td><td class="odds">25</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>3 愛馬善</td><td>1</td><td>133</td><td>袁幸堯(-10)</td><td class="odds">6.2</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>1 跨境寶馬</td><td>12</td><td>135</td><td>布文</td><td class="odds">4.4</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(8) · 連贏(8+10) · 位置Q(8+10+3)</span>
+                </div>
+                <div class="trap-warning">⚠️ 1號 外檔+頂磅，布文難救，最大陷阱。</div>
             </div>
         </div>
 
+        <!-- 第10場 -->
+        <div class="race-card">
+            <div class="race-header">
+                <span class="race-no">第10場 20:45</span>
+                <span class="race-meta"><strong>第三班</strong> 1600米 · 勝眼光讓賽</span>
+            </div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">8 友瑩亮</span></td><td>3</td><td>125</td><td>艾兆禮</td><td class="odds">17</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>12 大回報</td><td>5</td><td>117</td><td>巴度</td><td class="odds">8.3</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>9 火焰閃爍</td><td>2</td><td>122</td><td>霍宏聲</td><td class="odds">5.6</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>5 榮駿大道</td><td>9</td><td>131</td><td>潘頓</td><td class="odds">9.6</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(8) · 連贏(8+12) · 位置Q(8+12+9)</span>
+                </div>
+                <div class="trap-warning">⚠️ 5號 外檔+重磅，潘頓難救。</div>
+            </div>
+        </div>
+
+        <!-- 第11場 -->
+        <div class="race-card">
+            <div class="race-header">
+                <span class="race-no">第11場 21:20</span>
+                <span class="race-meta"><strong>第三班</strong> 1400米 · 隨心隨意讓賽</span>
+            </div>
+            <div class="race-body">
+                <table>
+                    <tr><th>定位</th><th>馬號・馬名</th><th>檔</th><th>磅</th><th>騎師</th><th>獨贏</th></tr>
+                    <tr><td><span class="badge badge-win">首選</span></td><td><span class="horse-name">6 閃電小子</span></td><td>1</td><td>127</td><td>艾兆禮</td><td class="odds">7.0</td></tr>
+                    <tr><td><span class="badge badge-place">次選</span></td><td>8 百勝威龍</td><td>4</td><td>123</td><td>霍宏聲</td><td class="odds">5.7</td></tr>
+                    <tr><td><span class="badge badge-cold">冷門</span></td><td>11 帥帥友福</td><td>3</td><td>119</td><td>楊明綸</td><td class="odds">14</td></tr>
+                    <tr><td><span class="badge badge-trap">陷阱</span></td><td>1 綠野飛馳</td><td>5</td><td>135</td><td>布文</td><td class="odds">3.6</td></tr>
+                </table>
+                <div class="strategy-box">
+                    <span><span class="label">策略：</span>獨贏(6) · 連贏(6+8) · 位置Q(6+8+11)</span>
+                </div>
+                <div class="trap-warning">⚠️ 1號 頂磅，直路力弱，切勿追捧。</div>
+            </div>
+        </div>
     </div>
 
-    <div class="footnote">
-        📌 策略總結：<br>
-        ✅ <strong>6-10倍為最佳膽區</strong>（第1場10號、第5場3號、第6場11號、第9場10號等）<br>
-        ✅ <strong>大熱(<4倍)只作位置保險</strong>（第2場2號3.0倍、第4場1號3.2倍、第6場4號2.5倍、第9場7號3.9倍輕注）<br>
-        ✅ <strong>外檔(>8)冷門必須納入四重彩</strong>（第1場11號26倍、第2場3號49倍、第7場10號41倍、第9場12號19倍）<br>
-        ✅ <strong>布文/潘頓級數高</strong>，可作膽但需警惕大熱倒灶<br>
-        ✅ <strong>黏地前置馬有利</strong>，內檔1-4優先選擇<br>
-        ⚠️ 賠率為賽前參考，實際投注請留意臨場變動及跑道偏差。
+    <!-- 總結部分 -->
+    <div class="summary-section">
+        <h2>📌 全日投注策略總結</h2>
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="title">🏆 三大銀行馬（核心膽）</div>
+                <div class="content">
+                    <div>• 第7場 10號 天蓬貓</div>
+                    <div>• 第8場 9號 銀亮奔騰</div>
+                    <div>• 第11場 6號 閃電小子</div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="title">💎 最佳冷門尋寶</div>
+                <div class="content">
+                    <div>• 第4場 11號 豐功偉績 (13倍)</div>
+                    <div>• 第9場 10號 威威傳奇 (25倍)</div>
+                    <div>• 第10場 12號 大回報 (8.3倍)</div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="title">⛔ 最大陷阱（切勿重注）</div>
+                <div class="content">
+                    <div>• 第6場 1號 鋁神 (潘頓)</div>
+                    <div>• 第9場 1號 跨境寶馬 (布文)</div>
+                    <div>• 第11場 1號 綠野飛馳 (布文)</div>
+                </div>
+            </div>
+        </div>
+        <div class="banker-list">
+            <span class="item"><span class="num">孖寶</span> 第10場 8號 友瑩亮 → 第11場 6號 閃電小子</span>
+            <span class="item"><span class="num">三寶</span> 第9場 8號 包裝天王 → 第10場 8號 友瑩亮 → 第11場 6號 閃電小子</span>
+            <span class="item"><span class="num">全日重心</span> 第11場 6號 閃電小子（1檔+近績穩）</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        數據源自 2026-07-12 沙田日賽 · 僅供參考 · 投注請理性
     </div>
 </div>
 </body>
